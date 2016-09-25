@@ -31,15 +31,16 @@
                 <th>Products</th>              
                 <th>Category </th>
                 <th>Price</th>
-                <th style="width: 40px">Action</th>
+                <th style="width: 60px">Action</th>
               </tr>
               <tbody>
                 <tr dir-paginate="prod in products |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="prod.productname"></td>
                   <td ng-bind="prod.category.category_name"></td>
-                  <td ng-bind="prod.retail_price"></td>
+                  <td ng-bind="prod.current_retail_price"></td>
                   <td>
+                     <a href="#"><i class="fa fa-eye"></i></a>
                     <a href="#"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>
                   </td>
@@ -64,7 +65,7 @@
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
   $(function(){
-    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+    $('input[type="radio"].flat-red').iCheck({
       checkboxClass: 'icheckbox_flat-green',
       radioClass: 'iradio_flat-green'
     });

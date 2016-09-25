@@ -14,7 +14,7 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="discountCtrl">
+    <section class="content" ng-controller="supplierCtrl">
       <div class='col-md-4'>
         @include('supplier.create')
       </div>
@@ -22,25 +22,21 @@
         <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>
+
           </div>
             <!-- /.box-header -->
           <div class="box-body">
+             <input type='text' ng-model='searchQry' class='form-control'/>
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px">#</th>  
-                <th>Supplier</th>              
-                <th>Category</th> 
-                <th>Cash</th>              
-                <th>Credit</th>             
+                <th>Supplier</th> 
                 <th style="width: 40px">Action</th>
               </tr>
               <tbody>
-                <tr dir-paginate="discount in discounts |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
+                <tr dir-paginate="supplier in suppliers |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>                 
-                  <td ng-bind="discount.category.category_name"></td>
-                  <td ng-bind="discount.account_level.level_name"></td>
-                   <td ng-bind="discount.cash"></td>
-                  <td ng-bind="discount.credit"></td>
+                  <td ng-bind="supplier.supplier_name"></td>               
                   <td>
                     <a href="#"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>

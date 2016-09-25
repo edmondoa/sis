@@ -34,7 +34,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('discounting/ng-discount-list','DiscountController@discount_list');
 	Route::resource('discounting','DiscountController');
 
-	Route::get('suppliers/ng-supplier-list','SupplierController@discount_list');
+	Route::get('suppliers/ng-supplier-list','SupplierController@supplier_list');
 	Route::resource('suppliers','SupplierController');
 });
 

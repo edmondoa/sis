@@ -4,34 +4,34 @@
 
   angular
     .module('SisApp')
-    .controller('categoryCtrl', categoryCtrl);
+    .controller('supplierCtrl', supplierCtrl);
 
-    function categoryCtrl($scope,$filter, $timeout,$http) {
-      $scope.categories = [];
+    function supplierCtrl($scope,$filter, $timeout,$http) {
+      $scope.suppliers = [];
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 
-      $scope.getCategories = function() {
+      $scope.getSuppliers = function() {
         
-        $http.get('category/ng-cat-list').
+        $http.get('suppliers/ng-supplier-list').
           success(function(data) {
-            $scope.categories = data;         
-            console.log($scope.categories);
+            $scope.suppliers = data;         
+            console.log($scope.suppliers);
           });
       }
 
-      $scope.saveCategory = function(model)
+      $scope.saveSupplier = function(model)
       {   
         if (model !== undefined && model !== null) {
-           model['category_name'] = $(".category_name option:selected").text();
+          model['supplier_name'] = $(".supplier_name option:selected").text();
         }
-       
+        //
         
-        $http.post('/category',model)
+        $http.post('/suppliers',model)
          .success(function(data) {
             $scope.message(data);
             //model.category_name="";
-            $scope.getCategories();
+            $scope.getSuppliers();
         })
       }
 
@@ -40,9 +40,9 @@
 
       $scope.order = function(predicate, reverse) {
         console.log("dd");
-         $scope.categories = orderBy($scope.categories, predicate, reverse);
+         $scope.suppliers = orderBy($scope.suppliers, predicate, reverse);
       };
-      $scope.getCategories();      
+      $scope.getSuppliers();      
       
      
 
