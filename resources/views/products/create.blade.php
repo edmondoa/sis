@@ -165,13 +165,7 @@
           </label>
         </div>
       </div>
-      <div class="form-group">
-        <label for="inputEmail3"  class="col-sm-3 control-label">Quantity</label>
-
-        <div class="col-sm-9">
-          <input type="text" class="form-control" id="" ng-model='product.quantity' placeholder="5">
-        </div>
-      </div>
+     
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Minimun Stock</label>
 
