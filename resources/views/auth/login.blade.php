@@ -32,22 +32,15 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="../../index2.html"><b>SiS</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
     {{HTML::ul($errors->all())}}
     <form action="login" method="post">
-        <div class="form-group">
-            <label>User Role</label>
-            <select class="form-control" name='user_level'>
-                @foreach($levels as $level)
-                <option value="{{$level->level_id}}">{{$level->level_name}}</option>
-                @endforeach    
-            </select>
-        </div>
-      <div class="form-group has-feedback domain_div hide">
+        
+      <div class="form-group has-feedback domain_div ">
         <label>Domain</label>
         <input type="text" class="form-control " name='domain' placeholder="Domain">
         <span class="glyphicon glyphicon-star form-control-feedback"></span>

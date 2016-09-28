@@ -22,12 +22,11 @@ class Product extends Model
     			'current_retail_price' => 'required|numeric|between:0,99999999.99',
                 'last_cost_price' => 'required|numeric|between:0,99999999.99',
                 'minimum_stock_quantity' => 'required|numeric',
-                'maximun_stock_quantity' => 'required|numeric',
-                'quantity' => 'required|numeric',
-                // 'non_returnable' => 'required',
-                // 'vatable' => 'required',
-                // 'suspended' => 'required',
-                // 'lock' => 'required',
+                'maximun_stock_quantity' => 'required|numeric',                
+                'non_returnable' => 'required',
+                'vatable' => 'required',
+                'suspended' => 'required',
+                'lock' => 'required',
                                
 
     ];

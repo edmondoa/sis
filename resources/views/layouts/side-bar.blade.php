@@ -125,7 +125,7 @@
             <li><a href="/"><i class="fa fa-circle-o"></i>Consolidated</a></li>
           </ul>
         </li>
-        <li><a href="/-overview"><i class="fa fa-circle-o"></i> Stockin (Regular/Reject)</a></li>
+        <li><a href="/stockin"><i class="fa fa-circle-o"></i> Stockin (Regular/Reject)</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i> Stockout</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Transfer (Branch to Branch)</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i> Damage (Expense)</a></li>

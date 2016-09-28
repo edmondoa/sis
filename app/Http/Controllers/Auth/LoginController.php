@@ -52,61 +52,31 @@ class LoginController extends Controller
     protected function login(Request $req)
     {
         
-        $level =  $req->user_level;  
-        if($level==1)
+        
+        $domain = $req->domain; 
+        $domain_exist = Domain::where('dbname',$domain)->first();
+        if($domain_exist)
         {
+            if($domain_exist->db_populated==0)
+                return Redirect::back()->withErrors(['Finance concern']);
+            Session::put('dbname',$domain_exist->dbname);
+            $credentials = ['username'=>$req->username,'password'=>$req->password];
+            // $email = $req->username;
+          
 
-        }else if($level==2)
-        {   
-            $domain = $req->domain; 
-            $domain_exist = Domain::where('dbname',$domain)->first();
-            
-
-            if($domain_exist)
-            {
-
-                if($domain_exist->db_populated==0)
-                    return Redirect::back()->withErrors(['Finance concern']);
-               
-                Session::put('dbname',$domain_exist->dbname);
-                $email = $req->username;
-                $password = $req->password;                
-                if ($errors = Auth::attempt(['email' => $email, 'password' => $password,'level_id'=>$level])) {
-                    // Authentication passed...         
-                   Session::put('level_type','owner');     
-                   return Redirect::to('/');//->intended('/home');
-                }else{   
-                       
-                   return Redirect::back()->withErrors(['Invalid user!']);
-                }   
-            }else{
-                return Redirect::back()->withErrors(['Domain does not exist']);
-            }
-        }else {
-            $domain = $req->domain; 
-            $domain_exist = Domain::where('dbname',$domain)->first();
-            if($domain_exist)
-            {
-                if($domain_exist->db_populated==0)
-                    return Redirect::back()->withErrors(['Finance concern']);
-                Session::put('dbname',$domain_exist->dbname);
-                $credentials = ['username'=>$req->username,'password'=>$req->password];
-                // $email = $req->username;
-              
-
-                if ($errors = Auth::attempt($credentials,true)) {
-                    
-                    //dump(Auth::user())  
-                    Session::put('branch_id',Auth::user()->branch_id);     
-                    return Redirect::to("/");
-                }else{                   
-                   // $error = "Invalid User";
-                    return Redirect::back()->withErrors(['Invalid user!']);
-                }   
-            }else{
-                return Redirect::back()->withErrors(['Domain does not exist']);
-            }
-        }    
+            if ($errors = Auth::attempt($credentials,true)) {
+                
+                //dump(Auth::user())  
+                Session::put('branch_id',Auth::user()->branch_id);     
+                return Redirect::to("/");
+            }else{                   
+               // $error = "Invalid User";
+                return Redirect::back()->withErrors(['Invalid user!']);
+            }   
+        }else{
+            return Redirect::back()->withErrors(['Domain does not exist']);
+        }
+          
         
     }
      protected function showRegistrationForm()

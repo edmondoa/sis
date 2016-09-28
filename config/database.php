@@ -51,7 +51,33 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
-'mysql' => [
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'sis',
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => '',
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+        'domain' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'port' => env('DB_PORT', '3306'),   
+            'database' => 'domain',                   
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+        'mysql-live' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'sisdbinstance.cgxcjnvsaza1.ap-southeast-1.rds.amazonaws.com'),
             'port' => env('DB_PORT', '3306'),
@@ -64,7 +90,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-        'domain' => [
+        'domain-live' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'sisdbinstance.cgxcjnvsaza1.ap-southeast-1.rds.amazonaws.com'),
             'port' => env('DB_PORT', '3306'),   

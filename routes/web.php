@@ -36,6 +36,9 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('suppliers/ng-supplier-list','SupplierController@supplier_list');
 	Route::resource('suppliers','SupplierController');
+
+	Route::get('stockin/ng-stockin-list','StockinController@stockin');
+	Route::resource('stockin','SupplierController');
 });
 
 
