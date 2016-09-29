@@ -20,6 +20,16 @@
           </div>
         </div> 
         <div class="form-group">
+          <label for="inputEmail3"  class="col-sm-3 control-label">Cluster</label>
+          <div class="col-sm-9">
+            <select class="form-control select2 cluster_name"ng-model='branch.cluster_id' >
+              @foreach($clusters as $cluster)
+              <option value="{{$cluster->cluster_id}}">{{$cluster->cluster_name}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div> 
+        <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Address 1</label>
           <div class="col-sm-9">
             <input type="text" class="form-control"  ng-model='branch.addressline1' placeholder="Address 1">
@@ -45,16 +55,15 @@
               <option value='BACK'>BACK</option>
             </select>
           </div>
-        </div>
+        </div>        
+      </div>
+      <div class="col-md-6">
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Credit Limit </label>
           <div class="col-sm-9">
             <input type="text" class="form-control"  ng-model='branch.default_credit_limit' placeholder="100.00">
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Header 1</label>
           <div class="col-sm-9">

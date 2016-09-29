@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use App\Models\Category;
+use App\Models\SupplierCategory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -15,7 +17,8 @@ class SupplierController extends Controller
     {
     	$suppliers = DB::connection('mysql')
                         ->table('supplier')->get();
-    	return view('supplier.index',compact('suppliers'));
+        $categories = Category::get();                
+    	return view('supplier.index',compact('suppliers','categories'));
     }
 
     public function store(Request $req)
@@ -25,10 +28,20 @@ class SupplierController extends Controller
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
         }
-        $category = Supplier::create($req->all());
-        if($category)        
-        	return Response::json(['status'=>true,'message' => "Successfuly created!"]);
-        
+        DB::beginTransaction();
+        $supplier = Supplier::create($req->all());
+        if($supplier) {       
+            $sup_category = new SupplierCategory;
+            $sup_category->category_id = $req->category_id;
+            $sup_category->supplier_id = $req->supplier_id;
+            $sup_category->save();
+            if($sup_category){
+                DB::commit();
+                return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+            }
+        	
+        }
+        DB::rollback();
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
@@ -36,5 +49,11 @@ class SupplierController extends Controller
     {
     	$list = Supplier::get();
     	return $list;
+    }
+
+    protected function rules($category_id)
+    {
+        return ['supplier_name' => 'required|unique:supplier,supplier_name,NULL,id,category_id,' . $category_id];
+
     }
 }

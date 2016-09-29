@@ -9,7 +9,7 @@ class Category extends Model
     protected $connection = 'domain';
     protected $table = 'category';
 
-    public static $rules = ['category_name' => 'required']; 
+    public static $rules = ['category_name' => 'required|unique:category,category_name']; 
 
     protected $fillable = ['sys_category_id','category_name','default_discount_id'];
 }

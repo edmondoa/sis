@@ -17,7 +17,16 @@
             </select>
           </div>  
         </div>
-           
+        <div class="form-group ">
+          <label for="inputEmail3"  class="col-sm-3 control-label">Category</label>
+          <div class="col-sm-9">                  
+            <select class="form-control select2 category_id"ng-model='supplier.category_id' >
+              @foreach($categories as $cat)
+              <option value="{{$cat->category_id}}">{{$cat->category_name}}</option>
+              @endforeach
+            </select>
+          </div>  
+        </div>   
       </div>
                    
     </div>

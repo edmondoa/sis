@@ -181,6 +181,7 @@
         </span>
       </a>
       <ul class="treeview-menu">
+        <li><a href="/clusters"><i class="fa fa-circle-o"></i> Clusters</a></li>
         <li><a href="/branches"><i class="fa fa-circle-o"></i> Branches</a></li>
         <li><a href="/category"><i class="fa fa-circle-o"></i> Category</a></li>
         <li><a href="/suppliers"><i class="fa fa-circle-o"></i> Supplier</a></li>

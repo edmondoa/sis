@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+  <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
       <h1>
         Branches  {{Session::get('dbname')}}   
@@ -29,6 +30,7 @@
                 <th style="width: 10px">#</th>                
                 <th>Branch Name</th>
                 <th>Business Name</th>
+                <th>Cluster</th>
                 <th>Terminal Type</th>
                 <th>Status</th>
                 <th style="width: 40px">Action</th>
@@ -38,6 +40,7 @@
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="br.branch_name"></td>
                   <td ng-bind="br.business_name"></td>
+                  <td ng-bind="br.cluster.cluster_name"></td>
                   <td ng-bind="br.terminal_type"></td>
                   <td ng-bind="br.status"></td>
                   <td>
@@ -61,5 +64,11 @@
 @parent
 <script src="/angular/controllers/branch.js"></script>
 <script src="/angular/dirPagination.js"></script>
-
+<script src="/plugins/select2/select2.full.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+  });
+</script>
 @stop
