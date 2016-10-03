@@ -41,8 +41,8 @@
     <form action="login" method="post">
         
       <div class="form-group has-feedback domain_div ">
-        <label>Domain</label>
-        <input type="text" class="form-control " name='domain' placeholder="Domain">
+        <label>Domain Id</label>
+        <input type="text" class="form-control " name='domain' placeholder="Domain Id">
         <span class="glyphicon glyphicon-star form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -71,10 +71,6 @@
       </div>
     </form>
    
-
-    <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
-
   </div>
   <!-- /.login-box-body -->
 </div>

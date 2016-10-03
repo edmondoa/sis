@@ -21,7 +21,9 @@
       }
 
       $scope.saveBranch = function(model)
-      {        
+      {    
+        model['lock'] = ($('#lock').is(":checked"))?1:0;
+        model['suspended'] = ($('#suspended').is(":checked"))?1:0;    
         $http.post('/branches',model)
          .success(function(data) {
             $scope.message(data);

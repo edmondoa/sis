@@ -15,10 +15,10 @@
 
     <!-- Main content -->
     <section class="content" ng-controller="supplierCtrl">
-      <div class='col-md-4'>
+      <div class='col-md-5'>
         @include('supplier.create')
       </div>
-      <div class='col-md-8'>
+      <div class='col-md-7'>
         <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>

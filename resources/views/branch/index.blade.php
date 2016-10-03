@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+  <link rel="stylesheet" href="/plugins/iCheck/all.css">
   <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
       <h1>
@@ -15,10 +16,10 @@
 
     <!-- Main content -->
     <section class="content" ng-controller="branchCtrl">
-      <div class='col-md-12'>
+      <div class='col-md-4'>
         @include('branch.create')
       </div>
-      <div class='col-md-12'>
+      <div class='col-md-8'>
         <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>
@@ -30,8 +31,7 @@
                 <th style="width: 10px">#</th>                
                 <th>Branch Name</th>
                 <th>Business Name</th>
-                <th>Cluster</th>
-                <th>Terminal Type</th>
+                <th>Cluster</th>                
                 <th>Status</th>
                 <th style="width: 40px">Action</th>
               </tr>
@@ -40,8 +40,7 @@
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="br.branch_name"></td>
                   <td ng-bind="br.business_name"></td>
-                  <td ng-bind="br.cluster.cluster_name"></td>
-                  <td ng-bind="br.terminal_type"></td>
+                  <td ng-bind="br.cluster.cluster_name"></td>                  
                   <td ng-bind="br.status"></td>
                   <td>
                     <a href="#"><i class="fa fa-pencil"></i></a>                   
@@ -65,10 +64,15 @@
 <script src="/angular/controllers/branch.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
+<script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
   $(function () {
     //Initialize Select2 Elements
     $(".select2").select2();
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass: 'iradio_flat-green'
+    });
   });
 </script>
 @stop

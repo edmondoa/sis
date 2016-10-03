@@ -14,12 +14,13 @@ class Branch extends Model
     			'addressline2','tin_no','terminal_type','default_credit_limit',
     			'invoice_header1','invoice_header2','invoice_header3','invoice_footer1',
     			'invoice_footer2','invoice_footer3','bir_permit_no','status','tran_date',
-    			'lock','deactivated','notes','cluster_id'];
+    			'lock','suspended','notes','cluster_id'];
 
     public static $rules =[
     				'business_name' => 'required',
     				'branch_name' => 'required|unique:branch,branch_name',
-    				'default_credit_limit' => 'required|numeric|between:0,99999999.99'
+    				'addressline1' => 'required',
+                    'addressline2' => 'required'
 
     ]	;	
 

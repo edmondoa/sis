@@ -4,9 +4,9 @@
   </div>
   <!-- /.box-header -->
   <!-- form start -->
-  <form class="form-horizontal">
+  <form class="form-horizontal" name='branch-form'>
     <div class="box-body">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="form-group ">
           <label for="inputEmail3"  class="col-sm-3 control-label">Business Name</label>
           <div class="col-sm-9">
@@ -32,13 +32,13 @@
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Address 1</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.addressline1' placeholder="Address 1">
+            <textarea class="form-control"  ng-model='branch.addressline1'></textarea>
           </div>
         </div> 
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Address 2</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.addressline2' placeholder="Address 2">
+            <textarea class="form-control"  ng-model='branch.addressline2'></textarea>
           </div>
         </div>
         <div class="form-group">
@@ -46,60 +46,36 @@
           <div class="col-sm-9">
             <input type="text" class="form-control"  ng-model='branch.tin_no' placeholder="TIN #">
           </div>
+        </div> 
+        <div class="form-group">
+          <label for="inputEmail3"  class="col-sm-3 control-label">Lock</label>
+          <div class="col-sm-9">
+           <label>
+              <input type="checkbox" class="flat-red" id='lock' checked>
+            </label>
+          </div>
         </div>
         <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Terminal Type</label>
+          <label for="inputEmail3"  class="col-sm-3 control-label">Suspended</label>
           <div class="col-sm-9">
-            <select class='form-control' ng-model='branch.terminal_type'>
-              <option value='FRONT'>FRONT</option>
-              <option value='BACK'>BACK</option>
-            </select>
+            <label>
+              <input type="checkbox" class="flat-red" id='suspended' checked>
+            </label>
           </div>
-        </div>        
-      </div>
-      <div class="col-md-6">
+        </div>
         <div class="form-group">
+          <label for="inputEmail3"  class="col-sm-3 control-label">Notes</label>
+          <div class="col-sm-9">
+            <textarea class="form-control"  ng-model='branch.notes'></textarea>
+          </div>
+        </div>     
+        <!-- <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Credit Limit </label>
           <div class="col-sm-9">
             <input type="text" class="form-control"  ng-model='branch.default_credit_limit' placeholder="100.00">
           </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Header 1</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.invoice_header1' placeholder="Invoice Header 1">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Header 2</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.invoice_header2' placeholder="Invoice Header 2">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Header 3</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.invoice_header3' placeholder="Invoice Header 3">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Footer 1</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.invoice_footer1' placeholder="Invoice Footer 1">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Footer 2</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.invoice_footer2' placeholder="Invoice Footer 2">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Footer 3</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.invoice_footer3' placeholder="Invoice Footer 3">
-          </div>
-        </div>
+        </div> -->
+        
       </div>
       
                    

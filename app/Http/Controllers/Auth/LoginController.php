@@ -54,7 +54,7 @@ class LoginController extends Controller
         
         
         $domain = $req->domain; 
-        $domain_exist = Domain::where('dbname',$domain)->first();
+        $domain_exist = Domain::where('domain_id',$domain)->first();
         if($domain_exist)
         {
             if($domain_exist->db_populated==0)
