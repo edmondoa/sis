@@ -42,6 +42,12 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
 	Route::resource('clusters','ClusterController');
+
+	Route::get('product-group/ng-group-list','ProductGroupController@group_list');
+	Route::resource('product-group','ProductGroupController');
+
+	Route::get('product-storage/ng-storage-list','ProductStorageController@storage_list');
+	Route::resource('product-storage','ProductStorageController');
 });
 
 

@@ -15,10 +15,9 @@ class SupplierController extends Controller
 {
     public function index()
     {
-    	$suppliers = DB::connection('mysql')
-                        ->table('supplier')->get();
+    	
         $categories = Category::get();                
-    	return view('supplier.index',compact('suppliers','categories'));
+    	return view('supplier.index',compact('categories'));
     }
 
     public function store(Request $req)

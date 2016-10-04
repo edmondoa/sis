@@ -9,8 +9,9 @@ class Supplier extends Model
     protected $connection = 'domain';
     protected $table = 'supplier';
 
-     public static $rules = ['supplier_name' => 'required',
-     						'category_id' => 'required']; 
+     public static $rules = ['supplier_name' => 'required|unique:supplier,supplier_name',
+     						 'email'=>'email']; 
 
-    protected $fillable = ['sys_supplier_id','supplier_name'];
+    protected $fillable = ['supplier_name','contact_person','mobile1_no','mobile2_no',
+    						'landline_no','email','notes'];
 }

@@ -4,30 +4,30 @@
 
   angular
     .module('SisApp')
-    .controller('supplierCtrl', supplierCtrl);
+    .controller('pStorageCtrl', pStorageCtrl);
 
-    function supplierCtrl($scope,$filter, $timeout,$http) {
-      $scope.suppliers = [];
+    function pStorageCtrl($scope,$filter, $timeout,$http) {
+      $scope.storages = [];
+      $scope.pr = {};
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 
-      $scope.getSuppliers = function() {
+      $scope.getStorages = function() {
         
-        $http.get('suppliers/ng-supplier-list').
+        $http.get('product-storage/ng-storage-list').
           success(function(data) {
-            $scope.suppliers = data;         
-            console.log($scope.suppliers);
+            $scope.storages = data;         
+            console.log($scope.storages);
           });
       }
 
-      $scope.saveSupplier = function(model)
-      {   
+      $scope.saveStorage = function(model)
+      {          
         
-        $http.post('/suppliers',model)
+        $http.post('/product-storage',model)
          .success(function(data) {
-            $scope.message(data);
-            //model.category_name="";
-            $scope.getSuppliers();
+            $scope.message(data);           
+            $scope.getStorages();
         })
       }
 
@@ -36,15 +36,16 @@
 
       $scope.order = function(predicate, reverse) {
         console.log("dd");
-         $scope.suppliers = orderBy($scope.suppliers, predicate, reverse);
+         $scope.storages = orderBy($scope.storages, predicate, reverse);
       };
-      $scope.getSuppliers();      
+      $scope.getStorages();      
       
      
 
     $scope.message = function(data)
     {
       if(data.status){
+        $scope.pr = {};
         $.notify({       
           message: data.message
         },{

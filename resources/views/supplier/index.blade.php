@@ -31,12 +31,15 @@
               <tr>
                 <th style="width: 10px">#</th>  
                 <th>Supplier</th> 
+                <th>Contact Person</th>
+
                 <th style="width: 40px">Action</th>
               </tr>
               <tbody>
                 <tr dir-paginate="supplier in suppliers |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>                 
-                  <td ng-bind="supplier.supplier_name"></td>               
+                  <td ng-bind="supplier.supplier_name"></td> 
+                  <td ng-bind="supplier.contact_person"></td>               
                   <td>
                     <a href="#"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>

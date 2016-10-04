@@ -1,22 +1,22 @@
 @extends('layouts.master')
 
 @section('content')
-    <link rel="stylesheet" href="/plugins/iCheck/all.css">
+    
     <section class="content-header">
       <h1>
-        Products     
+        Product Group    
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Products</li>
-        <li class="active"><i class="fa fa-circle"></i> Regular</li>
+        <li class=""><i class="fa fa-circle"></i> Settings</li>
+        <li class="active"><i class="fa fa-circle"></i> Product Group</li>
       </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="productCtrl">
+    <section class="content" ng-controller="pGroupCtrl">
       <div class='col-md-5'>
-        @include('products.create')
+        @include('productgroup.create')
       </div>
       <div class='col-md-7'>
         <div class="box">
@@ -28,17 +28,13 @@
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px">#</th>  
-                <th>Products</th>              
-                <th>Category </th>
-                <th>Price</th>
+                <th>Group Name</th> 
                 <th style="width: 60px">Action</th>
               </tr>
               <tbody>
-                <tr dir-paginate="prod in products |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
+                <tr dir-paginate="gr in groups |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
-                  <td ng-bind="prod.productname"></td>
-                  <td ng-bind="prod.category.category_name"></td>
-                  <td ng-bind="prod.current_retail_price"></td>
+                  <td ng-bind="gr.group_name"></td>                  
                   <td>
                      <a href="#"><i class="fa fa-eye"></i></a>
                     <a href="#"><i class="fa fa-pencil"></i></a>
@@ -60,15 +56,7 @@
 @stop
 @section('html_footer')
 @parent
-<script src="/angular/controllers/product.js"></script>
+<script src="/angular/controllers/group.js"></script>
 <script src="/angular/dirPagination.js"></script>
-<script src="/plugins/iCheck/icheck.min.js"></script>
-<script type="text/javascript">
-  $(function(){
-    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-      checkboxClass: 'icheckbox_flat-green',
-      radioClass: 'iradio_flat-green'
-    });
-  })
-</script>
+
 @stop

@@ -46,7 +46,7 @@
         </div>
       </div> 
       <div class="form-group">
-        <label for="inputEmail3"  class="col-sm-3 control-label">Price</label>
+        <label for="inputEmail3"  class="col-sm-3 control-label">Retail Price</label>
 
         <div class="col-sm-9">          
           <div class="input-group">
@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="inputEmail3"  class="col-sm-3 control-label">Last Price</label>
+        <label for="inputEmail3"  class="col-sm-3 control-label">Cost Price</label>
 
         <div class="col-sm-9">
          <div class="input-group">
@@ -82,105 +82,67 @@
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Book</label>
 
-        <div class="col-sm-9">          
+        <div class="col-sm-9">
           <label>
-            <input type="radio" name="non_book" ng-model='product.non_book' value="1" class="flat-red" checked>
-            <span>true</span>
+            <input type="checkbox" class="flat-red" id='non-book'ng-model='product.non_book' checked>
           </label>
-          <label>
-            <input type="radio" name="non_book" ng-model='product.non_book' value="0"class="flat-red">
-            <span>false</span>   
-          </label>            
-              
-        </div>
+        </div> 
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Consign</label>
 
         <div class="col-sm-9">          
           <label>
-            <input type="radio" name="non_consign" ng-model='product.non_consign' value="1" class="flat-red" checked>
-            <span>true</span>
-          </label>
-          <label>
-            <input type="radio" name="non_consign" ng-model='product.non_consign' value='0'class="flat-red">
-            <span>false</span></label>  
-
-              
+            <input type="checkbox" class="flat-red" id='non_consign'ng-model='product.non_consign' checked>
+          </label>  
         </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Returnable</label>
 
-        <div class="col-sm-9">          
+        <div class="col-sm-9">      
           <label>
-            <input type="radio" name="non_returnable" ng-model='product.non_returnable' value="1" class="flat-red" checked>
-            <span>true</span>
-          </label>
-          <label>
-            <input type="radio" name="non_returnable" ng-model='product.non_returnable' value='0'class="flat-red">
-            <span>false</span>
-          </label>
+            <input type="checkbox" class="flat-red" id='non_returnable'ng-model='product.non_returnable' checked>
+          </label>           
         </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Vatable</label>
 
-        <div class="col-sm-9">          
+        <div class="col-sm-9">   
           <label>
-            <input type="radio" name="vatable" ng-model='product.vatable' value="1" class="flat-red" checked>
-            <span>true</span>
-          </label>
-          <label>
-            <input type="radio" name="vatable" ng-model='product.vatable' value='0'class="flat-red">
-            <span>false</span>
-          </label>
+            <input type="checkbox" class="flat-red" id='vatable'ng-model='product.vatable' checked>
+          </label> 
         </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Lock</label>
 
-        <div class="col-sm-9">          
+        <div class="col-sm-9">  
           <label>
-            <input type="radio" name="lock" ng-model='product.lock' value="1" class="flat-red" checked>
-            <span>true</span>
-          </label>
-          <label>
-            <input type="radio" name="lock" ng-model='product.lock' value='0'class="flat-red">
-            <span>false</span>
-          </label>
+            <input type="checkbox" class="flat-red" id='lock'ng-model='product.lock' checked>
+          </label> 
         </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3"  class="col-sm-3 control-label">Tie up</label>
+
+        <div class="col-sm-9"> 
+          <label>
+            <input type="checkbox" class="flat-red" id='tieup'ng-model='product.tieup' checked>
+          </label>          
+       </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Suspended</label>
 
-        <div class="col-sm-9">          
+        <div class="col-sm-9"> 
           <label>
-            <input type="radio" name="suspended" ng-model='product.suspended' value="1" class="flat-red" checked>
-            <span>true</span>
-          </label>
-          <label>
-            <input type="radio" name="suspended" ng-model='product.suspended' value='0'class="flat-red">
-            <span>false</span>
-          </label>
-        </div>
+            <input type="checkbox" class="flat-red" id='suspended'ng-model='product.suspended' checked>
+          </label>          
+       </div>
       </div>
      
-      <div class="form-group">
-        <label for="inputEmail3"  class="col-sm-3 control-label">Minimun Stock</label>
-
-        <div class="col-sm-9">
-          <input type="text" class="form-control" id="" ng-model='product.minimum_stock_quantity' placeholder="1">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputEmail3"  class="col-sm-3 control-label">Maximum Stock</label>
-
-        <div class="col-sm-9">
-          <input type="text" class="form-control" id="" ng-model='product.maximun_stock_quantity' placeholder="100">
-        </div>
-      </div>
-
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Notes</label>
 

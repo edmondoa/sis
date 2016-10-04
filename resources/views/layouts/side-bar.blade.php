@@ -186,6 +186,9 @@
         <li><a href="/category"><i class="fa fa-circle-o"></i> Category</a></li>
         <li><a href="/suppliers"><i class="fa fa-circle-o"></i> Supplier</a></li>
         <li><a href="/acc_levels"><i class="fa fa-circle-o"></i>Account Level</a></li>
+        <li><a href="/product-group"><i class="fa fa-circle-o"></i>Product Group</a></li>
+        <li><a href="/product-storage"><i class="fa fa-circle-o"></i>Storage</a></li>
+
       </ul>
     </li>
    

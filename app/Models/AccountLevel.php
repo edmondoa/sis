@@ -13,7 +13,7 @@ class AccountLevel extends Model
 
     public static $rules =[
     				'level_name' => 'required',
-    				'credit_days' => 'sometimes|numeric'    				
+    				'credit_days' => 'sometimes|numeric|between:0,999'    				
 
     ]	;		
 

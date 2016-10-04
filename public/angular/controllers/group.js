@@ -4,30 +4,31 @@
 
   angular
     .module('SisApp')
-    .controller('supplierCtrl', supplierCtrl);
+    .controller('pGroupCtrl', pGroupCtrl);
 
-    function supplierCtrl($scope,$filter, $timeout,$http) {
-      $scope.suppliers = [];
+    function pGroupCtrl($scope,$filter, $timeout,$http) {
+      $scope.groups = [];
+      $scope.pr = {};
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 
-      $scope.getSuppliers = function() {
+      $scope.getGroups = function() {
         
-        $http.get('suppliers/ng-supplier-list').
+        $http.get('product-group/ng-group-list').
           success(function(data) {
-            $scope.suppliers = data;         
-            console.log($scope.suppliers);
+            $scope.groups = data;         
+            console.log($scope.groups);
           });
       }
 
-      $scope.saveSupplier = function(model)
-      {   
+      $scope.saveGroup = function(model)
+      {          
         
-        $http.post('/suppliers',model)
+        $http.post('/product-group',model)
          .success(function(data) {
             $scope.message(data);
-            //model.category_name="";
-            $scope.getSuppliers();
+            $scope.pr = {};
+            $scope.getGroups();
         })
       }
 
@@ -36,9 +37,9 @@
 
       $scope.order = function(predicate, reverse) {
         console.log("dd");
-         $scope.suppliers = orderBy($scope.suppliers, predicate, reverse);
+         $scope.groups = orderBy($scope.groups, predicate, reverse);
       };
-      $scope.getSuppliers();      
+      $scope.getGroups();      
       
      
 

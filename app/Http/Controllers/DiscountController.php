@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
 use Response;
+use Exception;
 class DiscountController extends Controller
 {
     public function index()
@@ -28,12 +29,16 @@ class DiscountController extends Controller
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
         }
-       
-        $discount = Discount::create($inputs);
+        try{
+           $discount = Discount::create($inputs);
         if($discount)        
-        	return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+            return Response::json(['status'=>true,'message' => "Successfuly created!"]); 
+        }catch(Exception $e){
+              return Response::json(['status'=>false,'message' => ["Error in saving, Please check this discount combination may already exist!"]]);
+        }
         
-        return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
+        
+      
     }
 
     public function discount_list()

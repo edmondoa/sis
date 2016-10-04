@@ -12,8 +12,8 @@ class Discount extends Model
     public static $rules = [
     			'category_id' => 'required',
     			'level_id' => 'required',
-    			'cash' => 'required|numeric|between:0,99999999.99',
-    			'credit' => 'required|numeric|between:0,99999999.99',
+    			'cash' => 'required|numeric|between:0,100.99',
+    			'credit' => 'required|numeric|between:0,100.99',
     			]; 
 
     protected $fillable = ['category_id','level_id','cash','credit','notes'];
