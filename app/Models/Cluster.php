@@ -12,4 +12,15 @@ class Cluster extends Model
     public static $rules = ['cluster_name' => 'required|unique:cluster,cluster_name']; 
 
     protected $fillable = ['cluster_name','notes'];
+
+    protected $appends = ['count_branch'];
+
+    public function branch()
+    {
+    	return $this->hasMany('App\Models\Branch','cluster_id','cluster_id');
+    }
+    public function getCountBranchAttribute()
+    {
+    	return $this->branch()->count('branch_id');
+    }
 }

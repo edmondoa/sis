@@ -22,6 +22,10 @@
 
       $scope.saveSupplier = function(model)
       {   
+        if (model !== undefined && model !== null) {
+          model['supplier_name'] = $(".supplier_name option:selected").text();
+        }
+        //
         
         $http.post('/suppliers',model)
          .success(function(data) {

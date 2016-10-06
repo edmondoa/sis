@@ -28,11 +28,9 @@
                 <label for="inputEmail3"  class="col-sm-2 control-label">Name</label>
 
                 <div class="col-sm-10">                  
-                  <select class="form-control select2 category_name"ng-model='category.sys_category_id' >
-                    @foreach($sys_category as $cat)
-                    <option value="{{$cat->category_id}}">{{$cat->category_name}}</option>
-                    @endforeach
-                  </select>
+                  <div class="col-sm-10">                  
+                    <input type='text' ng-model="category.category_name" class='form-control' placeholder="Category Name"/>
+                 </div>   
                
                 </div>                 
               </div>             

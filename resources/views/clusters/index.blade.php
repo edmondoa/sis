@@ -59,14 +59,14 @@
               <tr>
                 <th style="width: 10px">#</th>                
                 <th>Cluster Name</th>
-                <th>Branch</th>
+                <th>No. of Branch</th>
                 <th style="width: 40px">Action</th>
               </tr>
               <tbody>
                 <tr dir-paginate="cluster in clusters |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="cluster.cluster_name"></td>
-                  <td ></td>
+                  <td ng-bind="cluster.count_branch"></td>
                   <td>
                     <a href="#"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>

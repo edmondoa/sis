@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Discount;
 use App\Models\ProductCount;
 use App\Models\ProductCountItem;
+use App\Models\ProductGroup;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -21,7 +22,8 @@ class ProductController extends Controller
     {
     	$category = Category::get();
         $discount = Discount::with('account_level')->get();
-    	return view('products.index',compact('category','discount'));
+        $groups = ProductGroup::get();
+    	return view('products.index',compact('category','discount','groups'));
     }
 
     public function store(Request $req)

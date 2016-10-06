@@ -79,12 +79,23 @@
           </select>
         </div>
       </div>
+       <div class="form-group">
+        <label for="inputEmail3"  class="col-sm-3 control-label">Group</label>
+
+        <div class="col-sm-9">
+          <select class='form-control' ng-model='product.group_id' >            
+            @foreach($groups as $group)
+            <option value="{{$group->group_id}}">{{$group->group_name}}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Book</label>
 
         <div class="col-sm-9">
           <label>
-            <input type="checkbox" class="flat-red" id='non-book'ng-model='product.non_book' checked>
+            <input type="checkbox" class="flat-red" id='non-book'ng-model='product.non_book' >
           </label>
         </div> 
       </div>
@@ -93,7 +104,7 @@
 
         <div class="col-sm-9">          
           <label>
-            <input type="checkbox" class="flat-red" id='non_consign'ng-model='product.non_consign' checked>
+            <input type="checkbox" class="flat-red" id='non_consign'ng-model='product.non_consign' >
           </label>  
         </div>
       </div>
@@ -102,7 +113,7 @@
 
         <div class="col-sm-9">      
           <label>
-            <input type="checkbox" class="flat-red" id='non_returnable'ng-model='product.non_returnable' checked>
+            <input type="checkbox" class="flat-red" id='non_returnable'ng-model='product.non_returnable' >
           </label>           
         </div>
       </div>
@@ -111,7 +122,7 @@
 
         <div class="col-sm-9">   
           <label>
-            <input type="checkbox" class="flat-red" id='vatable'ng-model='product.vatable' checked>
+            <input type="checkbox" class="flat-red" id='vatable' checked>
           </label> 
         </div>
       </div>
@@ -120,7 +131,7 @@
 
         <div class="col-sm-9">  
           <label>
-            <input type="checkbox" class="flat-red" id='lock'ng-model='product.lock' checked>
+            <input type="checkbox" class="flat-red" id='lock'ng-model='product.lock' >
           </label> 
         </div>
       </div>
@@ -129,7 +140,7 @@
 
         <div class="col-sm-9"> 
           <label>
-            <input type="checkbox" class="flat-red" id='tieup'ng-model='product.tieup' checked>
+            <input type="checkbox" class="flat-red" id='tieup'ng-model='product.tieup' >
           </label>          
        </div>
       </div>
@@ -138,7 +149,7 @@
 
         <div class="col-sm-9"> 
           <label>
-            <input type="checkbox" class="flat-red" id='suspended'ng-model='product.suspended' checked>
+            <input type="checkbox" class="flat-red" id='suspended'ng-model='product.suspended' >
           </label>          
        </div>
       </div>

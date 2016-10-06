@@ -23,12 +23,14 @@
 
       $scope.saveProduct = function(model)
       {
-        model['non_book'] = $("input[name=non_book]:checked").val();    
-        model['non_consign'] = $("input[name=non_consign]:checked").val();
-        model['non_returnable'] = $("input[name=non_returnable]:checked").val();
-        model['vatable'] = $("input[name=vatable]:checked").val();
-        model['lock'] = $("input[name=lock]:checked").val();
-        model['suspended'] = $("input[name=suspended]:checked").val();         
+
+        model['non_book'] = $("#non_book").is(':checked')?1:0;    
+        model['non_consign'] = $("#non_consign").is(':checked')?1:0;
+        model['non_returnable'] = $("#non_returnable").is(':checked')?1:0;
+        model['vatable'] = $("#vatable").is(':checked')?1:0;
+        model['lock'] = $("#lock").is('checked')?1:0;
+        model['suspended'] = $("#suspended").is(':checked')?1:0;         
+        
         $http.post('/products-regular',model)
          .success(function(data) {
           $("button [type='reset']").trigger('click');

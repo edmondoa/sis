@@ -21,8 +21,7 @@ class Product extends Model
     			'productname' => 'required',
     			'current_retail_price' => 'required|numeric|between:0,99999999.99',
                 'last_cost_price' => 'required|numeric|between:0,99999999.99',
-                'minimum_stock_quantity' => 'required|numeric',
-                'maximun_stock_quantity' => 'required|numeric',                
+                             
                 'non_returnable' => 'required',
                 'vatable' => 'required',
                 'suspended' => 'required',
