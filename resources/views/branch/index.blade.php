@@ -24,6 +24,8 @@
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>
           </div>
+          <a href="#" ng-click="getBranches()" class="hide refresh"></a>
+          
             <!-- /.box-header -->
           <div class="box-body">
             <table class="table table-bordered">
@@ -43,7 +45,7 @@
                   <td ng-bind="br.cluster.cluster_name"></td>                  
                   <td ng-bind="br.status"></td>
                   <td>
-                    <a href="#"><i class="fa fa-pencil"></i></a>                   
+                    <a href="#" class='branch-edit' data-id="@{{br.branch_id}}"><i class="fa fa-pencil"></i></a>                   
                   </td>
                 </tr>
               </tbody>
@@ -74,5 +76,49 @@
       radioClass: 'iradio_flat-green'
     });
   });
+  $(document).on('click','.branch-edit',function(e){
+    e.preventDefault();
+    id = $(this).data('id');
+    $.get( "branches/"+id+"/edit", function( data ) {
+      var dialog = bootbox.dialog({
+          title: 'Edit Branch',
+          message: data,
+          buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success',
+                callback:function(){
+                  var $this   = $(this);
+                  var data = $('#form-branches').serialize();  
+                  $.ajax({
+                    url: "/branches/"+id,
+                    method:'PUT',
+                    data: data,
+                    dataType: 'JSON',
+                    success: function(result){
+                      if (result['status'] == true) {
+                        bootbox.hideAll();
+                        message(result);                        
+                        $(".refresh").trigger('click');
+                      } else {    
+                        message(result);                      
+                        return false;
+                      }
+                    },
+                    
+                  });                 
+                  
+                  return false;
+                }
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+      });
+          
+    });
+  })
 </script>
 @stop

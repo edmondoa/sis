@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Notifiable;
     protected $connection = 'domain';
     protected $table = 'user';
-
+    protected $primaryKey = 'user_id';
     /**
      * The attributes that are mass assignable.
      *

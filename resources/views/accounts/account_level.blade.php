@@ -67,7 +67,7 @@
                   <td ng-bind="acc.level_name"></td>
                   <td ng-bind="acc.credit_days"></td>
                   <td>
-                    <a href="#"><i class="fa fa-pencil"></i></a>
+                    <a href="#"  class='acc-edit' data-id="@{{acc.level_id}}"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>
                   </td>
                 </tr>
@@ -88,5 +88,50 @@
 @parent
 <script src="/angular/controllers/account_level.js"></script>
 <script src="/angular/dirPagination.js"></script>
-
+<script type="text/javascript">
+  $(document).on('click','.acc-edit',function(e){
+    e.preventDefault();
+    id = $(this).data('id');
+    $.get( "acc_levels/"+id+"/edit", function( data ) {
+      var dialog = bootbox.dialog({
+          title: 'Edit Level',
+          message: data,
+          buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success',
+                callback:function(){
+                  var $this   = $(this);
+                  var data = $('#form-acc_level').serialize();  
+                  $.ajax({
+                    url: "/acc_levels/"+id,
+                    method:'PUT',
+                    data: data,
+                    dataType: 'JSON',
+                    success: function(result){
+                      if (result['status'] == true) {
+                        bootbox.hideAll();
+                        message(result);                        
+                        $(".refresh").trigger('click');
+                      } else {    
+                        message(result);                      
+                        return false;
+                      }
+                    },
+                    
+                  });                 
+                  
+                  return false;
+                }
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+      });
+          
+    });
+  })
+</script>
 @stop

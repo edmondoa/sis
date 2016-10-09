@@ -90,8 +90,8 @@
 {{Html::script('/angular/ui-bootstrap-tpls.js')}}
 {{Html::script('/angular/angular-resource.js')}}
 {{Html::script('/angular/app.js')}}
-<!-- {{Html::script('/dist/js/demo.js')}} -->
-<!-- {{Html::script('/dist/js/common.js')}} -->
+{{Html::script('/js/bootbox.min.js')}}
+{{Html::script('/js/common.js')}}
 @show
 </body>
 </html>

@@ -49,6 +49,8 @@
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>
           </div>
+          <a href="#" ng-click="getCategories()" class="hide refresh"></a>
+          
             <!-- /.box-header -->
           <div class="box-body">
             <table class="table table-bordered">
@@ -64,7 +66,7 @@
                   <td ng-bind="cat.category_name"></td>
                   <td ></td>
                   <td>
-                    <a href="#"><i class="fa fa-pencil"></i></a>
+                    <a href="#"class='category-edit' data-id="@{{cat.category_id}}"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>
                   </td>
                 </tr>
@@ -91,5 +93,49 @@
     //Initialize Select2 Elements
     $(".select2").select2();
   });
+  $(document).on('click','.category-edit',function(e){
+    e.preventDefault();
+    id = $(this).data('id');
+    $.get( "category/"+id+"/edit", function( data ) {
+      var dialog = bootbox.dialog({
+          title: 'Edit Category',
+          message: data,
+          buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success',
+                callback:function(){
+                  var $this   = $(this);
+                  var data = $('#form-category').serialize();  
+                  $.ajax({
+                    url: "/category/"+id,
+                    method:'PUT',
+                    data: data,
+                    dataType: 'JSON',
+                    success: function(result){
+                      if (result['status'] == true) {
+                        bootbox.hideAll();
+                        message(result);                        
+                        $(".refresh").trigger('click');
+                      } else {    
+                        message(result);                      
+                        return false;
+                      }
+                    },
+                    
+                  });                 
+                  
+                  return false;
+                }
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+      });
+          
+    });
+  })
 </script>
 @stop

@@ -53,6 +53,7 @@
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>
           </div>
+          <a href="#" ng-click="getClusters()" class="hide refresh"></a>
             <!-- /.box-header -->
           <div class="box-body">
             <table class="table table-bordered">
@@ -68,7 +69,7 @@
                   <td ng-bind="cluster.cluster_name"></td>
                   <td ng-bind="cluster.count_branch"></td>
                   <td>
-                    <a href="#"><i class="fa fa-pencil"></i></a>
+                    <a href="#" class='cluster-edit' data-id="@{{cluster.cluster_id}}" ><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>
                   </td>
                 </tr>
@@ -89,5 +90,50 @@
 @parent
 <script src="/angular/controllers/cluster.js"></script>
 <script src="/angular/dirPagination.js"></script>
-
+<script type="text/javascript">
+  $(document).on('click','.cluster-edit',function(e){
+    e.preventDefault();
+    id = $(this).data('id');
+    $.get( "clusters/"+id+"/edit", function( data ) {
+      var dialog = bootbox.dialog({
+          title: 'Edit Cluster',
+          message: data,
+          buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success',
+                callback:function(){
+                  var $this   = $(this);
+                  var data = $('#form-cluster').serialize();  
+                  $.ajax({
+                    url: "/clusters/"+id,
+                    method:'PUT',
+                    data: data,
+                    dataType: 'JSON',
+                    success: function(result){
+                      if (result['status'] == true) {
+                        bootbox.hideAll();
+                        message(result);                        
+                        $(".refresh").trigger('click');
+                      } else {  
+                        message(result);                     
+                        return false;
+                      }
+                    },
+                    
+                  });                 
+                  
+                  return false;
+                }
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+      });
+          
+    });
+  })
+</script>
 @stop

@@ -9,7 +9,8 @@ class Branch extends Model
     protected $connection = 'domain';
     protected $database = 'domain';//(Session::has('dbname'))?Session::get('dbname'):"sis2";
     protected $table ='branch';
-
+    protected $primaryKey = 'branch_id';
+    
     protected $fillable =['business_name','branch_name','addressline1',
     			'addressline2','tin_no','terminal_type','default_credit_limit',
     			'invoice_header1','invoice_header2','invoice_header3','invoice_footer1',

@@ -8,7 +8,8 @@ class Cluster extends Model
 {
     protected $connection = 'domain';
     protected $table = 'cluster';
-
+    protected $primaryKey = 'cluster_id';
+    
     public static $rules = ['cluster_name' => 'required|unique:cluster,cluster_name']; 
 
     protected $fillable = ['cluster_name','notes'];

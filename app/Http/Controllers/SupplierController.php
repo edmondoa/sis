@@ -50,9 +50,44 @@ class SupplierController extends Controller
     	return $list;
     }
 
-    protected function rules($category_id)
+    public function edit($id)
     {
-        return ['supplier_name' => 'required|unique:supplier,supplier_name,NULL,id,category_id,' . $category_id];
+        $supplier = Supplier::find($id);
+        return view('supplier.edit',compact('supplier'));
+    }
 
+    public function update(Request $request,$id)
+    {
+        $jdata['status'] = false;
+        $jdata['message'] = "Error in updating, Please contact the administrator";
+        
+        $validate = Validator::make($request->all(), self::rules($id));
+        if($validate->fails())
+        {
+            return Response::json(['status'=>false,'message' => $validate->messages()]);
+        }
+        $supplier = Supplier::find($id);
+        $supplier->supplier_name = $request->supplier_name;
+        $supplier->contact_person = $request->contact_person;
+        $supplier->mobile1_no = $request->mobile1_no;
+        $supplier->mobile2_no = $request->mobile2_no;
+        $supplier->landline_no = $request->landline_no;
+        $supplier->email = $request->email;
+        $supplier->notes = $request->notes;
+        if($supplier->save())
+        {
+            $jdata['status'] = true;
+            $jdata['message'] = "Successfuly updated!";
+     
+        }
+        return $jdata;
+    }
+
+    private function rules($param)
+    {
+        return [
+               'supplier_name' => 'required|unique:supplier,supplier_name,'.$param.',supplier_id',
+               'email' => 'email'
+            ];
     }
 }

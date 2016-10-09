@@ -8,6 +8,7 @@ class AccountLevel extends Model
 {
 	protected $connection = 'domain';
     protected $table ='account_level';
+    protected $primaryKey ='level_id';
 
     protected $fillable =['level_name','credit_days'];
 
