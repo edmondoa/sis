@@ -21,14 +21,14 @@
         <label for="inputEmail3"  class="col-sm-3 control-label">Code</label>
 
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="productcode" ng-model='product.productcode' placeholder="Product Code">
+          <input type="text" class="form-control" id="product_code" ng-model='product.product_code' placeholder="Product Code">
         </div>
       </div> 
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-3 control-label">Bar Code</label>
 
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="" ng-model='product.bar_code' placeholder="Bar Code">
+          <input type="text" class="form-control" id="" ng-model='product.barcode' placeholder="Bar Code">
         </div>
       </div> 
       <div class="form-group">
@@ -42,7 +42,7 @@
         <label for="inputEmail3"  class="col-sm-3 control-label">Product</label>
 
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="" ng-model='product.productname' placeholder="Product Name">
+          <input type="text" class="form-control" id="" ng-model='product.product_name' placeholder="Product Name">
         </div>
       </div> 
       <div class="form-group">
@@ -51,7 +51,7 @@
         <div class="col-sm-9">          
           <div class="input-group">
             <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control" id="" ng-model='product.current_retail_price' placeholder="100.00">
+            <input type="text" class="form-control" id="" ng-model='product.retail_price' placeholder="100.00">
             <span class="input-group-addon">.00</span>
           </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="col-sm-9">
          <div class="input-group">
             <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control" id="" ng-model='product.last_cost_price' placeholder="100.00">
+            <input type="text" class="form-control" id="" ng-model='product.cost_price' placeholder="100.00">
             <span class="input-group-addon">.00</span>
           </div>
           

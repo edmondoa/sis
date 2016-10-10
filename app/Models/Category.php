@@ -12,4 +12,18 @@ class Category extends Model
     public static $rules = ['category_name' => 'required|unique:category,category_name']; 
 
     protected $fillable = ['sys_category_id','category_name','default_discount_id'];
+
+    protected $appends = ['count_supplier'];
+
+    public function supplier()
+    {
+    	return $this->belongsToMany('App\Models\Supplier','supplier_category');
+    }
+    
+   
+    public function getCountSupplierAttribute()
+    {
+    	return $this->supplier()->count();
+    }
+
 }

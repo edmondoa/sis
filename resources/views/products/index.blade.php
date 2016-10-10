@@ -36,9 +36,9 @@
               <tbody>
                 <tr dir-paginate="prod in products |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
-                  <td ng-bind="prod.productname"></td>
+                  <td ng-bind="prod.product_name"></td>
                   <td ng-bind="prod.category.category_name"></td>
-                  <td ng-bind="prod.current_retail_price"></td>
+                  <td ng-bind="prod.retail_price"></td>
                   <td>
                      <a href="#"><i class="fa fa-eye"></i></a>
                     <a href="#"><i class="fa fa-pencil"></i></a>

@@ -8,6 +8,7 @@ class ProductStorage extends Model
 {
     protected $connection = 'domain';
     protected $table = 'product_storage';
+    protected $primaryKey ='storage_id';
 
     public static $rules = ['storage_name' => 'required',
     						'branch_id' => 'required']; 

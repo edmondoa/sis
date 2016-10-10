@@ -36,4 +36,40 @@ class ProductGroupController extends Controller
     	$list = ProductGroup::get();
     	return $list;
     }
+
+    public function edit($id)
+    {
+        $group = ProductGroup::find($id);
+        return view('productgroup.edit',compact('group'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $jdata['status'] = false;
+        $jdata['message'] = "Error in updating, Please contact the administrator";
+        
+        $validate = Validator::make($request->all(), self::rules($id));
+        if($validate->fails())
+        {
+            return Response::json(['status'=>false,'message' => $validate->messages()]);
+        }
+        $pgroup = ProductGroup::find($id);
+        $pgroup->group_name = $request->group_name;
+        $pgroup->notes = $request->notes;
+        
+        if($pgroup->save())
+        {
+            $jdata['status'] = true;
+            $jdata['message'] = "Successfuly updated!";
+     
+        }
+        return $jdata;
+    }
+
+    private function rules($param)
+    {
+        return [
+               'group_name' => 'required|unique:product_group,group_name,'.$param.',group_id'               
+            ];
+    }
 }

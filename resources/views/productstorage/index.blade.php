@@ -23,6 +23,8 @@
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>
           </div>
+          <a href="#" ng-click="Storages()" class="hide refresh"></a>
+          
             <!-- /.box-header -->
           <div class="box-body">
             <table class="table table-bordered">
@@ -37,9 +39,8 @@
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="storage.branch.branch_name"></td>
                   <td ng-bind="storage.storage_name"></td>                  
-                  <td>
-                     <a href="#"><i class="fa fa-eye"></i></a>
-                    <a href="#"><i class="fa fa-pencil"></i></a>
+                  <td>                    
+                    <a href="#"class="storage-edit" data-id="@{{storage.storage_id}}"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>
                   </td>
                 </tr>
@@ -66,5 +67,49 @@
     //Initialize Select2 Elements
     $(".select2").select2();
   });
+  $(document).on('click','.storage-edit',function(e){
+    e.preventDefault();
+    id = $(this).data('id');
+    $.get( "product-storage/"+id+"/edit", function( data ) {
+      var dialog = bootbox.dialog({
+          title: 'Edit Storage',
+          message: data,
+          buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success',
+                callback:function(){
+                  var $this   = $(this);
+                  var data = $('#form-product-storage').serialize();  
+                  $.ajax({
+                    url: "/product-storage/"+id,
+                    method:'PUT',
+                    data: data,
+                    dataType: 'JSON',
+                    success: function(result){
+                      if (result['status'] == true) {
+                        bootbox.hideAll();
+                        message(result);                        
+                        $(".refresh").trigger('click');
+                      } else {    
+                        message(result);                      
+                        return false;
+                      }
+                    },
+                    
+                  });                 
+                  
+                  return false;
+                }
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+      });
+          
+    });
+  })
 </script>
 @stop

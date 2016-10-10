@@ -8,6 +8,7 @@ class ProductGroup extends Model
 {
     protected $connection = 'domain';
     protected $table = 'product_group';
+    protected $primaryKey = 'group_id';
 
     public static $rules = ['group_name' => 'required']; 
 

@@ -84,7 +84,7 @@
                 className: 'btn-success',
                 callback:function(){
                   var $this   = $(this);
-                  var data = $('#form-suppliers').serialize();  
+                  var data = $('#form-suppliers').serialize()+"&"+$('#sup_cat').serialize();  
                   $.ajax({
                     url: "/suppliers/"+id,
                     method:'PUT',

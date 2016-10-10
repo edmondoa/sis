@@ -64,7 +64,7 @@
                 <tr dir-paginate="cat in categories |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="cat.category_name"></td>
-                  <td ></td>
+                  <td ng-bind='cat.count_supplier'></td>
                   <td>
                     <a href="#"class='category-edit' data-id="@{{cat.category_id}}"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>

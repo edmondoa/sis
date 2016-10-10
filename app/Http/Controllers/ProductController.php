@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
     	$inputs = $req->all();
     	$inputs['post_date'] = date('Y-m-d');
-        $inputs['user_id'] = Auth::user()->id;
+        $inputs['user_id'] = Auth::user()->user_id;
     	$validate = Validator::make($inputs, Product::$rules);
         if($validate->fails())
         {

@@ -43,4 +43,41 @@ class ProductStorageController extends Controller
     	$list = ProductStorage::with('branch')->get();
     	return $list;
     }
+    public function edit($id)
+    {
+        $branches = Branch::get();
+        $storage = ProductStorage::find($id);
+        return view('productstorage.edit',compact('storage','branches'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $jdata['status'] = false;
+        $jdata['message'] = "Error in updating, Please contact the administrator";
+        
+        $validate = Validator::make($request->all(), self::rules($id));
+        if($validate->fails())
+        {
+            return Response::json(['status'=>false,'message' => $validate->messages()]);
+        }
+        $storage = ProductStorage::find($id);
+        $storage->branch_id = $request->branch_id;
+        $storage->storage_name = $request->storage_name;
+        $storage->notes = $request->notes;
+        
+        if($storage->save())
+        {
+            $jdata['status'] = true;
+            $jdata['message'] = "Successfuly updated!";
+     
+        }
+        return $jdata;
+    }
+
+    private function rules($param)
+    {
+        return [
+               'storage_name' => 'required|unique:product_storage,storage_name,'.$param.',storage_id'               
+            ];
+    }
 }

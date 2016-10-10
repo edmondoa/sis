@@ -14,4 +14,10 @@ class Supplier extends Model
 
     protected $fillable = ['supplier_name','contact_person','mobile1_no','mobile2_no',
     						'landline_no','email','notes'];
+
+
+    public function category()
+    {
+    	return $this->belongsToMany('App\Models\Category','supplier_category');
+    }						
 }

@@ -9,18 +9,18 @@ class Product extends Model
     protected $connection = 'domain';
     protected $table = 'product';
 
-    protected $fillable =['productcode','productname','barcode',
-                        'model_no','current_retail_price','category_id',
-                        'last_cost_price','discount_id','non_book','non_consign',
-                        'non_returnable','vatable','tie_up','group_id','maximum_stock_quantity',
-                        'minimum_stock_quantity','lock','suspended','notes','post_date','user_id',];
+    protected $fillable =['product_code','product_name','barcode',
+                        'model_no','retail_price','category_id',
+                        'cost_price','discount_id','non_book','non_consign',
+                        'non_returnable','vatable','tie_up','group_id',
+                        'lock','suspended','notes','post_date','user_id',];
 
     public static $rules = [
-    			'productcode' => 'required',
+    			'product_code' => 'required',
     			'category_id' => 'required',
-    			'productname' => 'required',
-    			'current_retail_price' => 'required|numeric|between:0,99999999.99',
-                'last_cost_price' => 'required|numeric|between:0,99999999.99',
+    			'product_name' => 'required',
+    			'retail_price' => 'required|numeric|between:0,99999999.99',
+                'cost_price' => 'required|numeric|between:0,99999999.99',
                              
                 'non_returnable' => 'required',
                 'vatable' => 'required',

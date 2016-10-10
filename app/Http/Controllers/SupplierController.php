@@ -53,7 +53,13 @@ class SupplierController extends Controller
     public function edit($id)
     {
         $supplier = Supplier::find($id);
-        return view('supplier.edit',compact('supplier'));
+        $mylist = [];
+        foreach ($supplier->category as $key) {
+            array_push($mylist,$key->pivot->category_id);
+        }
+       
+        $categories = Category::get();
+        return view('supplier.edit',compact('supplier','categories','mylist'));
     }
 
     public function update(Request $request,$id)
@@ -76,10 +82,16 @@ class SupplierController extends Controller
         $supplier->notes = $request->notes;
         if($supplier->save())
         {
+            $supplier->category()->detach();
+            foreach ($request->category as $val) {              
+               $supplier->category()->attach($val);              
+            }
             $jdata['status'] = true;
             $jdata['message'] = "Successfuly updated!";
      
         }
+
+       
         return $jdata;
     }
 
