@@ -80,6 +80,8 @@ class SupplierController extends Controller
         $supplier->landline_no = $request->landline_no;
         $supplier->email = $request->email;
         $supplier->notes = $request->notes;
+        $supplier->lock = (isset($request->lock))?1:0;
+        $supplier->suspended = (isset($request->suspended))?1:0;
         if($supplier->save())
         {
             $supplier->category()->detach();

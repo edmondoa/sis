@@ -49,6 +49,22 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="inputEmail3"  class="col-sm-3 control-label">Lock</label>
+          <div class="col-sm-9">
+           <label>
+              <input type="checkbox" class="flat-red" id='lock' checked>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3"  class="col-sm-3 control-label">Suspended</label>
+          <div class="col-sm-9">
+            <label>
+              <input type="checkbox" class="flat-red" id='suspended' >
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Notes</label>
 
           <div class="col-sm-9">

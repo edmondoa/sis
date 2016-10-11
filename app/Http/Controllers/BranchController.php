@@ -80,11 +80,10 @@ class BranchController extends Controller
 
     private function rules($param)
     {
-        return [
-                'business_name' => 'required',
+        return [                
                 'branch_name' => 'required|unique:branch,branch_name,'.$param.',branch_id',
-                'addressline1' => 'required',
-                'addressline2' => 'required'               
+                'business_name' => 'required',
+                'addressline1' => 'required'              
             ];
     
     }

@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
+    
+    <link rel="stylesheet" href="/plugins/iCheck/all.css">
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
       <h1>
@@ -64,12 +66,15 @@
 <script src="/angular/controllers/supplier.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
+<script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
   $(function () {
     //Initialize Select2 Elements
     $(".select2").select2();
-
-
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass: 'iradio_flat-green'
+    });
   });
   $(document).on('click','.supplier-edit',function(e){
     e.preventDefault();

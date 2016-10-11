@@ -17,11 +17,10 @@ class Branch extends Model
     			'invoice_footer2','invoice_footer3','bir_permit_no','status','tran_date',
     			'lock','suspended','notes','cluster_id'];
 
-    public static $rules =[
-    				'business_name' => 'required',
+    public static $rules =[    				
     				'branch_name' => 'required|unique:branch,branch_name',
-    				'addressline1' => 'required',
-                    'addressline2' => 'required'
+    				'business_name' => 'required',
+                    'addressline1' => 'required'
 
     ]	;	
 

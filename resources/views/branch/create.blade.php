@@ -7,18 +7,18 @@
   <form class="form-horizontal" name='branch-form'>
     <div class="box-body">
       <div class="col-md-12">
-        <div class="form-group ">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Business Name</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='branch.business_name' placeholder="Business Name">
-          </div>
-        </div>
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Branch Name</label>
           <div class="col-sm-9">
             <input type="text" class="form-control"  ng-model='branch.branch_name' placeholder="Branch Name">
           </div>
         </div> 
+        <div class="form-group ">
+          <label for="inputEmail3"  class="col-sm-3 control-label">Business Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"  ng-model='branch.business_name' placeholder="Business Name">
+          </div>
+        </div>       
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Cluster</label>
           <div class="col-sm-9">
@@ -30,13 +30,13 @@
           </div>
         </div> 
         <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Address 1</label>
+          <label for="inputEmail3"  class="col-sm-3 control-label">Addressline 1</label>
           <div class="col-sm-9">
             <textarea class="form-control"  ng-model='branch.addressline1'></textarea>
           </div>
         </div> 
         <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Address 2</label>
+          <label for="inputEmail3"  class="col-sm-3 control-label">Addressline 2</label>
           <div class="col-sm-9">
             <textarea class="form-control"  ng-model='branch.addressline2'></textarea>
           </div>
@@ -65,7 +65,7 @@
           <label for="inputEmail3"  class="col-sm-3 control-label">Suspended</label>
           <div class="col-sm-9">
             <label>
-              <input type="checkbox" class="flat-red" id='suspended' checked>
+              <input type="checkbox" class="flat-red" id='suspended' >
             </label>
           </div>
         </div>

@@ -23,7 +23,8 @@
       $scope.saveSupplier = function(model)
       {   
         if (model !== undefined && model !== null) {
-          model['supplier_name'] = $(".supplier_name option:selected").text();
+          model['suspended'] = ($("#suspended").is(":checked"))?'1':'0';
+          model['lock'] = ($("#lock").is(":checked"))?'1':'0';
         }
         //
         

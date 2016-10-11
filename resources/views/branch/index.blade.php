@@ -31,19 +31,21 @@
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px">#</th>                
-                <th>Branch Name</th>
-                <th>Business Name</th>
-                <th>Cluster</th>                
-                <th>Status</th>
+                <th class="col-sm-3">Branch Name</th>               
+                <th class="col-sm-2">Cluster</th>                
+                <th class="col-sm-2">Status</th>
+                <th class="col-sm-1">Lock</th>
+                <th class="col-sm-1">Suspended</th>
                 <th style="width: 40px">Action</th>
               </tr>
               <tbody>
                 <tr dir-paginate="br in branches |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
-                  <td ng-bind="br.branch_name"></td>
-                  <td ng-bind="br.business_name"></td>
+                  <td ng-bind="br.branch_name"></td>                 
                   <td ng-bind="br.cluster.cluster_name"></td>                  
-                  <td ng-bind="br.status"></td>
+                  <td><span ng-class="(br.status =='CLOSE')?'text-red':'text-green'" ng-bind="br.status"></span></td>
+                  <td><span ng-bind="(br.lock==1)?'Yes':'No'"></span></td>
+                  <td><span ng-bind="(br.suspended==1)?'Yes':'No'"></span></td>
                   <td>
                     <a href="#" class='branch-edit' data-id="@{{br.branch_id}}"><i class="fa fa-pencil"></i></a>                   
                   </td>

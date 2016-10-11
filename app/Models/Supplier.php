@@ -13,7 +13,7 @@ class Supplier extends Model
      						 'email'=>'email']; 
 
     protected $fillable = ['supplier_name','contact_person','mobile1_no','mobile2_no',
-    						'landline_no','email','notes'];
+    						'landline_no','email','notes','lock','suspended'];
 
 
     public function category()

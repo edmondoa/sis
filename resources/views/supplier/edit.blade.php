@@ -68,6 +68,22 @@
                 </div>
               </div>
               <div class="form-group">
+                <label for="inputEmail3"  class="col-sm-3 control-label">Lock</label>
+                <div class="col-sm-9">
+                 <label>
+                    <input type="checkbox" class="flat-red" value='1' name='lock' <?php echo ($supplier->lock==1)?'checked':'' ?>>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3"  class="col-sm-3 control-label">Suspended</label>
+                <div class="col-sm-9">
+                  <label>
+                    <input type="checkbox" class="flat-red" value='1' name='suspended' <?php echo ($supplier->suspended==1)?'checked':'' ?>>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
                 <label for="inputEmail3"  class="col-sm-3 control-label">Notes</label>
 
                 <div class="col-sm-9">
