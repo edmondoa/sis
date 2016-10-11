@@ -48,6 +48,12 @@
           </div>
         </div> 
         <div class="form-group">
+          <label for="inputEmail3"  class="col-sm-3 control-label">BIR Permit #</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"  ng-model='branch.bir_permit_no' placeholder="BIR Permit #">
+          </div>
+        </div>
+        <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Lock</label>
           <div class="col-sm-9">
            <label>

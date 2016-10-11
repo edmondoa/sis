@@ -63,6 +63,7 @@ class BranchController extends Controller
         $branch->branch_name = $request->branch_name;
         $branch->cluster_id = $request->cluster_id;
         $branch->tin_no = $request->tin_no;
+        $branch->bir_permit_no = $request->bir_permit_no;
         $branch->addressline1 = $request->addressline1;
         $branch->addressline2 = $request->addressline2;
         $branch->lock = (isset($request->lock))?1:0;

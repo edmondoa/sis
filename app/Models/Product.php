@@ -8,11 +8,14 @@ class Product extends Model
 {
     protected $connection = 'domain';
     protected $table = 'product';
+    protected $primaryKey = 'product_id';
+
+
 
     protected $fillable =['product_code','product_name','barcode',
                         'model_no','retail_price','category_id',
                         'cost_price','discount_id','non_book','non_consign',
-                        'non_returnable','vatable','tie_up','group_id',
+                        'non_returnable','vatable','tieup','group_id',
                         'lock','suspended','notes','post_date','user_id',];
 
     public static $rules = [

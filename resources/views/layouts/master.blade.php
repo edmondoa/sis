@@ -46,7 +46,7 @@
     <!-- /.content -->
    </div> 
 </div>
-@include('layouts.footer')
+
 <!-- ./wrapper -->
 @section('html_footer')
 <!-- jQuery 2.2.3 -->

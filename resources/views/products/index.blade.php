@@ -23,6 +23,7 @@
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>
           </div>
+          <a href="#" ng-click="getProducts()" class="hide refresh"></a>
             <!-- /.box-header -->
           <div class="box-body">
             <table class="table table-bordered">
@@ -40,8 +41,8 @@
                   <td ng-bind="prod.category.category_name"></td>
                   <td ng-bind="prod.retail_price"></td>
                   <td>
-                     <a href="#"><i class="fa fa-eye"></i></a>
-                    <a href="#"><i class="fa fa-pencil"></i></a>
+                     
+                    <a href="#" class="product-edit" data-id="@{{prod.product_id}}"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>
                   </td>
                 </tr>
@@ -68,6 +69,50 @@
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
       checkboxClass: 'icheckbox_flat-green',
       radioClass: 'iradio_flat-green'
+    });
+  })
+  $(document).on('click','.product-edit',function(e){
+    e.preventDefault();
+    id = $(this).data('id');
+    $.get( "products-regular/"+id+"/edit", function( data ) {
+      var dialog = bootbox.dialog({
+          title: 'Edit Product',
+          message: data,
+          buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success',
+                callback:function(){
+                  var $this   = $(this);
+                  var data = $('#form-product').serialize();  
+                  $.ajax({
+                    url: "/products-regular/"+id,
+                    method:'PUT',
+                    data: data,
+                    dataType: 'JSON',
+                    success: function(result){
+                      if (result['status'] == true) {
+                        bootbox.hideAll();
+                        message(result);                        
+                        $(".refresh").trigger('click');
+                      } else {    
+                        message(result);                      
+                        return false;
+                      }
+                    },
+                    
+                  });                 
+                  
+                  return false;
+                }
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+      });
+          
     });
   })
 </script>
