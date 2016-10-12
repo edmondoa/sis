@@ -25,14 +25,22 @@
           <form class="form-horizontal">
             <div class="box-body">
               <div class="form-group">
-                <label for="inputEmail3"  class="col-sm-2 control-label">Name</label>
+                <label for="inputEmail3"  class="col-sm-4 control-label">System Category</label>
 
-                <div class="col-sm-10">                  
-                  <div class="col-sm-10">                  
-                    <input type='text' ng-model="category.category_name" class='form-control' placeholder="Category Name"/>
-                 </div>   
+                <div class="col-sm-8">                  
+                  <select class="form-control select2 sys_category_id" ng-model='category.sys_category_id' >
+                    @foreach($sys_category as $cat)
+                    <option value="{{$cat->category_id}}">{{$cat->category_name}}</option>
+                    @endforeach
+                  </select>
                
                 </div>                 
+              </div>      
+              <div class="form-group">
+                <label for="inputEmail3"  class="col-sm-4 control-label">Name</label>
+                  <div class="col-sm-8">                  
+                    <input type='text' ng-model="category.category_name" class='form-control category_name' placeholder="Category Name"/>
+                 </div>         
               </div>             
             </div>
             <!-- /.box-body -->
@@ -92,6 +100,9 @@
   $(function () {
     //Initialize Select2 Elements
     $(".select2").select2();
+  });
+  $(document).on('change','.sys_category_id',function(e){
+    $(".category_name").val($('.sys_category_id option:selected').text());
   });
   $(document).on('click','.category-edit',function(e){
     e.preventDefault();

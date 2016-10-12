@@ -22,9 +22,8 @@
 
       $scope.saveCategory = function(model)
       {   
-        if (model !== undefined && model !== null) {
-           model['category_name'] = $(".category_name option:selected").text();
-        }
+       
+        model['category_name'] = $(".category_name").val();     
        
         
         $http.post('/category',model)
@@ -52,7 +51,12 @@
         $.notify({       
           message: data.message
         },{
-          type: 'success'
+          type: 'success',
+          newest_on_top: true,
+          placement: {
+              align: "right",
+              from: "bottom"
+          }
         });
       }else{
         var stringBuilder ="<ul class='error'>";
@@ -64,7 +68,12 @@
          $.notify({       
             message: stringBuilder
           },{
-            type: 'danger'
+            type: 'danger',
+            newest_on_top: true,
+          placement: {
+              align: "right",
+              from: "bottom"
+          }
           });   
       }
     }  

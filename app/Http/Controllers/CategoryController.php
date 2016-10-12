@@ -14,8 +14,9 @@ class CategoryController extends Controller
     
     public function index()
     {
-        
-    	return view('category.index');
+        $sys_category = DB::connection('mysql')
+                        ->table('category')->get();
+        return view('category.index',compact('sys_category'));
     }
 
     public function store(Request $req)
@@ -40,8 +41,10 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
+        $sys_category = DB::connection('mysql')
+                        ->table('category')->get();
         $category = Category::find($id);
-        return view('category.edit',compact('category'));
+        return view('category.edit',compact('category','sys_category'));
     }
 
      public function update(Request $request,$id)

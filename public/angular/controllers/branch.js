@@ -47,7 +47,12 @@
         $.notify({       
           message: data.message
         },{
-          type: 'success'
+          type: 'success',
+          newest_on_top: true,
+          placement: {
+              align: "right",
+              from: "bottom"
+          }
         });
       }else{
         var stringBuilder ="<ul class='error'>";
@@ -59,7 +64,12 @@
          $.notify({       
             message: stringBuilder
           },{
-            type: 'danger'
+            type: 'danger',
+            newest_on_top: true,
+          placement: {
+              align: "right",
+              from: "bottom"
+          }
           });   
       }
     }  
