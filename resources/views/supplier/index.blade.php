@@ -45,7 +45,7 @@
                   <td ng-bind="supplier.contact_person"></td>               
                   <td>
                     <a href="javascript:void(0)" class='supplier-edit' data-id="@{{supplier.supplier_id}}"><i class="fa fa-pencil"></i></a>
-                    <a href="#"><i class="fa fa-trash warning"></i></a>
+                    <a href="#"><i class="fa fa-trash warning text-red"></i></a>
                   </td>
                 </tr>
               </tbody>

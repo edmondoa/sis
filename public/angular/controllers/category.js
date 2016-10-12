@@ -7,7 +7,7 @@
     .controller('categoryCtrl', categoryCtrl);
 
     function categoryCtrl($scope,$filter, $timeout,$http) {
-      $scope.categories = [];
+      $scope.categories = [];      
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 

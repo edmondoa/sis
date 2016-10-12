@@ -8,6 +8,7 @@
 
     function supplierCtrl($scope,$filter, $timeout,$http) {
       $scope.suppliers = [];
+      $scope.supplier ={};
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 
@@ -31,7 +32,8 @@
         $http.post('/suppliers',model)
          .success(function(data) {
             $scope.message(data);
-            //model.category_name="";
+            $scope.supplier ={};
+            $("#suspended").attr('checked',false);
             $scope.getSuppliers();
         })
       }
@@ -53,7 +55,12 @@
         $.notify({       
           message: data.message
         },{
-          type: 'success'
+          type: 'success',
+          newest_on_top: true,
+          placement: {
+              align: "right",
+              from: "bottom"
+          }
         });
       }else{
         var stringBuilder ="<ul class='error'>";
@@ -65,7 +72,12 @@
          $.notify({       
             message: stringBuilder
           },{
-            type: 'danger'
+            type: 'danger',
+            newest_on_top: true,
+            placement: {
+                align: "right",
+                from: "bottom"
+            }
           });   
       }
     }  

@@ -8,6 +8,7 @@
 
     function clusterCtrl($scope,$filter, $timeout,$http) {
       $scope.clusters = [];
+      $scope.cluster = {};
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 
@@ -26,7 +27,7 @@
         $http.post('/clusters',model)
          .success(function(data) {
             $scope.message(data);
-            //model.category_name="";
+            $scope.cluster = {};
             $scope.getClusters();
         })
       }
@@ -48,7 +49,12 @@
         $.notify({       
           message: data.message
         },{
-          type: 'success'
+          type: 'success',
+          newest_on_top: true,
+          placement: {
+              align: "right",
+              from: "bottom"
+          }
         });
       }else{
         var stringBuilder ="<ul class='error'>";
@@ -60,7 +66,12 @@
          $.notify({       
             message: stringBuilder
           },{
-            type: 'danger'
+            type: 'danger',
+            newest_on_top: true,
+            placement: {
+                align: "right",
+                from: "bottom"
+            }
           });   
       }
     }  

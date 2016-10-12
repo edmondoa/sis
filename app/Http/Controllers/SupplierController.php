@@ -27,20 +27,11 @@ class SupplierController extends Controller
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
         }
-        DB::beginTransaction();
+        
         $supplier = Supplier::create($req->all());
-        if($supplier) {       
-            $sup_category = new SupplierCategory;
-            $sup_category->category_id = $req->category_id;
-            $sup_category->supplier_id = $req->supplier_id;
-            $sup_category->save();
-            if($sup_category){
-                DB::commit();
-                return Response::json(['status'=>true,'message' => "Successfuly created!"]);
-            }
-        	
-        }
-        DB::rollback();
+        if($supplier) { 
+            return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+        }        
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
@@ -84,10 +75,12 @@ class SupplierController extends Controller
         $supplier->suspended = (isset($request->suspended))?1:0;
         if($supplier->save())
         {
-            $supplier->category()->detach();
-            foreach ($request->category as $val) {              
-               $supplier->category()->attach($val);              
-            }
+            if(count($request->category) > 0){
+                $supplier->category()->detach();            
+                foreach ($request->category as $val) {              
+                   $supplier->category()->attach($val);              
+                }
+            }    
             $jdata['status'] = true;
             $jdata['message'] = "Successfuly updated!";
      

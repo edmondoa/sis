@@ -87,7 +87,7 @@
                 <label for="inputEmail3"  class="col-sm-3 control-label">Notes</label>
 
                 <div class="col-sm-9">
-                  <textarea class="form-control" id="" name='notes'>{{$supplier->note}}</textarea>
+                  <textarea class="form-control" id="" name='notes'>{{$supplier->notes}}</textarea>
                   
                 </div>
               </div>
