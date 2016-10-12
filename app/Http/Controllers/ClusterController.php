@@ -65,6 +65,22 @@ class ClusterController extends Controller
         return $jdata;
     }
 
+    public function destroy($id)
+    {
+        $jdata['status'] = false;
+        $jdata['message'] = "Error in updating, Please contact the administrator";
+        
+        
+        $cluster = Cluster::find($id);      
+        if($cluster->delete())
+        {
+            $jdata['status'] = true;
+            $jdata['message'] = "Successfuly deleted!";
+     
+        }
+        return $jdata;
+    }
+
     private function rules($param)
     {
         return [

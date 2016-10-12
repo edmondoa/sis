@@ -70,7 +70,7 @@
                   <td ng-bind="cluster.count_branch"></td>
                   <td>
                     <a href="#" class='cluster-edit' data-id="@{{cluster.cluster_id}}" ><i class="fa fa-pencil"></i></a>
-                    <a href="#"><i class="fa fa-trash warning"></i></a>
+                    <a href="#" ng-hide="cluster.count_branch > 0"><i class="fa fa-trash text-red cluster-delete" data-id="@{{cluster.cluster_id}}"></i></a>
                   </td>
                 </tr>
               </tbody>
@@ -134,6 +134,45 @@
       });
           
     });
+  })
+
+//Delete
+$(document).on('click','.cluster-delete',function(e){
+    e.preventDefault();
+    id = $(this).data('id');
+    bootbox.confirm({
+    title: "Remove Cluster?",
+    message: "Do you want to remove this cluster now ? This cannot be undone.",
+    buttons: {
+        cancel: {
+            label: '<i class="fa fa-times"></i> Cancel'
+        },
+        confirm: {
+            label: '<i class="fa fa-check"></i> Confirm'
+        }
+    },
+    callback: function (result) {
+        if(result)
+        {
+          $.ajax({
+            url: "/clusters/"+id,
+            method:'DELETE',           
+            dataType: 'JSON',
+            success: function(result){
+              if (result['status'] == true) {
+                bootbox.hideAll();
+                message(result);                        
+                $(".refresh").trigger('click');
+              } else {  
+                message(result);                     
+                return false;
+              }
+            },
+            
+          });
+        }
+    }
+});
   })
 </script>
 @stop
