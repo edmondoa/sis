@@ -35,7 +35,7 @@
                 <th style="width: 40px">Action</th>
               </tr>
               <tbody>
-                <tr dir-paginate="discount in discounts |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
+                <tr dir-paginate="discount in discounts |filter:{category_id: discount.category_id}|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>                 
                   <td ng-bind="discount.category.category_name"></td>
                   <td ng-bind="discount.account_level.level_name"></td>

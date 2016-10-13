@@ -41,13 +41,13 @@
         </div>
       </div> 
       <div class="form-group">
-        <label for="inputEmail3"  class="col-sm-3 control-label">Addressline 1</label>
+        <label for="inputEmail3"  class="col-sm-3 control-label">Addressline1</label>
         <div class="col-sm-9">
           <textarea class="form-control"  name='addressline1'>{{$branch->addressline1}}</textarea>
         </div>
       </div> 
       <div class="form-group">
-        <label for="inputEmail3"  class="col-sm-3 control-label">Addressline 2</label>
+        <label for="inputEmail3"  class="col-sm-3 control-label">Addressline2</label>
         <div class="col-sm-9">
           <textarea class="form-control"  name='addressline2'>{{$branch->addressline2}}</textarea>
         </div>
