@@ -8,7 +8,7 @@
 
     function pStorageCtrl($scope,$filter, $timeout,$http) {
       $scope.storages = [];
-      $scope.storage ={};
+      $scope.pr ={};
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 
@@ -26,7 +26,7 @@
         $http.post('/product-storage',model)
          .success(function(data) {
             $scope.message(data);
-            $scope.storage ={};
+            $scope.pr ={};
             $scope.Storages();
         })
       }

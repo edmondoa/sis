@@ -26,8 +26,7 @@ class BranchController extends Controller
 
     public function store(Request $req)
     {
-    	$inputs = $req->all();
-    	$inputs['tran_date'] = date('Y-m-d');
+    	$inputs = $req->all();    	
     	$validate = Validator::make($inputs, Branch::$rules);
         if($validate->fails())
         {

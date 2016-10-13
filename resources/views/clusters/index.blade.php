@@ -142,7 +142,7 @@ $(document).on('click','.cluster-delete',function(e){
     id = $(this).data('id');
     bootbox.confirm({
     title: "Remove Cluster?",
-    message: "Do you want to remove this cluster now ? This cannot be undone.",
+    message: "Do you want to remove this cluster now? This cannot be undone.",
     buttons: {
         cancel: {
             label: '<i class="fa fa-times"></i> Cancel'

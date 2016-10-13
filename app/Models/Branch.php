@@ -12,9 +12,9 @@ class Branch extends Model
     protected $primaryKey = 'branch_id';
     
     protected $fillable =['business_name','branch_name','addressline1',
-    			'addressline2','tin_no','terminal_type','default_credit_limit',
+    			'addressline2','tin_no','default_credit_limit',
     			'invoice_header1','invoice_header2','invoice_header3','invoice_footer1',
-    			'invoice_footer2','invoice_footer3','bir_permit_no','status','tran_date',
+    			'invoice_footer2','invoice_footer3','bir_permit_no','status',
     			'lock','suspended','notes','cluster_id'];
 
     public static $rules =[    				
