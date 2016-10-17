@@ -97,6 +97,19 @@ class ProductController extends Controller
         return $jdata;
     }
 
+    public function search($sup,$search=NULL)
+    {
+        if ($search =='_blank') $search ="";
+        $sql = "SELECT p.* FROM product p
+                LEFT JOIN category c ON p.category_id = c.category_id
+                LEFT JOIN supplier_category sc ON c.category_id = sc.category_id
+                WHERE sc.supplier_id = $sup
+                AND (product_code LIKE ('%".$search."%') OR 
+                        product_name LIKE ('%".$search."%')) ";
+        $products = DB::select($sql);
+        return view('products.search',compact('products'));                 
+    }
+
     private function rules($param)
     {
         return [

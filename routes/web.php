@@ -26,6 +26,7 @@ Route::group(['middleware' => 'web'], function () {
 
 	//Products
 	Route::get('products-regular-list','ProductController@product_list');
+	Route::get('products/search/{id}/{param}','ProductController@search');
 	Route::resource('products-regular','ProductController');
 
 	Route::get('acc_levels/ng-acc_levels-list','AccountLevelController@level_list');
@@ -38,6 +39,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::resource('suppliers','SupplierController');
 
 	Route::get('stockin/ng-stockin-list','StockinController@stockin');
+	Route::post('stockin-float','StockinController@stockFloat');
+	Route::post('stockin-float/items','StockinController@stockFloatItems');
 	Route::resource('stockin','StockinController');
 
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
