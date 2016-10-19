@@ -42,7 +42,7 @@
         </div>
       <div class="wrapper"></div>
       <br>
-      <table class='table table-bordered table-hover dataTable' style="background-color: #c7c4c4;">
+      <table class='table table-bordered table-hover dataTable' style="background-color: #f4f4f4;">
       	<thead>
       		<th class='col-sm-1'>Prod Code</th>
       		<th>Prod Name</th>
@@ -51,10 +51,10 @@
       		<th class='col-sm-1'>Total</th>
       	</thead>
       	<tbody>
-      		<tr>
-      			<td></td>
-	      		<td></td>
-	      		<td></td>
+      		<tr ng-repeat="stock in stockins">
+      			<td ng-bind="stock.product_code"></td>
+	      		<td ng-bind="stock.product_name"></td>
+	      		<td ng-bind="stock.cost_price"></td>
 	      		<td ><input type='text' class='form-control input-sm' style="height:26px"/></td>
 	      		<td></td>
       		</tr>

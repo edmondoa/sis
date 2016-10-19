@@ -7,22 +7,24 @@
     .controller('stockinCtrl', stockinCtrl);
 
     function stockinCtrl($scope,$filter, $timeout,$http) {
-      $scope.stokins = [];
-      $scope.stockin ={};
+      $scope.stockins = [];
+      // $scope.stockin ={};
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 
       $scope.getStockins = function() {
         
-        $http.get('/stockin/ng-pgroup-list').
+        $http.get('/stockin/ng-stockin-list').
           success(function(data) {
-            $scope.stokins = data;         
-            console.log($scope.groups);
+            $scope.stockins = data.prodlist; 
+            $scope.stockin = data.stockin;                
+            console.log($scope.stockin);
           });
       }
 
       $scope.saveStockin = function(model)
-      {        
+      {    
+        console.log(model);    
         $http.post('/stockin-float',model)
          .success(function(data) {
             $scope.message(data);            
@@ -35,9 +37,9 @@
 
       $scope.order = function(predicate, reverse) {
         console.log("dd");
-         $scope.stokins = orderBy($scope.stokins, predicate, reverse);
+         $scope.stockins = orderBy($scope.stockins, predicate, reverse);
       };
-     // $scope.getGroups();      
+      $scope.getStockins();      
       
      
 

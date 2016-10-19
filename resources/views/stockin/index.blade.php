@@ -44,14 +44,15 @@
                 label: 'Yes',
                 className: 'btn-success',
                 callback:function(){
+                  
                   var selected = [];
-                  var param =[];
-                  $('input:checkbox.selected:checked').each(function () {
-                    selected.push($(this).data('id'));                    
+                  $('input:checkbox.selected:checked').each(function () {                    
+                    selected = $(this).data('id');                                      
                   }); 
-                  param['ids'] = selected;                                    
-                  $.post('stockin-float/items',param,function(){
-
+                  //param['ids'] = selected;  
+                                                  
+                  $.post('stockin-float/items',{'ids[]':selected},function(data){
+                     bootbox.hideAll();
                   });
                   return false;
                 }

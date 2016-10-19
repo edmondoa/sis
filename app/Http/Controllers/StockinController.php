@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use App\Models\Branch;
+use App\Models\Product;
 use App\Models\StockinFloat;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,7 @@ use App\Http\Requests;
 use Validator;
 use Response;
 use Auth;
+use Session;
 class StockinController extends Controller
 {
     public function index()
@@ -22,11 +24,13 @@ class StockinController extends Controller
 
     public function stockFloat(Request $req)
     {
-    	$input = $req->all();
-    	$input['user_id'] = Auth::user()->user_id;
-    	$input['type'] = "PURCHASE";
-    	$input['encode_date'] = date("Y-m-d");
-    	$validate = Validator::make($input, StockinFloat::$rules);
+    	dump($req->all());
+    	$req->user_id = Auth::user()->user_id;
+    	$req->type = "PURCHASE";
+    	$req->encode_date = date("Y-m-d");
+    	
+    	$validate = Validator::make($req->all(), StockinFloat::$rules);
+
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
@@ -43,7 +47,19 @@ class StockinController extends Controller
 
     public function stockFloatItems(Request $req)
     {
-    	dump($req->all());
+    	$prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
+    	foreach ($req->ids as $id) {
+    		$prod = Product::find($id);
+    		array_push($prodlist,$prod);
+    	}    	
+    	Session::put('prodlist',$prodlist);
+    }
+
+    public function stockinList()
+    {
+    	$jdata['prodlist'] = (Session::has('prodlist'))?Session::get('prodlist'):[];
+    	$jdata['stockin'] = (Session::has('stockinFloat'))?Session::get('stockinFloat'):[];
+    	return $jdata;
     }
 
     
