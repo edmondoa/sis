@@ -17,18 +17,18 @@
         $http.get('/stockin/ng-stockin-list').
           success(function(data) {
             $scope.stockins = data.prodlist;
-            $("#branch_id").val(data.stockin.branch_id);
-            $("#supplier_id").val(data.stockin.supplier_id);
+            $("#branch_id").val(data.stockin.branch_id).trigger("change");
+            $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
             $("#doc_no").val(data.stockin.doc_no);
             $("#amount_due").val(data.stockin.amount_due);
-            
-            if(data.stockin.branch_id !='')
+            console.log(data.stockin)
+            if(data.stockin.branch_id)
             {
               $('.btn-save').removeClass('disabled');
               $('.search-prod').removeClass('disabled');
               $("a.stock").addClass('disabled');
               $("input.stock").attr('readonly',true);
-              $("select.stock").attr('readonly',true);
+              $("select.stock").attr('disabled',true);
             }
                               
             console.log($scope.stockin);
@@ -48,16 +48,16 @@
         $http.post('/stockin-float',model)
          .success(function(data) {
             $scope.message(data);
-            if(data.success)
+            if(data.status)
             {
               $('.btn-save').removeClass('disabled');
               $('.search-prod').removeClass('disabled');
               $("a.stock").addClass('disabled');
               $("input.stock").attr('readonly',true);
-              $("select.stock").attr('readonly',true);;
+              $("select.stock").attr('disabled',true);
             }            
-            $("#branch_id").val(data.stockin.branch_id);
-            $("#supplier_id").val(data.stockin.supplier_id);
+            $("#branch_id").val(data.stockin.branch_id).trigger("change");
+            $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
             $("#doc_no").val(data.stockin.doc_no);
             $("#amount_due").val(data.stockin.amount_due);
         })
@@ -80,7 +80,7 @@
             
             $("a.stock").removeClass('disabled');
             $("input.stock").attr('readonly',false);
-            $("select.stock").attr('readonly',false);
+            $("select.stock").attr('disabled',false);
             $("div.amount-due").removeClass('has-error');
         })
       }

@@ -51,10 +51,14 @@
                     selected.push($(this).data('id'));                                      
                   }); 
                   //param['ids'] = selected;  
-                  console.log(selected);                               
+                  if(selected.length==0)
+                  {
+                    bootbox.hideAll();
+                    return true;
+                  }                               
                   $.post('stockin-float/items',{'ids[]':selected},function(data){
                     $(".refresh").trigger('click');
-                    bootbox.hideAll();
+                     bootbox.hideAll();
                   });
                   return false;
                 }
