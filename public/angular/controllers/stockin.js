@@ -8,7 +8,7 @@
 
     function stockinCtrl($scope,$filter, $timeout,$http) {
       $scope.stockins = [];
-      // $scope.stockin ={};
+       $scope.stock =[];
       $scope.currentPage = 1;
       $scope.pageSize = 15;  
 
@@ -16,19 +16,72 @@
         
         $http.get('/stockin/ng-stockin-list').
           success(function(data) {
-            $scope.stockins = data.prodlist; 
-            $scope.stockin = data.stockin;                
+            $scope.stockins = data.prodlist;
+            $("#branch_id").val(data.stockin.branch_id);
+            $("#supplier_id").val(data.stockin.supplier_id);
+            $("#doc_no").val(data.stockin.doc_no);
+            $("#amount_due").val(data.stockin.amount_due);
+            
+            if(data.stockin.branch_id !='')
+            {
+              $('.btn-save').removeClass('disabled');
+              $('.search-prod').removeClass('disabled');
+              $("a.stock").addClass('disabled');
+              $("input.stock").attr('readonly',true);
+              $("select.stock").attr('readonly',true);
+            }
+                              
             console.log($scope.stockin);
           });
       }
 
-      $scope.saveStockin = function(model)
+      $scope.saveStockin = function()
       {    
-        console.log(model);    
+        
+        var model = {
+              'branch_id':$("#branch_id").val(),
+              'supplier_id': $("#supplier_id").val(),
+              'doc_no' : $("#doc_no").val(),
+              'amount_due':$("#amount_due").val()
+        } 
+        console.log(model);
         $http.post('/stockin-float',model)
          .success(function(data) {
+            $scope.message(data);
+            if(data.success)
+            {
+              $('.btn-save').removeClass('disabled');
+              $('.search-prod').removeClass('disabled');
+              $("a.stock").addClass('disabled');
+              $("input.stock").attr('readonly',true);
+              $("select.stock").attr('readonly',true);;
+            }            
+            $("#branch_id").val(data.stockin.branch_id);
+            $("#supplier_id").val(data.stockin.supplier_id);
+            $("#doc_no").val(data.stockin.doc_no);
+            $("#amount_due").val(data.stockin.amount_due);
+        })
+      }
+
+      $scope.cancel = function()
+      {
+        $http.get('/stockin-float/cancel')
+         .success(function(data) {
             $scope.message(data);            
+            $scope.stockins = data.prodlist;
+            $("#branch_id").val(data.stockin.branch_id);
+            $("#supplier_id").val(data.stockin.supplier_id);
+            $("#doc_no").val(data.stockin.doc_no);
+            $("#amount_due").val(data.stockin.amount_due);
+            $("#totalQuantity").text(0);    
+            $("#totalCost").text(parseFloat(0));
+            $('.btn-save').addClass('disabled');
+            $('.search-prod').addClass('disabled');
             
+            $("a.stock").removeClass('disabled');
+            $("input.stock").attr('readonly',false);
+            $("select.stock").attr('readonly',false);
+            $("div.amount-due").removeClass('has-error');
         })
       }
 

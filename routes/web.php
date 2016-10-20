@@ -41,6 +41,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('stockin/ng-stockin-list','StockinController@stockinList');
 	Route::post('stockin-float','StockinController@stockFloat');
 	Route::post('stockin-float/items','StockinController@stockFloatItems');
+	Route::get("stockin-float/cancel","StockinController@cancel");
 	Route::resource('stockin','StockinController');
 
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
