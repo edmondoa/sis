@@ -106,15 +106,23 @@
       });
       $("div.amount-due").addClass('has-error');
     }else{
+      var stocks = {};
       var quantity = [];
-      $('.quantity').each(function () {                    
-        quantity.push($(this).data('id'));                                      
+      var prod_id = [];
+      var costprice = [];
+      $('.quantity').each(function () { 
+        quantity.push($(this).val());
+        prod_id.push($(this).data('prodid'));
+        costprice.push($(this).data('costprice')) ;
       }); 
-      $.post('stockin-float/save',{'quantity[]':quantity},function(data){
-        $(".refresh").trigger('click');
-        bootbox.hideAll();
+      stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice};
+      console.log(stocks);
+      $.post('stockin-float/save',stocks,function(data){
+        message(result);
+        $(".refresh").trigger('click');       
       });
     }
   })
+  $(".calendar").datepicker({autoclose:true});
 </script>
 @stop

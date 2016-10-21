@@ -21,6 +21,8 @@
             $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
             $("#doc_no").val(data.stockin.doc_no);
             $("#amount_due").val(data.stockin.amount_due);
+            $("#doc_date").val(data.stockin.doc_date);
+            $("#arrive_date").val(data.stockin.arrive_date);
             console.log(data.stockin)
             if(data.stockin.branch_id)
             {
@@ -42,6 +44,8 @@
               'branch_id':$("#branch_id").val(),
               'supplier_id': $("#supplier_id").val(),
               'doc_no' : $("#doc_no").val(),
+              'doc_date' : $("#doc_date").val(),
+              'arrive_date' : $("#arrive_date").val(),
               'amount_due':$("#amount_due").val()
         } 
         console.log(model);
@@ -60,6 +64,8 @@
             $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
             $("#doc_no").val(data.stockin.doc_no);
             $("#amount_due").val(data.stockin.amount_due);
+            $("#doc_date").val(data.stockin.doc_date);
+            $("#arrive_date").val(data.stockin.arrive_date);
         })
       }
 
@@ -73,6 +79,8 @@
             $("#supplier_id").val(data.stockin.supplier_id);
             $("#doc_no").val(data.stockin.doc_no);
             $("#amount_due").val(data.stockin.amount_due);
+            $("#doc_date").val(data.stockin.doc_date);
+            $("#arrive_date").val(data.stockin.arrive_date);
             $("#totalQuantity").text(0);    
             $("#totalCost").text(parseFloat(0));
             $('.btn-save').addClass('disabled');
@@ -83,6 +91,35 @@
             $("select.stock").attr('disabled',false);
             $("div.amount-due").removeClass('has-error');
         })
+      }
+
+      $scope.removeItem = function(index)
+      {
+        bootbox.confirm({
+          title: "Remove Item",
+          message: "Are you sure you want to remove this item?",
+          size: 'small',
+          buttons: {
+              cancel: {
+                  label: '<i class="fa fa-times"></i> Cancel',
+                  className: 'btn-danger'
+              },
+              confirm: {
+                  label: '<i class="fa fa-check"></i> Confirm',
+                  className: 'btn-success'
+              }
+          },
+          callback: function (result) {
+              if(result)
+              {
+                 $http.post('/stockin-items-remove/'+index)
+                  .success(function(data) {
+                    $scope.message(data);
+                    $("#"+index).remove();
+                  });
+              }
+          }
+      });
       }
 
       
