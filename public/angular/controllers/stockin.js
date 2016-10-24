@@ -32,6 +32,8 @@
               $("input.stock").attr('readonly',true);
               $("select.stock").attr('disabled',true);
             }
+
+            $scope.total(data.prodlist);
                               
             console.log($scope.stockin);
           });
@@ -67,6 +69,20 @@
             $("#doc_date").val(data.stockin.doc_date);
             $("#arrive_date").val(data.stockin.arrive_date);
         })
+      }
+
+      $scope.total = function(datas)
+      {
+        var totalQuantity =0;
+        var totalCost =0;
+        angular.forEach(datas, function(value, key) {
+          
+          totalCost = parseFloat(value.total) + parseFloat(totalCost);          
+          totalQuantity = parseInt(value.quantity) + parseInt(totalQuantity); 
+                  
+        });
+        $("#totalQuantity").text(totalQuantity);    
+        $("#totalCost").text(parseFloat(totalCost));
       }
 
       $scope.cancel = function()

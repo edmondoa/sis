@@ -70,6 +70,7 @@
       		<th class='col-sm-2'>Prod Code</th>
       		<th>Prod Name</th>
       		<th class='col-sm-1'>Cost Price</th>
+          <th class='col-sm-1'>Updated Price</th>
       		<th class='col-sm-1'>Qty</th>
       		<th class='col-sm-1'>Total</th>
           <th class='col-sm-1'></th>
@@ -79,10 +80,13 @@
       			<td ng-bind="stock.product_code"></td>
 	      		<td ng-bind="stock.product_name"></td>
 	      		<td ng-bind="stock.cost_price"></td>
-	      		<td ><input type='number' class='form-control input-sm quantity' min="0" value="0" name="quantity[]" 
+            <td ><input type='text' class='form-control input-sm updated_price' value="@{{stock.updated_price}}" name="updated_price[]" 
                 data-prodid="@{{stock.product_id}}"
-                data-costprice='@{{stock.cost_price}}' style="height:26px"/></td>
-	      		<td><span class='total'>0.00</span></td>
+                data-costprice='@{{stock.cost_price}}' style="height:26px"/></td>            
+	      		<td ><input type='number' class='form-control input-sm quantity' min="0" value="@{{stock.quantity}}" name="quantity[]" 
+                data-prodid="@{{stock.product_id}}"
+                data-updatedprice='@{{stock.updated_price}}' data-costprice='@{{stock.cost_price}}'  style="height:26px"/></td>
+	      		<td><span class='total' >@{{stock.total}}</span></td>
             <td><a href="javascript:void(0)" title="Remove Item" ng-click="removeItem($index)"><i class="fa fa-trash text-red"></i></a></td>
       		</tr>
       	</tbody>
@@ -91,6 +95,7 @@
       		
       		<td colspan="2"></td>
       		<td></td>
+          <td></td>
       		<td><strong id='totalQuantity'>0</strong></td>
       		<td><strong id='totalCost'>0.00</strong></td>
       	</tfoot>

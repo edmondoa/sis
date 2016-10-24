@@ -50,7 +50,10 @@ class StockinController extends Controller
     	$prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	
     	foreach ($req->ids as $id) {
-    		$prod = Product::find($id);    		
+    		$prod = Product::find($id);
+    		$prod->quantity = 0;  
+    		$prod->updated_price = $prod->cost_price; 
+    		$prod->total = 0;  		
     		array_push($prodlist,$prod);
     	}    	
     	Session::put('prodlist',$prodlist);
@@ -92,6 +95,7 @@ class StockinController extends Controller
     			'product_id' => $req->prod_id[$i], 
     			'quantity'	 => $req->quantity[$i], 	
     			'cost_price' => $req->costprice[$i],
+    			'updated_price' => $req->updated_price[$i],
     			'stockin_float_id' => $stock->stockin_float_id
     		];
     		StockItem::create($item );
@@ -109,6 +113,16 @@ class StockinController extends Controller
     	array_values($prodlist);
     	Session::put('prodlist',$prodlist);
     	return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
+    }
+
+    public function stockFloatUpdate(Request $req)
+    {
+    	$prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
+    	$prod = $prodlist[$req->key];
+    	$row = $req->row;
+    	$prod->$row = $req->value;
+    	$prod->total = $prod->quantity * $prod->updated_price; 
+    	Session::put('prodlist',$prodlist);
     }
 
     

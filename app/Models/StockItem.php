@@ -10,5 +10,5 @@ class StockItem extends Model
     protected $table = 'stockin_item';
     public $timestamps = false;
     
-    public $fillable = ['product_id','cost_price','quantity','stockin_float_id'];
+    public $fillable = ['product_id','cost_price','quantity','stockin_float_id','updated_price'];
 }

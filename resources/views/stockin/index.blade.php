@@ -79,8 +79,9 @@
 
   $(document).on('change','.quantity',function(e){
     e.preventDefault();
-    var costprice = parseFloat($(this).data('costprice'));
-    var total = costprice * $(this).val();
+    key = $(this).parent('td').parent('tr').attr('id');
+    var updatedprice = $(this).parent('td').siblings('td').find('input.updated_price').val();
+    var total = updatedprice * $(this).val();
     $(this).parent('td').next('td').find('span').text(total);
     var totalQuantity = 0;
     $(".quantity").each(function(){
@@ -93,7 +94,27 @@
    
     $("#totalQuantity").text(totalQuantity);    
     $("#totalCost").text(parseFloat(totalCost));
+
+    update(key,'quantity',parseInt($(this).val()));
   });
+
+  $(document).on('change','.updated_price',function(e){
+    e.preventDefault();
+    key = $(this).parent('td').parent('tr').attr('id');
+
+    var updatedprice = $(this).val();
+    var quantity = $(this).parent('td').siblings('td').find('input.quantity').val();
+    var total = parseFloat(updatedprice) * parseFloat(quantity);    
+    $(this).parent('td').siblings('td').find('.total').text(total);
+
+    var totalCost = 0;
+    $(".total").each(function(){      
+      totalCost = totalCost + parseFloat($(this).text());
+    });
+    $("#totalCost").text(parseFloat(totalCost));
+    update(key,'updated_price',updatedprice);
+    
+  })
 
   $(document).on("click",".btn-save",function(e){
     var totalCost =  $("#totalCost").text();
@@ -110,19 +131,29 @@
       var quantity = [];
       var prod_id = [];
       var costprice = [];
+      var updated_price = [];
       $('.quantity').each(function () { 
         quantity.push($(this).val());
         prod_id.push($(this).data('prodid'));
         costprice.push($(this).data('costprice')) ;
+        updated_price.push($(this).parent('td').siblings('td').find('input.updated_price').val());
       }); 
-      stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice};
+      stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice,'updated_price':updated_price};
       console.log(stocks);
       $.post('stockin-float/save',stocks,function(data){
-        message(result);
+        message(data);
         $(".refresh").trigger('click');       
       });
     }
   })
   $(".calendar").datepicker({autoclose:true});
+
+  function update(key,row,value)
+  {
+    var param = {'key':key,'row':row,'value':value};
+    $.post( "stockin-float/update",param, function( data ) {
+      return false;
+     });
+  }
 </script>
 @stop
