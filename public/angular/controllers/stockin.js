@@ -131,7 +131,7 @@
                  $http.post('/stockin-items-remove/'+index)
                   .success(function(data) {
                     $scope.message(data);
-                    $("#"+index).remove();
+                    $scope.getStockins();
                   });
               }
           }

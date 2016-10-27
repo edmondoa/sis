@@ -1,7 +1,7 @@
 <div class="box box-info">
   <div class="box-header with-border">
     <h3 class="box-title">Add Stockin 
-    	<select class="form-control select2 stock "  id="branch_id">
+    	<select class="form-control select2 stock "  id="branch_id" tabindex="1">
           	@foreach($branches as $branch)
               <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
             @endforeach
@@ -17,7 +17,7 @@
           <label for="inputEmail3"  class="col-sm-2 control-label">Supplier</label>
 
           <div class="col-sm-2">
-            <select class="form-control select2 stock"  id='supplier_id'>
+            <select class="form-control select2 stock"  id='supplier_id' tabindex="2">
             	@foreach($suppliers as $sup)
                 <option value="{{$sup->supplier_id}}">{{$sup->supplier_name}}</option>
               @endforeach
@@ -27,7 +27,7 @@
 
           <div class="col-sm-2">          
             <div class="input-group">            
-              <input type="text" class="form-control stock" id="doc_no" >
+              <input type="text" class="form-control stock" id="doc_no" tabindex="3">
             </div>
           </div>
           <label for="inputEmail3"  class="col-sm-2 control-label">Arrive Date</label>
@@ -35,17 +35,17 @@
           <div class="col-sm-2">          
             <div class="input-group ">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-              <input type="text" class="form-control stock calendar" id="arrive_date" >
+              <input type="text" class="form-control stock calendar" id="arrive_date" tabindex="4">
             </div>
           </div> 
         </div>
-        <br>
+        <br>        
         <div class="row">
           <label for="inputEmail3"  class="col-sm-2 control-label">Amount Due</label>
           <div class="col-sm-2">          
             <div class="input-group amount-due">
               <span class="input-group-addon">&#8369;</span>
-              <input type="text" class="form-control stock" id="amount_due" placeholder="100.00">
+              <input type="text" class="form-control stock" id="amount_due" placeholder="100.00" tabindex="5">
             </div>
           </div>
           <label for="inputEmail3"  class="col-sm-1 control-label">Doc Date</label>
@@ -53,24 +53,58 @@
           <div class="col-sm-2">          
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>           
-              <input type="text" class="form-control stock calendar" id="doc_date" >
+              <input type="text" class="form-control stock calendar" id="doc_date" tabindex="6">
             </div>
           </div>
           <div class='col-sm-2'></div>
           <div class="col-sm-2"> 
-            <a href="javascript:void(0)" class='btn btn-primary stock btn-add' ng-click="saveStockin()" style="width:100%">Add</a>
+            <a href="javascript:void(0)" class='btn btn-primary stock ' ng-click="saveStockin()" style="width:100%" tabindex="7"> Proceed</a>
           </div>  
           
         </div>
-        
-      <div class="wrapper"></div>
+        <br>  
+        <hr>
+        <div class="wrapper"></div>
+        <div class="row">
+          <label for="inputEmail3"  class="col-sm-2"></label>
+          
+          <label for="inputEmail3"  class="col-sm-1">Cat Code</label>
+          
+          <label for="inputEmail3"  class="col-sm-3">Product</label>
+          
+          <label for="inputEmail3"  class="col-sm-1">CPrice</label>
+          
+          <label for="inputEmail3"  class="col-sm-2">Qty</label>
+          
+        </div>
+        <div class="row">
+          <div class="col-sm-2">          
+            <div class="input-group">            
+              <input type="text" class="form-control " id="search" name='search' tabindex="8">
+              <a href="#" class='btn btn-sm btn-default input-group-addon disabled search-prod'>..</a>
+            </div>
+          </div> 
+          <span for="inputEmail3"  class="col-sm-1 " id="code"></span>
+          <span for="inputEmail3"  class="col-sm-3 " id="name"></span>
+          <div class="col-sm-1">
+            <input type="text" class="form-control " id="cprice" name='cprice'>
+          </div>          
+          <div class="col-sm-1">          
+            <div class="input-group">            
+              <input type="text" class="form-control " id="qty" name='qty' tabindex="9">
+              <input type="hidden" class="form-control " id="prod_id" name='prod_id' >            
+            </div>
+          </div>
+          <a href="#" class='btn btn-primary btn-add' tabindex="10">Add</a>
+        </div>           
+      </div>
       <br>
+      <hr>
       <table class='table table-bordered table-hover dataTable' style="background-color: #f4f4f4;">
       	<thead>
       		<th class='col-sm-2'>Prod Code</th>
       		<th>Prod Name</th>
-      		<th class='col-sm-1'>Cost Price</th>
-          <th class='col-sm-1'>Updated Price</th>
+      		<th class='col-sm-1'>Cost Price</th>          
       		<th class='col-sm-1'>Qty</th>
       		<th class='col-sm-1'>Total</th>
           <th class='col-sm-1'></th>
@@ -79,13 +113,8 @@
       		<tr ng-repeat="stock in stockins" id="@{{$index}}">
       			<td ng-bind="stock.product_code"></td>
 	      		<td ng-bind="stock.product_name"></td>
-	      		<td ng-bind="stock.cost_price"></td>
-            <td ><input type='text' class='form-control input-sm updated_price' value="@{{stock.updated_price}}" name="updated_price[]" 
-                data-prodid="@{{stock.product_id}}"
-                data-costprice='@{{stock.cost_price}}' style="height:26px"/></td>            
-	      		<td ><input type='number' class='form-control input-sm quantity' min="0" value="@{{stock.quantity}}" name="quantity[]" 
-                data-prodid="@{{stock.product_id}}"
-                data-updatedprice='@{{stock.updated_price}}' data-costprice='@{{stock.cost_price}}'  style="height:26px"/></td>
+	      		<td ng-bind="stock.cost_price"></td>                        
+	      		<td ng-bind="stock.quantity"></td>
 	      		<td><span class='total' >@{{stock.total}}</span></td>
             <td><a href="javascript:void(0)" title="Remove Item" ng-click="removeItem($index)"><i class="fa fa-trash text-red"></i></a></td>
       		</tr>
@@ -94,23 +123,14 @@
       	<tfoot>
       		
       		<td colspan="2"></td>
-      		<td></td>
-          <td></td>
+      		<td></td>          
       		<td><strong id='totalQuantity'>0</strong></td>
       		<td><strong id='totalCost'>0.00</strong></td>
       	</tfoot>
       </table>  
       
       <div class="wrapper"></div>
-      <div class="row">
-        <div class="col-sm-2">          
-          <div class="input-group">            
-            <input type="text" class="form-control " id="search" name='search' >
-            <a href="#" class='btn btn-sm btn-default input-group-addon disabled search-prod'>Search</a>
-          </div>
-        </div> 
-      </div>           
-    </div>
+      
     <div class="wrapper"></div>
     <!-- /.box-body -->
     <br>

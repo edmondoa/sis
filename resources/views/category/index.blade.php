@@ -2,6 +2,10 @@
 
 @section('content')
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="/plugins/iCheck/all.css">
+    <style type="text/css">
+    .select2{width:100% !important;}
+    </style>
     <section class="content-header">
       <h1>
         Categories     
@@ -25,6 +29,24 @@
           <form class="form-horizontal">
             <div class="box-body">
               <div class="form-group">
+                <label for="inputEmail3"  class="col-sm-4 control-label">Name</label>
+                  <div class="col-sm-8">                  
+                    <input type='text' ng-model="category.category_name" class='form-control category_name' placeholder="Category Name"/>
+                 </div>         
+              </div> 
+              <div class="form-group">
+                <label for="inputEmail3"  class="col-sm-4 control-label">Catergory Code</label>
+                  <div class="col-sm-8">                  
+                    <input type='text' ng-model="category.category_code" class='form-control category_name' placeholder="Category Name"/>
+                 </div>         
+              </div> 
+              <div class="form-group">
+                <label for="inputEmail3"  class="col-sm-4 control-label">Link</label>
+                  <div class="col-sm-8">                  
+                    <input type='checkbox'  class="flat-red" ng-model='show_system'/>
+                 </div>         
+              </div>
+              <div class="form-group" ng-show='show_system'>
                 <label for="inputEmail3"  class="col-sm-4 control-label">System Category</label>
 
                 <div class="col-sm-8">                  
@@ -36,12 +58,7 @@
                
                 </div>                 
               </div>      
-              <div class="form-group">
-                <label for="inputEmail3"  class="col-sm-4 control-label">Name</label>
-                  <div class="col-sm-8">                  
-                    <input type='text' ng-model="category.category_name" class='form-control category_name' placeholder="Category Name"/>
-                 </div>         
-              </div>             
+                          
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
@@ -65,6 +82,7 @@
               <tr>
                 <th style="width: 10px">#</th>                
                 <th>Category Name</th>
+                <th>Category Code</th>
                 <th>Suppliers</th>
                 <th style="width: 40px">Action</th>
               </tr>
@@ -72,6 +90,7 @@
                 <tr dir-paginate="cat in categories |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="cat.category_name"></td>
+                  <td ng-bind="cat.category_code"></td>
                   <td ng-bind='cat.count_supplier'></td>
                   <td>
                     <a href="#"class='category-edit' data-id="@{{cat.category_id}}"><i class="fa fa-pencil"></i></a>
@@ -96,14 +115,16 @@
 <script src="/angular/controllers/category.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
+<script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
   $(function () {
     //Initialize Select2 Elements
     $(".select2").select2();
-  });
-  $(document).on('change','.sys_category_id',function(e){
-    $(".category_name").val($('.sys_category_id option:selected').text());
-  });
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass: 'iradio_flat-green'
+    });
+  });  
   $(document).on('click','.category-edit',function(e){
     e.preventDefault();
     id = $(this).data('id');
@@ -148,5 +169,7 @@
           
     });
   })
+
+ 
 </script>
 @stop

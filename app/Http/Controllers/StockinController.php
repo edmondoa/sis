@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use App\Models\Setting;
 use App\Models\Branch;
 use App\Models\Product;
-use App\Models\StockinFloat;
+use App\Models\Stockin;
+use App\Models\Approval;
 use App\Models\StockItem;
 use Illuminate\Http\Request;
 
@@ -23,6 +25,11 @@ class StockinController extends Controller
     	return view('stockin.index',compact('suppliers','branches'));
     }
 
+    public function search()
+    {
+        return view('products.search');
+    }
+
     public function stockFloat(Request $req)
     {
     	$input = $req->all();     		
@@ -30,7 +37,7 @@ class StockinController extends Controller
     	$input['type'] = "PURCHASE";
     	$input['post_date'] = date("Y-m-d");
     	
-    	$validate = Validator::make($input, StockinFloat::$rules);
+    	$validate = Validator::make($input, Stockin::$rules);
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
@@ -49,13 +56,13 @@ class StockinController extends Controller
     {
     	$prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	
-    	foreach ($req->ids as $id) {
-    		$prod = Product::find($id);
-    		$prod->quantity = 0;  
-    		$prod->updated_price = $prod->cost_price; 
-    		$prod->total = 0;  		
-    		array_push($prodlist,$prod);
-    	}    	
+    	$prod = Product::find($req->id);
+        $prod->quantity = $req->qty;
+        $prod->cost_price = $req->costprice;
+        $prod->total = $req->qty * $req->costprice; 
+        		
+    	array_unshift($prodlist,$prod);
+    	   	
     	Session::put('prodlist',$prodlist);
     	$jdata['prodlist'] =$prodlist;
     	return $jdata;
@@ -81,22 +88,27 @@ class StockinController extends Controller
 
     public function stockFloatSave(Request $req)
     {
-    	$rows = count($req->quantity);
-    	
-    	$stockin = Session::get('stockinFloat');    	
-    	
-    	$stockin['arrive_date'] = date("Y-m-d",strtotime($stockin['arrive_date']));
-    	$stockin['doc_date'] = date("Y-m-d",strtotime($stockin['doc_date']));
-    	
-    	$stock = StockinFloat::create($stockin);
-    	for($i = 0; $i < $rows; $i++)
+    	$rows = count($req->quantity) - 1 ;
+    	$post_date = Setting::first()->pluck('post_date')[0];
+    	$stockin = Session::get('stockinFloat'); 
+    	$approval = Approval::create([
+                        'type'=>'STOCKIN',
+                        'status' => 'PENDING',
+                        'user_id' => Auth::user()->user_id,
+                        'post_date' => $post_date]);
+        $stockin['arrive_date'] = date("Y-m-d",strtotime($stockin['arrive_date']));
+        $stockin['doc_date'] = date("Y-m-d",strtotime($stockin['doc_date']));
+        $stockin['approval_id'] = $approval->approval_id;
+        $stockin['post_date'] = $post_date;
+    	$stock = Stockin::create($stockin);
+        $prodlist = array_reverse(Session::get('prodlist'));
+    	foreach($prodlist as $prod)
     	{    		
     		$item = [
-    			'product_id' => $req->prod_id[$i], 
-    			'quantity'	 => $req->quantity[$i], 	
-    			'cost_price' => $req->costprice[$i],
-    			'updated_price' => $req->updated_price[$i],
-    			'stockin_float_id' => $stock->stockin_float_id
+    			'product_id' => $prod->product_id, 
+    			'quantity'	 => $prod->quantity, 	
+    			'cost_price' => $prod->cost_price,    			
+    			'stockin_id' => $stock->stockin_id
     		];
     		StockItem::create($item );
     	}
@@ -110,7 +122,7 @@ class StockinController extends Controller
     {
     	$prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	unset($prodlist[$key]);
-    	array_values($prodlist);
+    	$prodlist = array_values($prodlist);
     	Session::put('prodlist',$prodlist);
     	return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
     }

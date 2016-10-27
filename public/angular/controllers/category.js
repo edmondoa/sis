@@ -23,8 +23,6 @@
       $scope.saveCategory = function(model)
       {   
        
-        model['category_name'] = $(".category_name").val();     
-       
         
         $http.post('/category',model)
          .success(function(data) {

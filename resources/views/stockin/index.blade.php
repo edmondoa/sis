@@ -31,12 +31,9 @@
   })
 
   $(document).on("click",'.search-prod',function(e){
-    e.preventDefault();    
-    searchStr = $("#search").val();
-    supplier = $("#supplier_id").val();
-    if(searchStr=='')
-      searchStr ='_blank';
-    $.get( "products/search/"+supplier+"/"+searchStr, function( data ) {
+    e.preventDefault();   
+    
+    $.get( "stockin/search", function( data ) {
       var dialog = bootbox.dialog({
           title: 'Search Products',
           message: data,
@@ -77,25 +74,45 @@
     $('.selected').not(this).prop('checked', this.checked);
   })
 
-  $(document).on('change','.quantity',function(e){
-    e.preventDefault();
-    key = $(this).parent('td').parent('tr').attr('id');
-    var updatedprice = $(this).parent('td').siblings('td').find('input.updated_price').val();
-    var total = updatedprice * $(this).val();
-    $(this).parent('td').next('td').find('span').text(total);
-    var totalQuantity = 0;
-    $(".quantity").each(function(){
-      totalQuantity = totalQuantity + parseInt($(this).val());
-    })
-    var totalCost = 0;
-    $(".total").each(function(){
-      totalCost = totalCost + parseFloat($(this).text());
-    })
-   
-    $("#totalQuantity").text(totalQuantity);    
-    $("#totalCost").text(parseFloat(totalCost));
+  $(document).on('click','.btn-add',function(e){
+    e.preventDefault();    
+    var param = {
+                id:$("#prod_id").val(),
+                qty:$("#qty").val(),
+                costprice:$("#cprice").val()};
+    $.post("stockin-float/items",param, function( data ) {     
+      $("#code").text('');
+      $("#name").text('');
+      $("#cprice").val('');
+      $("#qty").val('');
+      $("#prod_id").val('');
+      $("#search").val('');
+      $("#search").focus();
+      $(".refresh").trigger('click');
+    });
 
-    update(key,'quantity',parseInt($(this).val()));
+  });
+
+  $(document).on('keypress','#qty',function(e){
+    e.preventDefault();
+    if(e.which==13){
+      var param = {
+                id:$("#prod_id").val(),
+                qty:$("#qty").val(),
+                costprice:$("#cprice").val()};
+      $.post("stockin-float/items",param, function( data ) {     
+        $("#code").text('');
+        $("#name").text('');
+        $("#cprice").val('');
+        $("#qty").val('');
+        $("#prod_id").val('');
+        $("#search").val('');
+        $("#search").focus();
+        $(".refresh").trigger('click');
+      });
+      
+     }
+    
   });
 
   $(document).on('change','.updated_price',function(e){
@@ -115,6 +132,8 @@
     update(key,'updated_price',updatedprice);
     
   })
+
+
 
   $(document).on("click",".btn-save",function(e){
     var totalCost =  $("#totalCost").text();
@@ -146,8 +165,72 @@
       });
     }
   })
+
+  $(document).on('change','#search',function(e){
+    e.preventDefault();      
+    searchStr = $(this).val();
+    supplier = $("#supplier_id").val();
+    if(searchStr=='')
+      searchStr ='_blank';
+    $.get( "products/search/"+supplier+"/"+searchStr, function( data ) {
+      if(data.status)
+      {
+        console.log(data.products);
+        $("#code").text(data.products[0].category_code);
+        $("#name").text(data.products[0].product_name);
+        $("#cprice").val(data.products[0].cost_price);
+        $("#qty").val(1);
+        $("#prod_id").val(data.products[0].product_id);
+        $("#qty").focus();
+      }
+      else{
+        $("#code").text();
+        $("#name").text();
+        $("#cprice").val();
+        $("#qty").val();
+        $("#prod_id").val();
+        $("#search").val();
+        $("#search").focus();
+        bootbox.alert({message:"Product not found!", size: 'small'});
+      }
+    });
+  });
+
+  $(document).on('change','.searchStr',function(e){
+    Stockin().search($(this).val());
+  })
   $(".calendar").datepicker({autoclose:true});
 
+  
+  function Stockin()
+  {
+    this.search = function(param){
+      $.post('product/multi_search',{str:param,supplier_id:$("#supplier_id").val()},function(data){
+        if(data.status)
+        {
+          var strBuilder ="";
+          for(i=0; i<data.products.length; i++)
+          {
+            strBuilder += "<tr>";
+            strBuilder += "<td><input type='checkbox'></td>";
+            strBuilder += "<td>"+data.products[i].product_code+"</td>";
+            strBuilder += "<td>"+data.products[i].product_name+"</td>";
+            strBuilder += "<td>"+data.products[i].cost_price+"</td>";
+            strBuilder += "</tr>";
+
+          }
+          $("#products tbody").html(strBuilder);
+        }else
+        {
+          var strBuilder ="";
+          $("#products tbody").html(strBuilder);
+          bootbox.alert({message:"Product not found!", size: 'small'});
+        }
+               
+      });
+    }
+    return this;
+  }
   function update(key,row,value)
   {
     var param = {'key':key,'row':row,'value':value};
