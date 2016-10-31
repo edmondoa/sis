@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\Models\UserLevel;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -11,6 +11,8 @@ class User extends Authenticatable
     protected $connection = 'domain';
     protected $table = 'user';
     protected $primaryKey = 'user_id';
+
+    // protected $appends = ['user_level'];
     /**
      * The attributes that are mass assignable.
      *
@@ -29,4 +31,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // public function userLevel()
+    // {
+    //     return $this->belongsTo('App\Model\UserLevel');
+    // }
+
+    // public function getUserLevelAttribute()
+    // {
+    //     if(!is_null($this->userLevel))
+    //         return $this->userLevel->level_name;
+    //     return "";
+    // }
 }

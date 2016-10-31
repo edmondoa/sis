@@ -15,7 +15,7 @@ class Stockin extends Model
     						'doc_no' => 'required']; 
 
     protected $fillable = ['branch_id','notes' ,'supplier_id',
-    						'type','doc_no','doc_date','status',
+    						'type','doc_no','doc_date','status','encode_date',
     						'user_id','post_date','arrive_date','approval_id'];
 
     public function items()

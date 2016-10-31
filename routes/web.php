@@ -59,6 +59,8 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('product-storage/ng-storage-list','ProductStorageController@storage_list');
 	Route::resource('product-storage','ProductStorageController');
+
+	Route::get('header/task','HeaderController@task');
 });
 
 

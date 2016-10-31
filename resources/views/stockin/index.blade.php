@@ -26,6 +26,7 @@
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
+  var model ={};
   $(function(){
     $(".select2").select2();
   })
@@ -43,20 +44,15 @@
                 className: 'btn-success',
                 callback:function(){
                   
-                  var selected = [];
-                  $('input:checkbox.selected:checked').each(function () {                    
-                    selected.push($(this).data('id'));                                      
-                  }); 
-                  //param['ids'] = selected;  
-                  if(selected.length==0)
-                  {
-                    bootbox.hideAll();
-                    return true;
-                  }                               
-                  $.post('stockin-float/items',{'ids[]':selected},function(data){
-                    $(".refresh").trigger('click');
-                     bootbox.hideAll();
-                  });
+                  var row = $("#product-search table#products tr.selected");
+                  console.log(row);
+                  $("#code").text(row.data('catcode'));
+                  $("#name").text(row.data('prodname'));
+                  $("#cprice").val(row.data('costprice'));
+                  $("#qty").val(1);
+                  $("#prod_id").val(row.data('prod_id'));
+                  $("#qty").focus();
+                  bootbox.hideAll();
                   return false;
                 }
             },
@@ -94,7 +90,7 @@
   });
 
   $(document).on('keypress','#qty',function(e){
-    e.preventDefault();
+   
     if(e.which==13){
       var param = {
                 id:$("#prod_id").val(),
@@ -161,7 +157,22 @@
       console.log(stocks);
       $.post('stockin-float/save',stocks,function(data){
         message(data);
-        $(".refresh").trigger('click');       
+        $(".refresh").trigger('click'); 
+        $("#branch_id").val('').trigger("change");
+        $("#supplier_id").val('').trigger("change");
+        $("#doc_no").val('');
+        $("#amount_due").val('');
+        $("#doc_date").val('');
+        $("#arrive_date").val('');
+        $("#totalQuantity").text(0);    
+        $("#totalCost").text(parseFloat(0));
+        $('.btn-save').addClass('disabled');
+        $('.search-prod').addClass('disabled');
+        
+        $("a.stock").removeClass('disabled');
+        $("input.stock").attr('readonly',false);
+        $("select.stock").attr('disabled',false);
+        $("div.amount-due").removeClass('has-error');      
       });
     }
   })
@@ -199,6 +210,14 @@
   $(document).on('change','.searchStr',function(e){
     Stockin().search($(this).val());
   })
+  $(document).on('click','#product-search table#products tr',function(){
+    cls = $(this).attr('class');     
+    $("#product-search table#products tr").not('.'+cls).css('background-color','#fff !important');
+    $("#product-search table#products tr").not('.'+cls).removeClass('selected');
+    $(this).css('background-color','antiquewhite');
+    $(this).addClass('selected');
+    
+  })
   $(".calendar").datepicker({autoclose:true});
 
   
@@ -211,8 +230,12 @@
           var strBuilder ="";
           for(i=0; i<data.products.length; i++)
           {
-            strBuilder += "<tr>";
-            strBuilder += "<td><input type='checkbox'></td>";
+            strBuilder += "<tr class='"+data.products[i].product_id+"'"+
+                          "data-prod_id ='"+data.products[i].product_id+"'"+
+                          "data-prodcode ='"+data.products[i].product_code+"'"+
+                          "data-catcode ='"+data.products[i].category_code+"'"+
+                          "data-prodname ='"+data.products[i].product_name+"'"+
+                          "data-costprice ='"+data.products[i].cost_price+"'>";          
             strBuilder += "<td>"+data.products[i].product_code+"</td>";
             strBuilder += "<td>"+data.products[i].product_name+"</td>";
             strBuilder += "<td>"+data.products[i].cost_price+"</td>";

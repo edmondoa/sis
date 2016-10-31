@@ -90,6 +90,7 @@
 {{Html::script('/angular/ui-bootstrap-tpls.js')}}
 {{Html::script('/angular/angular-resource.js')}}
 {{Html::script('/angular/app.js')}}
+{{Html::script('/angular/controllers/header.js')}}
 {{Html::script('/js/bootbox.min.js')}}
 {{Html::script('/js/common.js')}}
 @show

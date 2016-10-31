@@ -99,7 +99,7 @@ class StockinController extends Controller
         $stockin['arrive_date'] = date("Y-m-d",strtotime($stockin['arrive_date']));
         $stockin['doc_date'] = date("Y-m-d",strtotime($stockin['doc_date']));
         $stockin['approval_id'] = $approval->approval_id;
-        $stockin['post_date'] = $post_date;
+        $stockin['encode_date'] = $post_date;
     	$stock = Stockin::create($stockin);
         $prodlist = array_reverse(Session::get('prodlist'));
     	foreach($prodlist as $prod)

@@ -12,4 +12,6 @@ class Approval extends Model
     public $timestamps = false;
     protected $fillable =['type','approver_user_id','approve_date',
     					 'post_date','notes','user_id','status'];
+
+    				 
 }
