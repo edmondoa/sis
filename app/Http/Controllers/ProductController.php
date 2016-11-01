@@ -105,7 +105,7 @@ class ProductController extends Controller
                 LEFT JOIN supplier_category sc ON c.category_id = sc.category_id
                 WHERE sc.supplier_id = $sup
                 AND (product_code = '".$search."' OR 
-                  barcode = '%".$search."') ";
+                  barcode = '".$search."') AND p.suspended = 0";
         $products = DB::select($sql);
         if(count($products) > 0)
             return Response::json(['status'=>true,'products'=>$products]);
@@ -122,11 +122,13 @@ class ProductController extends Controller
                 LEFT JOIN category c ON p.category_id = c.category_id
                 LEFT JOIN supplier_category sc ON c.category_id = sc.category_id
                 WHERE sc.supplier_id = $sup
-                AND (product_code LIKE('%".$search."%') OR 
-                  barcode = '%".$search."' )  LIMIT 15";
+                AND (product_code LIKE ('%".$search."%') OR 
+                  barcode LIKE ('%".$search."%') OR product_name LIKE ('%".$search."%') )
+                  AND p.suspended = 0  LIMIT 15";
         $products = DB::select($sql);
-        if(count($products) > 0)
+        if(count($products) > 0){            
             return Response::json(['status'=>true,'products'=>$products]);
+        }
         return Response::json(['status'=>false,'products'=>[]]); 
     }
 

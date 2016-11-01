@@ -4,7 +4,21 @@
 
   angular
     .module('SisApp')
-    .controller('pStorageCtrl', pStorageCtrl);
+    .controller('pStorageCtrl', pStorageCtrl)
+    .filter('myFilter', function(){
+         return function(storages, branch_id){
+           if(!branch_id){
+             return storages;
+           }
+           var arr = [];
+           angular.forEach(storages, function(v){
+             if(v.branch_id == branch_id){
+               arr.push(v);
+             }
+           })
+
+           return arr;
+         }});
 
     function pStorageCtrl($scope,$filter, $timeout,$http) {
       $scope.storages = [];
@@ -29,6 +43,13 @@
             $scope.pr ={};
             $scope.Storages();
         })
+      }
+
+      $scope.branchMatch = function(branch)
+      {
+        return function( storage ) {
+          return storage.branch_id === branch;
+        };
       }
 
       

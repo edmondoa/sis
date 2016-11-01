@@ -6,7 +6,8 @@
   <!-- form start -->
   <form class="form-horizontal">
     <div class="box-body">
-      <div class="col-md-12">
+      <div class="col-md-12">     
+        @if(Auth::user()->level_id != 1)
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Branch</label>
 
@@ -18,6 +19,9 @@
             </select>
           </div>
         </div>
+        @else
+          <input type="hidden" class="form-control"   ng-init='pr.branch_id = {{Auth::user()->branch_id}}' ng-model='pr.branch_id'>
+        @endif
         <div class="form-group ">
           <label for="inputEmail3"  class="col-sm-3 control-label">Name</label>
           <div class="col-sm-9">                  

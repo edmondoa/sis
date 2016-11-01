@@ -35,7 +35,8 @@
                 <th style="width: 60px">Action</th>
               </tr>
               <tbody>
-                <tr dir-paginate="storage in storages |filter:{branch_id: pr.branch_id}|itemsPerPage: pageSize" current-page="currentPage">
+
+                <tr dir-paginate="storage in storages | myFilter:pr.branch_id|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="storage.branch.branch_name"></td>
                   <td ng-bind="storage.storage_name"></td>                  

@@ -136,6 +136,7 @@
           </ul>
         </li>
         <!-- Tasks: style can be found in dropdown.less -->
+        @if(Auth::user()->level_id !=1)
         <li class="dropdown tasks-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-flag-o"></i>
@@ -161,6 +162,7 @@
             </li>
           </ul>
         </li>
+        @endif
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">

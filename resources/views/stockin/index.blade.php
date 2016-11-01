@@ -71,41 +71,52 @@
   })
 
   $(document).on('click','.btn-add',function(e){
-    e.preventDefault();    
-    var param = {
-                id:$("#prod_id").val(),
-                qty:$("#qty").val(),
-                costprice:$("#cprice").val()};
-    $.post("stockin-float/items",param, function( data ) {     
-      $("#code").text('');
-      $("#name").text('');
-      $("#cprice").val('');
-      $("#qty").val('');
-      $("#prod_id").val('');
-      $("#search").val('');
-      $("#search").focus();
-      $(".refresh").trigger('click');
-    });
-
-  });
-
-  $(document).on('keypress','#qty',function(e){
-   
-    if(e.which==13){
+    e.preventDefault();  
+     if($("#locked").val()==0){  
       var param = {
-                id:$("#prod_id").val(),
-                qty:$("#qty").val(),
-                costprice:$("#cprice").val()};
+                  id:$("#prod_id").val(),
+                  qty:$("#qty").val(),
+                  costprice:$("#cprice").val()};
       $.post("stockin-float/items",param, function( data ) {     
         $("#code").text('');
         $("#name").text('');
         $("#cprice").val('');
+         $("#locked").val('');
         $("#qty").val('');
         $("#prod_id").val('');
         $("#search").val('');
         $("#search").focus();
         $(".refresh").trigger('click');
       });
+    }else{
+      bootbox.alert({message:"Product is locked!", size: 'small'});
+    }
+
+  });
+
+  $(document).on('keypress','#qty',function(e){
+   
+    if(e.which==13){
+      if($("#locked").val()==0){
+        var param = {
+                id:$("#prod_id").val(),
+                qty:$("#qty").val(),
+                  costprice:$("#cprice").val()};
+        $.post("stockin-float/items",param, function( data ) {     
+          $("#code").text('');
+           $("#locked").val('');
+          $("#name").text('');
+          $("#cprice").val('');
+          $("#qty").val('');
+          $("#prod_id").val('');
+          $("#search").val('');
+          $("#search").focus();
+          $(".refresh").trigger('click');
+        });
+      }else{
+        bootbox.alert({message:"Product is locked!", size: 'small'});
+      }
+      
       
      }
     
@@ -178,7 +189,7 @@
   })
 
   $(document).on('change','#search',function(e){
-    e.preventDefault();      
+    e.preventDefault();     
     searchStr = $(this).val();
     supplier = $("#supplier_id").val();
     if(searchStr=='')
@@ -187,6 +198,7 @@
       if(data.status)
       {
         console.log(data.products);
+        $("#locked").val(data.products[0].lock);
         $("#code").text(data.products[0].category_code);
         $("#name").text(data.products[0].product_name);
         $("#cprice").val(data.products[0].cost_price);
@@ -195,15 +207,20 @@
         $("#qty").focus();
       }
       else{
-        $("#code").text();
-        $("#name").text();
-        $("#cprice").val();
-        $("#qty").val();
-        $("#prod_id").val();
-        $("#search").val();
-        $("#search").focus();
-        bootbox.alert({message:"Product not found!", size: 'small'});
+        $("#code").text('');
+        $("#name").text('');
+        $("#cprice").val('');
+        $("#qty").val('');
+         $("#locked").val('');
+        $("#prod_id").val('');
+        $("#search").val('');
+        
+        bootbox.alert({message:"Product not found!",
+                       size: 'small'
+            });
+         $("#search").focus();
       }
+       
     });
   });
 

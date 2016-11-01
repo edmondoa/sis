@@ -88,6 +88,7 @@
           <span for="inputEmail3"  class="col-sm-3 " id="name"></span>
           <div class="col-sm-1">
             <input type="text" class="form-control " id="cprice" name='cprice'>
+            <input type="hidden" class="form-control " id="locked" name='locked'>
           </div>          
           <div class="col-sm-1">          
             <div class="input-group">            
