@@ -8,9 +8,12 @@
 	</div>
 	<br>
 	<table class="table table-bordered " id="products" >
-		<thead>		
+		<thead>	
+			
+			<th>Cat Code</th>
 			<th>Product Code</th>
 			<th>Product Name</th>
+			<th>BarCode</th>
 			<th>Price</th>
 		</thead>
 		<tbody>		

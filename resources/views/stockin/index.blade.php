@@ -253,8 +253,10 @@
                           "data-catcode ='"+data.products[i].category_code+"'"+
                           "data-prodname ='"+data.products[i].product_name+"'"+
                           "data-costprice ='"+data.products[i].cost_price+"'>";          
+            strBuilder += "<td>"+data.products[i].category_code+"</td>";
             strBuilder += "<td>"+data.products[i].product_code+"</td>";
             strBuilder += "<td>"+data.products[i].product_name+"</td>";
+            strBuilder += "<td>"+data.products[i].barcode+"</td>";
             strBuilder += "<td>"+data.products[i].cost_price+"</td>";
             strBuilder += "</tr>";
 
