@@ -51,7 +51,7 @@
         <div class="col-sm-7">          
           <div class="input-group amount-due">
             <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control stock" id="amount_due" placeholder="" tabindex="5">
+            <input type="text" class="form-control stock" id="amount_due" placeholder="0.00" tabindex="5">
           </div>
         </div>
       </div>
