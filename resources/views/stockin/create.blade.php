@@ -36,6 +36,25 @@
             <input type="text" class="form-control stock" id="doc_no" tabindex="3">
         </div>
       </div>
+      <div class="form-group ">
+        <label for="inputEmail3"  class="col-sm-4 control-label">Doc Date</label>
+
+        <div class="col-sm-7"  id='stockitem-div'>          
+          <div class="input-group"> 
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>           
+            <input type="text" class="form-control stock calendar" id="doc_date" tabindex="6">
+          </div>
+        </div>
+      </div>
+      <div class="form-group ">    
+        <label for="inputEmail3"  class="col-sm-4 control-label">Total</label>
+        <div class="col-sm-7">          
+          <div class="input-group amount-due">
+            <span class="input-group-addon">&#8369;</span>
+            <input type="text" class="form-control stock" id="amount_due" placeholder="" tabindex="5">
+          </div>
+        </div>
+      </div>
       <div class="form-group ">  
         <label for="inputEmail3"  class="col-sm-4 control-label">Arrive Date</label>
 
@@ -46,25 +65,8 @@
           </div>
         </div> 
       </div>  
-      <div class="form-group ">    
-        <label for="inputEmail3"  class="col-sm-4 control-label">Amount Due</label>
-        <div class="col-sm-7">          
-          <div class="input-group amount-due">
-            <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control stock" id="amount_due" placeholder="100.00" tabindex="5">
-          </div>
-        </div>
-      </div>  
-      <div class="form-group ">
-        <label for="inputEmail3"  class="col-sm-4 control-label">Doc Date</label>
-
-        <div class="col-sm-7"  id='stockitem-div'>          
-          <div class="input-group"> 
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>           
-            <input type="text" class="form-control stock calendar" id="doc_date" tabindex="6">
-          </div>
-        </div>
-      </div>  
+        
+        
       <div class='col-sm-2'></div>
       <div class="col-sm-8" > 
         <a href="javascript:void(0)" class='btn btn-primary stock ' ng-click="saveStockin()" style="width:100%" tabindex="7"> Proceed</a>
