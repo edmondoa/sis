@@ -29,10 +29,7 @@
   {{Html::style('/plugins/daterangepicker/daterangepicker.css')}}
   <!-- bootstrap wysihtml5 - text editor -->
   {{Html::style('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}
-
-  <style type="text/css">
-  
-  </style>
+  {{Html::style('/css/app.css')}}
 </head>
 <body class="hold-transition skin-blue sidebar-mini " ng-app="SisApp">
 <div class="wrapper">

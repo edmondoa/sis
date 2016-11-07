@@ -172,6 +172,19 @@
         </li>
       </ul>
     </li>
+    <li class='treeview'>
+      <a href="#">
+        <i class="fa fa-gears"></i>
+        <span>Operations</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="/approvals"><i class="fa fa-circle-o"></i> Approvals</a></li>
+         <li><a href="/journals"><i class="fa fa-circle-o"></i> Journals</a></li>
+      </ul> 
+    </li>
     <li class="treeview">
       <a href="#">
         <i class="fa fa-gears"></i>

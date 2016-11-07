@@ -26,14 +26,20 @@
             console.log(data.stockin)
             if(data.stockin.branch_id)
             {
-              $("#stockin-div").prop('disabled',true);
-              $("#stockitem-div").prop('disabled',false);
+              $("#stockin-div").attr('disabled',true);
+              $("#stockitem-div").attr('disabled',false);
               
               // $('.btn-save').removeClass('disabled');
               // $('.search-prod').removeClass('disabled');
               // $("a.stock").addClass('disabled');
               // $("input.stock").attr('readonly',true);
-              // $("select.stock").attr('disabled',true);
+               $("select.stock").attr('disabled',true);
+            }else{
+              $("#stockin-div").attr('disabled',false);
+
+
+              $(':input','a','#stockitem-div').attr("disabled",true)
+              $("#stockitem-div").attr('disabled',true);
             }
 
             $scope.total(data.prodlist);

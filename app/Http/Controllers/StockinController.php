@@ -91,14 +91,9 @@ class StockinController extends Controller
     	$rows = count($req->quantity) - 1 ;
     	$post_date = Setting::first()->pluck('post_date')[0];
     	$stockin = Session::get('stockinFloat'); 
-    	$approval = Approval::create([
-                        'type'=>'STOCKIN',
-                        'status' => 'PENDING',
-                        'user_id' => Auth::user()->user_id,
-                        'post_date' => $post_date]);
+    
         $stockin['arrive_date'] = date("Y-m-d",strtotime($stockin['arrive_date']));
         $stockin['doc_date'] = date("Y-m-d",strtotime($stockin['doc_date']));
-        $stockin['approval_id'] = $approval->approval_id;
         $stockin['encode_date'] = $post_date;
     	$stock = Stockin::create($stockin);
         $prodlist = array_reverse(Session::get('prodlist'));
@@ -112,6 +107,13 @@ class StockinController extends Controller
     		];
     		StockItem::create($item );
     	}
+        $stock->approval()->create([
+                            'status' => 'PENDING',
+                            'user_id' => Auth::user()->user_id,
+                            'post_date' => $post_date,
+                            'branch_id' => $stock->branch_id,
+                            'approval_type_id' =>1
+                            ]);
     	Session::forget('prodlist');
     	Session::forget('stockinFloat');
     	return Response::json(['status'=>true,'message' => "Successfuly save!"]);

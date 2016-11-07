@@ -1,17 +1,19 @@
 <div class="box box-info">
   <div class="box-body"> 
-  <div class='col-sm-5' id='stockin-div'>
+  <fieldset class='col-sm-5' id='stockin-div'>
     <div class="box-header with-border">
       <h3 class="box-title">Add Stockin 
       	
       </h3>
-    </div>     
+    </div> 
+        
     <form class='form-horizontal'>
       <div class="form-group ">
         <label for="inputEmail3"  class="col-sm-4 control-label">Branch</label>
 
         <div class="col-sm-7">
           <select class="form-control select2 stock "  id="branch_id" tabindex="1">
+              <option value="">Select Branch</option>
               @foreach($branches as $branch)
                 <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
               @endforeach
@@ -23,7 +25,8 @@
 
         <div class="col-sm-7">
           <select class="form-control select2 stock"  id='supplier_id' tabindex="2">
-          	@foreach($suppliers as $sup)
+          	<option value="">Select Supplier</option>
+            @foreach($suppliers as $sup)
               <option value="{{$sup->supplier_id}}">{{$sup->supplier_name}}</option>
             @endforeach
           </select>         
@@ -33,16 +36,16 @@
         <label for="inputEmail3"  class="col-sm-4 control-label">Doc #</label>
 
         <div class="col-sm-7"> 
-            <input type="text" class="form-control stock" id="doc_no" tabindex="3">
+            <input type="text" class="form-control " id="doc_no" tabindex="3">
         </div>
       </div>
       <div class="form-group ">
         <label for="inputEmail3"  class="col-sm-4 control-label">Doc Date</label>
 
-        <div class="col-sm-7"  id='stockitem-div'>          
+        <div class="col-sm-7"  >          
           <div class="input-group"> 
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>           
-            <input type="text" class="form-control stock calendar" id="doc_date" tabindex="6">
+            <input type="text" class="form-control  calendar" id="doc_date" tabindex="6">
           </div>
         </div>
       </div>
@@ -52,16 +55,16 @@
           <div class="input-group amount-due">
             <span class="input-group-addon">&#8369;</span>
             <input type="text" class="form-control stock" id="amount_due" placeholder="0.00" tabindex="5">
-          </div>
+          </div> 
         </div>
       </div>
       <div class="form-group ">  
         <label for="inputEmail3"  class="col-sm-4 control-label">Arrive Date</label>
 
-        <div class="col-sm-7">          
+        <div class="col-sm-7 "  >          
           <div class="input-group ">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            <input type="text" class="form-control stock calendar" id="arrive_date" tabindex="4">
+            <input type="text" class="form-control  calendar" id="arrive_date" tabindex="4">
           </div>
         </div> 
       </div>  
@@ -69,12 +72,12 @@
         
       <div class='col-sm-2'></div>
       <div class="col-sm-8" > 
-        <a href="javascript:void(0)" class='btn btn-primary stock ' ng-click="saveStockin()" style="width:100%" tabindex="7"> Proceed</a>
+        <a href="javascript:void(0)" class='btn btn-primary  ' ng-click="saveStockin()" style="width:100%" tabindex="7"> Proceed</a>
       </div>
     </form>  
-  </div>
+  </fieldset>
 
-  <div class='col-sm-7'> 
+  <fieldset class='col-sm-7 disabled-all' id='stockitem-div' disabled> 
     <table class='table'>
       <tr>
         <td class="col-sm-2"></td>
@@ -88,7 +91,7 @@
         <td>
           <div class="input-group">            
             <input type="text" class="form-control " id="search" name='search' tabindex="8" style='padding:6px 2px !important'>
-            <a href="#" class='btn btn-sm btn-default input-group-addon disabled search-prod'>..</a>
+            <a href="#" class='btn btn-sm btn-default input-group-addon  search-prod'>..</a>
           </div>
         </td>
         <td><span  id="code"></span></td>
@@ -136,13 +139,13 @@
     	</tfoot>
     </table>  
       
-  </div>    
+  
     <!-- /.box-body -->
     <br>
     <div class="box-footer">
       <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-      <button type="button"  class="btn btn-info pull-right btn-save disabled" >Save</button>
+      <button type="button"  class="btn btn-info pull-right btn-save " >Save</button>
     </div>
     <!-- /.box-footer -->
-  <!-- </form> -->
+  </fieldset>
 </div>

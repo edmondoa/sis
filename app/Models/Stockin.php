@@ -22,4 +22,9 @@ class Stockin extends Model
     {
     	return $this->belongsTo('App\Models\StockItem','stockin_id','stockin_id');
     }
+
+    public function approval()
+    {
+        return $this->morphMany('App\Models\Approval', 'approvalable');
+    }
 }
