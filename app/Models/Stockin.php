@@ -25,6 +25,6 @@ class Stockin extends Model
 
     public function approval()
     {
-        return $this->morphMany('App\Models\Approval', 'approvalable');
+        return $this->morphOne('App\Models\Approval', 'approvalable');
     }
 }

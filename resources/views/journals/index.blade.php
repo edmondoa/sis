@@ -30,18 +30,16 @@
                 <th style="width: 10px">#</th> 
                 <th class="col-sm-2">Date</th>               
                 <th class="col-sm-3">Doc#</th>               
-                <th class="col-sm-2">Type</th>                
-                <th class="col-sm-2">Name</th>
+                <th class="col-sm-2">Type</th> 
                 <th class="col-sm-1">Status</th>               
                 <th style="width: 40px">Action</th>
               </tr>
               <tbody>
                 <tr dir-paginate="app in journals |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
-                  <td ng-bind="app.post_date"></td>                 
-                  <td ng-bind="app.branch.branch_name"></td>  
-                  <td><span ng-bind="app.approval_type.approval"></span></td>                
-                   <td><span ng-bind="app.user.firstname+' '+app.user.lastname"></span></td>
+                  <td ng-bind="app.approvalable.encode_date"></td>                 
+                  <td ng-bind="app.approvalable.doc_no"></td>  
+                  <td><span ng-bind="app.approval_type.approval"></span></td> 
                   <td><span class="text-info" ng-bind="app.status"></span></td>
                  
                  
@@ -75,7 +73,7 @@
 @stop
 @section('html_footer')
 @parent
-<script src="/angular/controllers/journals.js"></script>
+<script src="/angular/controllers/journal.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>

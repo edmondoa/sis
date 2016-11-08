@@ -63,8 +63,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('approvals/ng-approve-list','ApprovalController@approve_list');
 	Route::resource('approvals','ApprovalController');
 
-	Route::get('journals/ng-journal-list','ApprovalController@journal_list');
-	Route::resource('journals','ApprovalController');
+	Route::get('journals/ng-journal-list','JournalController@journal_list');
+	Route::resource('journals','JournalController');
 
 	Route::get('header/task','HeaderController@task');
 });
