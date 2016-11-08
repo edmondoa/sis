@@ -20,6 +20,15 @@
           });
       } 
 
+      $scope.approved = function(model)
+      {
+        $http.post('approvals/update/APPROVED/'+model.approval_id).
+        success(function(data) {
+         $scope.getApproves();         
+         $scope.message(data); 
+        });
+      }
+
       
       
 

@@ -61,6 +61,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::resource('product-storage','ProductStorageController');
 
 	Route::get('approvals/ng-approve-list','ApprovalController@approve_list');
+	Route::post('approvals/update/{status}/{is}','ApprovalController@update');
 	Route::resource('approvals','ApprovalController');
 
 	Route::get('journals/ng-journal-list','JournalController@journal_list');

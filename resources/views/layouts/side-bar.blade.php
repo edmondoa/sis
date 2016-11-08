@@ -181,8 +181,11 @@
         </span>
       </a>
       <ul class="treeview-menu">
+        @if(Auth::user()->level_id > 2)  
         <li><a href="/approvals"><i class="fa fa-circle-o"></i> Approvals</a></li>
-         <li><a href="/journals"><i class="fa fa-circle-o"></i> Journals</a></li>
+        @else
+        <li><a href="/journals"><i class="fa fa-circle-o"></i> Journals</a></li>
+        @endif
       </ul> 
     </li>
     <li class="treeview">

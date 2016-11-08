@@ -51,8 +51,7 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Approve<i class='pull-right glyphicon glyphicon-thumbs-up'></i> </a></li>
-                        <li><a href="#">Decline<i class='pull-right glyphicon glyphicon-thumbs-down'></i> </a></li>
+                        <li><a href="#">Cancel<i class='pull-right glyphicon glyphicon-remove'></i> </a></li>
                         <li><a href="#">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
                       </ul>
                     </div>                  
