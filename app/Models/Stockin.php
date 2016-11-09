@@ -20,8 +20,19 @@ class Stockin extends Model
 
     public function items()
     {
-    	return $this->belongsTo('App\Models\StockItem','stockin_id','stockin_id');
+    	return $this->hasMany('App\Models\StockItem','stockin_id','stockin_id');
     }
+
+    public function branch()
+    {
+        return $this->belongsTo('App\Models\Branch','branch_id','branch_id')->select('branch_id','branch_name','business_name');
+    }
+
+     public function supplier()
+    {
+        return $this->belongsTo('App\Models\Supplier');
+    }
+
 
     public function approval()
     {

@@ -31,7 +31,7 @@ class ApprovalController extends Controller
     	$approval->approve_date =  Setting::first()->pluck('post_date')[0];
     	if($approval->save())
     	{
-    		$approval->approvalable->series_id = $this->series_id();
+    		$approval->approvalable->series_id = $this->series_id($approval->approvalable->branch_id);
     		$approval->approvalable->status = $status;
     		
     		if($approval->approvalable->save())
@@ -46,9 +46,9 @@ class ApprovalController extends Controller
 
 
 
-    private function series_id()
+    private function series_id($branch_id)
     {
-    	$max = Stockin::max('series_id');
+    	$max = Stockin::where('branch_id',$branch_id)->max('series_id');
     	return (is_null($max)) ? 1 : $max + 1;
     }
 }

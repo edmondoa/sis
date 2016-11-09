@@ -139,5 +139,11 @@ class StockinController extends Controller
     	Session::put('prodlist',$prodlist);
     }
 
+    public function show($id)
+    {
+        $stockin = Stockin::with('items','branch','supplier')->find($id);
+        return view('stockin.show',compact('stockin'));
+    }
+
     
 }
