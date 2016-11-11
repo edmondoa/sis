@@ -8,9 +8,10 @@
     </div> 
         
     <form class='form-horizontal'>
+      @if(Auth::user()->level_id > 2) 
       <div class="form-group ">
         <label for="inputEmail3"  class="col-sm-4 control-label">Branch</label>
-        @if(Auth::user()->level_id > 2)   
+         
         <div class="col-sm-7">
           <select class="form-control select2 stock "  id="branch_id" tabindex="1">
               <option value="">Select Branch</option>
@@ -18,13 +19,13 @@
                 <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
               @endforeach
           </select>         
-        </div>
-        @else
+        </div>        
+      </div>
+      @else
         <div class="col-sm-7">
           <input type='hidden' name="branch_id" value="{{Auth::user()->branch_id}}" />  
        </div>
         @endif
-      </div>
       <div class="form-group ">
         <label for="inputEmail3"  class="col-sm-4 control-label">Supplier</label>
 
