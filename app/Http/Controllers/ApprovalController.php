@@ -20,7 +20,7 @@ class ApprovalController extends Controller
 
     public function approve_list()
     {
-    	return Approval::with('branch','approval_type','user')->where('status','PENDING')->get();
+    	return Approval::with('approvalable','branch','approval_type','user')->where('status','PENDING')->get();
     }
 
     public function update($status,$id)

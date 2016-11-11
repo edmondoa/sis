@@ -14,13 +14,10 @@ class HeaderController extends Controller
     public function task()
     {
 
-    	if(Auth::user()->level_id == 5)
+    	if(Auth::user()->level_id > 2)
     	{
-    		$sql = "SELECT a.*,s.doc_no,b.branch_name FROM approval a
-    				LEFT JOIN stockin s ON a.approval_id = s.approval_id
-    				LEFT JOIN branch b ON s.branch_id = b.branch_id
-    				";
-    		return DB::select($sql);
+    		$sql = Approval::with('approvalable','branch','approval_type')->where('status','PENDING')->get();
+    		return $sql;
     	 }
     	return [];
     }

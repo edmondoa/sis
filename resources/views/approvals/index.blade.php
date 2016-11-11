@@ -55,7 +55,7 @@
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="#" ng-click="approved(app)">Approve<i class='pull-right glyphicon glyphicon-thumbs-up'></i> </a></li>
                         <li><a href="#">Decline<i class='pull-right glyphicon glyphicon-thumbs-down'></i> </a></li>
-                        <li><a href="#">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
+                        <li><a href="#" class='show-stock' data-id="@{{app.approvalable.stockin_id}}">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
                       </ul>
                     </div>                  
                   </td>
@@ -88,37 +88,19 @@
       radioClass: 'iradio_flat-green'
     });
   });
-  $(document).on('click','.branch-edit',function(e){
+  $(document).on('click','.show-stock',function(e){
     e.preventDefault();
     id = $(this).data('id');
-    $.get( "branches/"+id+"/edit", function( data ) {
+    $.get( "stockin/"+id, function( data ) {
       var dialog = bootbox.dialog({
-          title: 'Edit Branch',
+          title: 'Stockin Details',
+          size: 'large',
           message: data,
           buttons: {
             confirm: {
                 label: 'Yes',
                 className: 'btn-success',
-                callback:function(){
-                  var $this   = $(this);
-                  var data = $('#form-branches').serialize();  
-                  $.ajax({
-                    url: "/branches/"+id,
-                    method:'PUT',
-                    data: data,
-                    dataType: 'JSON',
-                    success: function(result){
-                      if (result['status'] == true) {
-                        bootbox.hideAll();
-                        message(result);                        
-                        $(".refresh").trigger('click');
-                      } else {    
-                        message(result);                      
-                        return false;
-                      }
-                    },
-                    
-                  });                 
+                callback:function(){                              
                   
                   return false;
                 }
@@ -132,5 +114,6 @@
           
     });
   })
+
 </script>
 @stop
