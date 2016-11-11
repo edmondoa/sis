@@ -31,12 +31,13 @@ class ApprovalController extends Controller
     	$approval->approve_date =  Setting::first()->pluck('post_date')[0];
     	if($approval->save())
     	{
-    		$approval->approvalable->series_id = $this->series_id($approval->approvalable->branch_id);
+            if($status == 'APPROVED')
+    		      $approval->approvalable->series_id = $this->series_id($approval->approvalable->branch_id);
     		$approval->approvalable->status = $status;
     		
     		if($approval->approvalable->save())
     		{
-    			return Response::json(['status'=>true,'message' => "Successfuly approved!"]);
+    			return Response::json(['status'=>true,'message' => "Successfuly ".strtolower($status)."!"]);
         
     		}
     	}

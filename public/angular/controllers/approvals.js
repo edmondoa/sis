@@ -29,6 +29,15 @@
         });
       }
 
+      $scope.dis_approved = function(model)
+      {
+        $http.post('approvals/update/DECLINED/'+model.approval_id).
+        success(function(data) {
+         $scope.getApproves();         
+         $scope.message(data); 
+        });
+      }
+
       
       
 

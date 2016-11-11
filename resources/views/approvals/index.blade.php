@@ -54,7 +54,7 @@
                       </button>
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="#" ng-click="approved(app)">Approve<i class='pull-right glyphicon glyphicon-thumbs-up'></i> </a></li>
-                        <li><a href="#">Decline<i class='pull-right glyphicon glyphicon-thumbs-down'></i> </a></li>
+                        <li><a href="#" ng-click="dis_approved(app)">Decline<i class='pull-right glyphicon glyphicon-thumbs-down'></i> </a></li>
                         <li><a href="#" class='show-stock' data-id="@{{app.approvalable.stockin_id}}">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
                       </ul>
                     </div>                  
