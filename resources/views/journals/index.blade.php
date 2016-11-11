@@ -40,7 +40,7 @@
                   <td ng-bind="app.approvalable.encode_date"></td>                 
                   <td ng-bind="app.approvalable.doc_no"></td>  
                   <td><span ng-bind="app.approval_type.approval"></span></td> 
-                  <td><span class="text-info" ng-bind="app.status"></span></td>
+                  <td><span ng-class="gen_class(app.status)" ng-bind="app.status"></span></td>
                  
                  
                   <td>

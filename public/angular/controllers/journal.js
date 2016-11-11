@@ -20,7 +20,14 @@
           });
       } 
 
-      
+      $scope.gen_class = function(cls){
+        if(cls == 'PENDING')
+          return "text-info";
+        else if(cls == 'APPROVED')
+          return "text-success";
+
+        return "text-danger";
+      }
       
 
       $scope.order = function(predicate, reverse) {
