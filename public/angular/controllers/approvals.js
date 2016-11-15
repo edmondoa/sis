@@ -31,11 +31,49 @@
 
       $scope.dis_approved = function(model)
       {
-        $http.post('approvals/update/DECLINED/'+model.approval_id).
-        success(function(data) {
-         $scope.getApproves();         
-         $scope.message(data); 
+        $http.get( "approvals/notes").success(function(data) {
+        var dialog = bootbox.dialog({
+            title: 'Notes',           
+            message: data,
+            buttons: {
+              confirm: {
+                  label: 'GO!',
+                  className: 'btn-success',
+                  callback:function(){ 
+                    if($("[name='notes']").val().trim() =='')
+                    {
+                      $.notify({       
+                          message: "Note's is required"
+                        },{
+                          type: 'danger',
+                          newest_on_top: true,
+                        placement: {
+                            align: "right",
+                            from: "bottom"
+                        }                       
+                      });  
+                      return false;
+                    }  
+                    var param = {'note':$("[name='notes']").val()};                           
+                    $http.post('approvals/update/DECLINED/'+model.approval_id,param).
+                      success(function(data) {
+                      $scope.getApproves();         
+                      $scope.message(data);
+                      bootbox.hideAll(); 
+                    });
+                   
+                  }
+              },
+              cancel: {
+                  label: 'Cancel',
+                  className: 'btn-danger'
+              }
+          },
         });
+      });  
+              
+      
+        
       }
 
       

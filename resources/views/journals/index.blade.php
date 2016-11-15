@@ -51,7 +51,7 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li ng-hide="app.status != 'PENDING'"><a href="#">Cancel<i class='pull-right glyphicon glyphicon-remove'></i> </a></li>
+                        <li ng-hide="app.status != 'PENDING'"><a href="#" ng-click="cancel(app)">Cancel<i class='pull-right glyphicon glyphicon-remove'></i> </a></li>
                         <li><a href="#" class='show-stock' data-id="@{{app.approvalable.stockin_id}}">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
                       </ul>
                     </div>                  

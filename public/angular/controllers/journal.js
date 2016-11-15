@@ -20,6 +20,51 @@
           });
       } 
 
+      $scope.cancel = function(model)
+      {
+        $http.get( "approvals/notes").success(function(data) {
+        var dialog = bootbox.dialog({
+            title: 'Notes',           
+            message: data,
+            buttons: {
+              confirm: {
+                  label: 'GO!',
+                  className: 'btn-success',
+                  callback:function(){ 
+                    if($("[name='notes']").val().trim() =='')
+                    {
+                      $.notify({       
+                          message: "Note's is required"
+                        },{
+                          type: 'danger',
+                          newest_on_top: true,
+                        placement: {
+                            align: "right",
+                            from: "bottom"
+                        }                       
+                      });  
+                      return false;
+                    }  
+                    var param = {'note':$("[name='notes']").val()};                           
+                    $http.post('approvals/update/CANCELLED/'+model.approval_id,param).
+                      success(function(data) {
+                      $scope.getJournals();         
+                      $scope.message(data);
+                      bootbox.hideAll(); 
+                    });
+                   
+                  }
+              },
+              cancel: {
+                  label: 'Cancel',
+                  className: 'btn-danger'
+              }
+            },
+          });
+        });    
+       
+      }
+
       $scope.gen_class = function(cls){
         if(cls == 'PENDING')
           return "text-info";
