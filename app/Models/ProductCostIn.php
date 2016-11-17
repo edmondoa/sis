@@ -16,10 +16,10 @@ class ProductCostIn extends Model
 
     public static function insert($list)
     {
-    	$list = $this->group_product($list);
+    	$list = self::group_product($list);
     }
 
-    private function group_product($list)
+    private static function group_product($list)
     {
     	$result = [];
     	foreach ($list as $val) {
