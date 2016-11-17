@@ -111,5 +111,10 @@
           
     });
   })
+
+  $(document).on('click','.generate-pdf',function(e){
+     $.get( "stockin/pdf/"+id, function( data ) {
+     });
+  })
 </script>
 @stop

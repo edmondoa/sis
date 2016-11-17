@@ -46,6 +46,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('stockin/search','StockinController@search');
 	Route::post("stockin-items-remove/{id}",'StockinController@removeItems');
 	Route::get("stockin-float/cancel","StockinController@cancel");
+	Route::get("stockin/pdf/{id}","StockinController@stockin_pdf");
 	Route::post("stockin-float/save","StockinController@stockFloatSave");
 	Route::post("stockin-float/update","StockinController@stockFloatUpdate");
 	

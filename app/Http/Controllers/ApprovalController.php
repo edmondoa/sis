@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Approval;
 use App\Models\Stockin;
 use App\Models\Setting;
+use App\Models\ProductCostIn;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -40,6 +41,8 @@ class ApprovalController extends Controller
     		
     		if($approval->approvalable->save())
     		{
+
+                ProductCostIn::insert($approval->approvalable);
     			return Response::json(['status'=>true,'message' => "Successfuly ".strtolower($status)."!"]);
         
     		}

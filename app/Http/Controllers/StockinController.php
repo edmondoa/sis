@@ -16,6 +16,7 @@ use Validator;
 use Response;
 use Auth;
 use Session;
+use PDF;
 class StockinController extends Controller
 {
     public function index()
@@ -143,6 +144,14 @@ class StockinController extends Controller
     {
         $stockin = Stockin::with('items','branch','supplier')->find($id);
         return view('stockin.show',compact('stockin'));
+    }
+
+    public function stockin_pdf($id)
+    {
+        $stockin = Stockin::with('items','branch','supplier')->find($id);
+        $data =  array( 'stockin' => $stockin );
+        $pdf = PDF::loadView('pdf.stockin', $data);
+        return $pdf->download('invoice.pdf');
     }
 
     
