@@ -27,7 +27,7 @@ class ProductCostIn extends Model
     		{
     			$found = false;
     			foreach ($result as $k) {
-    				if($k->product_it == $val->product_id){
+    				if($k->product_id == $val->product_id){
     					$k->quantity = $val->quantity;
     					$found = true;
     					break;
