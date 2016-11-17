@@ -23,9 +23,10 @@ class ProductCostIn extends Model
     {
     	$result = [];
     	foreach ($list as $val) {
-    		if(!empty($result))
+    		if(count($result)>0)
     		{
     			$found = false;
+    			dump($result);
     			foreach ($result as $k) {
     				if($k->product_id == $val->product_id){
     					$k->quantity = $val->quantity;
