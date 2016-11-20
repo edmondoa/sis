@@ -42,7 +42,7 @@ class ApprovalController extends Controller
     		if($approval->approvalable->save())
     		{
 
-                ProductCostIn::insert($approval->approvalable);
+                ProductCostIn::insert($approval->approvalable->items);
     			return Response::json(['status'=>true,'message' => "Successfuly ".strtolower($status)."!"]);
         
     		}
