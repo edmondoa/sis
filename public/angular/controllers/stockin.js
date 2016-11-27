@@ -6,7 +6,7 @@
     .module('SisApp')
     .controller('stockinCtrl', stockinCtrl);
 
-    function stockinCtrl($scope,$filter, $timeout,$http) {
+    function stockinCtrl($scope,$filter, $timeout,$http,$window) {
       $scope.stockins = [];
        $scope.stock =[];
       $scope.currentPage = 1;
@@ -65,11 +65,7 @@
             $scope.message(data);
             if(data.status)
             {
-              $('.btn-save').removeClass('disabled');
-              $('.search-prod').removeClass('disabled');
-              $("a.stock").addClass('disabled');
-              $("input.stock").attr('readonly',true);
-              $("select.stock").attr('disabled',true);
+              $window.location.reload();
             }            
             $("#branch_id").val(data.stockin.branch_id).trigger("change");
             $("#supplier_id").val(data.stockin.supplier_id).trigger("change");

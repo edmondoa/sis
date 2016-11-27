@@ -9,17 +9,8 @@
 <form class="form-horizontal" id="form-product-storage">
     <div class="box-body">
       <div class="col-md-12">
-        <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Branch</label>
-
-          <div class="col-sm-9">
-            <select class='form-control' name='branch_id' >            
-              @foreach($branches as $branch)
-              <option value="{{$branch->branch_id}}"{{($storage->branch_id == $branch->branch_id)?'selected':''}}>{{$branch->branch_name}}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
+        <input type='hidden' name='branch_id' value="$storage->branch_id">
+        
         <div class="form-group ">
           <label for="inputEmail3"  class="col-sm-3 control-label">Name</label>
           <div class="col-sm-9">                  

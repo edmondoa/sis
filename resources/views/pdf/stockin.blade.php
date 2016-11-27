@@ -3,14 +3,18 @@
 <head>
     <meta charset="utf-8">
     <title>STOCKIN</title>
-    <style>
-      body * { font-family:arial; }
-      body #header { width:100%; }
-      body #lineitems { width:100%; }
-      body > table { width:100%; }
-      body > table th { text-align:left; }
-      body table .border{ border: 1px solid #aaa}
+    <style type="text/css">
+      body{font-size: 11px}
+      .list {
+        border-collapse: collapse;
+      }
+
+      .list th, .list td {
+          border: 1px solid black;
+      }
+      .no-border{border-left:0px !important; border-right:0px !important }
     </style>
+  
   </head>
 <body class="hold-transition skin-blue sidebar-mini " >
 <div class="wrapper">
@@ -18,98 +22,101 @@
     <!-- Content Header (Page header) -->
     <section class="invoice">
   <!-- title row -->
-  <div class="row">
-    <div class="col-xs-12">
-      <h2 class="page-header">
-        <i class="fa fa-globe"></i> {{$stockin->branch->business_name.", ".$stockin->branch->branch_name}}
-        <small class="pull-right">Date: {{$stockin->encode_date}}</small>
-      </h2>
-    </div>
-    <!-- /.col -->
-  </div>
-  <!-- info row -->
-  <div class="row invoice-info">
-    <div class="col-sm-8 invoice-col">
-      FROM
-      <address>
-      <dl class="dl-horizontal">
-        <dt style="width: 78px">Supplier : </dt><dd style="margin-left: 96px">{{$stockin->supplier->supplier_name}}</dd>
-        <dt style="width: 78px">Contact  : </dt><dd style="margin-left: 96px">{{$stockin->supplier->contact_person}}</dd>
-        <dt style="width: 78px">Mobile   : </dt><dd style="margin-left: 96px">{{$stockin->supplier->mobile1_no}}</dd>
-        <dt style="width: 78px">Landline : </dt><dd style="margin-left: 96px">{{$stockin->supplier->landline}}</dd>
-        <dt style="width: 78px">Email    : </dt><dd style="margin-left: 96px">{{$stockin->supplier->email}}</dd>
-      </dl>
-       
-      </address>
-    </div>
-    
-    <!-- /.col -->
-    <div class="col-sm-4 invoice-col">
-    <dl class="dl-horizontal">
-        <dt style="width: 78px">Series # : </dt><dd style="margin-left: 96px">{{$stockin->series_id}}</dd>
-        <dt style="width: 78px">Doc #  : </dt><dd style="margin-left: 96px">{{$stockin->doc_no}}</dd>
-        <dt style="width: 78px">Doc Date   : </dt><dd style="margin-left: 96px">{{$stockin->doc_date}}</dd>
-        <dt style="width: 78px">Status : </dt><dd style="margin-left: 96px">{{$stockin->approval->status}}</dd>
-    </dl>     
-    </div>
-    <!-- /.col -->
-  </div>
-  <!-- /.row -->
-
-  <!-- Table row -->
-  <div class="row">
-    <div class="col-xs-12 table-responsive" style="height: 400px; overflow-y: auto;">
-      <table class="table table-striped">
-        <thead>
+      <div class="row">
+        <div class="col-xs-12">
+          <table style="1200px">
+            <tr>
+              <td style='width:50%'><h4>{{$stockin->branch->business_name.", ".$stockin->branch->branch_name}}</h4></td>
+              <td style='width:50%'>Date: {{$stockin->encode_date}}</td>
+            </tr>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div> 
+      <table style='width:1200px'>
         <tr>
-          <th class='col-sm-2'>Prod Code</th>
-          <th class='col-sm-2'>Cat Code</th>
-          <th>Product</th>
-          <th class='col-sm-1'>Price</th>
-          <th class='col-sm-1'>Qty</th>
-          <th class='col-sm-1'>Total</th>
+          <td >FROM</td>
+          <td style='width:50%'><span>Series # : </span><span >{{$stockin->series_id}}</span></td>
         </tr>
-        </thead>
-        <tbody>
-        <?php 
-          $quantity = 0;
-          $total = 0;
-        ?>
-        @foreach($stockin->items as $item)
         <tr>
-          <td>{{$item->product->product_code}}</td>
-          <td>{{$item->product->category->category_code}}</td>
-          <td>{{$item->product->product_name}}</td>
-          <td>{{$item->cost_price}}</td>
-          <td>{{$item->quantity}}</td>
-          <td>{{ number_format(($item->quantity * $item->cost_price), 2, '.', ',')}}</td>
+          <td><span >Supplier : </span><span >{{$stockin->supplier->supplier_name}}</span></td>
+          <td><span >Doc #  : </span><span >{{$stockin->doc_no}}</span></td>
         </tr>
-        <?php $quantity += $item->quantity; $total += ($item->quantity * $item->cost_price)?>
-        @endforeach
-        </tbody>
-        <tfoot>
-          <td> </td>
-          <td> </td>
-          <td> </td>
-          <td><strong>Total</strong></td>
-          <td><strong>{{$quantity}}</strong></td>
-          <td><strong>{{ number_format($total,2,'.',',')}}</strong></td>
-          
-        </tfoot>
+        <tr>
+          <td></td>
+          <td><span >Doc Date   : </span><span >{{$stockin->doc_date}}</span>
+            </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><span >Status : </span><span >{{$stockin->approval->status}}</span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><span >Arrive Date : </span><span>{{$stockin->arrive_date}}</span></td>
+        </tr>
       </table>
-    </div>
-    <!-- /.col -->
-  </div>
-  <!-- /.row -->
+      <!-- /.row -->
 
-  
-  <!-- /.row -->
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-xs-12 table-responsive" >
+          <table class="list" style='width:700px; margin-top:10px'>
+          
+            <tr>
+              <th  style="text-align:left">Prod Code</th>
+              <th  style="text-align:left">Cat Code</th>
+              <th  style="text-align:left">Product</th>
+              <th  style="text-align:left">Price</th>
+              <th  style="text-align:left">Qty</th>
+              <th  style="text-align:left">Total</th>
+            </tr>
+           
+            <tbody>
+            <?php 
+              $quantity = 0;
+              $total = 0;
+            ?>
+            @foreach($stockin->items as $item)
+            <tr>
+              <td>{{$item->product->product_code}}</td>
+              <td>{{$item->product->category->category_code}}</td>
+              <td>{{$item->product->product_name}}</td>
+              <td>{{$item->cost_price}}</td>
+              <td>{{$item->quantity}}</td>
+              <td>{{ number_format(($item->quantity * $item->cost_price), 2, '.', ',')}}</td>
+            </tr>
+            <?php $quantity += $item->quantity; $total += ($item->quantity * $item->cost_price)?>
+            @endforeach
+            </tbody>
+            <tfoot>
+              <td class='no-border'> </td>
+              <td class='no-border'> </td>
+              <td class='no-border'> </td>
+              <td class='no-border'><strong>Total</strong></td>
+              <td class='no-border'><strong>{{$quantity}}</strong></td>
+              <td class='no-border'><strong>{{ number_format($total,2,'.',',')}}</strong></td>
+              
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
 
-  <!-- this row will not appear when printing -->
  
-</section>
+    </section>
     <!-- /.content -->
    </div> 
+   <div style="position: relative">
+      <table style="position: fixed; bottom: 10; width:100%;">
+        <tr>
+          <td><span style="text-decoration:overline">&nbsp;&nbsp;&nbsp;Print Name / Signature&nbsp;&nbsp;</span></td>
+          <td><span style="text-decoration:overline">&nbsp;&nbsp;&nbsp;Print Name / Signature&nbsp;&nbsp;</span></td>
+          
+        </tr>
+      </table>
+        
+    </div>
 </div>
 
 </body>

@@ -105,7 +105,7 @@
       </ul>     
     </li>
     <!-- Financial -->
-    <li class="treeview">
+    <li class="treeview main-products">
       <a href="#">
         <i class="fa fa-laptop"></i>
         <span>Product</span>
@@ -125,7 +125,7 @@
             <li><a href="/"><i class="fa fa-circle-o"></i>Consolidated</a></li>
           </ul>
         </li>
-        <li><a href="/stockin"><i class="fa fa-circle-o"></i> Stockin (Regular/Reject)</a></li>
+        <li class="stockin"><a href="/stockin"><i class="fa fa-circle-o"></i> Stockin (Regular/Reject)</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i> Stockout</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Transfer (Branch to Branch)</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i> Damage (Expense)</a></li>
@@ -133,7 +133,7 @@
       </ul> 
     </li>
     <!-- Product -->
-    <li class="treeview">
+    <li class="treeview record-management">
       <a href="#">
         <i class="fa fa-laptop"></i>
         <span>Record Management</span>
@@ -142,7 +142,7 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li class="treeview">
+        <li class="treeview customer">
             <a href="/">
               <i class="fa fa-circle-o"></i>
               <spa>Customer</spa>
@@ -151,11 +151,11 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="/"><i class="fa fa-circle-o"></i> Account</a></li>
-              <li><a href="/discounting"><i class="fa fa-circle-o"></i> Discounting Table</a></li>
+              <li class="account"><a href="/"><i class="fa fa-circle-o"></i> Account</a></li>
+              <li class="discounting"><a href="/discounting"><i class="fa fa-circle-o"></i> Discounting Table</a></li>
             </ul>
         </li>  
-        <li class="treeview">
+        <li class="treeview product">
           <a href="/">
             <i class="fa fa-circle-o"></i>
             <spa>Product</spa>
@@ -164,15 +164,15 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/products-regular"><i class="fa fa-circle-o"></i> Regular</a></li>
-            <li><a href="/-overview"><i class="fa fa-circle-o"></i> Promo</a></li>
-            <li><a href="/-overview"><i class="fa fa-circle-o"></i> Price Adjustment</a></li>
-            <li><a href="/-overview"><i class="fa fa-circle-o"></i> System Products</a></li>
+            <li class='products-regular'><a href="/products-regular"><i class="fa fa-circle-o"></i> Regular</a></li>
+            <li class="promo"><a href="/-overview"><i class="fa fa-circle-o"></i> Promo</a></li>
+            <li class='price-adjustment'><a href="/-overview"><i class="fa fa-circle-o"></i> Price Adjustment</a></li>
+            <li class="system-product"><a href="/-overview"><i class="fa fa-circle-o"></i> System Products</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li class='treeview'>
+    <li class='treeview operations'>
       <a href="#">
         <i class="fa fa-gears"></i>
         <span>Operations</span>
@@ -182,13 +182,13 @@
       </a>
       <ul class="treeview-menu">
         @if(Auth::user()->level_id > 2)  
-        <li><a href="/approvals"><i class="fa fa-circle-o"></i> Approvals</a></li>
+        <li class='approvals'><a href="/approvals"><i class="fa fa-circle-o"></i> Approvals</a></li>
         @else
-        <li><a href="/journals"><i class="fa fa-circle-o"></i> Journals</a></li>
+        <li class='journals'><a href="/journals"><i class="fa fa-circle-o"></i> Journals</a></li>
         @endif
       </ul> 
     </li>
-    <li class="treeview">
+    <li class="treeview settings">
       <a href="#">
         <i class="fa fa-gears"></i>
         <span>Settings</span>
@@ -197,13 +197,13 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="/clusters"><i class="fa fa-circle-o"></i> Clusters</a></li>
-        <li><a href="/branches"><i class="fa fa-circle-o"></i> Branches</a></li>
-        <li><a href="/category"><i class="fa fa-circle-o"></i> Category</a></li>
-        <li><a href="/suppliers"><i class="fa fa-circle-o"></i> Supplier</a></li>
-        <li><a href="/acc_levels"><i class="fa fa-circle-o"></i>Account Level</a></li>
-        <li><a href="/product-group"><i class="fa fa-circle-o"></i>Product Group</a></li>
-        <li><a href="/product-storage"><i class="fa fa-circle-o"></i>Storage</a></li>
+        <li class="clusters"><a href="/clusters"><i class="fa fa-circle-o"></i> Clusters</a></li>
+        <li class="branches"><a href="/branches"><i class="fa fa-circle-o"></i> Branches</a></li>
+        <li class="category"><a href="/category"><i class="fa fa-circle-o"></i> Category</a></li>
+        <li class="suppliers"><a href="/suppliers"><i class="fa fa-circle-o"></i> Supplier</a></li>
+        <li class="acc_levels"><a href="/acc_levels"><i class="fa fa-circle-o"></i>Account Level</a></li>
+        <li class="product-group"><a href="/product-group"><i class="fa fa-circle-o"></i>Product Group</a></li>
+        <li class="product-storage"><a href="/product-storage"><i class="fa fa-circle-o"></i>Storage</a></li>
 
       </ul>
     </li>

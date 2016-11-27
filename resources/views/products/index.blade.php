@@ -35,7 +35,7 @@
                 <th style="width: 60px">Action</th>
               </tr>
               <tbody>
-                <tr dir-paginate="prod in products |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
+                <tr dir-paginate="prod in products | myFilter:product.category_id|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="prod.product_name"></td>
                   <td ng-bind="prod.category.category_name"></td>
@@ -65,6 +65,11 @@
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
+  $(document).ready(function(){
+    $("li.record-management").addClass('active');
+    $("li.product").addClass("active");
+    $("li.products-regular").addClass("active");
+  })
   $(function(){
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
       checkboxClass: 'icheckbox_flat-green',

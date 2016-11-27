@@ -89,6 +89,10 @@
 <script src="/angular/controllers/account_level.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script type="text/javascript">
+  $(document).ready(function(){
+    $("li.settings").addClass('active');
+    $("li.acc_levels").addClass('active');
+  });
   $(document).on('click','.acc-edit',function(e){
     e.preventDefault();
     id = $(this).data('id');

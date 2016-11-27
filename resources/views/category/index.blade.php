@@ -117,6 +117,10 @@
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
+  $(document).ready(function(){
+    $("li.settings").addClass('active');
+    $("li.category").addClass('active');
+  });
   $(function () {
     //Initialize Select2 Elements
     $(".select2").select2();

@@ -149,9 +149,10 @@ class StockinController extends Controller
     public function stockin_pdf($id)
     {
         $stockin = Stockin::with('items','branch','supplier')->find($id);
+        $filename = $stockin->doc_no."-".$stockin->doc_date.".pdf";
         $data =  array( 'stockin' => $stockin );
         $pdf = PDF::loadView('pdf.stockin', $data);
-        return $pdf->download('invoice.pdf');
+        return $pdf->download($filename);
     }
 
     

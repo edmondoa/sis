@@ -61,6 +61,10 @@
 <script src="/angular/controllers/group.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script type="text/javascript">
+  $(document).ready(function(){
+    $("li.settings").addClass('active');
+    $("li.product-group").addClass('active');
+  });
   $(document).on('click','.group-edit',function(e){
     e.preventDefault();
     id = $(this).data('id');

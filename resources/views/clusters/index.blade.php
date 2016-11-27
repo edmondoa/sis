@@ -91,6 +91,10 @@
 <script src="/angular/controllers/cluster.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script type="text/javascript">
+  $(document).ready(function(){
+    $("li.settings").addClass('active');
+    $("li.clusters").addClass('active');
+  });
   $(document).on('click','.cluster-edit',function(e){
     e.preventDefault();
     id = $(this).data('id');
