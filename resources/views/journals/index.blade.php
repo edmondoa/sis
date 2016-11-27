@@ -99,15 +99,15 @@
           message: data,
           buttons: {
             confirm: {
-                label: 'Yes',
-                className: 'btn-success',
+                label: '<i class="fa fa-download "></i> Generate PDF',
+                className: 'btn btn-primary pull-right',
                 callback:function(){                              
-                  
+                  $("iframe").attr('src',"stockin/pdf/"+id);
                   return false;
                 }
             },
             cancel: {
-                label: 'No',
+                label: 'Close',
                 className: 'btn-danger'
             }
         },

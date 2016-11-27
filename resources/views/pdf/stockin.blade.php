@@ -61,15 +61,15 @@
       <!-- Table row -->
       <div class="row">
         <div class="col-xs-12 table-responsive" >
-          <table class="list" style='width:700px; margin-top:10px'>
+          <table class="list" style='width:700px; margin-top:50px'>
           
             <tr>
-              <th  style="text-align:left">Prod Code</th>
-              <th  style="text-align:left">Cat Code</th>
+              <th  style="text-align:left; width:100px !important">Prod Code</th>
+              <th  style="text-align:left;width:75px !important">Cat Code</th>
               <th  style="text-align:left">Product</th>
-              <th  style="text-align:left">Price</th>
-              <th  style="text-align:left">Qty</th>
-              <th  style="text-align:left">Total</th>
+              <th  style="text-align:left; width:75px !important">Price</th>
+              <th  style="text-align:left; width:50px !important">Qty</th>
+              <th  style="text-align:left; width:100px !important">Total</th>
             </tr>
            
             <tbody>
