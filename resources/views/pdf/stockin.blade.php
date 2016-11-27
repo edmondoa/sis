@@ -24,7 +24,7 @@
   <!-- title row -->
       <div class="row">
         <div class="col-xs-12">
-          <table style="1200px">
+          <table style="width:1200px">
             <tr>
               <td style='width:50%'><h4>{{$stockin->branch->business_name.", ".$stockin->branch->branch_name}}</h4></td>
               <td style='width:50%'>Date: {{$stockin->encode_date}}</td>
