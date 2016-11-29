@@ -4,7 +4,21 @@
 
   angular
     .module('SisApp')
-    .controller('productCtrl', productCtrl);
+    .controller('productCtrl', productCtrl)
+    .filter('myFilter', function(){
+         return function(products, category_id){
+           if(!category_id){
+             return [];
+           }
+           var arr = [];
+           angular.forEach(products, function(v){
+             if(v.category_id == category_id){
+               arr.push(v);
+             }
+           })
+
+           return arr;
+         }});
 
     function productCtrl($scope,$filter, $timeout,$http) {
       $scope.products = [];
