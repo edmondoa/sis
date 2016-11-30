@@ -142,10 +142,12 @@ class ProductController extends Controller
                 'retail_price' => 'required|numeric|between:0,99999999.99',
                 'cost_price' => 'required|numeric|between:0,99999999.99',
                              
-                'non_returnable' => 'required',
-                'vatable' => 'required',
-                'suspended' => 'required',
-                'lock' => 'required',
+                // 'non_returnable' => 'required',
+                // 'vatable' => 'required',
+                // 'suspended' => 'required',
+                // 'lock' => 'required',
             ];
+
+            
     }
 }
