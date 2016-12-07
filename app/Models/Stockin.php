@@ -38,4 +38,9 @@ class Stockin extends Model
     {
         return $this->morphOne('App\Models\Approval', 'approvalable');
     }
+
+    public function user()
+    {
+        return $this->belongsTo("App\User");
+    }
 }
