@@ -26,7 +26,7 @@ class ProductBinCard extends Model
     						  						
     		$avg_cost_price = $val->cost_price;
 
-    		if(!is_null($product_onHand) || !empty($product_onHand))
+    		if(!is_null($product_onHand) && !empty($product_onHand))
     		{
     			$t_cost = $product_onHand->$value + ($val->quantity * $val->cost_price);
     			$t_quantity = $product_onHand->$value + $val->quantity ;
