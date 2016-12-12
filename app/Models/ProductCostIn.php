@@ -17,6 +17,8 @@ class ProductCostIn extends Model
     public static function insert($list)
     {
     	//$list = self::group_product($list);
+        dump($list);
+        exit;
     	foreach ($list as $val) {
     		$pci = ProductCostIn::firstOrNew([
     					'product_id'=> $val->product_id,
