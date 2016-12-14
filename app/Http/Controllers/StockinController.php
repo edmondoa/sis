@@ -28,7 +28,8 @@ class StockinController extends Controller
 
     public function search()
     {
-        return view('products.search');
+        $src ="stockin";
+        return view('products.search',compact('src'));
     }
 
     public function stockFloat(Request $req)

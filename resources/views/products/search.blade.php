@@ -14,6 +14,9 @@
 			<th>Product Code</th>
 			<th>Product Name</th>
 			<th>BarCode</th>
+			@if($src == 'stockout')
+			<th>Available</th>
+			@endif
 			<th>Price</th>
 		</thead>
 		<tbody>		

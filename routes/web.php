@@ -52,6 +52,12 @@ Route::group(['middleware' => 'web'], function () {
 	
 	Route::resource('stockin','StockinController');
 
+	Route::post('stockout/multi_search','StockOutController@postSearch');
+	Route::get('stockout/search','StockOutController@search');
+	Route::get('stockout/ng-stockout-list','StockOutController@stockoutList');
+	Route::post('stockout-float','StockOutController@stockoutFloat');
+	Route::resource('stockout','StockOutController');
+
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
 	Route::resource('clusters','ClusterController');
 
