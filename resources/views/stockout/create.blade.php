@@ -100,7 +100,7 @@
       		<td ng-bind="stock.cost_price"></td>                        
       		<td ng-bind="stock.quantity"></td>
       		<td><span class='total' >@{{stock.total}}</span></td>
-          <td><a href="javascript:void(0)" title="Remove Item" ng-click="removeItem($index)"><i class="fa fa-trash text-red"></i></a></td>
+          <td><a href="javascript:void(0)" title="Remove Item" ng-click="removeItem(stock)"><i class="fa fa-trash text-red"></i></a></td>
     		</tr>
     	</tbody>
     	

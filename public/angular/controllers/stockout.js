@@ -98,7 +98,7 @@
         })
       }
 
-      $scope.removeItem = function(index)
+      $scope.removeItem = function(model)
       {
         bootbox.confirm({
           title: "Remove Item",
@@ -117,7 +117,7 @@
           callback: function (result) {
               if(result)
               {
-                 $http.post('/stockin-items-remove/'+index)
+                 $http.post('/stockout-items-remove',model)
                   .success(function(data) {
                     $scope.message(data);
                     $scope.getStockins();

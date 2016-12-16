@@ -15,7 +15,7 @@ class ProductBinCard extends Model
     public $timestamps = false;
 
 
-    public static function insert($list)
+    public static function insert($list,$reference,$type,$negative)
     {
     	
     	foreach ($list as $val) { 
@@ -41,13 +41,22 @@ class ProductBinCard extends Model
     					'product_id'=> $val->product_id,
     					'branch_id' => $val->branch_id,
     					'price' => $val->cost_price,
-    					'reference_id'=> $val->stockin_id,
-    					'type'=> 'STI']);
+    					'reference_id'=> $val->$reference,
+    					'type'=> $type]);
     		if ($pci->exists) 
-    		{    			
-    			$pci->quantity += $val->quantity;
-    		}else{    			
-    			$pci->quantity = $val->quantity;
+    		{    
+    			if($negative){
+    				$pci->quantity += - $val->quantity;
+    			}else{
+    				$pci->quantity += $val->quantity;
+    			}
+    			
+    		}else{  
+    			if($negative){
+    				$pci->quantity = - $val->quantity;
+    			}else{  			
+    				$pci->quantity = $val->quantity;
+    			}	
     		}	
     		
     		$pci->save();

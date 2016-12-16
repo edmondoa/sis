@@ -19,7 +19,7 @@ class StockOut extends Model
 
     public function items()
     {
-    	return $this->hasMany('App\Models\StockOutItem','stockout_id');
+    	return $this->hasMany('App\Models\StockOutItem','stockout_id','stockout_id');
     }						
 
     public static function onhand($prod_id,$branch)
@@ -88,6 +88,12 @@ class StockOut extends Model
         $transfer = self::transfer($prod_id,$branch);
         $adjust_out = self::adjust_out($prod_id,$branch);
         return ($onhand - ($book + $stockout + $transfer + $adjust_out));
-    }								
+    }	
+
+    public function approval()
+    {
+        return $this->morphOne('App\Models\Approval', 'approvalable');
+    }
+							
     					
 }

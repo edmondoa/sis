@@ -55,6 +55,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('stockout/multi_search','StockOutController@postSearch');
 	Route::post('stockout-float/items','StockOutController@saveItems');
 	Route::post('stockout/search','StockOutController@postSingleSearch');
+	Route::post('stockout-items-remove','StockOutController@removeItems');
+	Route::post('stockout-float/save','StockOutController@save');
 	Route::get('stockout/search','StockOutController@search');
 	Route::get('stockout/ng-stockout-list','StockOutController@stockoutList');
 	Route::post('stockout-float','StockOutController@stockoutFloat');

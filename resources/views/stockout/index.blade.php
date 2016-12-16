@@ -114,26 +114,36 @@
   $(document).on('keypress','#qty',function(e){
    
     if(e.which==13){
-      if($("#locked").val()==0){
-        var param = {
-                id:$("#prod_id").val(),
-                qty:$("#qty").val(),
+       if($("#locked").val()==0){  
+      var param = {
+                  id:$("#prod_id").val(),
+                  stockout_id:$("#stockout_id").val(),
+                  branch_id:$("#branch_id").val(),
+                  qty:$("#qty").val(),
+                  available:$("#available").text(),
                   costprice:$("#cprice").val()};
-        $.post("stockin-float/items",param, function( data ) {     
-          $("#code").text('');
-           $("#locked").val('');
-          $("#name").text('');
-          $("#price-text").text('');
-          $("#cprice").val('');
-          $("#qty").val('');
-          $("#prod_id").val('');
-          $("#search").val('');
-          $("#search").focus();
-          $(".refresh").trigger('click');
-        });
-      }else{
-        bootbox.alert({message:"Product is locked!", size: 'small'});
-      }
+      $.post("stockout-float/items",param, function( data ) { 
+      if(!data.status)
+      {
+        message(data);
+      } else{   
+        message(data);
+        $("#code").text('');
+        $("#name").text('');
+        $("#available").text('');
+         $("#price-text").text('');
+        $("#cprice").val('');
+         $("#locked").val('');
+        $("#qty").val('');
+        $("#prod_id").val('');
+        $("#search").val('');
+        $("#search").focus();
+        $(".refresh").trigger('click');
+      }  
+      });
+    }else{
+      bootbox.alert({message:"Product is locked!", size: 'small'});
+    }
       
       
      }
@@ -160,50 +170,15 @@
 
 
 
-  $(document).on("click",".btn-save",function(e){
-    var totalCost =  $("#totalCost").text();
-    var amount = $("#amount_due").val();
-    if(totalCost != amount)
-    {
-      bootbox.alert({
-          message: "Please check the Total amount it doesn't match to the amount due",
-          size: 'small'
-      });
-      $("div.amount-due").addClass('has-error');
-    }else{
-      var stocks = {};
-      var quantity = [];
-      var prod_id = [];
-      var costprice = [];
-      var updated_price = [];
-      $('.quantity').each(function () { 
-        quantity.push($(this).val());
-        prod_id.push($(this).data('prodid'));
-        costprice.push($(this).data('costprice')) ;
-        updated_price.push($(this).parent('td').siblings('td').find('input.updated_price').val());
-      }); 
-      stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice,'updated_price':updated_price};
-      console.log(stocks);
-      $.post('stockin-float/save',stocks,function(data){
-        message(data);
-        $(".refresh").trigger('click'); 
-        $("#branch_id").val('').trigger("change");
-        $("#supplier_id").val('').trigger("change");
-        $("#doc_no").val('');
-        $("#amount_due").val('');
-        $("#doc_date").val('');
-        $("#arrive_date").val('');
-        $("#totalQuantity").text(0);    
-        $("#totalCost").text(parseFloat(0));
-        $('.btn-save').addClass('disabled');
-        $('.search-prod').addClass('disabled');
-        
-        $("a.stock").removeClass('disabled');
-        $("input.stock").attr('readonly',false);
-        $("select.stock").attr('disabled',false);
-        $("div.amount-due").removeClass('has-error');      
-      });
-    }
+  $(document).on("click",".btn-save",function(e){ 
+    
+    var stocks = {};     
+   
+    $.post('stockout-float/save',function(data){
+      message(data);
+      location.reload();      
+    });
+ 
   })
 
   $(document).on('change','#search',function(e){

@@ -162,11 +162,41 @@ class StockOutController extends Controller
     	$stockout_item = new StockOutItem;
     	$stockout_item->product_id = $req->id;
         $stockout_item->quantity = $req->qty;
+        $stockout_item->branch_id = $req->branch_id;
         $stockout_item->stockout_id = $req->stockout_id;
         $stockout_item->cost_price = $req->costprice;
         if($stockout_item->save())
         	return Response::json(['status' => true, 'message' =>["Item are now book"]]);
 
         return Response::json(['status' => false, 'message' =>["Error"]]);
+    }
+
+    public function removeItems(Request $req)
+    {
+    	$item = StockOutItem::where('stockout_item_id',$req->stockout_item_id)    						
+    						->delete();
+    	return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
+    					
+    }
+
+    public function save()
+    {
+    	$stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
+    						->where('status','ONGOING')
+    						->first();
+    	$stockout->status = "PENDING";
+    	$stockout->encode_date = date("Y-m-d");    
+    	$stockout->save();
+    	$post_date = Setting::first()->pluck('post_date')[0];
+    	$stockout->approval()->create([
+                            'status' => 'PENDING',
+                            'user_id' => Auth::user()->user_id,
+                            'post_date' => $post_date,
+                            'branch_id' => $stockout->branch_id,
+                            'approval_type_id' =>2
+                            ]);
+    	Session::forget('prodlist');
+    	Session::forget('stockinFloat');
+    	return Response::json(['status'=>true,'message' => "Successfuly save!"]);
     }
 }

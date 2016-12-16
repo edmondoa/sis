@@ -8,7 +8,8 @@ class StockOutItem extends Model
 {
     protected $connection = 'domain';
     protected $table = 'stockout_item';
-    protected $fillable = ['stockout_id','product_id','quantity','cost_price'];
+     protected $primaryKey = 'stockout_item_id';
+    protected $fillable = ['stockout_id','product_id','quantity','cost_price','branch_id'];
     public $timestamps = false;
 
     protected $appends = ['product_name','product_code','total'];
