@@ -50,7 +50,7 @@ class StockOut extends Model
     	$stockout = DB::select("SELECT SUM(si.quantity) AS qty FROM `stockout_item` si
 							LEFT JOIN `stockout` s ON si.stockout_id = s.stockout_id
 							WHERE si.product_id =$prod_id AND s.branch_id = $branch
-							AND status IN ['PENDING','ONGOING']);
+							AND status IN ['PENDING','ONGOING']");
     	
     	if(!is_null($stockout[0]->qty))
     		return $stockout[0]->qty;
