@@ -53,8 +53,10 @@
                   $("#code").text(row.data('catcode'));
                   $("#name").text(row.data('prodname'));
                   $("#cprice").val(row.data('costprice'));
+                  $("#price-text").text(row.data('costprice'));
                   $("#qty").val(1);
                   $("#prod_id").val(row.data('prod_id'));
+                   $("#available").text(row.data('available'));
                   $("#qty").focus();
                   bootbox.hideAll();
                   return false;
@@ -79,11 +81,21 @@
      if($("#locked").val()==0){  
       var param = {
                   id:$("#prod_id").val(),
+                  stockout_id:$("#stockout_id").val(),
+                  branch_id:$("#branch_id").val(),
                   qty:$("#qty").val(),
+                  available:$("#available").text(),
                   costprice:$("#cprice").val()};
-      $.post("stockin-float/items",param, function( data ) {     
+      $.post("stockout-float/items",param, function( data ) { 
+      if(!data.status)
+      {
+        message(data);
+      } else{   
+        message(data);
         $("#code").text('');
         $("#name").text('');
+        $("#available").text('');
+         $("#price-text").text('');
         $("#cprice").val('');
          $("#locked").val('');
         $("#qty").val('');
@@ -91,6 +103,7 @@
         $("#search").val('');
         $("#search").focus();
         $(".refresh").trigger('click');
+      }  
       });
     }else{
       bootbox.alert({message:"Product is locked!", size: 'small'});
@@ -110,6 +123,7 @@
           $("#code").text('');
            $("#locked").val('');
           $("#name").text('');
+          $("#price-text").text('');
           $("#cprice").val('');
           $("#qty").val('');
           $("#prod_id").val('');
@@ -195,10 +209,10 @@
   $(document).on('change','#search',function(e){
     e.preventDefault();     
     searchStr = $(this).val();
-    supplier = $("#supplier_id").val();
+     var pass_param = {str:searchStr,supplier_id:$("#supplier_id").val(),branch_id:$("#branch_id").val()};
     if(searchStr=='')
       searchStr ='_blank';
-    $.get( "products/search/"+supplier+"/"+searchStr, function( data ) {
+    $.post( "stockout/search",pass_param, function( data ) {
       if(data.status)
       {
         console.log(data.products);
@@ -206,6 +220,7 @@
         $("#code").text(data.products[0].category_code);
         $("#name").text(data.products[0].product_name);
         $("#cprice").val(data.products[0].cost_price);
+        $("#available").text(data.products[0].available);
         $("#qty").val(1);
         $("#prod_id").val(data.products[0].product_id);
         $("#qty").focus();

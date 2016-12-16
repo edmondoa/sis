@@ -9,11 +9,18 @@ class StockOut extends Model
     protected $connection = 'domain';
     protected $table = 'stockout';
     protected $primaryKey = 'stockout_id';
+    protected $fillable = ['supplier_id','branch_id','series_id','notes','encode',
+    						'post_date','user_id','status'];
     public $timestamps = false;
 
     public static $rules =['supplier_id' => 'required',
     						'branch_id' => 'required',
     						]; 
+
+    public function items()
+    {
+    	return $this->hasMany('App\Models\StockOutItem','stockout_id');
+    }						
 
     public static function onhand($prod_id,$branch)
     {
@@ -71,6 +78,16 @@ class StockOut extends Model
     		return $adjust[0]->qty;
 
     	return 0;
+    }
+
+    public static function available($prod_id,$branch)
+    {
+    	$onhand = self::onhand($prod_id,$branch);
+        $book  = self::book($prod_id,$branch);
+        $stockout = self::stockout($prod_id,$branch);
+        $transfer = self::transfer($prod_id,$branch);
+        $adjust_out = self::adjust_out($prod_id,$branch);
+        return ($onhand - ($book + $stockout + $transfer + $adjust_out));
     }								
     					
 }

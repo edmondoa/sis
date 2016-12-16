@@ -53,6 +53,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::resource('stockin','StockinController');
 
 	Route::post('stockout/multi_search','StockOutController@postSearch');
+	Route::post('stockout-float/items','StockOutController@saveItems');
+	Route::post('stockout/search','StockOutController@postSingleSearch');
 	Route::get('stockout/search','StockOutController@search');
 	Route::get('stockout/ng-stockout-list','StockOutController@stockoutList');
 	Route::post('stockout-float','StockOutController@stockoutFloat');

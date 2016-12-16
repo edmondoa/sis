@@ -8,6 +8,7 @@
     </div> 
         
     <form class='form-horizontal'>
+      <input type="hidden" id="stockout_id" />
       @if(Auth::user()->level_id > 2) 
       <div class="form-group ">
         <label for="inputEmail3"  class="col-sm-4 control-label">Branch</label>
@@ -52,7 +53,8 @@
       <tr>
         <td class="col-sm-2"></td>
         <td class="col-sm-2">Cat Code</td>
-        <td class="col-sm-4">Product</td>
+        <td class="col-sm-3">Product</td>
+        <td class="col-sm-1">Available</td>
         <td class="col-sm-1">CPrice</td>
         <td class="col-sm-1">Qty</td>
         <td class="col-sm-2"></td>
@@ -66,8 +68,10 @@
         </td>
         <td><span  id="code"></span></td>
         <td><span  id="name"></span></td>
+        <td><span  id="available"></span></td>
         <td>
-          <input type="text" class="form-control " id="cprice" name='cprice' style='padding:6px 2px !important'>
+          <span id="price-text"></span>
+          <input type="hidden" class="form-control " id="cprice" name='cprice' style='padding:6px 2px !important'>
           <input type="hidden" class="form-control " id="prod_id" name='prod_id' > 
         </td>
         <td>          

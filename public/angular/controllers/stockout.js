@@ -17,9 +17,10 @@
         $http.get('/stockout/ng-stockout-list').
           success(function(data) {
             $scope.stockins = data.prodlist;
+            console.log(data.stockout)
             $("#branch_id").val(data.stockout.branch_id).trigger("change");
             $("#supplier_id").val(data.stockout.supplier_id).trigger("change");
-            
+            $("#stockout_id").val(data.stockout.stockout_id)
             console.log(data.stockout)
             if(data.stockout.branch_id)
             {
