@@ -44,8 +44,8 @@ class ApprovalController extends Controller
     		
     		if($approval->approvalable->save())
     		{
-
-                ProductBinCard::insert($approval->approvalable->items,$other_detail['reference'],$other_detail['type'],$other_detail['negative']);
+                if($status == 'APPROVED')
+                    ProductBinCard::insert($approval->approvalable->items,$other_detail['reference'],$other_detail['type'],$other_detail['negative']);
     			return Response::json(['status'=>true,'message' => "Successfuly ".strtolower($status)."!"]);
         
     		}
