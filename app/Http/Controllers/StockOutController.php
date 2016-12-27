@@ -18,7 +18,7 @@ use Response;
 use Auth;
 use Session;
 use DB;
-
+use PDF;
 class StockOutController extends Controller
 {
     
@@ -198,5 +198,21 @@ class StockOutController extends Controller
     	Session::forget('prodlist');
     	Session::forget('stockinFloat');
     	return Response::json(['status'=>true,'message' => "Successfuly save!"]);
+    }
+
+    public function show($id)
+    {
+        $stockout = StockOut::with('items','branch')->find($id);
+
+        return view('stockout.show',compact('stockout'));
+    }
+
+    public function pdf($id)
+    {
+        $stockout = Stockout::with('items','branch')->find($id);
+        $filename = $stockout->branch_id."-".$stockout->stockout_id.".pdf";
+        $data =  array( 'stockout' => $stockout );
+        $pdf = PDF::loadView('pdf.stockout', $data);
+        return $pdf->download($filename);
     }
 }

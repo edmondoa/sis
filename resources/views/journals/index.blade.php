@@ -52,7 +52,7 @@
                       </button>
                       <ul class="dropdown-menu" role="menu">
                         <li ng-hide="app.status != 'PENDING'"><a href="#" ng-click="cancel(app)">Cancel<i class='pull-right glyphicon glyphicon-remove'></i> </a></li>
-                        <li><a href="#" class='show-stock' data-id="@{{app.approvalable.stockin_id}}">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
+                        <li><a href="#" class='show-stock'data-type="@{{app.approval_type.approval}}" data-id="@{{app.approvalable_id}}">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
                       </ul>
                     </div>                  
                   </td>
@@ -92,7 +92,8 @@
   $(document).on('click','.show-stock',function(e){
     e.preventDefault();
     id = $(this).data('id');
-    $.get( "stockin/"+id, function( data ) {
+    type = $(this).data('type');
+    $.get( type.toLowerCase()+"/"+id, function( data ) {
       var dialog = bootbox.dialog({
           title: 'Stockin Details',
           size: 'large',
@@ -102,7 +103,7 @@
                 label: '<i class="fa fa-download "></i> Generate PDF',
                 className: 'btn btn-primary pull-right',
                 callback:function(){                              
-                  $("iframe").attr('src',"stockin/pdf/"+id);
+                  $("iframe").attr('src',type.toLowerCase()+"/pdf/"+id);
                   return false;
                 }
             },
@@ -117,7 +118,7 @@
   })
 
   $(document).on('click','.generate-pdf',function(e){
-     $.get( "stockin/pdf/"+id, function( data ) {
+     $.get( type.toLowerCase()+"/pdf/"+id, function( data ) {
      });
   })
 </script>

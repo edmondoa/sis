@@ -20,8 +20,18 @@ class StockOut extends Model
     public function items()
     {
     	return $this->hasMany('App\Models\StockOutItem','stockout_id','stockout_id');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo('App\Models\Branch','branch_id','branch_id')->select('branch_id','branch_name','business_name');
     }						
 
+    public function user()
+    {
+        return $this->belongsTo("App\User");
+    }
+    
     public static function onhand($prod_id,$branch)
     {
     	$available = DB::select("SELECT qty FROM view_product_onhand_per_branch

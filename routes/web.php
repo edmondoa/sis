@@ -52,6 +52,7 @@ Route::group(['middleware' => 'web'], function () {
 	
 	Route::resource('stockin','StockinController');
 
+	Route::get("stockout/pdf/{id}","StockOutController@pdf");
 	Route::post('stockout/multi_search','StockOutController@postSearch');
 	Route::post('stockout-float/items','StockOutController@saveItems');
 	Route::post('stockout/search','StockOutController@postSingleSearch');
