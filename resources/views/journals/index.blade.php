@@ -95,7 +95,7 @@
     type = $(this).data('type');
     $.get( type.toLowerCase()+"/"+id, function( data ) {
       var dialog = bootbox.dialog({
-          title: 'Stockin Details',
+          title: type+' Details',
           size: 'large',
           message: data,
           buttons: {

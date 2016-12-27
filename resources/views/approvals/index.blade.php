@@ -55,7 +55,7 @@
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="#" ng-click="approved(app)">Approve<i class='pull-right glyphicon glyphicon-thumbs-up'></i> </a></li>
                         <li><a href="#" ng-click="dis_approved(app)">Decline<i class='pull-right glyphicon glyphicon-thumbs-down'></i> </a></li>
-                        <li><a href="#" class='show-stock' data-id="@{{app.approvalable.stockin_id}}">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
+                        <li><a href="#" class='show-stock' data-type="@{{app.approval_type.approval}}"data-id="@{{app.approvalable_id}}">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
                       </ul>
                     </div>                  
                   </td>
@@ -94,10 +94,11 @@
   });
   $(document).on('click','.show-stock',function(e){
     e.preventDefault();
+    type = $(this).data('type');
     id = $(this).data('id');
-    $.get( "stockin/"+id, function( data ) {
+    $.get( type.toLowerCase()+"/"+id, function( data ) {
       var dialog = bootbox.dialog({
-          title: 'Stockin Details',
+          title: type+' Details',
           size: 'large',
           message: data,
           buttons: {
