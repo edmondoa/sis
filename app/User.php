@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Models\UserLevel;
+use App\Models\Branch;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -9,6 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected $connection = 'domain';
+   // protected $this->getConnection();
     protected $table = 'user';
     protected $primaryKey = 'user_id';
 
@@ -31,6 +33,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function branch()
+    {
+        return $this->belongsTo('App\Models\Branch');
+    }
 
     // public function userLevel()
     // {

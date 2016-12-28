@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Branch;
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -14,6 +14,7 @@ class BranchController extends Controller
     
     public function index()
     {
+        Core::setConnection();
         $clusters = Cluster::get();
     	return view('branch.index',compact('clusters'));
     }
@@ -21,12 +22,14 @@ class BranchController extends Controller
 
     public function branch_list()
     {
-    	return Branch::with('cluster')->get();
+    	Core::setConnection();
+        return Branch::with('cluster')->get();
     }
 
     public function store(Request $req)
     {
-    	$inputs = $req->all();    	
+    	Core::setConnection();
+        $inputs = $req->all();    	
     	$validate = Validator::make($inputs, Branch::$rules);
         if($validate->fails())
         {
@@ -42,6 +45,7 @@ class BranchController extends Controller
 
     public function edit($id)
     {
+        Core::setConnection();
         $branch = Branch::find($id);
         $clusters = Cluster::get();
         return view('branch.edit',compact('branch','clusters'));
@@ -49,6 +53,7 @@ class BranchController extends Controller
 
     public function update(Request $request,$id)
     {
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductStorage;
 use App\Models\Branch;
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -14,13 +14,15 @@ class ProductStorageController extends Controller
 {
     public function index()
     {
-    	$branches = Branch::get();
+    	Core::setConnection();
+        $branches = Branch::get();
     	return view('productstorage.index',compact('branches'));
     }
 
     public function store(Request $req)
     {
-    	$validate = Validator::make($req->all(), ProductStorage::$rules);
+    	Core::setConnection();
+        $validate = Validator::make($req->all(), ProductStorage::$rules);
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
@@ -40,11 +42,13 @@ class ProductStorageController extends Controller
 
     public function storage_list()
     {
-    	$list = ProductStorage::with('branch')->get();
+    	Core::setConnection();
+        $list = ProductStorage::with('branch')->get();
     	return $list;
     }
     public function edit($id)
     {
+        Core::setConnection();
         $branches = Branch::get();
         $storage = ProductStorage::find($id);
         return view('productstorage.edit',compact('storage','branches'));
@@ -52,6 +56,7 @@ class ProductStorageController extends Controller
 
     public function update(Request $request,$id)
     {
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

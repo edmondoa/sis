@@ -10,7 +10,7 @@ use App\Models\Stockin;
 use App\Models\Approval;
 use App\Models\StockItem;
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -21,7 +21,8 @@ class StockinController extends Controller
 {
     public function index()
     {
-    	$suppliers = Supplier::get();
+    	Core::setConnection();
+        $suppliers = Supplier::get();
     	$branches = Branch::get();
     	return view('stockin.index',compact('suppliers','branches'));
     }
@@ -34,7 +35,8 @@ class StockinController extends Controller
 
     public function stockFloat(Request $req)
     {
-    	$input = $req->all();     		
+    	Core::setConnection();
+        $input = $req->all();     		
     	$input['user_id'] = Auth::user()->user_id;
     	$input['type'] = "PURCHASE";
     	$input['post_date'] = date("Y-m-d");
@@ -90,7 +92,8 @@ class StockinController extends Controller
 
     public function stockFloatSave(Request $req)
     {
-    	$rows = count($req->quantity) - 1 ;
+    	Core::setConnection();
+        $rows = count($req->quantity) - 1 ;
     	$post_date = Setting::first()->pluck('post_date')[0];
     	$stockin = Session::get('stockinFloat'); 
     
@@ -124,7 +127,8 @@ class StockinController extends Controller
 
     public function removeItems($key)
     {
-    	$prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
+    	Core::setConnection();
+        $prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	unset($prodlist[$key]);
     	$prodlist = array_values($prodlist);
     	Session::put('prodlist',$prodlist);
@@ -143,12 +147,14 @@ class StockinController extends Controller
 
     public function show($id)
     {
+        Core::setConnection();
         $stockin = Stockin::with('items','branch','supplier')->find($id);
         return view('stockin.show',compact('stockin'));
     }
 
     public function stockin_pdf($id)
     {
+        Core::setConnection();
         $stockin = Stockin::with('items','branch','supplier')->find($id);
         $filename = $stockin->doc_no."-".$stockin->doc_date.".pdf";
         $data =  array( 'stockin' => $stockin );

@@ -8,7 +8,7 @@ use App\Models\StockOut;
 use App\Models\Setting;
 use App\Models\ProductBinCard;
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use Auth;
 use Response;
@@ -23,12 +23,14 @@ class ApprovalController extends Controller
 
     public function approve_list()
     {
+        Core::setConnection();
     	return Approval::with('approvalable','branch','approval_type','user')->where('status','PENDING')->get();
     }
 
     public function update(Request $request,$status,$id)
     {
-    	$approval = Approval::with('approvalable')->find($id);
+    	Core::setConnection();
+        $approval = Approval::with('approvalable')->find($id);
         $other_detail = $this->format_data($approval->approval_type_id);
     	$approval->status = $status;
         if($status != 'APPROVED')
@@ -57,6 +59,7 @@ class ApprovalController extends Controller
 
     public function notes()
     {
+        Core::setConnection();
         return view('approvals.note');
     }
 
@@ -64,7 +67,8 @@ class ApprovalController extends Controller
 
     private function series_id($type,$branch_id)
     {
-    	if($type==1)
+    	Core::setConnection();
+        if($type==1)
             $max = Stockin::where('branch_id',$branch_id)->max('series_id');
     	else if($type==2)
             $max = StockOut::where('branch_id',$branch_id)->max('series_id');

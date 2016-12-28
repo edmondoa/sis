@@ -22,10 +22,16 @@
           </select>         
         </div>        
       </div>
-      @else
-        <div class="col-sm-7">
-          <input type='hidden' name="branch_id" value="{{Auth::user()->branch_id}}" />  
-       </div>
+      @else        
+        <div class="form-group ">
+          <label for="inputEmail3"  class="col-sm-4 control-label">Branch</label>
+           
+          <div class="col-sm-7">
+
+            <label class='form-control'>{{Auth::user()->branch->branch_name}}</label>      
+            <input type='hidden' name='branch_id' id="branch_id"  value="{{Auth::user()->branch_id}}"/>
+          </div>        
+        </div>
         @endif
       <div class="form-group ">
         <label for="inputEmail3"  class="col-sm-4 control-label">Supplier</label>

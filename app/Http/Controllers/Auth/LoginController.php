@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Auth;
 //models
 use App\Models\UserLevel;
 use App\Models\Domain;
-
+use Config;
 use Session;
 use Redirect;
 use Auth;
 use App\User;
+use App\Libraries\Core;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -45,6 +46,7 @@ class LoginController extends Controller
     }
     protected function showLoginForm()
     {        
+        
         $levels =  UserLevel::get(); 
         return view('auth.login',compact('levels'));
     }
@@ -55,19 +57,19 @@ class LoginController extends Controller
         
         $domain = $req->domain; 
         $domain_exist = Domain::where('domain_id',$domain)->first();
+        
         if($domain_exist)
         {
             if($domain_exist->db_populated==0)
                 return Redirect::back()->withErrors(['Finance concern']);
+            
             Session::put('dbname',$domain_exist->dbname);
+            Core::setConnection();
             $credentials = ['username'=>$req->username,'password'=>$req->password];
             // $email = $req->username;
           
 
-            if ($errors = Auth::attempt($credentials,true)) {
-                
-                //dump(Auth::user())  
-                Session::put('branch_id',Auth::user()->branch_id);     
+            if ($errors = Auth::attempt($credentials,true)) { 
                 return Redirect::to("/");
             }else{                   
                // $error = "Invalid User";
@@ -86,6 +88,7 @@ class LoginController extends Controller
     
     protected function logout()
     {
+        Config::set('database.connections.domain.database',Session::get('dbname'));
         Auth::logout();
         return redirect('login');
     }

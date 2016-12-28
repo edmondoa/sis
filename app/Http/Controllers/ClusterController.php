@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Cluster;
+use App\Libraries\Core;
 use Validator;
 use Response;
 
@@ -13,13 +14,15 @@ class ClusterController extends Controller
 {
     public function index()
     {
+        Core::setConnection();
         $clusters = Cluster::get();
     	return view('clusters.index',compact('clusters'));
     }
 
     public function store(Request $req)
     {
-    	$validate = Validator::make($req->all(), Cluster::$rules);
+    	Core::setConnection();
+        $validate = Validator::make($req->all(), Cluster::$rules);
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
@@ -33,18 +36,21 @@ class ClusterController extends Controller
 
     public function cluster_list()
     {
-    	$list = Cluster::get();
+    	Core::setConnection();
+        $list = Cluster::get();
     	return $list;
     }
 
     public function edit($id)
     {
+        Core::setConnection();
         $cluster = Cluster::find($id);        
         return view('clusters.edit',compact('cluster'));
     }
 
     public function update(Request $request,$id)
     {
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         
@@ -67,6 +73,7 @@ class ClusterController extends Controller
 
     public function destroy($id)
     {
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

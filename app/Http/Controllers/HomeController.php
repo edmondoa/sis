@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use Redirect;
+use App\User;
+use Config;
+use App\Libraries\Core;
 class HomeController extends Controller
 {
     /**
@@ -15,6 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        
         $this->middleware('web');
     }
 
@@ -24,7 +28,8 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {     
+    {          
+       Core::setConnection(); 
        if(!Auth::check())
            return Redirect::to('login'); 
         return view('index');

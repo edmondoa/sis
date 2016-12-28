@@ -7,7 +7,7 @@ use App\Models\AccountLevel;
 use App\Models\Discount;
 
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -16,14 +16,16 @@ class DiscountController extends Controller
 {
     public function index()
     {
-    	$categorys = Category::get();
+    	Core::setConnection();
+        $categorys = Category::get();
     	$acc_level = AccountLevel::get();
     	return view('discounting.index',compact('categorys','acc_level'));
     }
 
     public function store(Request $req)
     {
-    	$inputs = $req->all();    	
+    	Core::setConnection();
+        $inputs = $req->all();    	
     	$validate = Validator::make($inputs, Discount::$rules);
         if($validate->fails())
         {
@@ -43,6 +45,7 @@ class DiscountController extends Controller
 
     public function discount_list()
     {
-    	return Discount::with(['category','account_level'])->get();
+    	Core::setConnection();
+        return Discount::with(['category','account_level'])->get();
     }
 }

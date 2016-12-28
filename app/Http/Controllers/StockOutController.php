@@ -11,7 +11,7 @@ use App\Models\StockOutItem;
 use App\Models\Approval;
 use App\Models\StockItem;
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -24,14 +24,16 @@ class StockOutController extends Controller
     
     public function index()
     {
-    	$suppliers = Supplier::get();
+    	Core::setConnection();
+        $suppliers = Supplier::get();
     	$branches = Branch::get();
     	return view('stockout.index',compact('suppliers','branches'));
     }
 
     public function stockoutFloat(Request $req)
     {
-    	$input = $req->all();   	
+    	Core::setConnection();
+        $input = $req->all();   	
     	$input['status'] = 'ONGOING';
     	$input['user_id'] = Auth::user()->user_id;
     	$validate = Validator::make($input, StockOut::$rules);
@@ -49,7 +51,8 @@ class StockOutController extends Controller
 
     public function stockoutList()
     {
-    	$stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
+    	Core::setConnection();
+        $stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->orderBy('stockout_id', 'desc')->first();
     					
@@ -67,7 +70,8 @@ class StockOutController extends Controller
 
     public function postSingleSearch(Request $req)
     {
-    	$sup = $req->supplier_id;
+    	Core::setConnection();
+        $sup = $req->supplier_id;
     	$branch = $req->branch_id;
 
         $search = trim($req->str);
@@ -107,7 +111,8 @@ class StockOutController extends Controller
     }
     public function postSearch(Request $req)
     {
-    	$sup = $req->supplier_id;
+    	Core::setConnection();
+        $sup = $req->supplier_id;
     	$branch = $req->branch_id;
 
         $search = $req->str;
@@ -150,7 +155,8 @@ class StockOutController extends Controller
 
     public function saveItems(Request $req)
     {
-    	$available = StockOut::available($req->id,$req->branch_id);
+    	Core::setConnection();
+        $available = StockOut::available($req->id,$req->branch_id);
     	if($available <= 0)
     	{
     		return Response::json(['status' => false, 'message' =>["Already out of stock"]]);
@@ -173,7 +179,8 @@ class StockOutController extends Controller
 
     public function removeItems(Request $req)
     {
-    	$item = StockOutItem::where('stockout_item_id',$req->stockout_item_id)    						
+    	Core::setConnection();
+        $item = StockOutItem::where('stockout_item_id',$req->stockout_item_id)    						
     						->delete();
     	return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
     					
@@ -181,7 +188,8 @@ class StockOutController extends Controller
 
     public function save()
     {
-    	$stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
+    	Core::setConnection();
+        $stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->first();
     	$stockout->status = "PENDING";
@@ -202,6 +210,7 @@ class StockOutController extends Controller
 
     public function show($id)
     {
+        Core::setConnection();
         $stockout = StockOut::with('items','branch')->find($id);
 
         return view('stockout.show',compact('stockout'));
@@ -209,6 +218,7 @@ class StockOutController extends Controller
 
     public function pdf($id)
     {
+        Core::setConnection();
         $stockout = Stockout::with('items','branch')->find($id);
         $filename = $stockout->branch_id."-".$stockout->stockout_id.".pdf";
         $data =  array( 'stockout' => $stockout );

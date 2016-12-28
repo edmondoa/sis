@@ -26,18 +26,17 @@
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("li.main-products").addClass('active');
-    $("li.stockin").addClass("active");    
-  })
+
   var model ={};
   $(function(){
     $(".select2").select2();
+
   })
 
   $(document).on("click",'.search-prod',function(e){
     e.preventDefault();   
     
+
     $.get( "stockin/search", function( data ) {
       var dialog = bootbox.dialog({
           title: 'Search Products',
@@ -284,5 +283,14 @@
       return false;
      });
   }
+
+  $(document).ready(function(){
+    $("li.main-products").addClass('active');
+    $("li.stockin").addClass("active");  
+     $("#branch_id").val('{{Auth::user()->branch_id}}').trigger("change");
+  
+  })
 </script>
+
+
 @stop

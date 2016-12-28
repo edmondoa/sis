@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\ProductGroup;
 use Illuminate\Http\Request;
-
+use App\Libraries\Model;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -19,7 +19,8 @@ class ProductGroupController extends Controller
 
     public function store(Request $req)
     {
-    	$validate = Validator::make($req->all(), ProductGroup::$rules);
+    	Core::setConnection();
+        $validate = Validator::make($req->all(), ProductGroup::$rules);
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
@@ -33,18 +34,21 @@ class ProductGroupController extends Controller
 
     public function group_list()
     {
-    	$list = ProductGroup::get();
+    	Core::setConnection();
+        $list = ProductGroup::get();
     	return $list;
     }
 
     public function edit($id)
     {
+       Core::setConnection();
         $group = ProductGroup::find($id);
         return view('productgroup.edit',compact('group'));
     }
 
     public function update(Request $request,$id)
     {
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

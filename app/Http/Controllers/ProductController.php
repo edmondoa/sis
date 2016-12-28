@@ -8,7 +8,7 @@ use App\Models\ProductCount;
 use App\Models\ProductCountItem;
 use App\Models\ProductGroup;
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -20,7 +20,8 @@ class ProductController extends Controller
     
     public function index()
     {
-    	$category = Category::get();
+    	Core::setConnection();
+        $category = Category::get();
         $discount = Discount::with('account_level')->get();
         $groups = ProductGroup::get();
     	return view('products.index',compact('category','discount','groups'));
@@ -28,7 +29,8 @@ class ProductController extends Controller
 
     public function store(Request $req)
     {
-    	$inputs = $req->all();
+    	Core::setConnection();
+        $inputs = $req->all();
     	$inputs['post_date'] = date('Y-m-d');
         $inputs['user_id'] = Auth::user()->user_id;
     	$validate = Validator::make($inputs, Product::$rules);
@@ -46,11 +48,13 @@ class ProductController extends Controller
 
     public function product_list()
     {
-    	return Product::with('category')->get();
+    	Core::setConnection();
+        return Product::with('category')->get();
     }
 
      public function edit($id)
     {
+        Core::setConnection();
         $category = Category::get();
         $discount = Discount::with('account_level')->get();
         $groups = ProductGroup::get();
@@ -60,6 +64,7 @@ class ProductController extends Controller
 
     public function update(Request $request,$id)
     {
+       Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         
@@ -99,6 +104,7 @@ class ProductController extends Controller
 
     public function search($sup,$search=NULL)
     {
+        Core::setConnection();
         if ($search =='_blank') $search ="";
         $sql = "SELECT p.*,c.category_code FROM product p
                 LEFT JOIN category c ON p.category_id = c.category_id
@@ -114,6 +120,7 @@ class ProductController extends Controller
 
     public function multi_search(Request $req)
     {
+       Core::setConnection();
         $sup = $req->supplier_id;
         $search = $req->str;
         if($search =='%')

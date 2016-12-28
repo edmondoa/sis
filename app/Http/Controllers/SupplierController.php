@@ -6,7 +6,7 @@ use App\Models\Supplier;
 use App\Models\Category;
 use App\Models\SupplierCategory;
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use DB;
 use Validator;
@@ -15,14 +15,16 @@ class SupplierController extends Controller
 {
     public function index()
     {
-    	
+    	Core::setConnection();
+        
         $categories = Category::get();                
     	return view('supplier.index',compact('categories'));
     }
 
     public function store(Request $req)
     {
-    	$validate = Validator::make($req->all(), Supplier::$rules);
+    	Core::setConnection();
+        $validate = Validator::make($req->all(), Supplier::$rules);
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
@@ -37,12 +39,14 @@ class SupplierController extends Controller
 
     public function supplier_list()
     {
-    	$list = Supplier::get();
+    	Core::setConnection();
+        $list = Supplier::get();
     	return $list;
     }
 
     public function edit($id)
     {
+        Core::setConnection();
         $supplier = Supplier::find($id);
         $mylist = [];
         foreach ($supplier->category as $key) {
@@ -55,6 +59,7 @@ class SupplierController extends Controller
 
     public function update(Request $request,$id)
     {
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

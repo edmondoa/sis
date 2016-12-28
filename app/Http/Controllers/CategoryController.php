@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use App\Libraries\Core;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -14,6 +14,7 @@ class CategoryController extends Controller
     
     public function index()
     {
+        Core::setConnection();
         $sys_category = DB::connection('mysql')
                         ->table('category')->get();
         return view('category.index',compact('sys_category'));
@@ -21,7 +22,8 @@ class CategoryController extends Controller
 
     public function store(Request $req)
     {
-    	$validate = Validator::make($req->all(), Category::$rules);
+    	Core::setConnection();
+        $validate = Validator::make($req->all(), Category::$rules);
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
@@ -35,12 +37,14 @@ class CategoryController extends Controller
 
     public function category_list()
     {
-    	$list = Category::get();
+    	Core::setConnection();
+        $list = Category::get();
     	return $list;
     }
 
     public function edit($id)
     {
+        Core::setConnection();
         $sys_category = DB::connection('mysql')
                         ->table('category')->get();
         $category = Category::find($id);
@@ -49,6 +53,7 @@ class CategoryController extends Controller
 
      public function update(Request $request,$id)
     {
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use Validator;
+use App\Libraries\Core;
 class AccountLevelController extends Controller
 {
     //
@@ -19,6 +20,7 @@ class AccountLevelController extends Controller
 
     public function store(Request $req)
     {
+        Core::setConnection();
     	$inputs = $req->all();    	
     	$validate = Validator::make($inputs, AccountLevel::$rules);
         if($validate->fails())
@@ -35,12 +37,14 @@ class AccountLevelController extends Controller
 
     public function edit($id)
     {
+        Core::setConnection();
         $acc_level = AccountLevel::find($id);
         return view('accounts.account_level_edit',compact('acc_level'));
     }
 
     public function update(Request $request,$id)
     {
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         
@@ -72,6 +76,7 @@ class AccountLevelController extends Controller
 
     public function level_list()
     {
+        Core::setConnection();
     	return AccountLevel::get();
     }
 }
