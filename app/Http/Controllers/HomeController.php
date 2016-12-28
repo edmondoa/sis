@@ -29,8 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {  
-       if(!Session::has('dbname'))
-        Session::put('dbname','domain1');     
+       if(!Session::has('dbname')){
+         Session::put('dbname','domain1');     
+       }
        Core::setConnection(); 
        if(!Auth::check())
            return Redirect::to('login'); 
