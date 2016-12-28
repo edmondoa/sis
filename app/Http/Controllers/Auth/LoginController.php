@@ -46,7 +46,9 @@ class LoginController extends Controller
     }
     protected function showLoginForm()
     {        
-        
+        if(!Session::has('dbname')){
+         Session::put('dbname','domain1');     
+       }
         $levels =  UserLevel::get(); 
         return view('auth.login',compact('levels'));
     }
@@ -88,7 +90,7 @@ class LoginController extends Controller
     
     protected function logout()
     {
-        Config::set('database.connections.domain.database',Session::get('dbname'));
+        Core::setConnection();
         Auth::logout();
         return redirect('login');
     }
