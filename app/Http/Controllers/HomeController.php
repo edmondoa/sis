@@ -28,7 +28,9 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {          
+    {  
+       if(!Session::has('dbname'))
+        Session::put('dbname','domain1');     
        Core::setConnection(); 
        if(!Auth::check())
            return Redirect::to('login'); 
