@@ -19,7 +19,7 @@ class ProductBinCard extends Model
     {
     	
     	foreach ($list as $val) { 
-    		$product_onHand = DB::table('view_product_onhand_per_branch')
+    		$product_onHand = DB::table('view_product_onhand')
     							->where('branch_id',$val->branch_id)
     							->where('product_id',$val->product_id)
     							->first();

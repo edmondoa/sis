@@ -63,6 +63,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('stockout-float','StockOutController@stockoutFloat');
 	Route::resource('stockout','StockOutController');
 
+	Route::resource('transfer','TransferController');
+
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
 	Route::resource('clusters','ClusterController');
 

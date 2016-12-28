@@ -7,6 +7,7 @@
       body{font-size: 11px}
       .list {
         border-collapse: collapse;
+         border-spacing: 0 1em;
       }
 
       .list th,  {
@@ -33,7 +34,7 @@
     <!-- Content Header (Page header) -->
     <section class="invoice"> 
        
-      <table style='width:1200px'>
+      <table style='width:1200px;  border-spacing: 10px 0; '>
         <tr>
           <td >Domain : <span>{{$stockout->branch->branch_name}}</span></td>
           <td style='width:50%'><span>Status : </span><span >{{$stockout->approval->status}}</span></td>
@@ -74,8 +75,8 @@
             ?>
             @foreach($stockout->items as $item)
             <tr>
-              <td>{{$item->product->product_code}}</td>
               <td>{{$item->product->category->category_code}}</td>
+              <td>{{$item->product->product_code}}</td>              
               <td>{{$item->product->product_name}}</td>
               <td>{{$item->cost_price}}</td>
               <td>{{$item->quantity}}</td>

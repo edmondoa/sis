@@ -7,6 +7,7 @@
       body{font-size: 11px}
       .list {
         border-collapse: collapse;
+         border-spacing: 0 1em;
       }
 
       .list th,  {
@@ -33,13 +34,13 @@
     <!-- Content Header (Page header) -->
     <section class="invoice"> 
        
-      <table style='width:1200px'>
+      <table style='width:1200px;  border-spacing: 10px 0; '>
         <tr>
-          <td >Domain : <span>{{$stockin->branch->branch_name}}</span></td>
+          <td >Domain : <span>{{Session::get('dbname')}}</span></td>
           <td style='width:50%'><span>Status : </span><span >{{$stockin->approval->status}}</span></td>
         </tr>
         <tr>
-          <td >Branch</td>
+          <td >Branch : <span>{{$stockin->branch->branch_name}}</span></td>
           <td style='width:50%'><span>Stockin ID : </span><span >{{$stockin->stockin_id}}</span></td>
         </tr>
         <tr>
@@ -83,12 +84,12 @@
             ?>
             @foreach($stockin->items as $item)
             <tr>
-              <td>{{$item->product->product_code}}</td>
               <td>{{$item->product->category->category_code}}</td>
+              <td>{{$item->product->product_code}}</td>            
               <td>{{$item->product->product_name}}</td>
-              <td>{{$item->cost_price}}</td>
-              <td>{{$item->quantity}}</td>
-              <td>{{ number_format(($item->quantity * $item->cost_price), 2, '.', ',')}}</td>
+              <td style="text-align:right;margin-right:30px !important">{{$item->cost_price}}</td>
+              <td style="text-align:left;  !important">{{$item->quantity}}</td>
+              <td style="text-align:right;margin-right:30px  !important">{{ number_format(($item->quantity * $item->cost_price), 2, '.', ',')}}</td>
             </tr>
             <?php $quantity += $item->quantity; $total += ($item->quantity * $item->cost_price)?>
             @endforeach

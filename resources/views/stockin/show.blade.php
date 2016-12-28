@@ -11,27 +11,27 @@
   </div>
   <!-- info row -->
   <div class="row invoice-info">
-    <div class="col-sm-8 invoice-col">
-      FROM
-      <address>
+    <div class="col-sm-8 invoice-col" >   
       <dl class="dl-horizontal">
-      	<dt style="width: 78px">Supplier : </dt><dd style="margin-left: 96px">{{$stockin->supplier->supplier_name}}</dd>
-        <dt style="width: 78px">Contact  : </dt><dd style="margin-left: 96px">{{$stockin->supplier->contact_person}}</dd>
-        <dt style="width: 78px">Mobile   : </dt><dd style="margin-left: 96px">{{$stockin->supplier->mobile1_no}}</dd>
-        <dt style="width: 78px">Landline : </dt><dd style="margin-left: 96px">{{$stockin->supplier->landline}}</dd>
-        <dt style="width: 78px">Email    : </dt><dd style="margin-left: 96px">{{$stockin->supplier->email}}</dd>
+      	<dt style="width: 78px">Domain : </dt><dd style="margin-left: 96px">{{$stockin->branch->branch_name}}</dd>
+        <dt style="width: 78px">Supplier  : </dt><dd style="margin-left: 96px">{{$stockin->supplier->contact_person}}</dd>
+        <dt style="width: 78px">Doc #  : </dt><dd style="margin-left: 96px">{{$stockin->doc_no}}</dd>
+        <dt style="width: 78px">Doc Date : </dt><dd style="margin-left: 96px">{{$stockin->doc_date}}</dd>
+        <dt style="width: 78px">Arrive Date : </dt><dd style="margin-left: 96px">{{$stockin->arrive_date}}</dd>
       </dl>
        
-      </address>
+      
     </div>
     
     <!-- /.col -->
     <div class="col-sm-4 invoice-col">
     <dl class="dl-horizontal">
-      	<dt style="width: 78px">Series # : </dt><dd style="margin-left: 96px">{{$stockin->series_id}}</dd>
-        <dt style="width: 78px">Doc #  : </dt><dd style="margin-left: 96px">{{$stockin->doc_no}}</dd>
-        <dt style="width: 78px">Doc Date   : </dt><dd style="margin-left: 96px">{{$stockin->doc_date}}</dd>
-        <dt style="width: 78px">Status : </dt><dd style="margin-left: 96px">{{$stockin->approval->status}}</dd>
+        <dt style="width: 88px">Status : </dt><dd style="margin-left: 96px">{{$stockin->approval->status}}</dd>
+        <dt style="width: 88px">Stockin ID : </dt><dd style="margin-left: 96px">{{$stockin->stockin_id}}</dd>
+      	<dt style="width: 88px">Series # : </dt><dd style="margin-left: 96px">{{$stockin->series_id}}</dd>
+        <dt style="width: 88px">Post Date  : </dt><dd style="margin-left: 96px">{{$stockin->approval->post_date}}</dd>
+        <dt style="width: 88px">Encode Date   : </dt><dd style="margin-left: 96px">{{$stockin->encode_date}}</dd>
+        <dt style="width: 88px">User  : </dt><dd style="margin-left: 96px">{{$stockin->user->username}}</dd>
     </dl>	    
     </div>
     <!-- /.col -->
