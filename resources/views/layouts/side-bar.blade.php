@@ -28,7 +28,7 @@
     
     <li class="treeview">
       <a href="#">
-        <i class="fa fa-dashboard"></i> <span>SALES</span>
+        <i class="fa fa-laptop"></i> <span>SALES</span>
         <span class="pull-right-container">
            <i  class="fa fa-angle-left pull-right"></i>
         </span>      
@@ -65,7 +65,7 @@
     <!-- Sales -->
     <li class="treeview">
       <a href="#">
-        <i class="fa fa-dashboard"></i> <span>FINANCIALS</span>  
+        <i class="fa fa-laptop"></i> <span>FINANCIALS</span>  
         <span class="pull-right-container">
            <i  class="fa fa-angle-left pull-right"></i>
         </span>      
@@ -200,7 +200,7 @@
     
     <li class='treeview operations'>
       <a href="#">
-        <i class="fa fa-gears"></i>
+        <i class="fa fa-laptop"></i>
         <span>OPERATIONS</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
