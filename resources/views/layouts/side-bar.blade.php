@@ -16,78 +16,51 @@
     <div class="input-group">
       <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
-            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-            </button>
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
           </span>
     </div>
   </form>
   <!-- /.search form -->
+
   <!-- sidebar menu: : style can be found in sidebar.less -->
   <ul class="sidebar-menu">
     <li class="header">MAIN NAVIGATION</li>
     
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-laptop"></i> <span>SALES</span>
-        <span class="pull-right-container">
-           <i  class="fa fa-angle-left pull-right"></i>
-        </span>      
-      </a> 
-      <ul class="treeview-menu">
-        <li><a href="/"><i class="fa fa-circle-o"></i>Invoice</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>InvoiceReturn</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Consign</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Consign Invoicing/Return</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>DueDate Extension</a></li>
-        <li class='treeview'>
-          <a href="#"><i class="fa fa-circle-o"></i>Credit Line
-            <span class="pull-right-container">
-                 <i  class="fa fa-angle-left pull-right"></i>
-              </span> 
-          </a>
-          <ul class="treeview-menu">
-             <li><a href="/"><i class="fa fa-circle-o"></i>Credit Request</a></li>
-             <li><a href="/"><i class="fa fa-circle-o"></i>Manual Credit</a></li>
-             <li class='treeview'><a href="/"><i class="fa fa-circle-o"></i>Bond
-              <span class="pull-right-container">
-                 <i  class="fa fa-angle-left pull-right"></i>
-              </span> </a>
-                <ul  class="treeview-menu">
-                  <li><a href="/"><i class="fa fa-circle-o"></i>Deposit</a></li>
-                  <li><a href="/"><i class="fa fa-circle-o"></i>Withdraw</a></li>
-                </ul>
-             </li>
-          </ul>
-        </li>
-        
-      </ul>     
-    </li>
     <!-- Sales -->
     <li class="treeview">
       <a href="#">
-        <i class="fa fa-laptop"></i> <span>FINANCIALS</span>  
-        <span class="pull-right-container">
-           <i  class="fa fa-angle-left pull-right"></i>
-        </span>      
+        <i class="fa fa-laptop"></i> <span>Sales</span>
+        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>      
+      </a> 
+      <ul class="treeview-menu">
+        <li><a href="/"><i class="fa fa-circle-o"></i>Invoice</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Invoice Return</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Consign</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Consign Invoicing/Return</a></li>
+      </ul>     
+    </li>
+    <!-- /Sales -->
+
+    <!-- Financials -->
+    <li class="treeview">
+      <a href="#">
+        <i class="fa fa-laptop"></i> <span>Financials</span>  
+        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>      
       </a> 
       <ul class="treeview-menu">
         <li><a href="/"><i class="fa fa-circle-o"></i>Payment</a></li>        
         <li class='treeview'>
           <a href="#"><i class="fa fa-circle-o"></i>Non ARPayment
-            <span class="pull-right-container">
-                 <i  class="fa fa-angle-left pull-right"></i>
-              </span> 
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
             <li><a href="/"><i class="fa fa-circle-o"></i>In</a></li>
             <li><a href="/"><i class="fa fa-circle-o"></i>Out</a></li>
           </ul>
         </li>
-        <li class='treeview'>
+        <li class="treeview">
           <a href="#"><i class="fa fa-circle-o"></i>Memo
-            <span class="pull-right-container">
-                 <i  class="fa fa-angle-left pull-right"></i>
-              </span> 
+            <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span> 
           </a>
           <ul class="treeview-menu">
             <li><a href="/"><i class="fa fa-circle-o"></i>CM</a></li>
@@ -95,33 +68,28 @@
           </ul>
         </li>
         <li class='treeview'>
-          <a href="#"><i class="fa fa-circle-o"></i>Collection Panel
-            <span class="pull-right-container">
-                 <i  class="fa fa-angle-left pull-right"></i>
-              </span> 
+          <a href="#"><i class="fa fa-circle-o"></i>Collection
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
           </a>
           <ul class="treeview-menu">
             <li><a href="/"><i class="fa fa-circle-o"></i>Cash TurnIn</a></li>
-            <li><a href="/"><i class="fa fa-circle-o"></i>Balancing/Bank Deposit</a></li>
+            <li><a href="/"><i class="fa fa-circle-o"></i>Balancing/Deposit</a></li>
           </ul>
         </li>
       </ul>     
     </li>
-    <!-- Financials -->
-    <li class="treeview main-products">
+    <!-- /Financials -->
+
+    <!-- Inventory -->
+    <li class="treeview">
       <a href="#">
-        <i class="fa fa-laptop"></i>
-        <span>INVENTORY</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        <i class="fa fa-laptop"></i><span>Inventory</span>
+        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
-        <li class='treeview'>
+        <li class="treeview">
           <a href="#"><i class="fa fa-circle-o"></i>Purchase Order
-            <span class="pull-right-container">
-                 <i  class="fa fa-angle-left pull-right"></i>
-              </span> 
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
           </a>
           <ul class="treeview-menu">
             <li><a href="/"><i class="fa fa-circle-o"></i>Customer Order</a></li>
@@ -130,9 +98,7 @@
         </li>        
         <li class='treeview'>
           <a href="#"><i class="fa fa-circle-o"></i>StockIn
-            <span class="pull-right-container">
-                 <i  class="fa fa-angle-left pull-right"></i>
-              </span> 
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
           </a>
           <ul class="treeview-menu">
             <li class="stockin"><a href="/stockin"><i class="fa fa-circle-o"></i>Regular</a></li>
@@ -143,49 +109,39 @@
         <li><a href="/transfer"><i class="fa fa-circle-o"></i>InterBranch Transfer</a></li>
         <li class='treeview'>
           <a href="#"><i class="fa fa-circle-o"></i>Stock Adjustment
-            <span class="pull-right-container">
-                 <i  class="fa fa-angle-left pull-right"></i>
-              </span> 
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
           </a>
           <ul class="treeview-menu">
             <li class="stockin"><a href="/"><i class="fa fa-circle-o"></i>In</a></li>
             <li><a href="/"><i class="fa fa-circle-o"></i>Out</a></li>
           </ul>
         </li>
-
         <li><a href="/"><i class="fa fa-circle-o"></i>Daily Cycle Count</a></li>
       </ul> 
     </li>
-    <!-- Inventory -->
-    <li class="treeview record-management">
+    <!-- /Inventory -->
+
+    <!-- Record Management -->
+    <li class="treeview">
       <a href="#">
-        <i class="fa fa-laptop"></i>
-        <span>RECORD MANAGEMENT</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        <i class="fa fa-laptop"></i><span>Record Management</span>
+        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
-        <li class="treeview customer">
-            <a href="/">
-              <i class="fa fa-circle-o"></i>
-              <spa>Customer</spa>
-              <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-              </span>
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-circle-o"></i><span>Customer</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
               <li class="account"><a href="/"><i class="fa fa-circle-o"></i>Account</a></li>
               <li class="discounting"><a href="/discounting"><i class="fa fa-circle-o"></i>Discounting</a></li>
             </ul>
         </li>  
-        <li class="treeview product">
-          <a href="/">
-            <i class="fa fa-circle-o"></i>
-            <spa>Product</spa>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-circle-o"></i><span>Product</span>
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
             <li class='products-regular'><a href="/products-regular"><i class="fa fa-circle-o"></i>Regular</a></li>
@@ -196,44 +152,94 @@
         </li>
       </ul>
     </li>
-    <!-- Record Management -->
-    
-    <li class='treeview operations'>
+    <!-- /Record Management -->
+
+    <!-- Operations -->
+    <li class="treeview">
       <a href="#">
-        <i class="fa fa-laptop"></i>
-        <span>OPERATIONS</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        <i class="fa fa-laptop"></i><span>Operations</span>
+        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
         <li><a href="/"><i class="fa fa-circle-o"></i>Branch</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Approvals</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>DueDate Extension</a></li>
+        <li><a href="#"><i class="fa fa-circle-o"></i>CreditLine Adjustment</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Domain</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Void</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Purchases</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Verifications</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>BackDating</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Edit Record</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Tools</a></li>
-
-        @if(Auth::user()->level_id > 2)  
-        <li class='approvals'><a href="/approvals"><i class="fa fa-circle-o"></i>Approvals</a></li>
-        @else
-        <li class='journals'><a href="/journals"><i class="fa fa-circle-o"></i>Journals</a></li>
-        @endif
-      </ul> 
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-circle-o"></i><span>Void</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/"><i class="fa fa-circle-o"></i>Invoice</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Payment</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Deposit</a></li>
+            </ul>
+        </li>  
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-circle-o"></i><span>Purchases</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/"><i class="fa fa-circle-o"></i>SupplierCM</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Purchase Liquidation</a></li>
+            </ul>
+        </li>  
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-circle-o"></i><span>Audit/Verifications</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/"><i class="fa fa-circle-o"></i>StockIn</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Deposit</a></li>
+            </ul>
+        </li>  
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-circle-o"></i><span>BackDating</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/"><i class="fa fa-circle-o"></i>Invoice</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Payment</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Non-AR Payment</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Deposit</a></li>
+            </ul>
+        </li>  
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-circle-o"></i><span>Modify Transaction Info</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/"><i class="fa fa-circle-o"></i>StockIn</a></li>
+            </ul>
+        </li> 
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-circle-o"></i><span>Tools</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/"><i class="fa fa-circle-o"></i>Export Invoices</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Export Receivables</a></li>
+            </ul>
+        </li> 
+               </ul>
     </li>
-    <!-- Operations -->
-    
-    <li class="treeview reports">
+    <!-- /Operations -->
+    <!-- Reports -->
+    <li class="treeview">
       <a href="#">
-        <i class="fa fa-dashboard"></i> <span>REPORTS</span>
-        <span class="pull-right-container">
-           <i  class="fa fa-angle-left pull-right"></i>
-        </span>      
+        <i class="fa fa-dashboard"></i> <span>Reports</span>
+        <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span>      
       </a> 
       <ul class="treeview-menu">
-        <li><a href="/"><i class="fa fa-circle-o"></i>Journals</a></li>
+        <!-- <li><a href="/"><i class="fa fa-circle-o"></i>Journals</a></li> -->
+        <li class="journals"><a href="/journals"><i class="fa fa-circle-o"></i>Journals</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Account</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Consignments</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Receivables</a></li>
@@ -245,22 +251,18 @@
         <li><a href="/"><i class="fa fa-circle-o"></i>Collection</a></li>
       </ul>     
     </li>
-    <!-- Reports -->
+    <!-- /Reports -->
 
-    <li class="treeview settings">
+    <!-- Settings -->
+    <li class="treeview">
       <a href="#">
-        <i class="fa fa-gears"></i>
-        <span>SETTINGS</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        <i class="fa fa-gears"></i><span>Settings</span>
+        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
-
-        <li class="treeview branches">
+        <li class="treeview">
             <a href="/">
-              <i class="fa fa-circle-o"></i>
-              <spa>Branches</spa>
+              <i class="fa fa-circle-o"></i><span></span>Branches</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -270,20 +272,16 @@
               <li class="branches"><a href="/branches"><i class="fa fa-circle-o"></i>Branches</a></li>
             </ul>
         </li>  
-        <li class="treeview settings-product">
+        <li class="treeview">
             <a href="/">
-              <i class="fa fa-circle-o"></i>
-              <spa>Product</spa>
-              <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-              </span>
+              <i class="fa fa-circle-o"></i><span>Product</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
               <li class="category"><a href="/category"><i class="fa fa-circle-o"></i>Category</a></li>
               <li class="suppliers"><a href="/suppliers"><i class="fa fa-circle-o"></i>Supplier</a></li>
               <li class="product-group"><a href="/product-group"><i class="fa fa-circle-o"></i>Grouping</a></li>
               <li class="product-storage"><a href="/product-storage"><i class="fa fa-circle-o"></i>Storage</a></li>
-
             </ul>
         </li>  
         <li class="acc_levels"><a href="/acc_levels"><i class="fa fa-circle-o"></i>Account Level</a></li>
@@ -292,14 +290,10 @@
         <li><a href="/"><i class="fa fa-circle-o"></i>Terminals</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Cash Denominations</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Security</a></li>
-
-        <li class="treeview settings-domain">
+        <li class="treeview">
             <a href="/">
-              <i class="fa fa-circle-o"></i>
-              <spa>Domain</spa>
-              <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-              </span>
+              <i class="fa fa-circle-o"></i><span>Domain</span>
+              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
               <li><a href="/"><i class="fa fa-circle-o"></i>Logo</a></li>
@@ -314,9 +308,8 @@
         </li>  
       </ul>
     </li>
-    <!-- Settings -->   
-       
+    <!-- /Settings -->         
   </ul>
 </section>
-<!-- /.sidebar -->
+<!-- / sidebar menu -->
 
