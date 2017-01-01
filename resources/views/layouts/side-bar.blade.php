@@ -25,7 +25,6 @@
   <!-- sidebar menu: : style can be found in sidebar.less -->
   <ul class="sidebar-menu">
     <li class="header">MAIN NAVIGATION</li>
-    
     <!-- Sales -->
     <li class="treeview">
       <a href="#">
@@ -40,7 +39,6 @@
       </ul>     
     </li>
     <!-- /Sales -->
-
     <!-- Financials -->
     <li class="treeview">
       <a href="#">
@@ -72,14 +70,13 @@
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
           </a>
           <ul class="treeview-menu">
-            <li><a href="/"><i class="fa fa-circle-o"></i>Cash TurnIn</a></li>
+            <li><a href="/"><i class="fa fa-circle-o"></i>Cash Turn-In</a></li>
             <li><a href="/"><i class="fa fa-circle-o"></i>Balancing/Deposit</a></li>
           </ul>
         </li>
       </ul>     
     </li>
     <!-- /Financials -->
-
     <!-- Inventory -->
     <li class="treeview">
       <a href="#">
@@ -87,13 +84,15 @@
         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
+        <li><a href="/"><i class="fa fa-circle-o"></i>Daily Cycle Count</a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-circle-o"></i>Purchase Order
+          <a href="#"><i class="fa fa-circle-o"></i>Order
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
           </a>
           <ul class="treeview-menu">
             <li><a href="/"><i class="fa fa-circle-o"></i>Customer Order</a></li>
             <li><a href="/"><i class="fa fa-circle-o"></i>Consolidated</a></li>
+            <li><a href="/"><i class="fa fa-circle-o"></i>Fulfillment Manager</a></li>
           </ul>
         </li>        
         <li class='treeview'>
@@ -116,11 +115,10 @@
             <li><a href="/"><i class="fa fa-circle-o"></i>Out</a></li>
           </ul>
         </li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Daily Cycle Count</a></li>
+
       </ul> 
     </li>
     <!-- /Inventory -->
-
     <!-- Record Management -->
     <li class="treeview">
       <a href="#">
@@ -134,7 +132,8 @@
               <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
-              <li class="account"><a href="/"><i class="fa fa-circle-o"></i>Account</a></li>
+              <li><a href="/"><i class="fa fa-circle-o"></i>Customer Info</a></li>
+              <li class="account"><a href="/"><i class="fa fa-circle-o"></i>Account/Registration</a></li>
               <li class="discounting"><a href="/discounting"><i class="fa fa-circle-o"></i>Discounting</a></li>
             </ul>
         </li>  
@@ -153,7 +152,6 @@
       </ul>
     </li>
     <!-- /Record Management -->
-
     <!-- Operations -->
     <li class="treeview">
       <a href="#">
@@ -252,7 +250,6 @@
       </ul>     
     </li>
     <!-- /Reports -->
-
     <!-- Settings -->
     <li class="treeview">
       <a href="#">
