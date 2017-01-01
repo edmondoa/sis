@@ -159,7 +159,7 @@
         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
-        <li class='approvals'><a href="/approvals"><i class="fa fa-circle-o"></i> Approvals</a></li>
+        <li class='approvals'><a href="/approvals"><i class="fa fa-circle-o"></i>Approvals</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Branch</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Domain</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>DueDate Extension</a></li>
