@@ -9,9 +9,9 @@
         Suppliers     
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Settings</li>
-        <li class="active"><i class="fa fa-circle"></i>Supplier</li>
+        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class=""><i class="fa fa-circle"></i>Settings</li>
+        <li class="active"><i class="fa fa-circle"></i>Suppliers</li>
       </ol>
     </section>
 
@@ -33,7 +33,7 @@
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px">#</th>  
-                <th>Supplier</th> 
+                <th>Supplier Name</th> 
                 <th>Contact Person</th>
 
                 <th style="width: 40px">Action</th>

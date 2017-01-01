@@ -48,7 +48,7 @@
       <ul class="treeview-menu">
         <li><a href="/"><i class="fa fa-circle-o"></i>Payment</a></li>        
         <li class='treeview'>
-          <a href="#"><i class="fa fa-circle-o"></i>Non ARPayment
+          <a href="#"><i class="fa fa-circle-o"></i>Non-AR Payment
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
@@ -61,8 +61,8 @@
             <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span> 
           </a>
           <ul class="treeview-menu">
-            <li><a href="/"><i class="fa fa-circle-o"></i>CM</a></li>
-            <li><a href="/"><i class="fa fa-circle-o"></i>DM</a></li>
+            <li><a href="/"><i class="fa fa-circle-o"></i>Credit (CM)</a></li>
+            <li><a href="/"><i class="fa fa-circle-o"></i>Debit (DM)</a></li>
           </ul>
         </li>
         <li class='treeview'>
@@ -236,13 +236,13 @@
         <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span>      
       </a> 
       <ul class="treeview-menu">
-        <!-- <li><a href="/"><i class="fa fa-circle-o"></i>Journals</a></li> -->
         <li class="journals"><a href="/journals"><i class="fa fa-circle-o"></i>Journals</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Account</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Non-AR Payments</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Customer/Account</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Consignments</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Receivables</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Sales Performance</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Product</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Products</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Management Reports</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Invoices</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Purchases</a></li>
@@ -257,6 +257,7 @@
         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
+        <li><a href="/"><i class="fa fa-circle-o"></i>Security</a></li>
         <li class="treeview">
             <a href="/">
               <i class="fa fa-circle-o"></i><span></span>Branches</span>
@@ -282,11 +283,10 @@
             </ul>
         </li>  
         <li class="acc_levels"><a href="/acc_levels"><i class="fa fa-circle-o"></i>Account Level</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>BankAccounts</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Holidays</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Terminals</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Bank Account</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Holiday</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Terminal</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Cash Denominations</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Security</a></li>
         <li class="treeview">
             <a href="/">
               <i class="fa fa-circle-o"></i><span>Domain</span>
@@ -309,4 +309,3 @@
   </ul>
 </section>
 <!-- / sidebar menu -->
-

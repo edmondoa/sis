@@ -1,6 +1,6 @@
 <div class="box box-info">
   <div class="box-header with-border">
-    <h3 class="box-title">Add Supplier</h3>
+    <h3 class="box-title">New Supplier</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
@@ -8,9 +8,9 @@
     <div class="box-body">
       <div class="col-md-12">
         <div class="form-group ">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Supplier</label>
+          <label for="inputEmail3"  class="col-sm-3 control-label">Supplier Name</label>
           <div class="col-sm-9">                  
-            <input type="text" class="form-control"  ng-model='supplier.supplier_name' placeholder="Supplier">
+            <input type="text" class="form-control"  ng-model='supplier.supplier_name' placeholder="Supplier Name">
           </div>  
         </div>
         <div class="form-group">

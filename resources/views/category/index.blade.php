@@ -11,9 +11,9 @@
         Categories     
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Settings</li>
-        <li class="active"><i class="fa fa-circle"></i> Category</li>
+        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class=""><i class="fa fa-circle"></i>Settings</li>
+        <li class="active"><i class="fa fa-circle"></i>Category</li>
       </ol>
     </section>
 
@@ -22,14 +22,14 @@
       <div class='col-md-5'>
         <div class="box box-info">
           <div class="box-header with-border">
-            <h3 class="box-title">Add Category</h3>
+            <h3 class="box-title">New Category</h3>
           </div>
           <!-- /.box-header -->
           <!-- form start -->
           <form class="form-horizontal">
             <div class="box-body">
               <div class="form-group">
-                <label for="inputEmail3"  class="col-sm-4 control-label">Name</label>
+                <label for="inputEmail3"  class="col-sm-4 control-label">Category Name</label>
                   <div class="col-sm-8">                  
                     <input type='text' ng-model="category.category_name" class='form-control category_name' placeholder="Category Name"/>
                  </div>         
@@ -83,7 +83,7 @@
                 <th style="width: 10px">#</th>                
                 <th>Category Name</th>
                 <th>Category Code</th>
-                <th>Suppliers</th>
+                <th>No. Of Suppliers</th>
                 <th style="width: 40px">Action</th>
               </tr>
               <tbody>

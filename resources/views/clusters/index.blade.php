@@ -60,7 +60,7 @@
               <tr>
                 <th style="width: 10px">#</th>                
                 <th>Cluster Name</th>
-                <th>No. of Branch</th>
+                <th>No. Of Branches</th>
                 <th style="width: 40px">Action</th>
               </tr>
               <tbody>
