@@ -4,12 +4,12 @@
     
     <section class="content-header">
       <h1>
-        Product Group    
+        Product Groups    
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Settings</li>
-        <li class="active"><i class="fa fa-circle"></i> Product Group</li>
+        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class=""><i class="fa fa-circle"></i>Settings</li>
+        <li class="active"><i class="fa fa-circle"></i>Product Groups</li>
       </ol>
     </section>
 

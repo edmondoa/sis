@@ -4,12 +4,12 @@
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
       <h1>
-        Product Storage    
+        Product Storages   
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Settings</li>
-        <li class="active"><i class="fa fa-circle"></i> Product Storage</li>
+        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class=""><i class="fa fa-circle"></i>Settings</li>
+        <li class="active"><i class="fa fa-circle"></i>Product Storages</li>
       </ol>
     </section>
 
@@ -77,7 +77,7 @@
     id = $(this).data('id');
     $.get( "product-storage/"+id+"/edit", function( data ) {
       var dialog = bootbox.dialog({
-          title: 'Edit Storage',
+          title: 'Edit Product Storage',
           message: data,
           buttons: {
             confirm: {

@@ -272,20 +272,20 @@
         </li>  
         <li class="treeview">
             <a href="/">
-              <i class="fa fa-circle-o"></i><span>Product</span>
+              <i class="fa fa-circle-o"></i><span>Products</span>
               <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
-              <li class="category"><a href="/category"><i class="fa fa-circle-o"></i>Category</a></li>
-              <li class="suppliers"><a href="/suppliers"><i class="fa fa-circle-o"></i>Supplier</a></li>
-              <li class="product-group"><a href="/product-group"><i class="fa fa-circle-o"></i>Grouping</a></li>
-              <li class="product-storage"><a href="/product-storage"><i class="fa fa-circle-o"></i>Storage</a></li>
+              <li class="category"><a href="/category"><i class="fa fa-circle-o"></i>Categories</a></li>
+              <li class="suppliers"><a href="/suppliers"><i class="fa fa-circle-o"></i>Suppliers</a></li>
+              <li class="product-group"><a href="/product-group"><i class="fa fa-circle-o"></i>Groups</a></li>
+              <li class="product-storage"><a href="/product-storage"><i class="fa fa-circle-o"></i>Storages</a></li>
             </ul>
         </li>  
         <li class="acc_levels"><a href="/acc_levels"><i class="fa fa-circle-o"></i>Account Level</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Bank Account</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Holiday</a></li>
-        <li><a href="/"><i class="fa fa-circle-o"></i>Terminal</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Bank Accounts</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Holidays</a></li>
+        <li><a href="/"><i class="fa fa-circle-o"></i>Terminals</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Cash Denominations</a></li>
         <li class="treeview">
             <a href="/">

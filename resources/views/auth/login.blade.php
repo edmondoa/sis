@@ -32,7 +32,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>SiS</b></a>
+    <a href="../../index2.html"><b>Welcome to SIS</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -41,13 +41,13 @@
     <form action="login" method="post">
         
       <div class="form-group has-feedback domain_div ">
-        <label>Domain Id</label>
-        <input type="text" class="form-control " name='domain' placeholder="Domain Id">
+        <label>Domain ID</label>
+        <input type="text" class="form-control " name='domain' placeholder="Domain ID">
         <span class="glyphicon glyphicon-star form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <label>Username</label>
-        <input type="text" class="form-control" name='username' placeholder="Email">
+        <label>UserName</label>
+        <input type="text" class="form-control" name='username' placeholder="UserName">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

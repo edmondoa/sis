@@ -35,9 +35,9 @@
                  </div>         
               </div> 
               <div class="form-group">
-                <label for="inputEmail3"  class="col-sm-4 control-label">Catergory Code</label>
+                <label for="inputEmail3"  class="col-sm-4 control-label">Category Code</label>
                   <div class="col-sm-8">                  
-                    <input type='text' ng-model="category.category_code" class='form-control category_name' placeholder="Category Name"/>
+                    <input type='text' ng-model="category.category_code" class='form-control category_name' placeholder="Category Code"/>
                  </div>         
               </div> 
               <div class="form-group">

@@ -6,9 +6,9 @@
         Account Level     
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Settings</li>
-        <li class="active"><i class="fa fa-circle"></i> Account Level</li>
+        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class=""><i class="fa fa-circle"></i>Settings</li>
+        <li class="active"><i class="fa fa-circle"></i>Account Level</li>
       </ol>
     </section>
 
@@ -17,7 +17,7 @@
       <div class='col-md-5'>
         <div class="box box-info">
           <div class="box-header with-border">
-            <h3 class="box-title">Add Account Level</h3>
+            <h3 class="box-title">New Account Level</h3>
           </div>
           <!-- /.box-header -->
           <!-- form start -->
@@ -27,14 +27,14 @@
                 <label for="inputEmail3"  class="col-sm-3 control-label">Level Name</label>
 
                 <div class="col-sm-9">                  
-                  <input type='text' ng-model='acc_level.level_name' class='form-control'/>               
+                  <input type='text' ng-model='acc_level.level_name' class='form-control' placeholder="Level Name"/>               
                 </div>                 
               </div>
               <div class="form-group">
                 <label for="inputEmail3"  class="col-sm-3 control-label">Credit Days</label>
 
                 <div class="col-sm-9">                  
-                  <input type='text' ng-model='acc_level.credit_days' class='form-control'/>               
+                  <input type='text' ng-model='acc_level.credit_days' class='form-control' placeholder="0"/>               
                 </div>                 
               </div>                  
             </div>
@@ -98,7 +98,7 @@
     id = $(this).data('id');
     $.get( "acc_levels/"+id+"/edit", function( data ) {
       var dialog = bootbox.dialog({
-          title: 'Edit Level',
+          title: 'Edit Acount Level',
           message: data,
           buttons: {
             confirm: {

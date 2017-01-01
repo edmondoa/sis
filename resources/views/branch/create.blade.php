@@ -8,19 +8,19 @@
     <div class="box-body">
       <div class="col-md-12">
         <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Branch Name</label>
+          <label for="inputEmail3" class="col-sm-3 control-label">Branch Name</label>
           <div class="col-sm-9">
             <input type="text" class="form-control"  ng-model='branch.branch_name' placeholder="Branch Name">
           </div>
         </div> 
         <div class="form-group ">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Business Name</label>
+          <label for="inputEmail3" class="col-sm-3 control-label">Business Name</label>
           <div class="col-sm-9">
             <input type="text" class="form-control"  ng-model='branch.business_name' placeholder="Business Name">
           </div>
         </div>       
         <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Cluster</label>
+          <label for="inputEmail3" class="col-sm-3 control-label">Cluster</label>
           <div class="col-sm-9">
             <select class="form-control select2 cluster_name"ng-model='branch.cluster_id' >
               @foreach($clusters as $cluster)
@@ -30,13 +30,13 @@
           </div>
         </div> 
         <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Addressline1</label>
+          <label for="inputEmail3" class="col-sm-3 control-label">Addressline1</label>
           <div class="col-sm-9">
-            <textarea class="form-control"  ng-model='branch.addressline1'></textarea>
+            <textarea class="form-control" ng-model='branch.addressline1'></textarea>
           </div>
         </div> 
         <div class="form-group">
-          <label for="inputEmail3"  class="col-sm-3 control-label">Addressline2</label>
+          <label for="inputEmail3" class="col-sm-3 control-label">Addressline2</label>
           <div class="col-sm-9">
             <textarea class="form-control"  ng-model='branch.addressline2'></textarea>
           </div>
