@@ -6,6 +6,7 @@ use App\models\ProductGroup;
 use Illuminate\Http\Request;
 use App\Libraries\Model;
 use App\Http\Requests;
+use App\Libraries\Core;
 use Validator;
 use Response;
 class ProductGroupController extends Controller
