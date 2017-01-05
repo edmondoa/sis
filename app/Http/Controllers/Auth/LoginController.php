@@ -66,7 +66,11 @@ class LoginController extends Controller
                 return Redirect::back()->withErrors(['Domain database not yet ready!']);
 
             if($domain_exist->lock==1)
-                return Redirect::back()->withErrors(['Domain had been administratively locked!']);
+                return Redirect::back()->withErrors(['Domain had been locked by owner!']);
+
+            if($domain_exist->suspended==1)
+                return Redirect::back()->withErrors(['Domain had been administratively suspended!']);
+
             
             Session::put('dbname',$domain_exist->dbname);
             Core::setConnection();
