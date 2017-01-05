@@ -63,7 +63,10 @@ class LoginController extends Controller
         if($domain_exist)
         {
             if($domain_exist->db_populated==0)
-                return Redirect::back()->withErrors(['Finance concern']);
+                return Redirect::back()->withErrors(['Domain database not yet ready!']);
+
+            if($domain_exist->lock==1)
+                return Redirect::back()->withErrors(['Domain had been administratively locked!']);
             
             Session::put('dbname',$domain_exist->dbname);
             Core::setConnection();
@@ -78,7 +81,7 @@ class LoginController extends Controller
                 return Redirect::back()->withErrors(['Invalid user!']);
             }   
         }else{
-            return Redirect::back()->withErrors(['Domain does not exist']);
+            return Redirect::back()->withErrors(['Domain ID does not exist!']);
         }
           
         
