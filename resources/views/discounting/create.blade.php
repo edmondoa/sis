@@ -30,13 +30,13 @@
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Cash</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='discount.cash' placeholder="100.00">
+            <input type="text" class="form-control"  ng-model='discount.cash' placeholder="0.00">
           </div>
         </div> 
         <div class="form-group">
           <label for="inputEmail3"  class="col-sm-3 control-label">Credit</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"  ng-model='discount.credit' placeholder="100.00">
+            <input type="text" class="form-control"  ng-model='discount.credit' placeholder="0.00">
           </div>
         </div>
         <div class="form-group">
