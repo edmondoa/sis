@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Libraries\Core;
 use App\Models\Branch;
 use App\Models\Transfer;
-use App\Models\Stockout;
+use App\Models\StockOut;
 use App\Models\TransferItem;
 use App\Http\Requests;
 use Auth;
@@ -59,7 +59,7 @@ class TransferController extends Controller
      public function saveItems(Request $req)
     {
     	Core::setConnection();
-    	
+
         $available = StockOut::available($req->id,$req->branch_id);
     	if($available <= 0)
     	{
