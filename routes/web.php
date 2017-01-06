@@ -63,6 +63,11 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('stockout-float','StockOutController@stockoutFloat');
 	Route::resource('stockout','StockOutController');
 
+	Route::post('transfer/items','TransferController@saveItems');
+	Route::get('transfer/search','TransferController@search');
+	Route::post('transfer/multi_search','TransferController@postSearch');
+	Route::get('transfer/ng-transfer-list','TransferController@transferList');	
+	Route::post('transfer-float','TransferController@transferFloat');
 	Route::resource('transfer','TransferController');
 
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
@@ -81,6 +86,7 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('journals/ng-journal-list','JournalController@journal_list');
 	Route::resource('journals','JournalController');
+
 
 	Route::get('header/task','HeaderController@task');
 });

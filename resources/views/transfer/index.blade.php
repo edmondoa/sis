@@ -14,26 +14,154 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="stockinCtrl">
-      <a href="#" class='hide refresh' ng-click="getStockins()"></a>
+    <section class="content" ng-controller="transferCtrl">
+      <a href="#" class='hide refresh' ng-click="getTransfer()"></a>
       @include('transfer.create')
     </section>  
       <!-- /.row (main row) -->
 @stop
 @section('html_footer')
 @parent
-<script src="/angular/controllers/stockin.js"></script>
+<script src="/angular/controllers/transfer.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
-
+  $(document).ready(function(){
+    $("li.inventory").addClass('active');
+    $("li.interbranch-transfer").addClass('active');
+    branch1 = $("#branch_id_from").val();  
+    $("#branch_id_to option[value='"+branch1+"']").attr("disabled","disabled");
+    $("#branch_id_to").prop("selectedIndex",-1)
+  }); 
  
   $(function(){
     $(".select2").select2();
 
   })
+  $(document).on("click",'.search-prod',function(e){
+    e.preventDefault();   
+    
+    $.get( "transfer/search", function( data ) {
+      var dialog = bootbox.dialog({
+          title: 'Search Products',
+          message: data,
+          buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success',
+                callback:function(){
+                  
+                  var row = $("#product-search table#products tr.selected");
+                  console.log(row);
+                  $("#code").text(row.data('catcode'));
+                  $("#name").text(row.data('prodname'));
+                  $("#cprice").val(row.data('costprice'));
+                  $("#price-text").text(row.data('costprice'));
+                  $("#qty").val(1);
+                  $("#prod_id").val(row.data('prod_id'));
+                   $("#available").text(row.data('available'));
+                  $("#qty").focus();
+                  bootbox.hideAll();
+                  return false;
+                }
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+      });
+          
+    });
+  });
+ $(document).on('change','.searchStr',function(e){
+    Stockin().search($(this).val());
+  })
+  $(document).on('click','#product-search table#products tr',function(){
+    cls = $(this).attr('class');     
+    $("#product-search table#products tr").not('.'+cls).css('background-color','#fff !important');
+    $("#product-search table#products tr").not('.'+cls).removeClass('selected');
+    $(this).css('background-color','antiquewhite');
+    $(this).addClass('selected');
+    
+  })
+  $(".calendar").datepicker({autoclose:true});
+  $(document).on('click','.btn-add',function(e){
+    e.preventDefault();  
+     if($("#locked").val()==0){  
+      var param = {
+                  id:$("#prod_id").val(),
+                  transfer_id:$("#transfer_id").val(),
+                  branch_id:$("#branch_id_from").val(),
+                  qty:$("#qty").val(),
+                  available:$("#available").text(),
+                  costprice:$("#cprice").val()};
+      $.post("transfer/items",param, function( data ) { 
+      if(!data.status)
+      {
+        message(data);
+      } else{   
+        message(data);
+        $("#code").text('');
+        $("#name").text('');
+        $("#available").text('');
+         $("#price-text").text('');
+        $("#cprice").val('');
+         $("#locked").val('');
+        $("#qty").val('');
+        $("#prod_id").val('');
+        $("#search").val('');
+        $("#search").focus();
+        $(".refresh").trigger('click');
+      }  
+      });
+    }else{
+      bootbox.alert({message:"Product is locked!", size: 'small'});
+    }
 
- 
+  });
+  
+  function Stockin()
+  {
+    
+    this.search = function(param){
+      var pass_param = {str:param,branch_id:$("#branch_id_from").val()};
+      console.log(pass_param);
+      $.post('transfer/multi_search',pass_param,function(data){
+        if(data.status)
+        {
+          var strBuilder ="";
+          for(i=0; i<data.products.length; i++)
+          {
+            strBuilder += "<tr class='"+data.products[i].product_id+"'"+
+                          "data-prod_id ='"+data.products[i].product_id+"'"+
+                          "data-prodcode ='"+data.products[i].product_code+"'"+
+                          "data-catcode ='"+data.products[i].category_code+"'"+
+                          "data-prodname ='"+data.products[i].product_name+"'"+
+                          "data-available ='"+data.products[i].available+"'"+
+                          "data-barcode ='"+data.products[i].barcode+"'"+
+                          "data-costprice ='"+data.products[i].cost_price+"'>";          
+            strBuilder += "<td>"+data.products[i].category_code+"</td>";
+            strBuilder += "<td>"+data.products[i].product_code+"</td>";
+            strBuilder += "<td>"+data.products[i].product_name+"</td>";
+            strBuilder += "<td>"+data.products[i].barcode+"</td>";
+            strBuilder += "<td>"+data.products[i].available+"</td>";
+            strBuilder += "<td>"+data.products[i].cost_price+"</td>";
+            strBuilder += "</tr>";
+
+          }
+          $("#products tbody").html(strBuilder);
+        }else
+        {
+          var strBuilder ="";
+          $("#products tbody").html(strBuilder);
+          bootbox.alert({message:"Product not found!", size: 'small'});
+        }
+               
+      });
+    }
+    return this;
+  }
 </script>
 
 

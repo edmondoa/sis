@@ -78,7 +78,7 @@
     </li>
     <!-- /Financials -->
     <!-- Inventory -->
-    <li class="treeview">
+    <li class="treeview inventory">
       <a href="#">
         <i class="fa fa-laptop"></i><span>Inventory</span>
         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -105,7 +105,7 @@
           </ul>
         </li>
         <li><a href="/stockout"><i class="fa fa-circle-o"></i>Stockout</a></li>
-        <li><a href="/transfer"><i class="fa fa-circle-o"></i>InterBranch Transfer</a></li>
+        <li class="interbranch-transfer"><a href="/transfer"><i class="fa fa-circle-o"></i>InterBranch Transfer</a></li>
         <li class='treeview'>
           <a href="#"><i class="fa fa-circle-o"></i>Stock Adjustment
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 

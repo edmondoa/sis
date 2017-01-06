@@ -8,13 +8,13 @@
     </div> 
         
     <form class='form-horizontal'>
-      <input type="hidden" id="stockout_id" />
+      <input type="hidden" id="transfer_id" />
       @if(Auth::user()->level_id > 2) 
       <div class="form-group ">
         <label for="inputEmail3"  class="col-sm-4 control-label">From Branch</label>
          
         <div class="col-sm-7">
-          <select class="form-control select2 stock "  id="branch_id" tabindex="1">
+          <select class="form-control select2 stock "  id="branch_id_from" tabindex="1">
               <option value="">Select Branch</option>
               @foreach($branches as $branch)
                 <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
@@ -29,7 +29,7 @@
           <div class="col-sm-7">
 
             <label class='form-control'>{{Auth::user()->branch->branch_name}}</label>      
-            <input type='hidden' name='branch_id' id="branch_id"  value="{{Auth::user()->branch_id}}"/>
+            <input type='hidden' name='branch_id' id="branch_id_from"  value="{{Auth::user()->branch_id}}"/>
           </div>        
         </div>
       @endif
@@ -37,7 +37,7 @@
         <label for="inputEmail3"  class="col-sm-4 control-label">To Branch</label>
          
         <div class="col-sm-7">
-          <select class="form-control select2 stock "  id="branch_id" tabindex="1">
+          <select class="form-control select2 stock "  id="branch_id_to" tabindex="1">
               <option value="">Select Branch</option>
               @foreach($branches as $branch)
                 <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
@@ -50,7 +50,7 @@
         
       <div class='col-sm-2'></div>
       <div class="col-sm-10" > 
-        <a href="javascript:void(0)" class='btn btn-primary  ' ng-click="saveStockin()" style="width:100%" tabindex="7"> Proceed</a>
+        <a href="javascript:void(0)" class='btn btn-primary  ' ng-click="saveTranser()" style="width:100%" tabindex="7"> Proceed</a>
       </div>
     </form>  
   </fieldset>

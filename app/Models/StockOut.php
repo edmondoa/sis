@@ -34,7 +34,7 @@ class StockOut extends Model
     
     public static function onhand($prod_id,$branch)
     {
-    	$available = DB::select("SELECT qty FROM view_product_onhand_per_branch
+    	$available = DB::select("SELECT qty FROM view_product_onhand
         				WHERE product_id = $prod_id AND branch_id = $branch");
     	
     	if(!is_null($available[0]->qty))
@@ -43,17 +43,7 @@ class StockOut extends Model
     	return 0;
     }
 
-    public static function book($prod_id,$branch)
-    {
-    	$book = DB::select("SELECT SUM(pbi.quantity) AS qty FROM `product_book_item` pbi
-							LEFT JOIN `product_book` pb ON pbi.product_book_id = pb.product_book_id
-							WHERE pbi.product_id =$prod_id AND pb.branch_id = $branch");
-    	
-    	if(!is_null($book[0]->qty))
-    		return $book[0]->qty;
-
-    	return 0;
-    }
+    
 
     public static function stockout($prod_id,$branch)
     {
@@ -93,12 +83,11 @@ class StockOut extends Model
 
     public static function available($prod_id,$branch)
     {
-    	$onhand = self::onhand($prod_id,$branch);
-        $book  = self::book($prod_id,$branch);
+    	$onhand = self::onhand($prod_id,$branch);      
         $stockout = self::stockout($prod_id,$branch);
         $transfer = self::transfer($prod_id,$branch);
         $adjust_out = self::adjust_out($prod_id,$branch);
-        return ($onhand - ($book + $stockout + $transfer + $adjust_out));
+        return ($onhand - ( $stockout + $transfer + $adjust_out));
     }	
 
     public function approval()
