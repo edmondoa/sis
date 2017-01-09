@@ -120,6 +120,82 @@
     }
 
   });
+  $(document).on('change','#search',function(e){
+    e.preventDefault();     
+    searchStr = $(this).val();
+     var pass_param = {str:searchStr,branch_id:$("#branch_id_from").val()};
+    if(searchStr=='')
+      searchStr ='_blank';
+     console.log(pass_param);
+    $.post("transfer/singleSearch",pass_param, function( data ) {
+      if(data.status)
+      {
+        console.log(data.products);
+        $("#locked").val(data.products[0].lock);
+        $("#code").text(data.products[0].category_code);
+        $("#name").text(data.products[0].product_name);
+        $("#cprice").val(data.products[0].cost_price);
+        $("#available").text(data.products[0].available);
+        $("#qty").val(1);
+        $("#prod_id").val(data.products[0].product_id);
+        $("#qty").focus();
+      }
+      else{
+        $("#code").text('');
+        $("#name").text('');
+        $("#cprice").val('');
+        $("#qty").val('');
+         $("#locked").val('');
+        $("#prod_id").val('');
+        $("#search").val('');
+        
+        bootbox.alert({message:"Product not found!",
+                       size: 'small'
+            });
+         $("#search").focus();
+      }
+       
+    });
+  });
+
+  $(document).on('keypress','#qty',function(e){
+   
+    if(e.which==13){
+       if($("#locked").val()==0){  
+      var param = {
+                  id:$("#prod_id").val(),
+                  stockout_id:$("#stockout_id").val(),
+                  branch_id:$("#branch_id").val(),
+                  qty:$("#qty").val(),
+                  available:$("#available").text(),
+                  costprice:$("#cprice").val()};
+      $.post("stockout-float/items",param, function( data ) { 
+      if(!data.status)
+      {
+        message(data);
+      } else{   
+        message(data);
+        $("#code").text('');
+        $("#name").text('');
+        $("#available").text('');
+         $("#price-text").text('');
+        $("#cprice").val('');
+         $("#locked").val('');
+        $("#qty").val('');
+        $("#prod_id").val('');
+        $("#search").val('');
+        $("#search").focus();
+        $(".refresh").trigger('click');
+      }  
+      });
+    }else{
+      bootbox.alert({message:"Product is locked!", size: 'small'});
+    }
+      
+      
+     }
+    
+  });
   
   function Stockin()
   {

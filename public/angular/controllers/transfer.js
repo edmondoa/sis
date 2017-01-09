@@ -36,7 +36,7 @@
               $("#stockitem-div").attr('disabled',true);
            }
 
-           // $scope.total(data.prodlist);
+            $scope.total(data.products);
                               
            // console.log($scope.stockin);
           });
@@ -104,7 +104,7 @@
         })
       }
 
-      $scope.removeItem = function(index)
+      $scope.removeItem = function(model)
       {
         bootbox.confirm({
           title: "Remove Item",
@@ -123,10 +123,10 @@
           callback: function (result) {
               if(result)
               {
-                 $http.post('/stockin-items-remove/'+index)
+                 $http.post('transfer-items-remove/'+model.transfer_item_id)
                   .success(function(data) {
                     $scope.message(data);
-                    $scope.getStockins();
+                    $scope.getTransfer();
                   });
               }
           }

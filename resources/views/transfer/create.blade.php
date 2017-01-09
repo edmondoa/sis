@@ -101,7 +101,7 @@
         <th class='col-sm-1'></th>
     	</thead>
     	<tbody>
-    		<tr ng-repeat="stock in stockins" id="@{{$index}}">
+    		<tr ng-repeat="stock in products" id="@{{$index}}">
     			<td ng-bind="stock.product_code"></td>
       		<td ng-bind="stock.product_name"></td>
       		<td ng-bind="stock.cost_price"></td>                        

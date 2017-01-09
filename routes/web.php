@@ -63,6 +63,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('stockout-float','StockOutController@stockoutFloat');
 	Route::resource('stockout','StockOutController');
 
+	Route::post("transfer-items-remove/{id}",'TransferController@removeItems');
+	Route::post('transfer/singleSearch','TransferController@postSingleSearch');
 	Route::post('transfer/items','TransferController@saveItems');
 	Route::get('transfer/search','TransferController@search');
 	Route::post('transfer/multi_search','TransferController@postSearch');

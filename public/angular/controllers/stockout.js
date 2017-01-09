@@ -117,7 +117,7 @@
           callback: function (result) {
               if(result)
               {
-                 $http.post('/stockout-items-remove',model)
+                 $http.post('stockout-items-remove',model)
                   .success(function(data) {
                     $scope.message(data);
                     $scope.getStockins();

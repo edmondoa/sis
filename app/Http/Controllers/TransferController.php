@@ -50,7 +50,7 @@ class TransferController extends Controller
     						->where('status','ONGOING')
     						->orderBy('transfer_id', 'desc')->first();
     					
-    	
+    
     	$jdata['prodlist'] = (!is_null($transfer->items)) ? $transfer->items : [];;
 
     	$jdata['transfer'] = (!is_null($transfer)) ? $transfer : [];;
@@ -125,5 +125,55 @@ class TransferController extends Controller
             return Response::json(['status'=>true,'products'=>$products]);
         }
         return Response::json(['status'=>false,'products'=>[]]); 
+    }
+
+    public function postSingleSearch(Request $req)
+    {
+        Core::setConnection();       
+        $branch = $req->branch_id;
+
+        $search = trim($req->str);
+        
+       
+        $sql = "
+                SELECT distinct(p.product_id) as pid,p.*,c.category_code FROM product p
+                LEFT JOIN category c ON p.category_id = c.category_id
+                LEFT JOIN supplier_category sc ON c.category_id = sc.category_id
+                WHERE
+                (product_code = '".$search."' OR 
+                  barcode = '".$search."')  AND p.suspended = 0  AND
+                p.product_id IN (
+                    SELECT DISTINCT(product_id) FROM stockin_item si
+                    LEFT JOIN `stockin` s ON si.stockin_id = s.stockin_id
+                    WHERE s.branch_id = $branch 
+                ) ";        
+        
+        $products = DB::select($sql);
+
+       
+        $products = array_map(function($product) use($branch){
+                return [
+                'available' =>StockOut::available($product->product_id,$branch),
+                'product_id' => $product->product_id,
+                'product_code' =>$product->product_code,
+                'category_code' =>$product->category_code,
+                'product_name'  =>$product->product_name,
+                'barcode'  =>$product->barcode,
+                'cost_price' =>$product->cost_price,
+            ];
+        }, $products );
+        if(count($products) > 0){            
+            return Response::json(['status'=>true,'products'=>$products]);
+        }
+        return Response::json(['status'=>false,'products'=>[]]);
+    }
+
+    public function removeItems($id)
+    {
+        Core::setConnection();
+        $item = TransferItem::where('transfer_item_id',$id)                          
+                            ->delete();
+        return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
+                        
     }
 }
