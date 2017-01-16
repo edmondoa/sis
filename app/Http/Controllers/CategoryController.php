@@ -9,12 +9,15 @@ use App\Http\Requests;
 use Validator;
 use Response;
 use DB;
+use Redirect;
 class CategoryController extends Controller
 {
     
     public function index()
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $sys_category = DB::connection('mysql')
                         ->table('category')->get();
         return view('category.index',compact('sys_category'));
@@ -22,7 +25,9 @@ class CategoryController extends Controller
 
     public function store(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $validate = Validator::make($req->all(), Category::$rules);
         if($validate->fails())
         {
@@ -37,14 +42,18 @@ class CategoryController extends Controller
 
     public function category_list()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $list = Category::get();
     	return $list;
     }
 
     public function edit($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $sys_category = DB::connection('mysql')
                         ->table('category')->get();
         $category = Category::find($id);
@@ -53,7 +62,9 @@ class CategoryController extends Controller
 
      public function update(Request $request,$id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

@@ -15,12 +15,15 @@ use Response;
 use DB;
 use Auth;
 use Session;
+use Redirect;
 class ProductController extends Controller
 {
     
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $category = Category::get();
         $discount = Discount::with('account_level')->get();
         $groups = ProductGroup::get();
@@ -29,7 +32,9 @@ class ProductController extends Controller
 
     public function store(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $inputs = $req->all();
     	$inputs['post_date'] = date('Y-m-d');
         $inputs['user_id'] = Auth::user()->user_id;
@@ -48,13 +53,17 @@ class ProductController extends Controller
 
     public function product_list()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         return Product::with('category')->get();
     }
 
      public function edit($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $category = Category::get();
         $discount = Discount::with('account_level')->get();
         $groups = ProductGroup::get();
@@ -64,7 +73,9 @@ class ProductController extends Controller
 
     public function update(Request $request,$id)
     {
-       Core::setConnection();
+       if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         
@@ -104,7 +115,9 @@ class ProductController extends Controller
 
     public function search($sup,$search=NULL)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         if ($search =='_blank') $search ="";
         $sql = "SELECT p.*,c.category_code FROM product p
                 LEFT JOIN category c ON p.category_id = c.category_id
@@ -120,7 +133,9 @@ class ProductController extends Controller
 
     public function multi_search(Request $req)
     {
-       Core::setConnection();
+       if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $sup = $req->supplier_id;
         $search = $req->str;
         if($search =='%')

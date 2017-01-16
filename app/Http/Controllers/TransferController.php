@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Libraries\Core;
 use App\Models\Branch;
 use App\Models\Transfer;
+use App\Models\Setting;
 use App\Models\StockOut;
 use App\Models\TransferItem;
 use App\Http\Requests;
@@ -14,18 +15,24 @@ use Validator;
 use Response;
 use Session;
 use DB;
+use Redirect;
 class TransferController extends Controller
 {
     public function index()
     {
-    	Core::setConnection();
+    	
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }       
         $branches = Branch::get();
     	return view('transfer.index',compact('branches'));
     }
 
     public function transferFloat(Request $req)
     {
-    	Core::setConnection();	
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
     	$input = $req->all();	
     	$input['status'] = 'ONGOING';
     	$input['user_id'] = Auth::user()->user_id;
@@ -45,7 +52,9 @@ class TransferController extends Controller
 
     public function transferList()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $transfer = Transfer::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->orderBy('transfer_id', 'desc')->first();
@@ -58,7 +67,9 @@ class TransferController extends Controller
     }
      public function saveItems(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
 
         $available = StockOut::available($req->id,$req->branch_id);
     	if($available <= 0)
@@ -80,14 +91,56 @@ class TransferController extends Controller
         return Response::json(['status' => false, 'message' =>["Error"]]);
     }
 
+    public function save()
+    {
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
+        $transfer = Transfer::with('items')->where('user_id',Auth::user()->user_id)
+                            ->where('status','ONGOING')
+                            ->first();
+        $transfer->status = "PENDING";
+        $transfer->encode_date = date("Y-m-d");    
+        $transfer->save();
+        $post_date = Setting::first()->pluck('post_date')[0];
+        $transfer->approval()->create([
+                            'status' => 'PENDING',
+                            'user_id' => Auth::user()->user_id,
+                            'post_date' => $post_date,
+                            'branch_id' => $transfer->orig_branch_id,
+                            'approval_type_id' =>3
+                            ]);
+        Session::forget('prodlist');
+        Session::forget('transfer');
+        return Response::json(['status'=>true,'message' => "Successfuly save!"]);
+    }
+
+    public function cancel()
+    {
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
+        $transfer = Transfer::with('items')->where('user_id',Auth::user()->user_id)
+                            ->where('status','ONGOING')
+                            ->first();
+        $transfer->items()->delete();
+        $transfer->delete(); 
+        return Response::json(['status'=>true,'message' => "Successfuly remove!"]);                   
+    }
+
     public function search()
     {
-    	 $src ="transfer";
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
+    	$src ="transfer";
         return view('products.search',compact('src'));
     }
     public function postSearch(Request $req)
     {
-    	Core::setConnection();       
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
     	$branch = $req->branch_id;
 
         $search = $req->str;
@@ -129,7 +182,9 @@ class TransferController extends Controller
 
     public function postSingleSearch(Request $req)
     {
-        Core::setConnection();       
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }  
         $branch = $req->branch_id;
 
         $search = trim($req->str);
@@ -170,7 +225,9 @@ class TransferController extends Controller
 
     public function removeItems($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $item = TransferItem::where('transfer_item_id',$id)                          
                             ->delete();
         return Response::json(['status'=>true,'message' => "Successfuly remove!"]);

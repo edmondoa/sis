@@ -120,6 +120,16 @@
     }
 
   });
+
+  $(document).on("click",".btn-save",function(e){ 
+    
+    $.post('transfer-float/save',function(data){
+      message(data);
+      location.reload();      
+    });
+ 
+  })
+
   $(document).on('change','#search',function(e){
     e.preventDefault();     
     searchStr = $(this).val();

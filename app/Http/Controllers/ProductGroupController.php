@@ -9,18 +9,24 @@ use App\Http\Requests;
 use App\Libraries\Core;
 use Validator;
 use Response;
+use Redirect;
 class ProductGroupController extends Controller
 {
     //
 
     public function index()
     {
-    	return view('productgroup.index');
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
+        return view('productgroup.index');
     }
 
     public function store(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $validate = Validator::make($req->all(), ProductGroup::$rules);
         if($validate->fails())
         {
@@ -35,21 +41,27 @@ class ProductGroupController extends Controller
 
     public function group_list()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $list = ProductGroup::get();
     	return $list;
     }
 
     public function edit($id)
     {
-       Core::setConnection();
+       if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $group = ProductGroup::find($id);
         return view('productgroup.edit',compact('group'));
     }
 
     public function update(Request $request,$id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

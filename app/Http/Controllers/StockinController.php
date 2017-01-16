@@ -17,11 +17,14 @@ use Response;
 use Auth;
 use Session;
 use PDF;
+use Redirect;
 class StockinController extends Controller
 {
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $suppliers = Supplier::get();
     	$branches = Branch::get();
     	return view('stockin.index',compact('suppliers','branches'));
@@ -29,13 +32,18 @@ class StockinController extends Controller
 
     public function search()
     {
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $src ="stockin";
         return view('products.search',compact('src'));
     }
 
     public function stockFloat(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $input = $req->all();     		
     	$input['user_id'] = Auth::user()->user_id;
     	$input['type'] = "PURCHASE";
@@ -58,7 +66,10 @@ class StockinController extends Controller
 
     public function stockFloatItems(Request $req)
     {
-    	$prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
+        $prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	
     	$prod = Product::find($req->id);
         $prod->quantity = $req->qty;
@@ -74,14 +85,20 @@ class StockinController extends Controller
 
     public function stockinList()
     {
-    	$jdata['prodlist'] = (Session::has('prodlist'))?Session::get('prodlist'):[];
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
+        $jdata['prodlist'] = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	$jdata['stockin'] = (Session::has('stockinFloat'))?Session::get('stockinFloat'):[];
     	return $jdata;
     }
 
     public function cancel()
     {
-    	Session::forget('prodlist');
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
+        Session::forget('prodlist');
     	Session::forget('stockinFloat');
     	$jdata['prodlist'] = [];
     	$jdata['stockin'] = [];
@@ -92,7 +109,9 @@ class StockinController extends Controller
 
     public function stockFloatSave(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $rows = count($req->quantity) - 1 ;
     	$post_date = Setting::first()->pluck('post_date')[0];
     	$stockin = Session::get('stockinFloat'); 
@@ -127,7 +146,9 @@ class StockinController extends Controller
 
     public function removeItems($key)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	unset($prodlist[$key]);
     	$prodlist = array_values($prodlist);
@@ -137,7 +158,10 @@ class StockinController extends Controller
 
     public function stockFloatUpdate(Request $req)
     {
-    	$prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
+        $prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	$prod = $prodlist[$req->key];
     	$row = $req->row;
     	$prod->$row = $req->value;
@@ -147,14 +171,18 @@ class StockinController extends Controller
 
     public function show($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $stockin = Stockin::with('items','branch','supplier')->find($id);
         return view('stockin.show',compact('stockin'));
     }
 
     public function stockin_pdf($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $stockin = Stockin::with('items','branch','supplier')->find($id);
         $filename = $stockin->doc_no."-".$stockin->doc_date.".pdf";
         $data =  array( 'stockin' => $stockin );

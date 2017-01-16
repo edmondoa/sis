@@ -12,11 +12,14 @@ use App\Http\Requests;
 use Validator;
 use Response;
 use Exception;
+use Redirect;
 class DiscountController extends Controller
 {
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $categorys = Category::get();
     	$acc_level = AccountLevel::get();
     	return view('discounting.index',compact('categorys','acc_level'));
@@ -24,7 +27,9 @@ class DiscountController extends Controller
 
     public function store(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $inputs = $req->all();    	
     	$validate = Validator::make($inputs, Discount::$rules);
         if($validate->fails())
@@ -45,7 +50,9 @@ class DiscountController extends Controller
 
     public function discount_list()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         return Discount::with(['category','account_level'])->get();
     }
 }

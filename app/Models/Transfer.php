@@ -32,4 +32,9 @@ class Transfer extends Model
         return $this->belongsTo("App\User");
     }
 
+    public function approval()
+    {
+        return $this->morphOne('App\Models\Approval', 'approvalable');
+    }
+
 }

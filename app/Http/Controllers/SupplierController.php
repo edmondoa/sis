@@ -11,11 +11,14 @@ use App\Http\Requests;
 use DB;
 use Validator;
 use Response;
+use Redirect;
 class SupplierController extends Controller
 {
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         
         $categories = Category::get();                
     	return view('supplier.index',compact('categories'));
@@ -23,7 +26,9 @@ class SupplierController extends Controller
 
     public function store(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $validate = Validator::make($req->all(), Supplier::$rules);
         if($validate->fails())
         {
@@ -39,14 +44,18 @@ class SupplierController extends Controller
 
     public function supplier_list()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $list = Supplier::get();
     	return $list;
     }
 
     public function edit($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $supplier = Supplier::find($id);
         $mylist = [];
         foreach ($supplier->category as $key) {
@@ -59,7 +68,9 @@ class SupplierController extends Controller
 
     public function update(Request $request,$id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

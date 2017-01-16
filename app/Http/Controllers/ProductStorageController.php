@@ -10,18 +10,23 @@ use App\Http\Requests;
 use Validator;
 use Response;
 use Exception;
+use Redirect;
 class ProductStorageController extends Controller
 {
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $branches = Branch::get();
     	return view('productstorage.index',compact('branches'));
     }
 
     public function store(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $validate = Validator::make($req->all(), ProductStorage::$rules);
         if($validate->fails())
         {
@@ -42,13 +47,17 @@ class ProductStorageController extends Controller
 
     public function storage_list()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $list = ProductStorage::with('branch')->get();
     	return $list;
     }
     public function edit($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $branches = Branch::get();
         $storage = ProductStorage::find($id);
         return view('productstorage.edit',compact('storage','branches'));
@@ -56,7 +65,9 @@ class ProductStorageController extends Controller
 
     public function update(Request $request,$id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

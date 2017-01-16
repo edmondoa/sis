@@ -9,12 +9,15 @@ use App\Http\Requests;
 use Validator;
 use Response;
 use App\Models\Cluster;
+use Redirect;
 class BranchController extends Controller
 {
     
     public function index()
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $clusters = Cluster::get();
     	return view('branch.index',compact('clusters'));
     }
@@ -22,13 +25,17 @@ class BranchController extends Controller
 
     public function branch_list()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         return Branch::with('cluster')->get();
     }
 
     public function store(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $inputs = $req->all();    	
     	$validate = Validator::make($inputs, Branch::$rules);
         if($validate->fails())
@@ -45,7 +52,9 @@ class BranchController extends Controller
 
     public function edit($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $branch = Branch::find($id);
         $clusters = Cluster::get();
         return view('branch.edit',compact('branch','clusters'));
@@ -53,7 +62,9 @@ class BranchController extends Controller
 
     public function update(Request $request,$id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

@@ -12,24 +12,31 @@ use App\Libraries\Core;
 use App\Http\Requests;
 use Auth;
 use Response;
-
+use Redirect;
 class ApprovalController extends Controller
 {
     
     public function index()
     {
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
     	return view('approvals.index');
     }
 
     public function approve_list()
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
     	return Approval::with('approvalable','branch','approval_type','user')->where('status','PENDING')->get();
     }
 
     public function update(Request $request,$status,$id)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $approval = Approval::with('approvalable')->find($id);
         $other_detail = $this->format_data($approval->approval_type_id);
     	$approval->status = $status;
@@ -59,7 +66,9 @@ class ApprovalController extends Controller
 
     public function notes()
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         return view('approvals.note');
     }
 
@@ -67,7 +76,9 @@ class ApprovalController extends Controller
 
     private function series_id($type,$branch_id)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         if($type==1)
             $max = Stockin::where('branch_id',$branch_id)->max('series_id');
     	else if($type==2)

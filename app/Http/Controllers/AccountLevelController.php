@@ -10,17 +10,23 @@ use App\Http\Requests;
 use Response;
 use Validator;
 use App\Libraries\Core;
+use Redirect;
 class AccountLevelController extends Controller
 {
     //
     public function index()
     {
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
     	return view('accounts.account_level');
     }
 
     public function store(Request $req)
     {
-        Core::setConnection();
+       if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
     	$inputs = $req->all();    	
     	$validate = Validator::make($inputs, AccountLevel::$rules);
         if($validate->fails())
@@ -37,14 +43,18 @@ class AccountLevelController extends Controller
 
     public function edit($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $acc_level = AccountLevel::find($id);
         return view('accounts.account_level_edit',compact('acc_level'));
     }
 
     public function update(Request $request,$id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         
@@ -76,7 +86,9 @@ class AccountLevelController extends Controller
 
     public function level_list()
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
     	return AccountLevel::get();
     }
 }

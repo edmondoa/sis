@@ -19,12 +19,15 @@ use Auth;
 use Session;
 use DB;
 use PDF;
+use Redirect;
 class StockOutController extends Controller
 {
     
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $suppliers = Supplier::get();
     	$branches = Branch::get();
     	return view('stockout.index',compact('suppliers','branches'));
@@ -32,7 +35,9 @@ class StockOutController extends Controller
 
     public function stockoutFloat(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $input = $req->all();   	
     	$input['status'] = 'ONGOING';
     	$input['user_id'] = Auth::user()->user_id;
@@ -51,7 +56,9 @@ class StockOutController extends Controller
 
     public function stockoutList()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->orderBy('stockout_id', 'desc')->first();
@@ -64,13 +71,15 @@ class StockOutController extends Controller
 
     public function search()
     {
-    	 $src ="stockout";
+    	$src ="stockout";
         return view('products.search',compact('src'));
     }
 
     public function postSingleSearch(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $sup = $req->supplier_id;
     	$branch = $req->branch_id;
 
@@ -111,7 +120,9 @@ class StockOutController extends Controller
     }
     public function postSearch(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $sup = $req->supplier_id;
     	$branch = $req->branch_id;
 
@@ -155,7 +166,9 @@ class StockOutController extends Controller
 
     public function saveItems(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $available = StockOut::available($req->id,$req->branch_id);
     	if($available <= 0)
     	{
@@ -179,7 +192,9 @@ class StockOutController extends Controller
 
     public function removeItems(Request $req)
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $item = StockOutItem::where('stockout_item_id',$req->stockout_item_id)    						
     						->delete();
     	return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
@@ -188,7 +203,9 @@ class StockOutController extends Controller
 
     public function save()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->first();
@@ -210,7 +227,9 @@ class StockOutController extends Controller
 
     public function show($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $stockout = StockOut::with('items','branch')->find($id);
 
         return view('stockout.show',compact('stockout'));
@@ -218,7 +237,9 @@ class StockOutController extends Controller
 
     public function pdf($id)
     {
-        Core::setConnection();
+        if(!Core::setConnection()){           
+            return Redirect::to("/login");
+        }
         $stockout = Stockout::with('items','branch')->find($id);
         $filename = $stockout->branch_id."-".$stockout->stockout_id.".pdf";
         $data =  array( 'stockout' => $stockout );
