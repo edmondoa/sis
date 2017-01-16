@@ -32,7 +32,7 @@ class StockinController extends Controller
         $suppliers = Supplier::get();
 
     	$branches = Branch::get();
-        dump($branches);
+       
     	return view('stockin.index',compact('suppliers','branches'));
     }
 
