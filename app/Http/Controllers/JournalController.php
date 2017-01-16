@@ -10,19 +10,19 @@ use Redirect;
 class JournalController extends Controller
 {
     
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
     	return view('journals.index');
     }
 
     public function journal_list()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
     	$approvals = Approval::with('approvalable','approval_type')->where('user_id',Auth::user()->user_id)->get();
     	return $approvals;
     }

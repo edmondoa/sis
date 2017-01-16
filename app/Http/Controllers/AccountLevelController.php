@@ -14,19 +14,19 @@ use Redirect;
 class AccountLevelController extends Controller
 {
     //
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
     	return view('accounts.account_level');
     }
 
     public function store(Request $req)
     {
-       if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+       Core::setConnection();
     	$inputs = $req->all();    	
     	$validate = Validator::make($inputs, AccountLevel::$rules);
         if($validate->fails())
@@ -43,18 +43,14 @@ class AccountLevelController extends Controller
 
     public function edit($id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $acc_level = AccountLevel::find($id);
         return view('accounts.account_level_edit',compact('acc_level'));
     }
 
     public function update(Request $request,$id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         
@@ -86,9 +82,7 @@ class AccountLevelController extends Controller
 
     public function level_list()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
     	return AccountLevel::get();
     }
 }

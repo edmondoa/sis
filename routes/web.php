@@ -55,6 +55,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get("stockout/pdf/{id}","StockOutController@pdf");
 	Route::post('stockout/multi_search','StockOutController@postSearch');
 	Route::post('stockout-float/items','StockOutController@saveItems');
+	Route::get("stockout-float/cancel","StockOutController@cancel");
 	Route::post('stockout/search','StockOutController@postSingleSearch');
 	Route::post('stockout-items-remove','StockOutController@removeItems');
 	Route::post('stockout-float/save','StockOutController@save');
@@ -72,7 +73,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('transfer/multi_search','TransferController@postSearch');
 	Route::get('transfer/ng-transfer-list','TransferController@transferList');	
 	Route::post('transfer-float','TransferController@transferFloat');
-	Route::resource('transfer','TransferController');
+	Route::resource('/transfer','TransferController');
 
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
 	Route::resource('clusters','ClusterController');

@@ -12,20 +12,20 @@ use Response;
 use Redirect;
 class ClusterController extends Controller
 {
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $clusters = Cluster::get();
     	return view('clusters.index',compact('clusters'));
     }
 
     public function store(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $validate = Validator::make($req->all(), Cluster::$rules);
         if($validate->fails())
         {
@@ -40,27 +40,21 @@ class ClusterController extends Controller
 
     public function cluster_list()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $list = Cluster::get();
     	return $list;
     }
 
     public function edit($id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $cluster = Cluster::find($id);        
         return view('clusters.edit',compact('cluster'));
     }
 
     public function update(Request $request,$id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         
@@ -83,9 +77,7 @@ class ClusterController extends Controller
 
     public function destroy($id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

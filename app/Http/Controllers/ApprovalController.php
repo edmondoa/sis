@@ -16,27 +16,25 @@ use Redirect;
 class ApprovalController extends Controller
 {
     
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
     	return view('approvals.index');
     }
 
     public function approve_list()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
     	return Approval::with('approvalable','branch','approval_type','user')->where('status','PENDING')->get();
     }
 
     public function update(Request $request,$status,$id)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $approval = Approval::with('approvalable')->find($id);
         $other_detail = $this->format_data($approval->approval_type_id);
     	$approval->status = $status;
@@ -66,9 +64,7 @@ class ApprovalController extends Controller
 
     public function notes()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         return view('approvals.note');
     }
 
@@ -76,9 +72,7 @@ class ApprovalController extends Controller
 
     private function series_id($type,$branch_id)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         if($type==1)
             $max = Stockin::where('branch_id',$branch_id)->max('series_id');
     	else if($type==2)

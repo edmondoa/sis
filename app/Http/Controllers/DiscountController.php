@@ -15,11 +15,13 @@ use Exception;
 use Redirect;
 class DiscountController extends Controller
 {
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $categorys = Category::get();
     	$acc_level = AccountLevel::get();
     	return view('discounting.index',compact('categorys','acc_level'));
@@ -27,9 +29,7 @@ class DiscountController extends Controller
 
     public function store(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $inputs = $req->all();    	
     	$validate = Validator::make($inputs, Discount::$rules);
         if($validate->fails())
@@ -50,9 +50,7 @@ class DiscountController extends Controller
 
     public function discount_list()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         return Discount::with(['category','account_level'])->get();
     }
 }

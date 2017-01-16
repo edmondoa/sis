@@ -8,11 +8,7 @@ class Core
 	public static function setConnection()
 	{
 		
-		if(Session::has('dbname') && Auth::check()){
-			Config::set('database.connections.domain.database',Session::get('dbname'));
-			return true;
-		}
-			 return false;
+		Config::set('database.connections.domain.database',Session::get('dbname')); 
 		
 		
 	}

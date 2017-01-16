@@ -23,11 +23,13 @@ use Redirect;
 class StockOutController extends Controller
 {
     
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $suppliers = Supplier::get();
     	$branches = Branch::get();
     	return view('stockout.index',compact('suppliers','branches'));
@@ -35,9 +37,7 @@ class StockOutController extends Controller
 
     public function stockoutFloat(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $input = $req->all();   	
     	$input['status'] = 'ONGOING';
     	$input['user_id'] = Auth::user()->user_id;
@@ -56,14 +56,12 @@ class StockOutController extends Controller
 
     public function stockoutList()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->orderBy('stockout_id', 'desc')->first();
     					
-    	$jdata['prodlist'] = (!is_null($stockout->items)) ? $stockout->items : [];;
+    	$jdata['prodlist'] = (!is_null($stockout)) ? $stockout->items : [];;
 
     	$jdata['stockout'] = (!is_null($stockout)) ? $stockout : [];;
     	return $jdata;
@@ -77,9 +75,7 @@ class StockOutController extends Controller
 
     public function postSingleSearch(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $sup = $req->supplier_id;
     	$branch = $req->branch_id;
 
@@ -120,9 +116,7 @@ class StockOutController extends Controller
     }
     public function postSearch(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $sup = $req->supplier_id;
     	$branch = $req->branch_id;
 
@@ -166,9 +160,7 @@ class StockOutController extends Controller
 
     public function saveItems(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $available = StockOut::available($req->id,$req->branch_id);
     	if($available <= 0)
     	{
@@ -192,9 +184,7 @@ class StockOutController extends Controller
 
     public function removeItems(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $item = StockOutItem::where('stockout_item_id',$req->stockout_item_id)    						
     						->delete();
     	return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
@@ -203,9 +193,7 @@ class StockOutController extends Controller
 
     public function save()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->first();
@@ -227,19 +215,28 @@ class StockOutController extends Controller
 
     public function show($id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $stockout = StockOut::with('items','branch')->find($id);
 
         return view('stockout.show',compact('stockout'));
     }
 
+    public function cancel()
+    {
+        Core::setConnection();
+        $stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
+                            ->where('status','ONGOING')
+                            ->first();
+        $stockout->items()->delete();
+        $stockout->delete();  
+        $jdata['status'] = true;
+        $jdata['message'] ="Successfuly cancelled!";
+        return $jdata;                  
+    }
+
     public function pdf($id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $stockout = Stockout::with('items','branch')->find($id);
         $filename = $stockout->branch_id."-".$stockout->stockout_id.".pdf";
         $data =  array( 'stockout' => $stockout );

@@ -13,11 +13,13 @@ use Redirect;
 class CategoryController extends Controller
 {
     
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $sys_category = DB::connection('mysql')
                         ->table('category')->get();
         return view('category.index',compact('sys_category'));
@@ -25,9 +27,7 @@ class CategoryController extends Controller
 
     public function store(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $validate = Validator::make($req->all(), Category::$rules);
         if($validate->fails())
         {
@@ -42,18 +42,14 @@ class CategoryController extends Controller
 
     public function category_list()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $list = Category::get();
     	return $list;
     }
 
     public function edit($id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $sys_category = DB::connection('mysql')
                         ->table('category')->get();
         $category = Category::find($id);
@@ -62,9 +58,7 @@ class CategoryController extends Controller
 
      public function update(Request $request,$id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

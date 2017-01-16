@@ -18,15 +18,21 @@ use Auth;
 use Session;
 use PDF;
 use Redirect;
+use Config;
 class StockinController extends Controller
 {
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
+
     public function index()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $suppliers = Supplier::get();
+
     	$branches = Branch::get();
+        dump($branches);
     	return view('stockin.index',compact('suppliers','branches'));
     }
 

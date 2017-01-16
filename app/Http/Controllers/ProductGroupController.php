@@ -13,20 +13,19 @@ use Redirect;
 class ProductGroupController extends Controller
 {
     //
-
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         return view('productgroup.index');
     }
 
     public function store(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $validate = Validator::make($req->all(), ProductGroup::$rules);
         if($validate->fails())
         {
@@ -41,27 +40,21 @@ class ProductGroupController extends Controller
 
     public function group_list()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $list = ProductGroup::get();
     	return $list;
     }
 
     public function edit($id)
     {
-       if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+       Core::setConnection();
         $group = ProductGroup::find($id);
         return view('productgroup.edit',compact('group'));
     }
 
     public function update(Request $request,$id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         

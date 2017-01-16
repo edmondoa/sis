@@ -76,25 +76,10 @@
 
       $scope.cancel = function()
       {
-        $http.get('/stockin-float/cancel')
+        $http.get('/stockout-float/cancel')
          .success(function(data) {
             $scope.message(data);            
-            $scope.stockins = data.prodlist;
-            $("#branch_id").val(data.stockin.branch_id);
-            $("#supplier_id").val(data.stockin.supplier_id);
-            $("#doc_no").val(data.stockin.doc_no);
-            $("#amount_due").val(data.stockin.amount_due);
-            $("#doc_date").val(data.stockin.doc_date);
-            $("#arrive_date").val(data.stockin.arrive_date);
-            $("#totalQuantity").text(0);    
-            $("#totalCost").text(parseFloat(0));
-            $('.btn-save').addClass('disabled');
-            $('.search-prod').addClass('disabled');
-            
-            $("a.stock").removeClass('disabled');
-            $("input.stock").attr('readonly',false);
-            $("select.stock").attr('disabled',false);
-            $("div.amount-due").removeClass('has-error');
+            $window.location.reload();
         })
       }
 

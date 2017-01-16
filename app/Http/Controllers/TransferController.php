@@ -18,21 +18,21 @@ use DB;
 use Redirect;
 class TransferController extends Controller
 {
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
     	
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }       
+        Core::setConnection();  
         $branches = Branch::get();
     	return view('transfer.index',compact('branches'));
     }
 
     public function transferFloat(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
     	$input = $req->all();	
     	$input['status'] = 'ONGOING';
     	$input['user_id'] = Auth::user()->user_id;
@@ -52,24 +52,20 @@ class TransferController extends Controller
 
     public function transferList()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $transfer = Transfer::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->orderBy('transfer_id', 'desc')->first();
     					
     
-    	$jdata['prodlist'] = (!is_null($transfer->items)) ? $transfer->items : [];;
+    	$jdata['prodlist'] = (!is_null($transfer)) ? $transfer->items : [];;
 
     	$jdata['transfer'] = (!is_null($transfer)) ? $transfer : [];;
     	return $jdata;	
     }
      public function saveItems(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
 
         $available = StockOut::available($req->id,$req->branch_id);
     	if($available <= 0)
@@ -93,9 +89,7 @@ class TransferController extends Controller
 
     public function save()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $transfer = Transfer::with('items')->where('user_id',Auth::user()->user_id)
                             ->where('status','ONGOING')
                             ->first();
@@ -117,9 +111,7 @@ class TransferController extends Controller
 
     public function cancel()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $transfer = Transfer::with('items')->where('user_id',Auth::user()->user_id)
                             ->where('status','ONGOING')
                             ->first();
@@ -130,17 +122,13 @@ class TransferController extends Controller
 
     public function search()
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
     	$src ="transfer";
         return view('products.search',compact('src'));
     }
     public function postSearch(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
     	$branch = $req->branch_id;
 
         $search = $req->str;
@@ -181,10 +169,8 @@ class TransferController extends Controller
     }
 
     public function postSingleSearch(Request $req)
-    {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }  
+    {   
+        Core::setConnection();
         $branch = $req->branch_id;
 
         $search = trim($req->str);
@@ -225,9 +211,7 @@ class TransferController extends Controller
 
     public function removeItems($id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $item = TransferItem::where('transfer_item_id',$id)                          
                             ->delete();
         return Response::json(['status'=>true,'message' => "Successfuly remove!"]);

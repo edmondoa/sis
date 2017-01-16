@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     protected $connection = 'domain';
-    protected $database = 'domain';//(Session::has('dbname'))?Session::get('dbname'):"sis2";
     protected $table ='branch';
     protected $primaryKey = 'branch_id';
     

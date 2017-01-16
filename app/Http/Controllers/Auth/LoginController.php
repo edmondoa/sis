@@ -46,11 +46,7 @@ class LoginController extends Controller
     }
     protected function showLoginForm()
     {        
-        if(!Session::has('dbname')){
-         Session::put('dbname','domain1');     
-       }     
-       
-        $levels =  UserLevel::get(); 
+       $levels =  UserLevel::get(); 
         return view('auth.login',compact('levels'));
     }
 
@@ -67,6 +63,7 @@ class LoginController extends Controller
                 return Redirect::back()->withErrors(['Finance concern']);
             
             Session::put('dbname',$domain_exist->dbname);
+           
             Core::setConnection();
             $credentials = ['username'=>$req->username,'password'=>$req->password];
             // $email = $req->username;

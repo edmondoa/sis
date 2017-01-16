@@ -18,12 +18,13 @@ use Session;
 use Redirect;
 class ProductController extends Controller
 {
-    
+    public function __construct()
+    {        
+        $this->middleware('web');
+    }
     public function index()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $category = Category::get();
         $discount = Discount::with('account_level')->get();
         $groups = ProductGroup::get();
@@ -32,9 +33,7 @@ class ProductController extends Controller
 
     public function store(Request $req)
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         $inputs = $req->all();
     	$inputs['post_date'] = date('Y-m-d');
         $inputs['user_id'] = Auth::user()->user_id;
@@ -53,17 +52,13 @@ class ProductController extends Controller
 
     public function product_list()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection();
         return Product::with('category')->get();
     }
 
      public function edit($id)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         $category = Category::get();
         $discount = Discount::with('account_level')->get();
         $groups = ProductGroup::get();
@@ -73,9 +68,7 @@ class ProductController extends Controller
 
     public function update(Request $request,$id)
     {
-       if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+       Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
         
@@ -115,9 +108,7 @@ class ProductController extends Controller
 
     public function search($sup,$search=NULL)
     {
-        if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+        Core::setConnection();
         if ($search =='_blank') $search ="";
         $sql = "SELECT p.*,c.category_code FROM product p
                 LEFT JOIN category c ON p.category_id = c.category_id
@@ -133,9 +124,7 @@ class ProductController extends Controller
 
     public function multi_search(Request $req)
     {
-       if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+       Core::setConnection();
         $sup = $req->supplier_id;
         $search = $req->str;
         if($search =='%')
