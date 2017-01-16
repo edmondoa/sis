@@ -91,9 +91,7 @@ class LoginController extends Controller
     
     protected function logout()
     {
-        if(!Core::setConnection()){           
-             return redirect('login');
-        }
+        Core::setConnection();
         Auth::logout();
         return redirect('login');
     }

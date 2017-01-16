@@ -14,9 +14,8 @@ class HeaderController extends Controller
     
     public function task()
     {
-    	if(!Core::setConnection()){           
-            return Redirect::to("/login");
-        }
+    	Core::setConnection() ;        
+    
     	if(Auth::user()->level_id > 2)
     	{
     		$sql = Approval::with('approvalable','branch','approval_type')->where('status','PENDING')->get();
