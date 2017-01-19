@@ -7,8 +7,8 @@ class Core
 {
 	public static function setConnection()
 	{
-		
-		Config::set('database.connections.domain.database',Auth::user()->domain_name); 
+		if(Auth::check())
+			Config::set('database.connections.domain.database',Auth::user()->domain_name); 
 		
 	}
 
