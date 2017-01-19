@@ -68,9 +68,11 @@ class LoginController extends Controller
            
           
             $errors = Auth::attempt($credentials,true);
+           
             if ($errors) { 
                 return Redirect::to("/");
-            }else{                            
+            }else{  
+
                // $error = "Invalid User";
                 return Redirect::back()->withErrors(['Invalid user!']);
             }   
