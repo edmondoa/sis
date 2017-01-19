@@ -62,16 +62,15 @@ class LoginController extends Controller
             if($domain_exist->db_populated==0)
                 return Redirect::back()->withErrors(['Finance concern']);
             
-            Session::put('dbname',$domain_exist->dbname);
+                   
+            
+            $credentials = ['username'=>$req->username,'password'=>$req->password,'domain_id'=>$req->domain];
            
-            Core::setConnection();
-            $credentials = ['username'=>$req->username,'password'=>$req->password];
-            // $email = $req->username;
           
-
-            if ($errors = Auth::attempt($credentials,true)) { 
+            $errors = Auth::attempt($credentials,true);
+            if ($errors) { 
                 return Redirect::to("/");
-            }else{                   
+            }else{                            
                // $error = "Invalid User";
                 return Redirect::back()->withErrors(['Invalid user!']);
             }   
@@ -88,7 +87,7 @@ class LoginController extends Controller
     
     protected function logout()
     {
-        Core::setConnection();
+        //Core::setConnection();
         Auth::logout();
         return redirect('login');
     }

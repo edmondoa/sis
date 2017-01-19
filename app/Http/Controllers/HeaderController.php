@@ -14,10 +14,11 @@ class HeaderController extends Controller
     
     public function task()
     {
-    	Core::setConnection() ;        
+    	        
     
     	if(Auth::user()->level_id > 2)
     	{
+            Core::setConnection() ;
     		$sql = Approval::with('approvalable','branch','approval_type')->where('status','PENDING')->get();
     		return $sql;
     	 }

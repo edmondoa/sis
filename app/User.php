@@ -9,12 +9,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $connection = 'domain';
+    protected $connection = 'mysql';
    // protected $this->getConnection();
-    protected $table = 'user';
+    protected $table = 'domain_user';
     protected $primaryKey = 'user_id';
 
-    // protected $appends = ['user_level'];
+     protected $appends = ['domain_name'];
     /**
      * The attributes that are mass assignable.
      *
@@ -44,10 +44,10 @@ class User extends Authenticatable
     //     return $this->belongsTo('App\Model\UserLevel');
     // }
 
-    // public function getUserLevelAttribute()
-    // {
-    //     if(!is_null($this->userLevel))
-    //         return $this->userLevel->level_name;
-    //     return "";
-    // }
+    public function getDomainNameAttribute()
+    {
+        
+        return "domain".$this->domain_id;
+       
+    }
 }

@@ -8,7 +8,7 @@
     </div>
     <div class="pull-left info">
       <p>{{Auth::user()->firstname.' '.Auth::user()->lastname}}</p>
-      <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+      <a href="#"><i class="fa fa-circle text-success"></i> Online {{Auth::user()->domain_name}}</a>
     </div>
   </div>
   <!-- search form -->

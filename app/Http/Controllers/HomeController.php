@@ -30,6 +30,10 @@ class HomeController extends Controller
     public function index()
     {  
       Core::setConnection(); 
+      if(!Session::has('dbname')){
+        Auth::logout();
+        return redirect('login');
+      }
       return view('index');
     }
 }
