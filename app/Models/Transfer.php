@@ -22,10 +22,16 @@ class Transfer extends Model
     	return $this->hasMany('App\Models\TransferItem','transfer_id','transfer_id');
     }
 
-    public function branch()
+    public function branch_orig()
     {
-        return $this->belongsTo('App\Models\Branch','branch_id','branch_id')->select('branch_id','branch_name','business_name');
-    }						
+        return $this->belongsTo('App\Models\Branch','branch_id','orig_branch_id')->select('branch_id','branch_name','business_name');
+    }
+
+    public function branch_transfer()
+    {
+        return $this->belongsTo('App\Models\Branch','branch_id','recv_branch_id')->select('branch_id','branch_name','business_name');
+    }                       
+						
 
     public function user()
     {

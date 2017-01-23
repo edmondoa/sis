@@ -148,7 +148,7 @@ class TransferController extends Controller
 					WHERE s.branch_id = $branch 
 				) LIMIT 15";		
         
-        $products = DB::select($sql);
+        $products = DB::connection('domain')->select($sql);
 
        
         $products = array_map(function($product) use($branch){
@@ -189,7 +189,7 @@ class TransferController extends Controller
                     WHERE s.branch_id = $branch 
                 ) ";        
         
-        $products = DB::select($sql);
+        $products = DB::connection('domain')->select($sql);
 
        
         $products = array_map(function($product) use($branch){
@@ -216,5 +216,13 @@ class TransferController extends Controller
                             ->delete();
         return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
                         
+    }
+
+    public function show($id)
+    {
+        Core::setConnection();
+        $transfer = Transfer::with('items','branch_orig','branch_transfer')->find($id);
+        dump($transfer);
+        return view('transfer.show',compact('transfer'));
     }
 }

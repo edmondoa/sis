@@ -94,7 +94,7 @@
   });
   $(document).on('click','.show-stock',function(e){
     e.preventDefault();
-    type = $(this).data('type');
+    type = $(this).data('type').replace(" ","_");
     id = $(this).data('id');
     $.get( type.toLowerCase()+"/"+id, function( data ) {
       var dialog = bootbox.dialog({
