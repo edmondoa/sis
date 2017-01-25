@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h2 class="page-header">
-        <i class="fa fa-globe"></i> {{$transfer->branch_orig->business_name.", ".$stockout->branch->branch_name}}
+        <i class="fa fa-globe"></i> {{$transfer->branch_orig->business_name.", ".$transfer->branch_orig->branch_name}}
         <small class="pull-right">Date: {{$transfer->encode_date}}</small>
       </h2>
     </div>
@@ -16,9 +16,10 @@
     <!-- /.col -->
     <div class="col-sm-4 invoice-col">
     <dl class="dl-horizontal">
-      	<dt style="width: 78px">Series # : </dt><dd style="margin-left: 96px">{{$transfer->series_id}}</dd>
+      	<dt style="width: 100px">Series # : </dt><dd style="margin-left: 96px">{{$transfer->series_id}}</dd>
         
-        <dt style="width: 78px">Status : </dt><dd style="margin-left: 96px">{{$transfer->approval->status}}</dd>
+        <dt style="width: 100px">Status : </dt><dd style="margin-left: 96px">{{$transfer->approval->status}}</dd>
+        <dt style="width: 100px">Recv Branch : </dt><dd style="margin-left: 96px">{{$transfer->branch_transfer->branch_name}}</dd>
     </dl>	    
     </div>
     <!-- /.col -->

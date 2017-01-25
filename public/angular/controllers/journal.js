@@ -13,7 +13,7 @@
 
       $scope.getJournals = function() {
         
-        $http.get('journals/ng-journal-list').
+        $http.get('request/ng-journal-list').
           success(function(data) {
             $scope.journals = data;         
             console.log($scope.journals);

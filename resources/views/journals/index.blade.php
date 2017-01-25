@@ -5,12 +5,12 @@
   <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
       <h1>
-        Journals   
+        Request   
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class=""><i class="fa fa-circle"></i> Operations</li>
-        <li class="active"><i class="fa fa-circle"></i> Journals</li>
+        <li class="active"><i class="fa fa-circle"></i> Request</li>
       </ol>
     </section>
 

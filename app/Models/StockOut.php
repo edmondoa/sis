@@ -62,8 +62,8 @@ class StockOut extends Model
     {
     	$transfer = DB::select("SELECT SUM(sti.quantity) AS qty FROM `stock_transfer_item` sti
 							LEFT JOIN `stock_transfer` st ON sti.transfer_id = st.transfer_id
-							WHERE sti.product_id =$prod_id AND st.orig_branch_id = $branch");
-    	
+							WHERE sti.product_id =$prod_id AND st.orig_branch_id = $branch
+    	                    AND status IN ('PENDING','ONGOING','APPROVED')");   
     	if(!is_null($transfer[0]->qty))
     		return $transfer[0]->qty;
 
@@ -73,8 +73,8 @@ class StockOut extends Model
     {
     	$adjust = DB::select("SELECT SUM(saoi.quantity) AS qty FROM `stock_adj_out_item` saoi
 							LEFT JOIN `stock_adj_out` st ON saoi.stock_adj_out_id = st.stock_adj_out_id
-							WHERE saoi.product_id =$prod_id AND st.branch_id = $branch");
-    	
+							WHERE saoi.product_id =$prod_id AND st.branch_id = $branch
+    	                    AND status IN ('PENDING','ONGOING')");      
     	if(!is_null($adjust[0]->qty))
     		return $adjust[0]->qty;
 

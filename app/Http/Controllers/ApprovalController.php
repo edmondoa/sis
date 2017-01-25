@@ -45,13 +45,13 @@ class ApprovalController extends Controller
     	
         if($approval->save())
     	{
-            if($status == 'APPROVED')
+            if($status == 'APPROVED' && $other_detail['type']!='TRO')
     		    $approval->approvalable->series_id = $this->series_id($approval->approval_type_id, $approval->approvalable->branch_id);
     		$approval->approvalable->status = $status;
     		
     		if($approval->approvalable->save())
     		{
-                if($status == 'APPROVED')
+                if($status == 'APPROVED' && $other_detail['type']!='TRO')
                     ProductBinCard::insert($approval->approvalable->items,$other_detail['reference'],$other_detail['type'],$other_detail['negative']);
     			return Response::json(['status'=>true,'message' => "Successfuly ".strtolower($status)."!"]);
         
@@ -77,11 +77,13 @@ class ApprovalController extends Controller
             $max = Stockin::where('branch_id',$branch_id)->max('series_id');
     	else if($type==2)
             $max = StockOut::where('branch_id',$branch_id)->max('series_id');
+
         return (is_null($max)) ? 1 : $max + 1;
     }
 
     private function format_data($type)
     {
+        $data=[];
         if($type == 1)        {
             $data['reference'] = 'stock_id';
             $data['type'] = 'STI';
@@ -90,6 +92,10 @@ class ApprovalController extends Controller
             $data['reference'] = 'stockout_id';
             $data['type'] = 'STO';
             $data['negative'] = 1;
+        }else if($type==3){
+            $data['reference'] = 'transfer_id';
+            $data['type'] = 'TRO';
+            $data['negative'] = 0;
         }
         return $data;
     }

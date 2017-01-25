@@ -160,6 +160,7 @@
       </a>
       <ul class="treeview-menu">
         <li class='approvals'><a href="/approvals"><i class="fa fa-circle-o"></i>Approvals</a></li>
+         <li class='request'><a href="/request"><i class="fa fa-circle-o"></i>Request</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Branch</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Domain</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>DueDate Extension</a></li>

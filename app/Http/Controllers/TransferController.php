@@ -222,7 +222,6 @@ class TransferController extends Controller
     {
         Core::setConnection();
         $transfer = Transfer::with('items','branch_orig','branch_transfer')->find($id);
-        dump($transfer);
         return view('transfer.show',compact('transfer'));
     }
 }
