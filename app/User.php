@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Branch');
     }
 
+    public function domain()
+    {
+        return $this->belongsTo('App\Models\Domain');
+    }
+
     // public function userLevel()
     // {
     //     return $this->belongsTo('App\Model\UserLevel');
