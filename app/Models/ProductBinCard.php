@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 class ProductBinCard extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table ='product_bincard';
     protected $primaryKey = 'sequence_id';
     protected $fillable = ['product_id','branch_id','type','reference_id','price','quantity'];

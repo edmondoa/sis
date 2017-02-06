@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Discount extends Model
 {
-     protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'discount';
 
     public static $rules = [

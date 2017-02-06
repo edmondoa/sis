@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StockinFloat extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'stockin_float';
     protected $primaryKey ='stockin_float_id';
 

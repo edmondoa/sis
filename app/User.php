@@ -9,9 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $connection = 'mysql';
+    //protected $connection = 'domain';
    // protected $this->getConnection();
-    protected $table = 'domain_user';
+    protected $table = 'user';
     protected $primaryKey = 'user_id';
 
      protected $appends = ['domain_name'];

@@ -19,7 +19,10 @@ class ProductStorageController extends Controller
     }
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection())
+        {
+          return redirect()->intended('login');
+        }  
         $branches = Branch::get();
     	return view('productstorage.index',compact('branches'));
     }

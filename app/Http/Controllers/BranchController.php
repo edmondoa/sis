@@ -19,7 +19,10 @@ class BranchController extends Controller
     }
     public function index()
     {
-        Core::setConnection();
+        if(!Core::setConnection())
+        {
+         return redirect()->intended('login');
+        }  
         $clusters = Cluster::get();
     	return view('branch.index',compact('clusters'));
     }

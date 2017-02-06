@@ -29,7 +29,10 @@ class StockOutController extends Controller
     }
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection())
+        {
+            return redirect()->intended('login');
+        }  
         $suppliers = Supplier::get();
     	$branches = Branch::get();
     	return view('stockout.index',compact('suppliers','branches'));

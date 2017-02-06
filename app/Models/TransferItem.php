@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransferItem extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'stock_transfer_item'; 
-      protected $primaryKey = 'transfer_item_id'; 
+    protected $primaryKey = 'transfer_item_id'; 
     protected $fillable = ['transfer_id','product_id','quantity','cost_price'];
     public $timestamps = false;
     protected $appends = ['product_name','product_code','total'];

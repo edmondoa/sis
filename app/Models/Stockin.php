@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stockin extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'stockin';
     protected $primaryKey ='stockin_id';
 

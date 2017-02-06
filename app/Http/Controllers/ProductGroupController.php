@@ -19,7 +19,10 @@ class ProductGroupController extends Controller
     }
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection())
+        {
+            return redirect()->intended('login');
+        }  
         return view('productgroup.index');
     }
 

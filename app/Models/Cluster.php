@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cluster extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'cluster';
     protected $primaryKey = 'cluster_id';
     

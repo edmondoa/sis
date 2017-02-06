@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductCostIn extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table ='product_cost_in';
     protected $primaryKey = 'cost_in_id';
     protected $fillable = ['product_id','branch_id','type','reference_id','cost_price','quantity'];

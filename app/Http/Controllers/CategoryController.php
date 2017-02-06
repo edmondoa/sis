@@ -19,7 +19,10 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        Core::setConnection();
+        if(!Core::setConnection())
+        {
+         return redirect()->intended('login');
+        }  
         $sys_category = DB::connection('mysql')
                         ->table('category')->get();
         return view('category.index',compact('sys_category'));

@@ -21,7 +21,10 @@ class DiscountController extends Controller
     }
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection())
+        {
+         return redirect()->intended('login');
+        }  
         $categorys = Category::get();
     	$acc_level = AccountLevel::get();
     	return view('discounting.index',compact('categorys','acc_level'));

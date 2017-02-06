@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductStorage extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'product_storage';
     protected $primaryKey ='storage_id';
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 class StockOut extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'stockout';
     protected $primaryKey = 'stockout_id';
     protected $fillable = ['supplier_id','branch_id','series_id','notes','encode',

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductGroup extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'product_group';
     protected $primaryKey = 'group_id';
 

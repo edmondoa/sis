@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StockItem extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'stockin_item';
     protected $primaryKey = 'stockin_item_id';
     public $timestamps = false;

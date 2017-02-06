@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccountLevel extends Model
 {
-	protected $connection = 'domain';
+	//protected $connection = 'domain';
     protected $table ='account_level';
     protected $primaryKey ='level_id';
 

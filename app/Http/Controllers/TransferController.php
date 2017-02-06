@@ -25,7 +25,10 @@ class TransferController extends Controller
     public function index()
     {
     	
-        Core::setConnection();  
+        if(!Core::setConnection())
+        {
+             return redirect()->intended('login');
+        }  
         $branches = Branch::get();
     	return view('transfer.index',compact('branches'));
     }

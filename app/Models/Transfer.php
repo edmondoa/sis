@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transfer extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'stock_transfer';
     protected $primaryKey = 'transfer_id';
     protected $fillable = ['orig_branch_id','recv_branch_id','notes','recv_user_id','encode',

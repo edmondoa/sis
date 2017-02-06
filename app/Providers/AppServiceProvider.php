@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Tenanti;
+use App\User;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $entity = new User;
+        Tenanti::connection('domain', function ($entity, array $config) {
+            $config['database'] = "domain{$entity->getKey()}"; 
+            // refer to config under `database.connections.tenants.*`.
+
+            return $config;
+        });
     }
 
     /**

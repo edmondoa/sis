@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Approval extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
      protected $table ='approval';
     protected $primaryKey = 'approval_id';
     public $timestamps = false;

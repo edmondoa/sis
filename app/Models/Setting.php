@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
-   protected $connection = 'domain';
+   //protected $connection = 'domain';
    protected $table = 'settings';
 }

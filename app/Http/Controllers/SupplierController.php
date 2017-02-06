@@ -21,7 +21,10 @@ class SupplierController extends Controller
 
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection())
+        {
+            return redirect()->intended('login');
+        }  
         
         $categories = Category::get();                
     	return view('supplier.index',compact('categories'));

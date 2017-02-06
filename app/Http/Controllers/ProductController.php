@@ -24,7 +24,10 @@ class ProductController extends Controller
     }
     public function index()
     {
-    	Core::setConnection();
+    	if(!Core::setConnection())
+        {
+            return redirect()->intended('login');
+        }  
         $category = Category::get();
         $discount = Discount::with('account_level')->get();
         $groups = ProductGroup::get();

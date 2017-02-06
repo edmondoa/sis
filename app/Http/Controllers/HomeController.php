@@ -29,7 +29,11 @@ class HomeController extends Controller
      */
     public function index()
     {  
-      Core::setConnection();       
+       
+      if(!Core::setConnection())
+      {
+         return redirect()->intended('login');
+      }       
       return view('index');
     }
 }

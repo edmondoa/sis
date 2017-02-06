@@ -13,6 +13,8 @@ use App\Libraries\Core;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use DB;
+use Orchestra\Support\Facades\Tenanti;
 class LoginController extends Controller
 {
     /*
@@ -46,8 +48,8 @@ class LoginController extends Controller
     }
     protected function showLoginForm()
     {        
-       $levels =  UserLevel::get(); 
-        return view('auth.login',compact('levels'));
+       //$levels =  UserLevel::get(); 
+        return view('auth.login');
     }
 
     protected function login(Request $req)
@@ -59,6 +61,7 @@ class LoginController extends Controller
         
         if($domain_exist)
         {
+            Session::put('domain_exist',$domain_exist);
             if($domain_exist->db_populated==0)
                 return Redirect::back()->withErrors(['Finance concern']);
             
@@ -67,13 +70,18 @@ class LoginController extends Controller
             $data['database']=$domain_exist->dbname;
             $data['password']=$domain_exist->master->password;
             $data['username']=$domain_exist->master->username;
-            Core::setConnection2($data);
+            // dump($data);
+            // Core::setConnection2($data);
+            // DB::setDefaultConnection('domain');
+           Tenanti::driver('domain')->asDefaultConnection($domain_exist, 'domain{id}');
+            
             $credentials = ['username'=>$req->username,'password'=>$req->password,'domain_id'=>$req->domain];
            
           
             $errors = Auth::attempt($credentials,true);
-           
+
             if ($errors) { 
+
                 return Redirect::to("/");
             }else{  
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SupplierCategory extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table = 'supplier_category';
 
     

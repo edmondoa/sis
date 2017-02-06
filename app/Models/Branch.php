@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
 {
-    protected $connection = 'domain';
+    //protected $connection = 'domain';
     protected $table ='branch';
     protected $primaryKey = 'branch_id';
     

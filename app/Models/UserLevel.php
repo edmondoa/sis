@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserLevel extends Model
 {
-    protected $connection = 'mysql';
-	protected $table = 'domain_user_level';
+    //protected $connection = 'domain';
+	protected $table = 'user_level';
 }
