@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-
+use Session;
+use Orchestra\Support\Facades\Tenanti;
 class RedirectIfAuthenticated
 {
     /**
@@ -17,11 +18,14 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            //dump(Auth::check());
-            return redirect('/');
-        }
-        // return Auth::check();   
-        return $next($request);
+        
+            if (Auth::guard($guard)->check()) {
+                //dump(Auth::check());
+                return redirect('/');
+            }
+            // return Auth::check();   
+            return $next($request);
+       
+        
     }
 }

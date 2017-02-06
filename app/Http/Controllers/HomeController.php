@@ -30,6 +30,7 @@ class HomeController extends Controller
     public function index()
     {  
        
+
       if(!Core::setConnection())
       {
          return redirect()->intended('login');
