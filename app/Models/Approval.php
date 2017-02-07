@@ -31,7 +31,18 @@ class Approval extends Model
     public function user()
     {
     	return $this->belongsTo('App\User');
-    }			 
+    }
+    public function transfer()
+    {
+        return $this->belongsTo('App\Models\Transfer','branch_id','orig_branch_id');
+    } 
+
+    public function scopeTransfer($query, $branch)
+    {
+        return $query->whereHas('transfer',function($q) use($branch){
+            $q->where('recv_branch_id',$branch);
+        });
+    }  			 
 
     				 
 }

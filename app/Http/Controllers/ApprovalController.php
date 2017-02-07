@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Approval;
 use App\Models\Stockin;
 use App\Models\StockOut;
+use App\Models\Transfer;
 use App\Models\Setting;
 use App\Models\ProductBinCard;
 use Illuminate\Http\Request;
@@ -32,7 +33,35 @@ class ApprovalController extends Controller
     public function approve_list()
     {
         Core::setConnection();
-    	return Approval::with('approvalable','branch','approval_type','user')->where('status','PENDING')->get();
+    	$approvals = Approval::with('approvalable','branch','approval_type','user')
+                            ->where('branch_id',Auth::user()->branch_id)
+                            ->where('status','PENDING')->get();
+        $approvals = array_map(function($app){
+
+            return [
+                'post_date'=> $app['post_date'],
+                'branch_name'=>$app['branch']['branch_name'],
+                'approval_type' => $app['approval_type']['approval'],
+                'user' => $app['user']['firstname'].' '.$app['user']['lastname'],
+                'status' => $app['status']
+            ];
+        },$approvals->toArray() ) ;                   
+       
+        $tranfers = Transfer::with('approval','branch_transfer','user')
+                    ->where('recv_branch_id',Auth::user()->branch_id)
+                    ->where('status','APPROVED')->get();
+        
+        $tranfers = array_map(function($tran){
+
+            return [
+                'post_date'=> $tran['approval']['post_date'],
+                'branch_name'=>$tran['branch_transfer']['branch_name'],
+                'approval_type' => 'STOCK TRANSFER',
+                'user' => $tran['user']['firstname'].' '.$tran['user']['lastname'],
+                'status' => $tran['status']
+            ];
+        },$tranfers->toArray() ) ;             
+        return array_merge($tranfers,$approvals);    
     }
 
     public function update(Request $request,$status,$id)

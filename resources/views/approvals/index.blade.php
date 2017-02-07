@@ -39,9 +39,9 @@
                 <tr dir-paginate="app in approvals |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="app.post_date"></td>                 
-                  <td ng-bind="app.branch.branch_name"></td>  
-                  <td><span ng-bind="app.approval_type.approval"></span></td>                
-                   <td><span ng-bind="app.user.firstname+' '+app.user.lastname"></span></td>
+                  <td ng-bind="app.branch_name"></td>  
+                  <td><span ng-bind="app.approval_type"></span></td>                
+                   <td><span ng-bind="app.user"></span></td>
                   <td><span class="text-info" ng-bind="app.status"></span></td>
                  
                  
