@@ -24,7 +24,7 @@
             // $("#supplier_id").val(data.transfers.supplier_id).trigger("change");
              $("#transfer_id").val(data.transfer.transfer_id)
             console.log(data.transfers)
-            if(data.transfer != null)
+            if(data.transfer != null && data.transfers != 'undefined')
             {
               $("#stockin-div").attr('disabled',true);
               $("#stockitem-div").attr('disabled',false);              
