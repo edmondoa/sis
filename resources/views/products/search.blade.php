@@ -14,7 +14,7 @@
 			<th>Product Code</th>
 			<th>Product Name</th>
 			<th>BarCode</th>
-			@if($src == 'stockout')
+			@if($src == 'stockout' || $src='transfer')
 			<th>Available</th>
 			@endif
 			<th>Price</th>

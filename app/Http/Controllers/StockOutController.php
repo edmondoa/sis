@@ -98,7 +98,7 @@ class StockOutController extends Controller
 					WHERE s.branch_id = $branch AND s.supplier_id = $sup
 				) ";		
         
-        $products = DB::connection('domain')->select($sql);
+        $products = DB::select($sql);
 
        
         $products = array_map(function($product) use($branch){
@@ -141,7 +141,7 @@ class StockOutController extends Controller
 					WHERE s.branch_id = $branch AND s.supplier_id = $sup
 				) LIMIT 15";		
         
-        $products = DB::connection('domain')->select($sql);
+        $products = DB::select($sql);
 
        
         $products = array_map(function($product) use($branch){

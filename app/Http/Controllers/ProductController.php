@@ -119,7 +119,7 @@ class ProductController extends Controller
                 WHERE sc.supplier_id = $sup
                 AND (product_code = '".$search."' OR 
                   barcode = '".$search."') AND p.suspended = 0";
-        $products = DB::connection('domain')->select($sql);
+        $products = DB::select($sql);
         if(count($products) > 0)
             return Response::json(['status'=>true,'products'=>$products]);
         return Response::json(['status'=>false,'products'=>[]]);               
@@ -139,7 +139,7 @@ class ProductController extends Controller
                 AND (product_code LIKE ('%".$search."%') OR 
                   barcode LIKE ('%".$search."%') OR product_name LIKE ('%".$search."%') )
                   AND p.suspended = 0  LIMIT 15";
-        $products = DB::connection('domain')->select($sql);
+        $products = DB::select($sql);
         if(count($products) > 0){            
             return Response::json(['status'=>true,'products'=>$products]);
         }

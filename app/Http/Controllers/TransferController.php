@@ -151,7 +151,7 @@ class TransferController extends Controller
 					WHERE s.branch_id = $branch 
 				) LIMIT 15";		
         
-        $products = DB::connection('domain')->select($sql);
+        $products = DB::select($sql);
 
        
         $products = array_map(function($product) use($branch){
@@ -192,7 +192,7 @@ class TransferController extends Controller
                     WHERE s.branch_id = $branch 
                 ) ";        
         
-        $products = DB::connection('domain')->select($sql);
+        $products = DB::select($sql);
 
        
         $products = array_map(function($product) use($branch){
