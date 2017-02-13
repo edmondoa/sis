@@ -16,7 +16,7 @@
 
     <!-- Main content -->
     <section class="content" ng-controller="approvalCtrl">     
-      <div class='col-md-10'>
+      <div class='col-md-12'>
         <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title">List</h3>
@@ -53,7 +53,8 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="#" ng-click="approved(app)">Approve<i class='pull-right glyphicon glyphicon-thumbs-up'></i> </a></li>
+                        <li ng-show="app.approval_type == 'STOCK TRANSFER'"><a href="#" ng-click="recieve(app)">Recieve<i class='pull-right glyphicon glyphicon-thumbs-up'></i> </a></li>
+                        <li ng-show="app.approval_type != 'STOCK TRANSFER'"><a href="#" ng-click="approved(app)">Approve<i class='pull-right glyphicon glyphicon-thumbs-up'></i> </a></li>
                         <li><a href="#" ng-click="dis_approved(app)">Decline<i class='pull-right glyphicon glyphicon-thumbs-down'></i> </a></li>
                         <li><a href="#" class='show-stock' data-type="@{{app.approval_type.approval}}"data-id="@{{app.approvalable_id}}">Show <i class="pull-right glyphicon glyphicon-eye-open"/></i></a></li>
                       </ul>

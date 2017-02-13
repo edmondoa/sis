@@ -23,7 +23,7 @@
             $("#branch_id_to").val(data.transfer.recv_branch_id).trigger("change");
             // $("#supplier_id").val(data.transfers.supplier_id).trigger("change");
              $("#transfer_id").val(data.transfer.transfer_id)
-            console.log(data.transfers)
+            
             if(data.transfer != null && (typeof data.transfers != 'undefined'))
             {
               $("#stockin-div").attr('disabled',true);

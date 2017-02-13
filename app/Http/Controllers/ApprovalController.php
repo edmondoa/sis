@@ -77,7 +77,7 @@ class ApprovalController extends Controller
     	
         if($approval->save())
     	{
-            if($status == 'APPROVED' && $other_detail['type']!='TRO')
+            if(($status == 'APPROVED' && $other_detail['type']!='TRO') || $status == 'RECEIVED' )
     		    $approval->approvalable->series_id = $this->series_id($approval->approval_type_id, $approval->approvalable->branch_id);
     		$approval->approvalable->status = $status;
     		
@@ -85,7 +85,10 @@ class ApprovalController extends Controller
     		{
                 if($status == 'APPROVED' && $other_detail['type']!='TRO')
                     ProductBinCard::insert($approval->approvalable->items,$other_detail['reference'],$other_detail['type'],$other_detail['negative']);
-    			return Response::json(['status'=>true,'message' => "Successfuly ".strtolower($status)."!"]);
+    			if($status == 'RECEIVED'){
+                    ProductBinCard::insert($approval->approvalable->items,$other_detail['reference'],$other_detail['type'],$other_detail['negative']);
+                }
+                return Response::json(['status'=>true,'message' => "Successfuly ".strtolower($status)."!"]);
         
     		}
     	}

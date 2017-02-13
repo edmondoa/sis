@@ -150,7 +150,7 @@
                 <li ng-repeat="item in task"><!-- Task item -->
                   <a href="#">
                     <h3>
-                      <span ng-bind='item.branch.branch_name +" has new "+item.approval_type.approval'></span>
+                      <span ng-bind='item.branch_name +" has new "+item.approval_type'></span>
                     </h3>
                     
                   </a>
