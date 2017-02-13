@@ -73,7 +73,7 @@ class LoginController extends Controller
             // dump($data);
             // Core::setConnection2($data);
             // DB::setDefaultConnection('domain');
-           Tenanti::driver('domain')->asDefaultConnection($domain_exist, 'domain{id}');
+           Tenanti::driver('master')->asDefaultConnection($domain_exist, 'domain{id}');
             
             $credentials = ['username'=>$req->username,'password'=>$req->password,'domain_id'=>$req->domain];
            

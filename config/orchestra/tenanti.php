@@ -25,7 +25,12 @@ return [
     */
 
     'drivers' => [
-        'domain' => [
+        'master' => [
+            'model'  => 'App\User',
+            'path'   => database_path('tenant/domain'),
+            'shared' => false,
+        ],
+        'slave' => [
             'model'  => 'App\User',
             'path'   => database_path('tenant/domain'),
             'shared' => false,

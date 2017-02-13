@@ -14,7 +14,7 @@ class Core
             Auth::logout();
             return false;
         }else{
-			Tenanti::driver('domain')->asDefaultConnection(Session::get('domain_exist'), 'domain{id}');
+			Tenanti::driver('master')->asDefaultConnection(Session::get('domain_exist'), 'domain{id}');
 			return true;
 		}
 	}

@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $entity = new User;
-        Tenanti::connection('domain', function ($entity, array $config) {
+        Tenanti::connection('master', function ($entity, array $config) {
             $config['database'] = "domain{$entity->getKey()}"; 
             // refer to config under `database.connections.tenants.*`.
 
