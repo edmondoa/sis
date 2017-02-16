@@ -19,7 +19,7 @@
             $scope.stockins = data.prodlist;          
             if(data.stockin.branch_id)
             {
-              $("#stockin-div").attr('disabled',true);
+              $(':input','a','#stockitem-div').attr('disabled',true);
               $("#stockitem-div").attr('disabled',false);
               
               $("select#branch_id").val(data.stockin.branch_id).trigger("change");
