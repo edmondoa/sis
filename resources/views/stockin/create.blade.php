@@ -1,132 +1,94 @@
 <div class="box box-info">
-  <div class="box-body"> 
-  <fieldset class='col-sm-5' id='stockin-div'>
-    <div class="box-header with-border">
-      <h3 class="box-title">Add Stockin 
-      	
-      </h3>
-    </div> 
-        
-    <form class='form-horizontal'>
-      @if(Auth::user()->level_id > 2) 
-      <div class="form-group ">
-        <label for="inputEmail3"  class="col-sm-4 control-label">Branch</label>
-         
-        <div class="col-sm-7">
-          <select class="form-control select2 stock "  id="branch_id" tabindex="1">
-              <option value="">Select Branch</option>
-              @foreach($branches as $branch)
-                <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
-              @endforeach
-          </select>         
-        </div>        
-      </div>
-      @else
-        <div class="form-group ">
-          <label for="inputEmail3"  class="col-sm-4 control-label">Branch</label>
-           
-          <div class="col-sm-7">
+  <div class="box-body">   
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class='form-horizontal'>
+        <div class="row" style="min-height:145px" id='stockin-div'>
+          <div class="col-md-4" >          
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-4 control-label">Branch</label>
 
-            <label class='form-control'>{{Auth::user()->branch->branch_name}}</label>      
-            <input type='hidden' id="branch_id"  name='branch_id' value="{{Auth::user()->branch_id}}"/>
-          </div>        
-        </div>
-        
-        @endif
-      <div class="form-group ">
-        <label for="inputEmail3"  class="col-sm-4 control-label">Supplier</label>
-
-        <div class="col-sm-7">
-          <select class="form-control select2 stock"  id='supplier_id' tabindex="2">
-          	<option value="">Select Supplier</option>
-            @foreach($suppliers as $sup)
-              <option value="{{$sup->supplier_id}}">{{$sup->supplier_name}}</option>
-            @endforeach
-          </select>         
-        </div>
-      </div>
-      <div class="form-group ">  
-        <label for="inputEmail3"  class="col-sm-4 control-label">Doc #</label>
-
-        <div class="col-sm-7"> 
-            <input type="text" class="form-control " id="doc_no" tabindex="3">
-        </div>
-      </div>
-      <div class="form-group ">
-        <label for="inputEmail3"  class="col-sm-4 control-label">Doc Date</label>
-
-        <div class="col-sm-7"  >          
-          <div class="input-group"> 
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>           
-            <input type="text" class="form-control  calendar" id="doc_date" tabindex="6">
+              <div class="col-sm-8">
+                @if(Auth::user()->level_id > 2) 
+                  <select class="form-control select2 stock "  id="branch_id" tabindex="1">
+                    <option value="">Select Branch</option>
+                    @foreach($branches as $branch)
+                      <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
+                    @endforeach
+                  </select>
+                @else                  
+                  <label class='form-control'>{{Auth::user()->branch->branch_name}}</label>      
+                  <input type='hidden' id="branch_id"  name='branch_id' value="{{Auth::user()->branch->branch_id}}"/>
+                @endif 
+              </div>
+            </div> 
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-4 control-label">Supplier</label>
+              <div class="col-sm-8">
+                <select class="form-control select2 stock"  id='supplier_id' tabindex="2">
+                  <option value="">Select Supplier</option>
+                  @foreach($suppliers as $sup)
+                    <option value="{{$sup->supplier_id}}">{{$sup->supplier_name}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>            
+          </div>
+          <div class="col-md-4" >            
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-4 control-label">Doc #</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control " id="doc_no" tabindex="3">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-4 control-label">Doc Date</label>
+              <div class="col-sm-8">
+                <div class="input-group"> 
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>           
+                  <input type="text" class="form-control  calendar" id="doc_date" tabindex="6">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" >
+            
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-4 control-label">Arrived Date</label>
+              <div class="col-sm-8">
+                <div class="input-group ">
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  <input type="text" class="form-control  calendar" id="arrive_date" tabindex="4">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-4 control-label">Total</label>
+              <div class="col-sm-8">
+                <div class="input-group amount-due">
+                  <span class="input-group-addon">&#8369;</span>
+                  <input type="text" class="form-control stock" id="amount_due" placeholder="0.00" tabindex="5">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-4 control-label"></label>
+              <div class="col-sm-8"> 
+                <a href="javascript:void(0)" class='btn btn-primary  ' ng-click="saveStockin()" style="width:100%" tabindex="7"> Proceed</a>             
+              </div>
+            </div>            
           </div>
         </div>
-      </div>
-      <div class="form-group ">    
-        <label for="inputEmail3"  class="col-sm-4 control-label">Total</label>
-        <div class="col-sm-7">          
-          <div class="input-group amount-due">
-            <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control stock" id="amount_due" placeholder="0.00" tabindex="5">
-          </div> 
-        </div>
-      </div>
-      <div class="form-group ">  
-        <label for="inputEmail3"  class="col-sm-4 control-label">Arrive Date</label>
+      </form>  
+    </div>
+  </div>    
 
-        <div class="col-sm-7 "  >          
-          <div class="input-group ">
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            <input type="text" class="form-control  calendar" id="arrive_date" tabindex="4">
-          </div>
-        </div> 
-      </div>  
-        
-        
-      <div class='col-sm-2'></div>
-      <div class="col-sm-8" > 
-        <a href="javascript:void(0)" class='btn btn-primary  ' ng-click="saveStockin()" style="width:100%" tabindex="7"> Proceed</a>
-      </div>
-    </form>  
-  </fieldset>
-
-  <fieldset class='col-sm-7 disabled-all' id='stockitem-div' disabled> 
-    <table class='table'>
-      <tr>
-        <td class="col-sm-2"></td>
-        <td class="col-sm-2">Cat Code</td>
-        <td class="col-sm-4">Product</td>
-        <td class="col-sm-1">CPrice</td>
-        <td class="col-sm-1">Qty</td>
-        <td class="col-sm-2"></td>
-      </tr>
-      <tr>
-        <td>
-          <div class="input-group">            
-            <input type="text" class="form-control " id="search" name='search' tabindex="8" style='padding:6px 2px !important'>
-            <a href="#" class='btn btn-sm btn-default input-group-addon  search-prod'>..</a>
-          </div>
-        </td>
-        <td><span  id="code"></span></td>
-        <td><span  id="name"></span></td>
-        <td>
-          <input type="text" class="form-control " id="cprice" name='cprice' style='padding:6px 2px !important'>
-          <input type="hidden" class="form-control " id="prod_id" name='prod_id' > 
-        </td>
-        <td>          
-          <input type="text" class="form-control " id="qty" name='qty' tabindex="9" style='padding:6px 2px !important'>
-          <input type="hidden" class="form-control " id="locked" name='locked'>
-        </td>
-        <td><a href="#" class='btn btn-primary btn-add' tabindex="10">Add</a></td>
-      </tr>
-    </table>    
-
-    
+  <fieldset class='col-sm-12 disabled-all' id='stockitem-div' disabled> 
    
-    <table class='table table-bordered table-hover dataTable' style="background-color: #f4f4f4;">
+    <table class='table table-bordered table-hover dataTable invoice' >
     	<thead>
     		<th class='col-sm-2'>Prod Code</th>
-    		<th>Prod Name</th>
+    		<th class='col-sm-6'>Prod Name</th>
     		<th class='col-sm-1'>Cost Price</th>          
     		<th class='col-sm-1'>Qty</th>
     		<th class='col-sm-1'>Total</th>
@@ -144,11 +106,33 @@
     	</tbody>
     	
     	<tfoot>
-    		
-    		<td colspan="2"></td>
-    		<td></td>          
-    		<td><strong id='totalQuantity'>0</strong></td>
-    		<td><strong id='totalCost'>0.00</strong></td>
+    		<tr>
+      		<td colspan="2"></td>
+      		<td></td>          
+      		<td><strong id='totalQuantity'>0</strong></td>
+      		<td><strong id='totalCost'>0.00</strong></td>
+        </tr>
+        <tr >
+          <td>
+            <div class="input-group">            
+              <input type="text" class="form-control " id="search" name='search' tabindex="8" style='padding:6px 2px !important'>
+              <a href="#" class='btn btn-sm btn-default input-group-addon  search-prod'>..</a>
+            </div>
+          </td>
+          <td><span  id="name"></td>
+          <td>
+            <input type="text" class="form-control " id="cprice" name='cprice' style='padding:6px 2px !important'>
+            <input type="hidden" class="form-control " id="prod_id" name='prod_id' >
+          </td>
+          <td>
+            <input type="text" class="form-control " id="qty" name='qty' tabindex="9" style='padding:6px 2px !important'>
+            <input type="hidden" class="form-control " id="locked" name='locked'>
+          </td>
+          <td></td>
+          <td>
+            <a href="#" class='btn btn-primary btn-add' tabindex="10">Add</a>
+          </td>
+        </tr>
     	</tfoot>
     </table>  
       

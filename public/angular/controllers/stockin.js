@@ -16,24 +16,20 @@
         
         $http.get('/stockin/ng-stockin-list').
           success(function(data) {
-            $scope.stockins = data.prodlist;
-            $("#branch_id").val(data.stockin.branch_id).trigger("change");
-            $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
-            $("#doc_no").val(data.stockin.doc_no);
-            $("#amount_due").val(data.stockin.amount_due);
-            $("#doc_date").val(data.stockin.doc_date);
-            $("#arrive_date").val(data.stockin.arrive_date);
-            console.log(data.stockin)
+            $scope.stockins = data.prodlist;          
             if(data.stockin.branch_id)
             {
               $("#stockin-div").attr('disabled',true);
               $("#stockitem-div").attr('disabled',false);
               
-              // $('.btn-save').removeClass('disabled');
-              // $('.search-prod').removeClass('disabled');
-              // $("a.stock").addClass('disabled');
-              // $("input.stock").attr('readonly',true);
-               $("select.stock").attr('disabled',true);
+              $("select#branch_id").val(data.stockin.branch_id).trigger("change");
+              $("input#branch_id").val(data.stockin.branch_id);
+              $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
+              $("#doc_no").val(data.stockin.doc_no);
+              $("#amount_due").val(data.stockin.amount_due);
+              $("#doc_date").val(data.stockin.doc_date);
+              $("#arrive_date").val(data.stockin.arrive_date);
+              $("select.stock").attr('disabled',true);
             }else{
               $("#stockin-div").attr('disabled',false);
 

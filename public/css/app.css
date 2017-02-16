@@ -1,2 +1,6 @@
 
 .disabled-all{}
+table.invoice thead>tr>th {
+   background-color: #777!important;
+   color: #fff;
+}

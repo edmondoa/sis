@@ -57,7 +57,7 @@ class LoginController extends Controller
         
         
         $domain = $req->domain; 
-        $domain_exist = Domain::with('master')->where('domain_id',$domain)->first();
+        $domain_exist = Domain::where('domain_id',$domain)->first();
         
         if($domain_exist)
         {
@@ -66,10 +66,10 @@ class LoginController extends Controller
                 return Redirect::back()->withErrors(['Finance concern']);
             
             
-            $data['host']=$domain_exist->master->hostname;
-            $data['database']=$domain_exist->dbname;
-            $data['password']=$domain_exist->master->password;
-            $data['username']=$domain_exist->master->username;
+            // $data['host']=$domain_exist->master->hostname;
+            // $data['database']=$domain_exist->dbname;
+            // $data['password']=$domain_exist->master->password;
+            // $data['username']=$domain_exist->master->username;
             // dump($data);
             // Core::setConnection2($data);
             // DB::setDefaultConnection('domain');
