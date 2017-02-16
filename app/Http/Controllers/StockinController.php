@@ -80,12 +80,12 @@ class StockinController extends Controller
         }
         $prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	
-    	// $prod = Product::find($req->id);
-     //    $prod->quantity = $req->qty;
-     //    $prod->cost_price = $req->costprice;
-     //    $prod->total = $req->qty * $req->costprice; 
+    	$prod = Product::find($req->id);
+        $prod->quantity = $req->qty;
+        $prod->cost_price = $req->costprice;
+        $prod->total = $req->qty * $req->costprice; 
         		
-    	// array_unshift($prodlist,$prod);
+    	 array_push($prodlist,$prod);
     	   	
     	Session::put('prodlist',$prodlist);
     	$jdata['prodlist'] =$prodlist;
