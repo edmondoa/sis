@@ -18,9 +18,12 @@
           success(function(data) {
             $scope.stockins = data.prodlist;          
             if(data.stockin.branch_id)
-            {
-              $(':input','a','#stockitem-div').attr('disabled',true);
-              $("#stockitem-div").attr('disabled',false);
+            {             
+              $('#stockin-div :input,a').attr('disabled',true);
+              $('.btn-proceed').attr('disabled',true);
+              $("select.stock").attr('disabled',true);
+
+              $("#stockitem-div :input,a").removeAttr('disabled');
               
               $("select#branch_id").val(data.stockin.branch_id).trigger("change");
               $("input#branch_id").val(data.stockin.branch_id);
@@ -29,13 +32,12 @@
               $("#amount_due").val(data.stockin.amount_due);
               $("#doc_date").val(data.stockin.doc_date);
               $("#arrive_date").val(data.stockin.arrive_date);
-              $("select.stock").attr('disabled',true);
+              
             }else{
-              $("#stockin-div").attr('disabled',false);
-
-
-              $(':input','a','#stockitem-div').attr("disabled",true)
-              $("#stockitem-div").attr('disabled',true);
+              $("#stockin-div :input, a").removeAttr('disabled');             
+               $("select.stock").removeAttr('disabled');
+              $('#stockitem-div :input,a').attr("disabled",true)
+             
             }
 
             $scope.total(data.prodlist);
