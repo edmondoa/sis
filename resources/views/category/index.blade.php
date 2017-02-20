@@ -72,7 +72,7 @@
       <div class='col-md-7'>
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">List</h3>
+            @include('layouts.search')
           </div>
           <a href="#" ng-click="getCategories()" class="hide refresh"></a>
           

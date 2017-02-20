@@ -21,7 +21,7 @@
       <div class='col-md-7'>
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">List</h3>
+            @include('layouts.search')
           </div>
           <a href="#" ng-click="getProducts()" class="hide refresh"></a>
             <!-- /.box-header -->
@@ -35,7 +35,7 @@
                 <th style="width: 60px">Action</th>
               </tr>
               <tbody>
-                <tr dir-paginate="prod in products | myFilter:product.category_id|itemsPerPage: pageSize" current-page="currentPage">
+                <tr dir-paginate="prod in products |filter:searchQry| myFilter:product.category_id|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="prod.product_name"></td>
                   <td ng-bind="prod.category.category_name"></td>

@@ -21,7 +21,7 @@
       <div class='col-md-7'>
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">List</h3>
+            @include('layouts.search')
           </div>
           <a href="#" ng-click="Storages()" class="hide refresh"></a>
           
@@ -36,7 +36,7 @@
               </tr>
               <tbody>
 
-                <tr dir-paginate="storage in storages | myFilter:pr.branch_id|itemsPerPage: pageSize" current-page="currentPage">
+                <tr dir-paginate="storage in storages | filter:searchQry|myFilter:pr.branch_id|itemsPerPage: pageSize" current-page="currentPage">
                   <td ng-bind="$index + 1"></td>
                   <td ng-bind="storage.branch.branch_name"></td>
                   <td ng-bind="storage.storage_name"></td>                  

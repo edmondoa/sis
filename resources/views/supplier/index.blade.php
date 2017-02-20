@@ -23,13 +23,12 @@
       <div class='col-md-7'>
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">List</h3>
+            @include('layouts.search')
           </div>
           <a href="#" ng-click="getSuppliers()" class="hide refresh"></a>
           
             <!-- /.box-header -->
-          <div class="box-body">
-             <input type='text' ng-model='searchQry' class='form-control'/>
+          <div class="box-body">            
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px">#</th>  
