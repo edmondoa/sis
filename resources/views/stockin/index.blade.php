@@ -161,13 +161,14 @@
       var prod_id = [];
       var costprice = [];
       var updated_price = [];
+      var notes = $("name['notes']").val();
       $('.quantity').each(function () { 
         quantity.push($(this).val());
         prod_id.push($(this).data('prodid'));
         costprice.push($(this).data('costprice')) ;
         updated_price.push($(this).parent('td').siblings('td').find('input.updated_price').val());
       }); 
-      stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice,'updated_price':updated_price};
+      stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice,'updated_price':updated_price,'notes':notes};
       console.log(stocks);
       $.post('stockin-float/save',stocks,function(data){
         message(data);
