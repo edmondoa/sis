@@ -161,7 +161,7 @@
       var prod_id = [];
       var costprice = [];
       var updated_price = [];
-      var notes = $("name['notes']").val();
+      var notes = $("[name='notes']").val();
       $('.quantity').each(function () { 
         quantity.push($(this).val());
         prod_id.push($(this).data('prodid'));
