@@ -19,12 +19,14 @@
             $scope.stockins = data.prodlist;          
             if(data.stockin.branch_id)
             {             
-              $('#stockin-div :input,a').attr('disabled',true);
+              $('#stockin-div :input').attr('disabled',true);
+              $('#stockin-div .btn-proceed').attr('disabled',true);
               $('.btn-proceed').attr('disabled',true);
               $("select.stock").attr('disabled',true);
 
-              $("#stockitem-div :input,a").removeAttr('disabled');
-              
+              $("#stockitem-div :input").removeAttr('disabled');
+              $('#stockitem .btn-add').removeAttr('disabled');
+
               $("select#branch_id").val(data.stockin.branch_id).trigger("change");
               $("input#branch_id").val(data.stockin.branch_id);
               $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
@@ -34,9 +36,11 @@
               $("#arrive_date").val(data.stockin.arrive_date);
               
             }else{
-              $("#stockin-div :input, a").removeAttr('disabled');             
-               $("select.stock").removeAttr('disabled');
-              $('#stockitem-div :input,a').attr("disabled",true)
+              $("#stockin-div :input").removeAttr('disabled');             
+              $("select.stock").removeAttr('disabled');
+              $('#stockin-div .btn-proceed').removeAttr('disabled');
+              $('#stockitem-div :input').attr("disabled",true)
+              $('#stockitem-div .btn-add').attr('disabled',true);
              
             }
 
