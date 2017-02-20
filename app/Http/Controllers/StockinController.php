@@ -58,11 +58,12 @@ class StockinController extends Controller
     	$input['type'] = "PURCHASE";
     	$input['post_date'] = date("Y-m-d");
     	
-    	$validate = Validator::make($input, Stockin::$rules);
+    	$validate = Validator::make($input, $this->rules($input['branch_id']));
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
         }
+
 
         Session::put('stockinFloat',$input);
 
@@ -199,6 +200,13 @@ class StockinController extends Controller
         $pdf = PDF::loadView('pdf.stockin', $data);
         return $pdf->download($filename);
     }
+
+    private function rules($branch_id){
+        return [
+        'supplier_id' => 'required',
+        'branch_id' => 'required',        
+        'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id];
+    } 
 
     
 }

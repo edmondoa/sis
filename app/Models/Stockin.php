@@ -12,7 +12,7 @@ class Stockin extends Model
 
     public static $rules = ['supplier_id' => 'required',
     						'branch_id' => 'required',
-    						'doc_no' => 'required']; 
+    						'doc_no' => 'required|unique_with:stockin,branch_id']; 
 
     protected $fillable = ['branch_id','notes' ,'supplier_id',
     						'type','doc_no','doc_date','status','encode_date',
