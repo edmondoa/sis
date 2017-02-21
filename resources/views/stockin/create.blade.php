@@ -46,7 +46,7 @@
               <div class="col-sm-8">
                 <div class="input-group"> 
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>           
-                  <input type="text" class="form-control  calendar" id="doc_date" tabindex="6">
+                  <input type="text" class="form-control  calendar" id="doc_date" tabindex="4">
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
               <div class="col-sm-8">
                 <div class="input-group ">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <input type="text" class="form-control  calendar" id="arrive_date" tabindex="4">
+                  <input type="text" class="form-control  calendar" id="arrive_date" tabindex="5">
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@
               <div class="col-sm-8">
                 <div class="input-group amount-due">
                   <span class="input-group-addon">&#8369;</span>
-                  <input type="text" class="form-control stock" id="amount_due" placeholder="0.00" tabindex="5">
+                  <input type="text" class="form-control stock" id="amount_due" placeholder="0.00" tabindex="6">
                 </div>
               </div>
             </div>
@@ -85,12 +85,12 @@
        
         <table class='table table-bordered table-hover dataTable invoice' >
         	<thead>
-        		<th class='col-sm-2'>Prod Code</th>
-        		<th class='col-sm-6'>Prod Name</th>
+        		<th class='col-sm-2'>Product Code</th>
+        		<th class='col-sm-6'>Product Name</th>
         		<th class='col-sm-1'>Cost Price</th>          
-        		<th class='col-sm-1'>Qty</th>
+        		<th class='col-sm-1'>Quantity</th>
         		<th class='col-sm-1'>Total</th>
-            <th class='col-sm-1'></th>
+            <th class='col-sm-1'>Action</th>
         	</thead>
         	<tbody>
         		<tr ng-repeat="stock in stockins" id="@{{$index}}">
@@ -138,7 +138,7 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab_1" data-toggle="tab"><strong>Note</strong></a></li>
+                <li class="active"><a href="#tab_1" data-toggle="tab"><strong>Notes</strong></a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
