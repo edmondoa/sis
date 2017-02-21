@@ -63,7 +63,14 @@ class LoginController extends Controller
         {
             Session::put('domain_exist',$domain_exist);
             if($domain_exist->db_populated==0)
-                return Redirect::back()->withErrors(['Finance concern']);
+                return Redirect::back()->withErrors(['Domain database not yet ready!']);
+
+            if($domain_exist->lock==1)
+                return Redirect::back()->withErrors(['Domain had been locked by owner!']);
+
+            if($domain_exist->suspended==1)
+                return Redirect::back()->withErrors(['Domain had been administratively suspended!']);
+
             
             
             // $data['host']=$domain_exist->master->hostname;
@@ -89,7 +96,7 @@ class LoginController extends Controller
                 return Redirect::back()->withErrors(['Invalid user!']);
             }   
         }else{
-            return Redirect::back()->withErrors(['Domain does not exist']);
+            return Redirect::back()->withErrors(['Domain ID does not exist!']);
         }
           
         

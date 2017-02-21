@@ -37,7 +37,7 @@
         <div class="col-sm-8">          
           <div class="input-group">
             <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control" id="" ng-model='product.retail_price' placeholder="100.00">
+            <input type="text" class="form-control" id="" ng-model='product.retail_price' placeholder="0.00">
             
           </div>
         </div>
@@ -48,7 +48,7 @@
         <div class="col-sm-8">
          <div class="input-group">
             <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control" id="" ng-model='product.cost_price' placeholder="100.00">
+            <input type="text" class="form-control" id="" ng-model='product.cost_price' placeholder="0.00">
             
           </div>
           

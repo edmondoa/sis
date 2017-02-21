@@ -62,7 +62,7 @@
         <div class="col-sm-9">          
           <div class="input-group">
             <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control"  value="{{$product->retail_price}}" name='retail_price' placeholder="100.00">
+            <input type="text" class="form-control"  value="{{$product->retail_price}}" name='retail_price' placeholder="0.00">
             
           </div>
         </div>
@@ -73,7 +73,7 @@
         <div class="col-sm-9">
          <div class="input-group">
             <span class="input-group-addon">&#8369;</span>
-            <input type="text" class="form-control"  value="{{$product->cost_price}}" name='cost_price' placeholder="100.00">
+            <input type="text" class="form-control"  value="{{$product->cost_price}}" name='cost_price' placeholder="0.00">
             
           </div>
           

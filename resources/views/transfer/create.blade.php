@@ -2,7 +2,7 @@
   <div class="box-body"> 
   <fieldset class='col-sm-5' id='stockin-div'>
     <div class="box-header with-border">
-      <h3 class="box-title">Transfer 
+      <h3 class="box-title">InterBranch Transfer 
       	
       </h3>
     </div> 
