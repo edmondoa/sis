@@ -206,8 +206,8 @@ class StockinController extends Controller
         'supplier_id' => 'required',
         'branch_id' => 'required',        
         'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,
-        'doc_date' => 'required|date|after_equal:'.$post_date,
-        'arrive_date' => 'required|date|after_equal:doc_date'];
+        'doc_date' => 'required|date|after:'.$post_date,
+        'arrive_date' => 'required|date|after:doc_date'];
 
     } 
 
