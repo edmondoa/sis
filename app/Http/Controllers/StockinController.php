@@ -55,8 +55,7 @@ class StockinController extends Controller
         }
         $input = $req->all();     		
     	$input['user_id'] = Auth::user()->user_id;
-    	$input['type'] = "PURCHASE";
-    	$input['post_date'] = date("Y-m-d");
+    	$input['type'] = "PURCHASE";    	
     	$post_date = Setting::first()->pluck('post_date')[0];
     	$validate = Validator::make($input, $this->rules($input['branch_id'],$post_date));
         if($validate->fails())
@@ -207,7 +206,8 @@ class StockinController extends Controller
         'branch_id' => 'required',        
         'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,
         'doc_date' => 'required|date|after:'.$post_date,
-        'arrive_date' => 'required|date|after:doc_date'];
+        'arrive_date' => 'required|date|after:doc_date',
+        'amount_due' => 'required|numeric'];
 
     } 
 
