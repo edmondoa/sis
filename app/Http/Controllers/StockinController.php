@@ -84,7 +84,7 @@ class StockinController extends Controller
     	$prod = Product::find($req->id);
         $prod->quantity = $req->qty;
         $prod->cost_price = $req->costprice;
-        $prod->total = $req->qty * $req->costprice; 
+        $prod->total = number_format(($req->qty * $req->costprice), 2); 
         		
     	 array_push($prodlist,$prod);
     	   	
