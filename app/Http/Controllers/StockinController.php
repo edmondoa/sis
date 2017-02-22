@@ -57,8 +57,8 @@ class StockinController extends Controller
     	$input['user_id'] = Auth::user()->user_id;
     	$input['type'] = "PURCHASE";
     	$input['post_date'] = date("Y-m-d");
-    	
-    	$validate = Validator::make($input, $this->rules($input['branch_id']));
+    	$post_date = Setting::first()->pluck('post_date')[0];
+    	$validate = Validator::make($input, $this->rules($input['branch_id'],$post_date));
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
@@ -201,11 +201,14 @@ class StockinController extends Controller
         return $pdf->download($filename);
     }
 
-    private function rules($branch_id){
+    private function rules($branch_id,$post_date){
         return [
         'supplier_id' => 'required',
         'branch_id' => 'required',        
-        'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id];
+        'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,
+        'doc_date' => 'required|date|after_equal:'.$post_date,
+        'arrive_date' => 'required|date|after_equal:doc_date'];
+
     } 
 
     

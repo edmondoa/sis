@@ -89,7 +89,7 @@
                   
         });
         $("#totalQuantity").text(totalQuantity);    
-        $("#totalCost").text(parseFloat(totalCost));
+        $("#totalCost").text(totalCost.toFixed(2));
       }
 
       $scope.cancel = function()
