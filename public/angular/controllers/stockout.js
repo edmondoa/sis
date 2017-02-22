@@ -18,20 +18,27 @@
           success(function(data) {
             $scope.stockins = data.prodlist;
             console.log(data.stockout)
-            $("#branch_id").val(data.stockout.branch_id).trigger("change");
-            $("#supplier_id").val(data.stockout.supplier_id).trigger("change");
-            $("#stockout_id").val(data.stockout.stockout_id)
+            
             console.log(data.stockout)
             if(data.stockout.branch_id)
             {
-              $("#stockin-div").attr('disabled',true);
-              $("#stockitem-div").attr('disabled',false);              
-               $("select.stock").attr('disabled',true);
-            }else{
-              $("#stockin-div").attr('disabled',false);
+              $('#stockout-div :input').attr('disabled',true);
+              $('#stockout-div .btn-proceed').attr('disabled',true);                          
+              $("select.stock").attr('disabled',true);
 
-              $(':input','a','#stockitem-div').attr("disabled",true)
-              $("#stockitem-div").attr('disabled',true);
+              $("#stockitem-div :input").removeAttr('disabled');
+              $('#stockitem .btn-add').removeAttr('disabled');
+
+              $("#branch_id").val(data.stockout.branch_id).trigger("change");
+              $("#supplier_id").val(data.stockout.supplier_id).trigger("change");
+              $("#stockout_id").val(data.stockout.stockout_id) 
+              $("input#branch_id").val(data.stockout.branch_id);
+            }else{
+              $('#stockout-div :input').removeAttr('disabled');
+              $('#stockout-div .btn-proceed').removeAttr('disabled');                          
+              $("select.stock").removeAttr('disabled');
+              $("#stockitem-div :input").attr('disabled',true);
+              $('#stockitem .btn-add').attr('disabled',true);
             }
 
             $scope.total(data.prodlist);

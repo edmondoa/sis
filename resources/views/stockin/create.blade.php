@@ -87,18 +87,18 @@
         	<thead>
         		<th class='col-sm-2'>Prod Code</th>
         		<th class='col-sm-6'>Prod Name</th>
-        		<th class='col-sm-1'>Cost Price</th>          
-        		<th class='col-sm-1'>Qty</th>
-        		<th class='col-sm-1'>Total</th>
+        		<th class='col-sm-1 text-right'>Cost Price</th>          
+        		<th class='col-sm-1 text-right'>Qty</th>
+        		<th class='col-sm-1 text-right'>Total</th>
             <th class='col-sm-1'></th>
         	</thead>
         	<tbody>
         		<tr ng-repeat="stock in stockins" id="@{{$index}}">
         			<td ng-bind="stock.product_code"></td>
           		<td ng-bind="stock.product_name"></td>
-          		<td ng-bind="stock.cost_price"></td>                        
-          		<td ng-bind="stock.quantity"></td>
-          		<td><span class='total' >@{{stock.total}}</span></td>
+          		<td class="text-right"ng-bind="stock.cost_price"></td>                        
+          		<td class="text-right"ng-bind="stock.quantity"></td>
+          		<td class="text-right"><span class='total' ng-bind="stock.total"></span></td>
               <td><a href="javascript:void(0)" title="Remove Item" ng-click="removeItem($index)"><i class="fa fa-trash text-red"></i></a></td>
         		</tr>
         	</tbody>
@@ -107,8 +107,8 @@
         		<tr>
           		<td colspan="2"></td>
           		<td></td>          
-          		<td><strong id='totalQuantity'>0</strong></td>
-          		<td><strong id='totalCost'>0.00</strong></td>
+          		<td class="text-right"><strong id='totalQuantity'>0</strong></td>
+          		<td class="text-right"><strong id='totalCost'>0.00</strong></td>
             </tr>
             <tr >
               <td>
