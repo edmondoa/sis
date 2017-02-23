@@ -4,12 +4,12 @@
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
       <h1>
-        Stockin     
+        StockIn     
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class=""><i class="fa fa-circle"></i> Products</li>
-        <li class="active"><i class="fa fa-circle"></i> Stockin</li>
+        <li class="active"><i class="fa fa-circle"></i> StockIn</li>
       </ol>
     </section>
 
