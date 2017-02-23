@@ -30,8 +30,29 @@
   var model ={};
   $(function(){
     $(".select2").select2();
+    
 
   })
+
+  $(document).ready(function(){
+      var date = new Date('{{$post_date}}');
+    
+    console.log(date)
+    $('#doc_date').datepicker({
+            autoclose: true,                 
+            startDate: date,                  
+          
+    });
+
+    $("#doc_date").change(function(){
+      var arrive_date = new Date($(this).val());
+      $('#arrive_date').datepicker({
+            autoclose: true,                 
+            startDate: arrive_date,                  
+          
+    });
+    })
+  });
 
   $(document).on("click",'.search-prod',function(e){
     e.preventDefault();   

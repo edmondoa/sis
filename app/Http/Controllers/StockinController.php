@@ -22,7 +22,7 @@ use Config;
 class StockinController extends Controller
 {
     public function __construct()
-    {        
+    {
         $this->middleware('web');
     }
 
@@ -31,17 +31,17 @@ class StockinController extends Controller
     	if(!Core::setConnection())
         {
             return redirect()->intended('login');
-        }  
+        }
         $suppliers = Supplier::get();
 
     	$branches = Branch::get();
-       
-    	return view('stockin.index',compact('suppliers','branches'));
+        $post_date = Setting::first()->pluck('post_date')[0];
+    	return view('stockin.index',compact('suppliers','branches','post_date'));
     }
 
     public function search()
     {
-        if(!Core::setConnection()){           
+        if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         $src ="stockin";
@@ -50,12 +50,12 @@ class StockinController extends Controller
 
     public function stockFloat(Request $req)
     {
-    	if(!Core::setConnection()){           
+    	if(!Core::setConnection()){
             return Redirect::to("/login");
         }
-        $input = $req->all();     		
+        $input = $req->all();
     	$input['user_id'] = Auth::user()->user_id;
-    	$input['type'] = "PURCHASE";    	
+    	$input['type'] = "PURCHASE";
     	$post_date = Setting::first()->pluck('post_date')[0];
     	$validate = Validator::make($input, $this->rules($input['branch_id'],$post_date));
         if($validate->fails())
@@ -67,26 +67,26 @@ class StockinController extends Controller
         Session::put('stockinFloat',$input);
 
         //$stockinFloat = //StockinFloat::create($input);
-        //if($stockinFloat)        
+        //if($stockinFloat)
         return Response::json(['status'=>true,'message' => "Successfuly added!",'stockin'=>$input]);
-        
-        //return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);	
+
+        //return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
     public function stockFloatItems(Request $req)
     {
-    	if(!Core::setConnection()){           
+    	if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         $prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
-    	
+
     	$prod = Product::find($req->id);
         $prod->quantity = $req->qty;
         $prod->cost_price = $req->costprice;
-        $prod->total = number_format(($req->qty * $req->costprice), 2); 
-        		
+        $prod->total = number_format(($req->qty * $req->costprice), 2);
+
     	 array_push($prodlist,$prod);
-    	   	
+
     	Session::put('prodlist',$prodlist);
     	$jdata['prodlist'] =$prodlist;
     	return $jdata;
@@ -94,7 +94,7 @@ class StockinController extends Controller
 
     public function stockinList()
     {
-    	if(!Core::setConnection()){           
+    	if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         $jdata['prodlist'] = (Session::has('prodlist'))?Session::get('prodlist'):[];
@@ -104,7 +104,7 @@ class StockinController extends Controller
 
     public function cancel()
     {
-    	if(!Core::setConnection()){           
+    	if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         Session::forget('prodlist');
@@ -118,13 +118,13 @@ class StockinController extends Controller
 
     public function stockFloatSave(Request $req)
     {
-    	if(!Core::setConnection()){           
+    	if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         $rows = count($req->quantity) - 1 ;
     	$post_date = Setting::first()->pluck('post_date')[0];
-    	$stockin = Session::get('stockinFloat'); 
-    
+    	$stockin = Session::get('stockinFloat');
+
         $stockin['arrive_date'] = date("Y-m-d",strtotime($stockin['arrive_date']));
         $stockin['doc_date'] = date("Y-m-d",strtotime($stockin['doc_date']));
         $stockin['encode_date'] = $post_date;
@@ -132,11 +132,11 @@ class StockinController extends Controller
     	$stock = Stockin::create($stockin);
         $prodlist = array_reverse(Session::get('prodlist'));
     	foreach($prodlist as $prod)
-    	{    		
+    	{
     		$item = [
-    			'product_id' => $prod->product_id, 
-    			'quantity'	 => $prod->quantity, 	
-    			'cost_price' => $prod->cost_price,    			
+    			'product_id' => $prod->product_id,
+    			'quantity'	 => $prod->quantity,
+    			'cost_price' => $prod->cost_price,
     			'stockin_id' => $stock->stockin_id
     		];
     		StockItem::create($item );
@@ -151,12 +151,12 @@ class StockinController extends Controller
     	Session::forget('prodlist');
     	Session::forget('stockinFloat');
     	return Response::json(['status'=>true,'message' => "Successfuly save!"]);
-     
+
     }
 
     public function removeItems($key)
     {
-    	if(!Core::setConnection()){           
+    	if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         $prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
@@ -168,20 +168,20 @@ class StockinController extends Controller
 
     public function stockFloatUpdate(Request $req)
     {
-    	if(!Core::setConnection()){           
+    	if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         $prodlist = (Session::has('prodlist'))?Session::get('prodlist'):[];
     	$prod = $prodlist[$req->key];
     	$row = $req->row;
     	$prod->$row = $req->value;
-    	$prod->total = $prod->quantity * $prod->updated_price; 
+    	$prod->total = $prod->quantity * $prod->updated_price;
     	Session::put('prodlist',$prodlist);
     }
 
     public function show($id)
     {
-        if(!Core::setConnection()){           
+        if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         $stockin = Stockin::with('items','branch','supplier')->find($id);
@@ -190,7 +190,7 @@ class StockinController extends Controller
 
     public function stockin_pdf($id)
     {
-        if(!Core::setConnection()){           
+        if(!Core::setConnection()){
             return Redirect::to("/login");
         }
         $stockin = Stockin::with('items','branch','supplier')->find($id);
@@ -203,13 +203,11 @@ class StockinController extends Controller
     private function rules($branch_id,$post_date){
         return [
         'supplier_id' => 'required',
-        'branch_id' => 'required',        
-        'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,
-        'doc_date' => 'required|date|after:'.$post_date,
-        'arrive_date' => 'required|date|after:doc_date',
-        'amount_due' => 'required|numeric'];
+        'branch_id' => 'required',
+        'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,        
+        'amount_due' => 'sometimes|integer|min:0'];
 
-    } 
+    }
 
-    
+
 }

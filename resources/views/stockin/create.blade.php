@@ -46,7 +46,7 @@
               <div class="col-sm-8">
                 <div class="input-group"> 
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>           
-                  <input type="text" class="form-control  calendar" id="doc_date" tabindex="6">
+                  <input type="text" class="form-control " id="doc_date" tabindex="6" >
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
               <div class="col-sm-8">
                 <div class="input-group ">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <input type="text" class="form-control  calendar" id="arrive_date" tabindex="4">
+                  <input type="text" class="form-control  " id="arrive_date" tabindex="4">
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@
               </td>
               <td></td>
               <td>
-                <a href="#" class='btn btn-primary btn-add' tabindex="10">Add</a>
+                <a href="#" class='btn btn-primary btn-add' tabindex="10">Add <i class="fa fa-5 fa-plus-circle" aria-hidden='true'></i></a>
               </td>
             </tr>
         	</tfoot>
@@ -138,7 +138,7 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab_1" data-toggle="tab"><strong>Note</strong></a></li>
+                <li class="active"><a href="#tab_1" data-toggle="tab"><strong>Notes/Comments</strong></a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
