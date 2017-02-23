@@ -30,6 +30,7 @@
   <!-- bootstrap wysihtml5 - text editor -->
   {{Html::style('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}
   {{Html::style('/css/app.css')}}
+   {{Html::style('/css/loading.css')}}
 </head>
 <body class="hold-transition skin-blue sidebar-mini " ng-app="SisApp">
 <div class="wrapper">
@@ -39,6 +40,7 @@
  </aside>
   <div class="content-wrapper row">
     <!-- Content Header (Page header) -->
+    <div class="loading hide">Loading&#8230;</div>
     @yield('content')
     <!-- /.content -->
    </div> 

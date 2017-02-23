@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="content-header">
+    <section class="content-header ">
       <h1>
         Owner        
       </h1>

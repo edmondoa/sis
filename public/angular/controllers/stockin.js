@@ -52,7 +52,7 @@
 
       $scope.saveStockin = function()
       {    
-        
+        $("div.loading").removeClass('hide');
         var model = {
               'branch_id':$("#branch_id").val(),
               'supplier_id': $("#supplier_id").val(),
@@ -67,7 +67,14 @@
             $scope.message(data);
             if(data.status)
             {
-              $window.location.reload();
+              $("div.loading").addClass('hide');
+              $('#stockin-div :input').attr('disabled',true);
+              $('#stockin-div .btn-proceed').attr('disabled',true);
+              $('.btn-proceed').attr('disabled',true);
+              $("select.stock").attr('disabled',true);
+
+              $("#stockitem-div :input").removeAttr('disabled');
+              $('#stockitem .btn-add').removeAttr('disabled');
             }            
             $("#branch_id").val(data.stockin.branch_id).trigger("change");
             $("#supplier_id").val(data.stockin.supplier_id).trigger("change");

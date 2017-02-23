@@ -150,17 +150,34 @@
           <td>
             <span id="total"></span>
           </td>
-          <td><a href="#" class='btn btn-primary btn-add' tabindex="10">Add</a></td>
+          <td><a href="#" class='btn btn-primary btn-add' tabindex="10">Add <i class="glyphicon glyphicon-plus-sign"></i></a></td>
         </tr>
     	</tfoot>
-    </table>  
+    </table> 
+    <div class="col-sm-12">
+      <div class="col-md-6">
+        <!-- Custom Tabs -->
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_1" data-toggle="tab"><strong>Notes/Comments</strong></a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+              <textarea name='notes' class='form-control'></textarea>
+            </div>
+
+          </div>
+          <!-- /.tab-content -->
+        </div>
+      </div>
+    </div> 
       
   
     <!-- /.box-body -->
     <br>
-    <div class="box-footer">
-      <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-      <button type="button"  class="btn btn-info pull-right btn-save " >Save</button>
+    <div class="box-footer text-center">
+      <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      <button type="button"  class="btn btn-success  btn-save " >Save <span class="glyphicon glyphicon-floppy-disk"></button>
     </div>
     <!-- /.box-footer -->
   </fieldset>

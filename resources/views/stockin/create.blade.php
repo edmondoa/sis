@@ -130,7 +130,7 @@
               </td>
               <td></td>
               <td>
-                <a href="#" class='btn btn-primary btn-add' tabindex="10">Add <i class="fa fa-5 fa-plus-circle" aria-hidden='true'></i></a>
+                <a href="#" class='btn btn-primary btn-add' tabindex="10">Add <i class="glyphicon glyphicon-plus-sign"></i></a>
               </td>
             </tr>
         	</tfoot>

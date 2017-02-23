@@ -1,3 +1,12 @@
+function startLoad()
+{
+  $("div.loading").removeClass('hide');
+}
+function stopLoad()
+{
+  $("div.loading").addClass('hide');
+}
+
 function message(data)
 {
   if(data.status){

@@ -35,25 +35,28 @@
   })
 
   $(document).ready(function(){
-      var date = new Date('{{$post_date}}');
+      var date = new Date('{{$post_date}}');   
     
-    console.log(date)
     $('#doc_date').datepicker({
             autoclose: true,                 
-            startDate: date,                  
+            endDate: date,                  
           
     });
-
-    $("#doc_date").change(function(){
+    
+  });
+  $(document).on("change",'#doc_date',function(e){ 
+      $('#arrive_date').datepicker('remove'); 
+      $('#arrive_date').val('');   
       var arrive_date = new Date($(this).val());
+      var date = new Date('{{$post_date}}');     
       $('#arrive_date').datepicker({
             autoclose: true,                 
-            startDate: arrive_date,                  
+            startDate: arrive_date, 
+            endDate: date,                 
           
-    });
+      });
+      return true;
     })
-  });
-
   $(document).on("click",'.search-prod',function(e){
     e.preventDefault();   
     
@@ -167,10 +170,12 @@
 
 
   $(document).on("click",".btn-save",function(e){
+   stopLoad();
     var totalCost =  $("#totalCost").text();
     var amount = $("#amount_due").val();
     if(totalCost != amount)
     {
+      stopLoad();
       bootbox.alert({
           message: "Please check the Total amount it doesn't match to the amount due",
           size: 'small'
@@ -192,6 +197,7 @@
       stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice,'updated_price':updated_price,'notes':notes};
       console.log(stocks);
       $.post('stockin-float/save',stocks,function(data){
+        stopLoad();
         message(data);
         $(".refresh").trigger('click'); 
         $("#branch_id").val('').trigger("change");
