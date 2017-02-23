@@ -106,12 +106,11 @@
             $("#arrive_date").val(data.stockin.arrive_date);
             $("#totalQuantity").text(0);    
             $("#totalCost").text(parseFloat(0));
-            $('.btn-save').addClass('disabled');
-            $('.search-prod').addClass('disabled');
-            
-            $("a.stock").removeClass('disabled');
-            $("input.stock").attr('readonly',false);
-            $("select.stock").attr('disabled',false);
+            $("#stockin-div :input").removeAttr('disabled');             
+            $("select.stock").removeAttr('disabled');
+            $('#stockin-div .btn-proceed').removeAttr('disabled');
+            $('#stockitem-div :input').attr("disabled",true)
+            $('#stockitem-div .btn-add').attr('disabled',true);
             $("div.amount-due").removeClass('has-error');
         })
       }
