@@ -13,7 +13,7 @@
       $scope.pageSize = 15;  
 
       $scope.getStockins = function() {
-        
+         $("div.loading").removeClass('hide');
         $http.get('/stockin/ng-stockin-list').
           success(function(data) {
             $scope.stockins = data.prodlist;          
@@ -44,9 +44,8 @@
              
             }
 
-            $scope.total(data.prodlist);
-                              
-            console.log($scope.stockin);
+            $scope.total(data.prodlist);                              
+            $("div.loading").addClass('hide');
           });
       }
 
@@ -82,6 +81,7 @@
             $("#amount_due").val(data.stockin.amount_due);
             $("#doc_date").val(data.stockin.doc_date);
             $("#arrive_date").val(data.stockin.arrive_date);
+            $("div.loading").addClass('hide');
         })
       }
 
@@ -103,8 +103,7 @@
       {
         $("div.loading").removeClass('hide');
         $http.get('/stockin-float/cancel')
-         .success(function(data) {
-            $("div.loading").addClass('hide');
+         .success(function(data) {            
             $scope.message(data);            
             $scope.stockins = data.prodlist;
             $("select#branch_id").val('').trigger("change");
@@ -122,6 +121,7 @@
             $('#stockitem-div :input').attr("disabled",true)
             $('#stockitem-div .btn-add').attr('disabled',true);
             $("div.amount-due").removeClass('has-error');
+            $("div.loading").addClass('hide');
         })
       }
 
