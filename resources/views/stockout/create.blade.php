@@ -71,9 +71,9 @@
     		<th class='col-sm-2'>Prod Code</th>
     		<th>Prod Name</th>
     		<th class='col-sm-1 text-right'>Cost Price</th>          
-    		<th class='col-sm-1 '>Qty</th>
-        <th class='col-sm-1 '>Available</th>
-    		<th class='col-sm-1 '>Total</th>
+    		<th class='col-sm-1 text-right'>Qty</th>
+        <th class='col-sm-1 text-right'>Available</th>
+    		<th class='col-sm-1 text-right'>Total</th>
         <th class='col-sm-1'>Action</th>
     	</thead>
     	<tbody ng-show="stockins.length > 0">
