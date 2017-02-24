@@ -76,10 +76,10 @@
                   $("#name").text(row.data('prodname'));
                   $("#cprice").val(row.data('costprice'));
                   $("#qty").val(1);
-                  $("#prod_id").val(row.data('prod_id'));
-                  $("#qty").focus();
+                  $("#prod_id").val(row.data('prod_id')); 
                   bootbox.hideAll();
-                  //return false;
+                  $("#qty").focus();
+                  return false;
                 }
             },
             cancel: {
