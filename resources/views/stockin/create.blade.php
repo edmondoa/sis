@@ -100,7 +100,7 @@
           		<td ng-bind="stock.product_name"></td>
           		<td class="text-right"ng-bind="stock.cost_price"></td>
           		<td class="text-right"ng-bind="stock.quantity"></td>
-          		<td class="text-right"><span class='total' ng-bind="stock.total| number : 2" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"  ></span></td>
+          		<td class="text-right"><span class='total' ng-bind="stock.total| number : 2"  ></span></td>
               <td><a href="javascript:void(0)" title="Remove Item" ng-click="removeItem($index)"><i class="fa fa-trash text-red"></i></a></td>
         		</tr>
         	</tbody>
