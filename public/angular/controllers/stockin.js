@@ -103,7 +103,8 @@
       {
         $("div.loading").removeClass('hide');
         $http.get('/stockin-float/cancel')
-         .success(function(data) {            
+         .success(function(data) {  
+            $("div.loading").addClass('hide');          
             $scope.message(data);            
             $scope.stockins = data.prodlist;
             $("select#branch_id").val('').trigger("change");
@@ -121,7 +122,7 @@
             $('#stockitem-div :input').attr("disabled",true)
             $('#stockitem-div .btn-add').attr('disabled',true);
             $("div.amount-due").removeClass('has-error');
-            $("div.loading").addClass('hide');
+
         })
       }
 
