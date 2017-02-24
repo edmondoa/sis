@@ -105,8 +105,8 @@
             </div>
           </td>
           <td>
-            <span  id="name">
-            <input type='text' id='prod_id'/>
+            <span  id="name"></span>
+            <input type='hidden' id='prod_id'/>
           </td>
           <td>
             <span  id="cost">

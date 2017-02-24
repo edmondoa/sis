@@ -182,7 +182,8 @@
   })
 
   $(document).on('change','#search',function(e){
-    e.preventDefault();     
+    e.preventDefault();  
+    
     searchStr = $(this).val();
      var pass_param = {str:searchStr,supplier_id:$("#supplier_id").val(),branch_id:$("#branch_id").val()};
     if(searchStr=='')
