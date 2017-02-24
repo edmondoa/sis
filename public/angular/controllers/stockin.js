@@ -101,8 +101,10 @@
 
       $scope.cancel = function()
       {
+        $("div.loading").removeClass('hide');
         $http.get('/stockin-float/cancel')
          .success(function(data) {
+            $("div.loading").addClass('hide');
             $scope.message(data);            
             $scope.stockins = data.prodlist;
             $("#branch_id").val(data.stockin.branch_id);
