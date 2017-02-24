@@ -173,7 +173,7 @@
    stopLoad();
     var totalCost =  $("#totalCost").text();
     var amount = $("#amount_due").val();
-    if(totalCost != amount)
+    if(parseFloat(totalCost) != parseFloat(amount))
     {
       stopLoad();
       bootbox.alert({
