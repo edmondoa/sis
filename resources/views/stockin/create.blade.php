@@ -94,7 +94,7 @@
         		<th class='col-sm-1 '>Total</th>
             <th class='col-sm-1'>Action</th>
         	</thead>
-        	<tbody>
+        	<tbody ng-show="stockins.length > 0">
         		<tr ng-repeat="stock in stockins" id="@{{$index}}">
         			<td ng-bind="stock.product_code"></td>
           		<td ng-bind="stock.product_name"></td>
