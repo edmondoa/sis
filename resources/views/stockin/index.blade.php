@@ -170,7 +170,7 @@
 
 
   $(document).on("click",".btn-save",function(e){
-   stopLoad();
+    stopLoad();
     var totalCost =  $("#totalCost").text();
     var amount = $("#amount_due").val();
     if(parseFloat(totalCost) != parseFloat(amount))

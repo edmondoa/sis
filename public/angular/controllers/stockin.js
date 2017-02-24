@@ -13,7 +13,7 @@
       $scope.pageSize = 15;  
 
       $scope.getStockins = function() {
-         $("div.loading").removeClass('hide');
+        $("div.loading").removeClass('hide');
         $http.get('/stockin/ng-stockin-list').
           success(function(data) {
             $scope.stockins = data.prodlist; 

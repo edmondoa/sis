@@ -70,20 +70,20 @@
     	<thead>
     		<th class='col-sm-2'>Prod Code</th>
     		<th>Prod Name</th>
-    		<th class='col-sm-1'>Cost Price</th>          
-    		<th class='col-sm-1'>Qty</th>
-        <th class='col-sm-1'>Available</th>
-    		<th class='col-sm-1'>Total</th>
-        <th class='col-sm-1'></th>
+    		<th class='col-sm-1 text-right'>Cost Price</th>          
+    		<th class='col-sm-1 '>Qty</th>
+        <th class='col-sm-1 '>Available</th>
+    		<th class='col-sm-1 '>Total</th>
+        <th class='col-sm-1'>Action</th>
     	</thead>
     	<tbody>
     		<tr ng-repeat="stock in stockins" id="@{{$index}}">
     			<td ng-bind="stock.product_code"></td>
       		<td ng-bind="stock.product_name"></td>
-      		<td ng-bind="stock.cost_price"></td>                        
-      		<td ng-bind="stock.quantity"></td>
+      		<td class="text-right" ng-bind="stock.cost_price"></td>                        
+      		<td class="text-right" ng-bind="stock.quantity"></td>
           <td> </td>
-      		<td><span class='total' >@{{stock.total}}</span></td>
+      		<td class="text-right" ><span class='total' ng-bind="stock.total| number : 2" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ></span></td>
           <td><a href="javascript:void(0)" title="Remove Item" ng-click="removeItem(stock)"><i class="fa fa-trash text-red"></i></a></td>
     		</tr>
     	</tbody>
@@ -93,9 +93,10 @@
       		<td></td>  
           <td></td>  
       		<td></td>                  
-      		<td><strong id='totalQuantity'>0</strong></td>
+      		<td class='text-right'><strong id='totalQuantity'>0</strong></td>
           <td></td>   
-      		<td><strong id='totalCost'>0.00</strong></td>
+      		<td class='text-right'><strong id='totalCost'>0.00</strong></td>
+          <td></td>
         </tr>
         <tr>
           <td>
@@ -109,7 +110,8 @@
             <input type='hidden' id='prod_id'/>
           </td>
           <td>
-            <span  id="cost">
+            <span  id="cost"></span>
+            <input type='hidden' id="cprice"/>
           </td>
           <td>           
             <input type="text" class="form-control " id="qty" name='qty' tabindex="9" style='padding:6px 2px !important'>

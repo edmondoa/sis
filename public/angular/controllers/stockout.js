@@ -13,13 +13,11 @@
       $scope.pageSize = 15;  
 
       $scope.getStockins = function() {
-        
+        $("div.loading").removeClass('hide');
         $http.get('/stockout/ng-stockout-list').
           success(function(data) {
-            $scope.stockins = data.prodlist;
-            console.log(data.stockout)
-            
-            console.log(data.stockout)
+            $("div.loading").addClass('hide');
+            $scope.stockins = data.prodlist;            
             if(data.stockout.branch_id)
             {
               $('#stockout-div :input').attr('disabled',true);
@@ -49,14 +47,14 @@
 
       $scope.saveStockin = function()
       {    
-        
+        $("div.loading").removeClass('hide');
         var model = {
               'branch_id':$("#branch_id").val(),
               'supplier_id': $("#supplier_id").val()             
-        } 
-        console.log(model);
+        }        
         $http.post('/stockout-float',model)
          .success(function(data) {
+            $("div.loading").addClass('hide');
             $scope.message(data);
             if(data.status)
             {
@@ -78,15 +76,23 @@
                   
         });
         $("#totalQuantity").text(totalQuantity);    
-        $("#totalCost").text(parseFloat(totalCost));
+        $("#totalCost").text(totalCost.toFixed(2));
       }
 
       $scope.cancel = function()
       {
+        $("div.loading").removeClass('hide');
         $http.get('/stockout-float/cancel')
          .success(function(data) {
-            $scope.message(data);            
-            $window.location.reload();
+            $("div.loading").removeClass('hide');
+            $scope.message(data); 
+            $("select#branch_id").val('').trigger("change");
+            $("select#supplier_id").val('').trigger("change");           
+            $('#stockout-div :input').removeAttr('disabled');
+            $('#stockout-div .btn-proceed').removeAttr('disabled');                          
+            $("select.stock").removeAttr('disabled');
+            $("#stockitem-div :input").attr('disabled',true);
+            $('#stockitem .btn-add').attr('disabled',true);
         })
       }
 
