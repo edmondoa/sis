@@ -146,7 +146,7 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
-                  <textarea name='notes' class='form-control'></textarea>
+                  <textarea id="notes" name='notes' class='form-control'></textarea>
                 </div>
 
               </div>

@@ -29,8 +29,7 @@
 
   var model ={};
   $(function(){
-    $(".select2").select2();
-    
+    $(".select2").select2();  
 
   })
 
@@ -39,7 +38,7 @@
     
     $('#doc_date').datepicker({
             autoclose: true,                 
-            endDate: date,                  
+            endDate: date,                
           
     });
     
@@ -80,7 +79,7 @@
                   $("#prod_id").val(row.data('prod_id'));
                   $("#qty").focus();
                   bootbox.hideAll();
-                  return false;
+                  //return false;
                 }
             },
             cancel: {
@@ -314,8 +313,7 @@
 
   $(document).ready(function(){
     $("li.main-products").addClass('active');
-    $("li.stockin").addClass("active");  
-     $("#branch_id").val('{{Auth::user()->branch_id}}').trigger("change");
+    $("li.stockin").addClass("active");    
   
   })
 </script>

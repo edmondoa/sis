@@ -116,6 +116,7 @@
             $("#amount_due").val('');
             $("#doc_date").val('');
             $("#arrive_date").val('');
+            $("#notes").val('');  
             $("#totalQuantity").text(0);    
             $("#totalCost").text(parseFloat(0));
             $("#stockin-div :input").removeAttr('disabled');             
