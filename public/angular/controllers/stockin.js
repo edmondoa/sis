@@ -26,7 +26,7 @@
               $("select.stock").attr('disabled',true);
 
               $("#stockitem-div :input").removeAttr('disabled');
-              $('#stockitem .btn-add').removeAttr('disabled');
+              $('#stockitem-div .btn-add').removeAttr('disabled');
 
               $("select#branch_id").val(data.stockin.branch_id).trigger("change");
               $("input#branch_id").val(data.stockin.branch_id);
@@ -75,7 +75,7 @@
               $("select.stock").attr('disabled',true);
 
               $("#stockitem-div :input").removeAttr('disabled');
-              $('#stockitem .btn-add').removeAttr('disabled');
+              $('#stockitem-div .btn-add').removeAttr('disabled');
             }            
             $("#branch_id").val(data.stockin.branch_id).trigger("change");
             $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
