@@ -16,7 +16,8 @@
          $("div.loading").removeClass('hide');
         $http.get('/stockin/ng-stockin-list').
           success(function(data) {
-            $scope.stockins = data.prodlist;          
+            $scope.stockins = data.prodlist; 
+            $("div.loading").addClass('hide');         
             if(data.stockin.branch_id)
             {             
               $('#stockin-div :input').attr('disabled',true);
@@ -45,7 +46,7 @@
             }
 
             $scope.total(data.prodlist);                              
-            $("div.loading").addClass('hide');
+           
           });
       }
 
@@ -63,6 +64,7 @@
         console.log(model);
         $http.post('/stockin-float',model)
          .success(function(data) {
+            $("div.loading").addClass('hide');
             $scope.message(data);
             if(data.status)
             {
@@ -81,7 +83,7 @@
             $("#amount_due").val(data.stockin.amount_due);
             $("#doc_date").val(data.stockin.doc_date);
             $("#arrive_date").val(data.stockin.arrive_date);
-            $("div.loading").addClass('hide');
+           
         })
       }
 
