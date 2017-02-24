@@ -205,7 +205,9 @@ class StockinController extends Controller
         'supplier_id' => 'required',
         'branch_id' => 'required',
         'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,        
-        'amount_due' => 'sometimes|integer|min:0'];
+        'amount_due' => 'sometimes|integer|min:0',
+        'doc_date' =>'required|date',
+        'arrive_date' =>'required|date'];
 
     }
 

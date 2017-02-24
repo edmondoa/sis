@@ -107,12 +107,12 @@
             $("div.loading").addClass('hide');
             $scope.message(data);            
             $scope.stockins = data.prodlist;
-            $("#branch_id").val(data.stockin.branch_id);
-            $("#supplier_id").val(data.stockin.supplier_id);
-            $("#doc_no").val(data.stockin.doc_no);
-            $("#amount_due").val(data.stockin.amount_due);
-            $("#doc_date").val(data.stockin.doc_date);
-            $("#arrive_date").val(data.stockin.arrive_date);
+            $("#branch_id").val();
+            $("#supplier_id").val();
+            $("#doc_no").val();
+            $("#amount_due").val();
+            $("#doc_date").val();
+            $("#arrive_date").val();
             $("#totalQuantity").text(0);    
             $("#totalCost").text(parseFloat(0));
             $("#stockin-div :input").removeAttr('disabled');             
