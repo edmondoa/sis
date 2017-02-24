@@ -58,7 +58,15 @@
             $scope.message(data);
             if(data.status)
             {
-              $window.location.reload();
+              $('#stockout-div :input').attr('disabled',true);
+              $('#stockout-div .btn-proceed').attr('disabled',true);                          
+              $("select.stock").attr('disabled',true);
+
+              $("#stockitem-div :input").removeAttr('disabled');
+              $('#stockitem .btn-add').removeAttr('disabled');
+             
+              $("#stockout_id").val(data.stockout.stockout_id) 
+              $("input#branch_id").val(data.stockout.branch_id);
             }            
             $("#branch_id").val(data.stockin.branch_id).trigger("change");
             $("#supplier_id").val(data.stockin.supplier_id).trigger("change");           
@@ -84,11 +92,18 @@
         $("div.loading").removeClass('hide');
         $http.get('/stockout-float/cancel')
          .success(function(data) {
-            $("div.loading").removeClass('hide');
+            $("div.loading").addClass('hide');
             $scope.message(data); 
             $("select#branch_id").val('').trigger("change");
             $("select#supplier_id").val('').trigger("change");           
             $('#stockout-div :input').removeAttr('disabled');
+            $("#search").val('');            
+            $("#notes").val('');
+            $("#qty").val('');
+            $("#available").text(''); 
+            $("#total").text('');  
+            $("#totalQuantity").text(0);    
+            $("#totalCost").text(parseFloat(0));
             $('#stockout-div .btn-proceed').removeAttr('disabled');                          
             $("select.stock").removeAttr('disabled');
             $("#stockitem-div :input").attr('disabled',true);

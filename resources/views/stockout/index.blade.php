@@ -56,9 +56,9 @@
                   $("#price-text").text(row.data('costprice'));
                   $("#qty").val(1);
                   $("#prod_id").val(row.data('prod_id'));
-                   $("#available").text(row.data('available'));
-                  $("#qty").focus();
+                   $("#available").text(row.data('available'));                  
                   bootbox.hideAll();
+                  $("#qty").focus();
                   return false;
                 }
             },

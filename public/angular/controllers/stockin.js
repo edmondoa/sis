@@ -111,11 +111,15 @@
             $scope.stockins = data.prodlist;
             $("select#branch_id").val('').trigger("change");
             $("select#supplier_id").val('').trigger("change");         
-            
+            $("#search").val('');
             $("#doc_no").val('');
+            $("#cprice").val('');
+            $("#qty").val('');
             $("#amount_due").val('');
             $("#doc_date").val('');
             $("#arrive_date").val('');
+            $("#notes").val(''); 
+            $("#name").text(''); 
             $("#totalQuantity").text(0);    
             $("#totalCost").text(parseFloat(0));
             $("#stockin-div :input").removeAttr('disabled');             

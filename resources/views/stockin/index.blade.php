@@ -29,8 +29,7 @@
 
   var model ={};
   $(function(){
-    $(".select2").select2();
-    
+    $(".select2").select2();  
 
   })
 
@@ -39,7 +38,7 @@
     
     $('#doc_date').datepicker({
             autoclose: true,                 
-            endDate: date,                  
+            endDate: date,                
           
     });
     
@@ -77,9 +76,9 @@
                   $("#name").text(row.data('prodname'));
                   $("#cprice").val(row.data('costprice'));
                   $("#qty").val(1);
-                  $("#prod_id").val(row.data('prod_id'));
-                  $("#qty").focus();
+                  $("#prod_id").val(row.data('prod_id')); 
                   bootbox.hideAll();
+                  $("#qty").focus();
                   return false;
                 }
             },
@@ -314,8 +313,7 @@
 
   $(document).ready(function(){
     $("li.main-products").addClass('active');
-    $("li.stockin").addClass("active");  
-     $("#branch_id").val('{{Auth::user()->branch_id}}').trigger("change");
+    $("li.stockin").addClass("active");    
   
   })
 </script>
