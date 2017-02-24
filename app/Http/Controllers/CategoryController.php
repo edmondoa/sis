@@ -38,7 +38,7 @@ class CategoryController extends Controller
         }
         $category = Category::create($req->all());
         if($category)        
-        	return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+        	return Response::json(['status'=>true,'message' => "Successfully created!"]);
         
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
@@ -76,7 +76,7 @@ class CategoryController extends Controller
         if($category->save())
         {
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly updated!";
+            $jdata['message'] = "Successfully updated!";
      
         }
         return $jdata;

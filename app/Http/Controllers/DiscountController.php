@@ -42,7 +42,7 @@ class DiscountController extends Controller
         try{
            $discount = Discount::create($inputs);
         if($discount)        
-            return Response::json(['status'=>true,'message' => "Successfuly created!"]); 
+            return Response::json(['status'=>true,'message' => "Successfully created!"]); 
         }catch(Exception $e){
               return Response::json(['status'=>false,'message' => ["Error in saving, Please check this discount combination may already exist!"]]);
         }

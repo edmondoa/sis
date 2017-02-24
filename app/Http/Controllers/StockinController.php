@@ -163,7 +163,7 @@ class StockinController extends Controller
     	unset($prodlist[$key]);
     	$prodlist = array_values($prodlist);
     	Session::put('prodlist',$prodlist);
-    	return Response::json(['status'=>true,'message' => "Successfuly removed!"]);
+    	return Response::json(['status'=>true,'message' => "Successfully removed!"]);
     }
 
     public function stockFloatUpdate(Request $req)

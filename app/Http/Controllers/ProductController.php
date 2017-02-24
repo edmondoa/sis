@@ -47,7 +47,7 @@ class ProductController extends Controller
         }        
         $product = Product::create($inputs);
         if($product){        
-            return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+            return Response::json(['status'=>true,'message' => "Successfully created!"]);
         }
        
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
@@ -103,7 +103,7 @@ class ProductController extends Controller
         if($product->save())
         {
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly updated!";
+            $jdata['message'] = "Successfully updated!";
      
         }
         return $jdata;
