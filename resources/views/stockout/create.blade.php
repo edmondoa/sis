@@ -64,39 +64,7 @@
         
  
 
-  <fieldset class='col-sm-12 disabled-all' id='stockitem-div'> 
-    <!--
-    <table class='table table-bordered table-hover dataTable invoice'>
-      <tr>
-        <td class="col-sm-2"></td>
-        <td class="col-sm-2">Cat Code</td>
-        <td class="col-sm-3">Product</td>
-        <td class="col-sm-1">Available</td>
-        <td class="col-sm-1">CPrice</td>
-        <td class="col-sm-1">Qty</td>
-        <td class="col-sm-2"></td>
-      </tr>
-      <tr>
-        <td>
-          
-        </td>
-        <td><span  id="code"></span></td>
-        <td><span  id="name"></span></td>
-        <td><span  id="available"></span></td>
-        <td>
-          <span id="price-text"></span>
-          <input type="hidden" class="form-control " id="cprice" name='cprice' style='padding:6px 2px !important'>
-          <input type="hidden" class="form-control " id="prod_id" name='prod_id' > 
-        </td>
-        <td>          
-          <input type="text" class="form-control " id="qty" name='qty' tabindex="9" style='padding:6px 2px !important'>
-          <input type="hidden" class="form-control " id="locked" name='locked'>
-        </td>
-        <td><a href="#" class='btn btn-primary btn-add' tabindex="10">Add</a></td>
-      </tr>
-    </table>    
-  -->
-    
+  <fieldset class='col-sm-12 disabled-all' id='stockitem-div'>    
    
     <table class='table table-bordered table-hover dataTable invoice' >
     	<thead>
@@ -114,6 +82,7 @@
       		<td ng-bind="stock.product_name"></td>
       		<td ng-bind="stock.cost_price"></td>                        
       		<td ng-bind="stock.quantity"></td>
+          <td> </td>
       		<td><span class='total' >@{{stock.total}}</span></td>
           <td><a href="javascript:void(0)" title="Remove Item" ng-click="removeItem(stock)"><i class="fa fa-trash text-red"></i></a></td>
     		</tr>
@@ -121,9 +90,11 @@
     	
     	<tfoot>
     		<tr>
-      		<td colspan="2"></td>
-      		<td></td>          
+      		<td></td>  
+          <td></td>  
+      		<td></td>                  
       		<td><strong id='totalQuantity'>0</strong></td>
+          <td></td>   
       		<td><strong id='totalCost'>0.00</strong></td>
         </tr>
         <tr>
@@ -135,7 +106,7 @@
           </td>
           <td>
             <span  id="name">
-            <input type='hidden' id='prod_id'/>
+            <input type='text' id='prod_id'/>
           </td>
           <td>
             <span  id="cost">
