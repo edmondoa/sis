@@ -196,6 +196,7 @@
         $("#code").text(data.products[0].category_code);
         $("#name").text(data.products[0].product_name);
         $("#cprice").val(data.products[0].cost_price);
+        $("#cost").text(data.products[0].cost_price);
         $("#available").text(data.products[0].available);
         $("#qty").val(1);
         $("#prod_id").val(data.products[0].product_id);

@@ -93,12 +93,13 @@
         var totalCost =0;
         angular.forEach(datas, function(value, key) {
           
-          totalCost = parseFloat(value.total) + parseFloat(totalCost);          
+          totalCost = parseFloat(value.total.replace(',','')) + parseFloat(totalCost);          
           totalQuantity = parseInt(value.quantity) + parseInt(totalQuantity); 
                   
         });
+        var total = $filter('currency')(totalCost,'₧');
         $("#totalQuantity").text(totalQuantity);    
-        $("#totalCost").text(totalCost.toFixed(2));
+        $("#totalCost").text(total);
       }
 
       $scope.cancel = function()

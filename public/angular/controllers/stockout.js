@@ -77,14 +77,16 @@
       {
         var totalQuantity =0;
         var totalCost =0;
+
         angular.forEach(datas, function(value, key) {
-          
+         
           totalCost = parseFloat(value.total) + parseFloat(totalCost);          
           totalQuantity = parseInt(value.quantity) + parseInt(totalQuantity); 
                   
         });
+        var total = $filter('currency')(totalCost,'₧');
         $("#totalQuantity").text(totalQuantity);    
-        $("#totalCost").text(totalCost.toFixed(2));
+        $("#totalCost").text(total);
       }
 
       $scope.cancel = function()
@@ -94,6 +96,7 @@
          .success(function(data) {
             $("div.loading").addClass('hide');
             $scope.message(data); 
+            $scope.stockins = [];
             $("select#branch_id").val('').trigger("change");
             $("select#supplier_id").val('').trigger("change");           
             $('#stockout-div :input').removeAttr('disabled');
