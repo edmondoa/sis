@@ -68,8 +68,8 @@ class StockinController extends Controller
 
         //$stockinFloat = //StockinFloat::create($input);
         //if($stockinFloat)
-        return Response::json(['status'=>true,'message' => "Successfuly added!",'stockin'=>$input]);
-
+        return Response::json(['status'=>true,'message' => "Document was successfully validated!",'stockin'=>$input]);
+        
         //return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
@@ -112,7 +112,7 @@ class StockinController extends Controller
     	$jdata['prodlist'] = [];
     	$jdata['stockin'] = [];
     	$jdata['status'] = true;
-    	$jdata['message'] ="Successfuly cancelled!";
+    	$jdata['message'] ="StockIn was successfully cancelled!";
     	return $jdata;
     }
 
@@ -150,7 +150,7 @@ class StockinController extends Controller
                             ]);
     	Session::forget('prodlist');
     	Session::forget('stockinFloat');
-    	return Response::json(['status'=>true,'message' => "Successfuly save!"]);
+    	return Response::json(['status'=>true,'message' => "StockIn was successfully saved for approval!"]);
 
     }
 
@@ -163,7 +163,7 @@ class StockinController extends Controller
     	unset($prodlist[$key]);
     	$prodlist = array_values($prodlist);
     	Session::put('prodlist',$prodlist);
-    	return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
+    	return Response::json(['status'=>true,'message' => "Successfully removed!"]);
     }
 
     public function stockFloatUpdate(Request $req)
@@ -202,14 +202,11 @@ class StockinController extends Controller
 
     private function rules($branch_id,$post_date){
         return [
-        'supplier_id' => 'required',
         'branch_id' => 'required',
+        'supplier_id' => 'required',
         'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,        
-        'amount_due' => 'sometimes|integer|min:0',
         'doc_date' =>'required|date',
-        'arrive_date' =>'required|date'];
-
+        'arrive_date' =>'required|date',
+        'amount_due' => 'sometimes|integer|min:0'];
     }
-
-
 }

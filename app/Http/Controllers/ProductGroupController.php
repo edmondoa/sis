@@ -36,7 +36,7 @@ class ProductGroupController extends Controller
         }
         $group = ProductGroup::create($req->all());
         if($group)        
-        	return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+        	return Response::json(['status'=>true,'message' => "Successfully created!"]);
         
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
@@ -73,7 +73,7 @@ class ProductGroupController extends Controller
         if($pgroup->save())
         {
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly updated!";
+            $jdata['message'] = "Successfully updated!";
      
         }
         return $jdata;

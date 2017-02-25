@@ -36,7 +36,7 @@ class ClusterController extends Controller
         }
         $cluster = Cluster::create($req->all());
         if($cluster)        
-        	return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+        	return Response::json(['status'=>true,'message' => "Successfully created!"]);
         
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
@@ -72,7 +72,7 @@ class ClusterController extends Controller
         if($cluster->save())
         {
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly updated!";
+            $jdata['message'] = "Successfully updated!";
      
         }
         return $jdata;
@@ -89,7 +89,7 @@ class ClusterController extends Controller
         if($cluster->delete())
         {
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly deleted!";
+            $jdata['message'] = "Successfully deleted!";
      
         }
         return $jdata;
