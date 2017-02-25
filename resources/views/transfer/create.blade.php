@@ -1,6 +1,48 @@
 <div class="box box-info">
   <div class="box-body"> 
-  <fieldset class='col-sm-5' id='stockin-div'>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form class='form-horizontal'>
+        <div class="row" style="min-height:145px" id='stockin-div'>
+          <div class="col-md-4" >
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-5 control-label">Originating Branch</label>
+
+              <div class="col-sm-7">
+                @if(Auth::user()->level_id > 2)
+                  <select class="form-control select2 stock "  id="branch_id_from" tabindex="1">
+                    <option value="">Select Branch</option>
+                    @foreach($branches as $branch)
+                      <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
+                    @endforeach
+                  </select> 
+                @else
+                  <label class='form-control'>{{Auth::user()->branch->branch_name}}</label>
+                  <input type='hidden' id="branch_id"  name='branch_id' value="{{Auth::user()->branch->branch_id}}"/>
+                @endif
+              </div>
+            </div>
+          </div> 
+          <div class='col-md-4'>
+            <div class="form-group ">
+              <label for="inputEmail3"  class="col-sm-5 control-label">Recieving Branch</label>
+               
+              <div class="col-sm-7">
+                <select class="form-control select2 stock "  id="branch_id_to" tabindex="1">
+                    <option value="">Select Branch</option>
+                    @foreach($branches as $branch)
+                      <option value="{{$branch->branch_id}}">{{$branch->branch_name}}</option>
+                    @endforeach
+                </select>         
+              </div>        
+            </div>
+          </div> 
+          <div class="col-md-4">
+            <div class='col-sm-8'>
+              <a href="javascript:void(0)" class='btn btn-primary  ' ng-click="saveTranser()" style="width:100%" tabindex="7"> Proceed</a>
+            </div>
+          </div>
+  <!-- <fieldset class='col-sm-5' id='stockin-div'>
     <div class="box-header with-border">
       <h3 class="box-title">InterBranch Transfer 
       	
@@ -53,7 +95,7 @@
         <a href="javascript:void(0)" class='btn btn-primary  ' ng-click="saveTranser()" style="width:100%" tabindex="7"> Proceed</a>
       </div>
     </form>  
-  </fieldset>
+  </fieldset> -->
 
   <fieldset class='col-sm-7 disabled-all' id='stockitem-div' disabled> 
     <table class='table'>

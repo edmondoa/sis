@@ -194,14 +194,15 @@ class StockOutController extends Controller
     					
     }
 
-    public function save()
+    public function save(Request $req)
     {
     	Core::setConnection();
         $stockout = StockOut::with('items')->where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
     						->first();
     	$stockout->status = "PENDING";
-    	$stockout->encode_date = date("Y-m-d");    
+    	$stockout->encode_date = date("Y-m-d"); 
+        $stockout->notes = $req->notes;   
     	$stockout->save();
     	$post_date = Setting::first()->pluck('post_date')[0];
     	$stockout->approval()->create([

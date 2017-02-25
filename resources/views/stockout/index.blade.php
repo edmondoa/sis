@@ -53,6 +53,7 @@
                   $("#code").text(row.data('catcode'));
                   $("#name").text(row.data('prodname'));
                   $("#cprice").val(row.data('costprice'));
+                  $("#cost").text(row.data('costprice'));
                   $("#price-text").text(row.data('costprice'));
                   $("#qty").val(1);
                   $("#prod_id").val(row.data('prod_id'));
@@ -95,9 +96,10 @@
         $("#code").text('');
         $("#name").text('');
         $("#available").text('');
-         $("#price-text").text('');
+        $("#price-text").text('');
         $("#cprice").val('');
-         $("#locked").val('');
+        $("#cost").text('');
+        $("#locked").val('');
         $("#qty").val('');
         $("#prod_id").val('');
         $("#search").val('');
@@ -133,6 +135,7 @@
         $("#available").text('');
          $("#price-text").text('');
         $("#cprice").val('');
+        $("#cost").text('');
          $("#locked").val('');
         $("#qty").val('');
         $("#prod_id").val('');
@@ -173,8 +176,8 @@
   $(document).on("click",".btn-save",function(e){ 
     
     var stocks = {};     
-   
-    $.post('stockout-float/save',function(data){
+       
+    $.post('stockout-float/save',{notes:$("#notes").val()},function(data){
       message(data);
       location.reload();      
     });
