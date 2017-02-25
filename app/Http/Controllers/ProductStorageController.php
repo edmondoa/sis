@@ -38,7 +38,7 @@ class ProductStorageController extends Controller
         try{
         	 $storage = ProductStorage::create($req->all());
         	if($storage)        
-        		return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+        		return Response::json(['status'=>true,'message' => "Successfully created!"]);
         
         }catch(Exception $e)
         {
@@ -81,7 +81,7 @@ class ProductStorageController extends Controller
         if($storage->save())
         {
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly updated!";
+            $jdata['message'] = "Successfully updated!";
      
         }
         return $jdata;

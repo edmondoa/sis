@@ -46,7 +46,7 @@ class BranchController extends Controller
        
         $branch = Branch::create($inputs);
         if($branch)        
-        	return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+        	return Response::json(['status'=>true,'message' => "Successfully created!"]);
         
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
@@ -84,7 +84,7 @@ class BranchController extends Controller
         if($branch->save())
         {
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly updated!";
+            $jdata['message'] = "Successfully updated!";
      
         }
         return $jdata;

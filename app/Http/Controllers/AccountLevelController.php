@@ -39,7 +39,7 @@ class AccountLevelController extends Controller
        
         $account_level = AccountLevel::create($inputs);
         if($account_level)        
-        	return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+        	return Response::json(['status'=>true,'message' => "Successfully created!"]);
         
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
@@ -69,7 +69,7 @@ class AccountLevelController extends Controller
         if($acc_level->save())
         {
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly updated!";
+            $jdata['message'] = "Successfully updated!";
      
         }
         return $jdata;

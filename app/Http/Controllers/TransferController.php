@@ -50,7 +50,7 @@ class TransferController extends Controller
 
         //$stockinFloat = //StockinFloat::create($input);
         //if($stockinFloat)        
-        return Response::json(['status'=>true,'message' => "Successfuly added!",'stockin'=>$input]);
+        return Response::json(['status'=>true,'message' => "Successfully added!",'stockin'=>$input]);
     }
 
     public function transferList()
@@ -109,7 +109,7 @@ class TransferController extends Controller
                             ]);
         Session::forget('prodlist');
         Session::forget('transfer');
-        return Response::json(['status'=>true,'message' => "Successfuly save!"]);
+        return Response::json(['status'=>true,'message' => "Successfully save!"]);
     }
 
     public function cancel()
@@ -120,7 +120,7 @@ class TransferController extends Controller
                             ->first();
         $transfer->items()->delete();
         $transfer->delete(); 
-        return Response::json(['status'=>true,'message' => "Successfuly remove!"]);                   
+        return Response::json(['status'=>true,'message' => "Successfully remove!"]);                   
     }
 
     public function search()
@@ -217,7 +217,7 @@ class TransferController extends Controller
         Core::setConnection();
         $item = TransferItem::where('transfer_item_id',$id)                          
                             ->delete();
-        return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
+        return Response::json(['status'=>true,'message' => "Successfully remove!"]);
                         
     }
 

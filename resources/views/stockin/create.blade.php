@@ -130,10 +130,11 @@
                 <input type="text" class="form-control " id="qty" name='qty' tabindex="9" style='padding:6px 2px !important'>
                 <input type="hidden" class="form-control " id="locked" name='locked'>
               </td>
-              <td></td>
               <td>
-                <a href="#" class='btn btn-primary btn-add' tabindex="10">Add <i class="glyphicon glyphicon-plus-sign"></i></a>
-              </td>
+                <center>
+                    <a href="#" class='btn btn-primary btn-add' tabindex="10">Add <i class="glyphicon glyphicon-plus-sign"></i></a>
+                </center>
+              </td><td></td>
             </tr>
         	</tfoot>
         </table>
@@ -142,7 +143,7 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab_1" data-toggle="tab"><strong>Notes/Comments</strong></a></li>
+                <li class="active"><a href="#tab_1" data-toggle="tab"><strong>Notes</strong></a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">

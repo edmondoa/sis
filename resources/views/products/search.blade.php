@@ -17,7 +17,7 @@
 			@if($src == 'stockout' || $src=='transfer')
 			<th>Available</th>
 			@endif
-			<th>Price</th>
+			<th>Cost Price</th>
 		</thead>
 		<tbody>		
 		</tbody>

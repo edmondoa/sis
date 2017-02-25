@@ -54,7 +54,7 @@ class StockOutController extends Controller
 
         //$stockinFloat = //StockinFloat::create($input);
         //if($stockinFloat)        
-        return Response::json(['status'=>true,'message' => "Successfuly added!",'stockin'=>$input]);
+        return Response::json(['status'=>true,'message' => "Successfully added!",'stockin'=>$input]);
     }
 
     public function stockoutList()
@@ -190,7 +190,7 @@ class StockOutController extends Controller
     	Core::setConnection();
         $item = StockOutItem::where('stockout_item_id',$req->stockout_item_id)    						
     						->delete();
-    	return Response::json(['status'=>true,'message' => "Successfuly remove!"]);
+    	return Response::json(['status'=>true,'message' => "Successfully remove!"]);
     					
     }
 
@@ -213,7 +213,7 @@ class StockOutController extends Controller
                             ]);
     	Session::forget('prodlist');
     	Session::forget('stockinFloat');
-    	return Response::json(['status'=>true,'message' => "Successfuly save!"]);
+    	return Response::json(['status'=>true,'message' => "Successfully save!"]);
     }
 
     public function show($id)
@@ -233,7 +233,7 @@ class StockOutController extends Controller
         $stockout->items()->delete();
         $stockout->delete();  
         $jdata['status'] = true;
-        $jdata['message'] ="Successfuly cancelled!";
+        $jdata['message'] ="Successfully cancelled!";
         return $jdata;                  
     }
 

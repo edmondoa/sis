@@ -41,7 +41,7 @@ class SupplierController extends Controller
         
         $supplier = Supplier::create($req->all());
         if($supplier) { 
-            return Response::json(['status'=>true,'message' => "Successfuly created!"]);
+            return Response::json(['status'=>true,'message' => "Successfully created!"]);
         }        
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
@@ -96,7 +96,7 @@ class SupplierController extends Controller
                 }
             }    
             $jdata['status'] = true;
-            $jdata['message'] = "Successfuly updated!";
+            $jdata['message'] = "Successfully updated!";
      
         }
 
