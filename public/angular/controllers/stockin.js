@@ -89,14 +89,17 @@
 
       $scope.total = function(datas)
       {
+
         var totalQuantity =0;
         var totalCost =0;
+        var regex = new RegExp(',', 'g');
         angular.forEach(datas, function(value, key) {
           
-          totalCost = parseFloat(value.total.replace(',','')) + parseFloat(totalCost);          
+          totalCost = parseFloat(value.total.replace(regex,'')) + parseFloat(totalCost);          
           totalQuantity = parseInt(value.quantity) + parseInt(totalQuantity); 
                   
         });
+        console.log(datas);
         var total = $filter('currency')(totalCost,'₧');
         $("#totalQuantity").text(totalQuantity);    
         $("#totalCost").text(total);

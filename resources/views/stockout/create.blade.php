@@ -7,7 +7,7 @@
     </div> 
     <div class="panel panel-default">
       <div class="panel-body">
-        <form class='form-horizontal'>
+        <form class='form-horizontal col-md-12'>
           <div class="row" style="min-height:80px" id='stockout-div'>     
       
             <input type="hidden" id="stockout_id" />
@@ -66,7 +66,7 @@
 
   <fieldset class='col-sm-12 disabled-all' id='stockitem-div'>    
    
-    <table class='table table-bordered table-hover dataTable invoice' >
+    <table class='table table-bordered table-hover dataTable invoice-table' >
     	<thead>
     		<th class='col-sm-2'>Prod Code</th>
     		<th>Prod Name</th>

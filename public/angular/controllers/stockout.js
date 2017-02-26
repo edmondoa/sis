@@ -77,7 +77,7 @@
       {
         var totalQuantity =0;
         var totalCost =0;
-
+        
         angular.forEach(datas, function(value, key) {
          
           totalCost = parseFloat(value.total) + parseFloat(totalCost);          

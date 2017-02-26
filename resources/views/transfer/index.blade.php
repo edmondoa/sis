@@ -29,15 +29,26 @@
   $(document).ready(function(){
     $("li.inventory").addClass('active');
     $("li.interbranch-transfer").addClass('active');
-    branch1 = $("#branch_id_from").val();  
-    $("#branch_id_to option[value='"+branch1+"']").attr("disabled","disabled");
-    $("#branch_id_to").prop("selectedIndex",-1)
+    branch1 = $("#branch_id_from").val(); 
+    if(branch1 !=""){ 
+      $("#branch_id_to option[value='"+branch1+"']").attr("disabled","disabled");
+      $("#branch_id_to").prop("selectedIndex",-1)  
+    }
+    
   }); 
  
   $(function(){
     $(".select2").select2();
 
   })
+  $(document).on("change",'#branch_id_from',function(e){
+      branch1 = $(this).val(); 
+      $("#branch_id_to").val('');
+      if(branch1 !=""){ 
+        $("#branch_id_to option[value='"+branch1+"']").attr("disabled","disabled");
+        $("#branch_id_to").prop("selectedIndex",-1)  
+      }
+  });
   $(document).on("click",'.search-prod',function(e){
     e.preventDefault();   
     

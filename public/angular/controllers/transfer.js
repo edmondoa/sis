@@ -18,22 +18,27 @@
           success(function(data) {
             $scope.products = data.prodlist;
             $scope.transfer = data.transfer;
-           
-            $("#branch_id_from").val(data.transfer.orig_branch_id).trigger("change");
-            $("#branch_id_to").val(data.transfer.recv_branch_id).trigger("change");
-            // $("#supplier_id").val(data.transfers.supplier_id).trigger("change");
-             $("#transfer_id").val(data.transfer.transfer_id)
+           console.log(data.transfer);
             
-            if(data.transfer != null && (typeof data.transfers != 'undefined'))
+            if(data.transfer.orig_branch_id)
             {
-              $("#stockin-div").attr('disabled',true);
-              $("#stockitem-div").attr('disabled',false);              
-               $("select.stock").attr('disabled',true);
-            }else{
-              $("#stockin-div").attr('disabled',false);
+              $("#branch_id_from").val(data.transfer.orig_branch_id).trigger("change");
+              $("#branch_id_to").val(data.transfer.recv_branch_id).trigger("change");
+              // $("#supplier_id").val(data.transfers.supplier_id).trigger("change");
+              $("#transfer_id").val(data.transfer.transfer_id)            
+             
+              $('#stockin-div :input').attr('disabled',true);
+              $('#stockin-div .btn-proceed').attr('disabled',true);                          
+              $("select.stock").attr('disabled',true);
 
-              $(':input','a','#stockitem-div').attr("disabled",true)
-              $("#stockitem-div").attr('disabled',true);
+              $("#stockitem-div :input").removeAttr('disabled');
+              $('#stockitem .btn-add').removeAttr('disabled'); 
+            }else{
+             $('#stockin-div :input').removeAttr('disabled');
+              $('#stockin-div .btn-proceed').removeAttr('disabled');                          
+              $("select.stock").removeAttr('disabled');
+              $("#stockitem-div :input").attr('disabled',true);
+              $('#stockitem .btn-add').attr('disabled',true);
            }
 
             $scope.total(data.products);
@@ -44,7 +49,11 @@
 
       $scope.saveTranser = function()
       {    
-        
+        if($("#branch_id_from").val() == $("#branch_id_to").val()){
+          var data = {status:false,message:['Originating and Receiving branch should not be the same!']};
+           $scope.message(data);
+           return false;
+        }
         var model = {
               'orig_branch_id':$("#branch_id_from").val(),
               'recv_branch_id':$("#branch_id_to").val()             
@@ -70,14 +79,16 @@
       {
         var totalQuantity =0;
         var totalCost =0;
+
         angular.forEach(datas, function(value, key) {
-          
+         
           totalCost = parseFloat(value.total) + parseFloat(totalCost);          
           totalQuantity = parseInt(value.quantity) + parseInt(totalQuantity); 
                   
         });
+        var total = $filter('currency')(totalCost,'₧');
         $("#totalQuantity").text(totalQuantity);    
-        $("#totalCost").text(parseFloat(totalCost));
+        $("#totalCost").text(total);
       }
 
       $scope.cancel = function()
