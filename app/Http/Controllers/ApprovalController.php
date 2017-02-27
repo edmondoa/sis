@@ -36,13 +36,15 @@ class ApprovalController extends Controller
     	$approvals = Approval::with('approvalable','branch','approval_type','user')
                             ->where('branch_id',Auth::user()->branch_id)
                             ->where('status','PENDING')->get();
+
         $approvals = array_map(function($app){
 
             return [
                 'post_date'=> $app['post_date'],
                 'branch_name'=>$app['branch']['branch_name'],
                 'approval_type' => $app['approval_type']['approval'],
-                'approval_id' => $app['approvalable_id'],
+                'approvalable_id' => $app['approvalable_id'],
+                'approval_id' => $app['approval_id'],
                 'user' => $app['user']['firstname'].' '.$app['user']['lastname'],
                 'status' => $app['status']
             ];
@@ -122,7 +124,7 @@ class ApprovalController extends Controller
     {
         $data=[];
         if($type == 1)        {
-            $data['reference'] = 'stock_id';
+            $data['reference'] = 'stockin_id';
             $data['type'] = 'STI';
             $data['negative'] = 0;
         }else if($type==2){
