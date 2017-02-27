@@ -25,7 +25,7 @@
               $("select.stock").attr('disabled',true);
 
               $("#stockitem-div :input").removeAttr('disabled');
-              $('#stockitem .btn-add').removeAttr('disabled');
+              $('#stockitem-div .btn-add').removeAttr('disabled');
 
               $("#branch_id").val(data.stockout.branch_id).trigger("change");
               $("#supplier_id").val(data.stockout.supplier_id).trigger("change");
@@ -110,7 +110,7 @@
             $('#stockout-div .btn-proceed').removeAttr('disabled');
             $("select.stock").removeAttr('disabled');
             $("#stockitem-div :input").attr('disabled',true);
-            $('#stockitem .btn-add').attr('disabled',true);
+            $('#stockitem-div .btn-add').attr('disabled',true);
         })
       }
 

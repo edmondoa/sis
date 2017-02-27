@@ -134,7 +134,7 @@
 
   $(document).on("click",".btn-save",function(e){
 
-    $.post('transfer-float/save',function(data){
+    $.post('transfer-float/save',{notes:$("#notes").val()},function(data){
       message(data);
       location.reload();
     });

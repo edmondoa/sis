@@ -28,7 +28,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('products-regular-list','ProductController@product_list');
 	Route::get('products/search/{id}/{param}','ProductController@search');
 	Route::post('product/multi_search','ProductController@multi_search');
-	
+
 	Route::resource('products-regular','ProductController');
 
 	Route::get('acc_levels/ng-acc_levels-list','AccountLevelController@level_list');
@@ -49,7 +49,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get("stockin/pdf/{id}","StockinController@stockin_pdf");
 	Route::post("stockin-float/save","StockinController@stockFloatSave");
 	Route::post("stockin-float/update","StockinController@stockFloatUpdate");
-	
+
 	Route::resource('stockin','StockinController');
 
 	Route::get("stockout/pdf/{id}","StockOutController@pdf");
@@ -65,7 +65,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::resource('stockout','StockOutController');
 
 	Route::get("stock_transfer/{id}","TransferController@show");
-
+	Route::get("stock_transfer/pdf/{id}","TransferController@pdf");
 	Route::get('transfer-float/cancel','TransferController@cancel');
 	Route::post("transfer-float/save",'TransferController@save');
 	Route::post("transfer-items-remove/{id}",'TransferController@removeItems');
@@ -73,7 +73,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('transfer/items','TransferController@saveItems');
 	Route::get('transfer/search','TransferController@search');
 	Route::post('transfer/multi_search','TransferController@postSearch');
-	Route::get('transfer/ng-transfer-list','TransferController@transferList');	
+	Route::get('transfer/ng-transfer-list','TransferController@transferList');
 	Route::post('transfer-float','TransferController@transferFloat');
 	Route::resource('/transfer','TransferController');
 

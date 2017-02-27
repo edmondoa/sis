@@ -33,8 +33,9 @@
   <div class="content-wrapper row">
     <!-- Content Header (Page header) -->
     <section class="invoice">
-      <?php      
-        setlocale(LC_MONETARY, 'en_PH');
+      <?php
+      $fmt = new NumberFormatter( 'en_PH', NumberFormatter::CURRENCY );
+
       ?>
       <table style='width:1200px;  border-spacing: 10px 0; '>
         <tr>
@@ -102,7 +103,7 @@
               <td class='no-border'> </td>
               <td style="text-align:right; !important" class='no-border text-right'><strong>Total</strong></td>
               <td style="text-align:right; !important" class='no-border text-right'><strong>{{$quantity}}</strong></td>
-              <td style="text-align:right; !important" class='no-border text-right'><strong>{{money_format('%i', $total)}}  </strong></td>
+              <td style="text-align:right; !important" class='no-border text-right'><strong>{{$fmt->formatCurrency($total, "PHP")}}  </strong></td>
 
             </tfoot>
           </table>
