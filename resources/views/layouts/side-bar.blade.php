@@ -29,24 +29,24 @@
     <li class="treeview">
       <a href="#">
         <i class="fa fa-laptop"></i> <span>Sales</span>
-        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>      
-      </a> 
+        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+      </a>
       <ul class="treeview-menu">
         <li><a href="/"><i class="fa fa-circle-o"></i>Invoice</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Invoice Return</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Consign</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Consign Invoicing/Return</a></li>
-      </ul>     
+      </ul>
     </li>
     <!-- /Sales -->
     <!-- Financials -->
     <li class="treeview">
       <a href="#">
-        <i class="fa fa-laptop"></i> <span>Financials</span>  
-        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>      
-      </a> 
+        <i class="fa fa-laptop"></i> <span>Financials</span>
+        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+      </a>
       <ul class="treeview-menu">
-        <li><a href="/"><i class="fa fa-circle-o"></i>Payment</a></li>        
+        <li><a href="/"><i class="fa fa-circle-o"></i>Payment</a></li>
         <li class='treeview'>
           <a href="#"><i class="fa fa-circle-o"></i>Non-AR Payment
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -58,7 +58,7 @@
         </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-circle-o"></i>Memo
-            <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span> 
+            <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
             <li><a href="/"><i class="fa fa-circle-o"></i>Credit (CM)</a></li>
@@ -67,14 +67,14 @@
         </li>
         <li class='treeview'>
           <a href="#"><i class="fa fa-circle-o"></i>Collection
-            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
             <li><a href="/"><i class="fa fa-circle-o"></i>Cash Turn-In</a></li>
             <li><a href="/"><i class="fa fa-circle-o"></i>Balancing/Deposit</a></li>
           </ul>
         </li>
-      </ul>     
+      </ul>
     </li>
     <!-- /Financials -->
     <!-- Inventory -->
@@ -87,17 +87,17 @@
         <li><a href="/"><i class="fa fa-circle-o"></i>Daily Cycle Count</a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-circle-o"></i>Order
-            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
             <li><a href="/"><i class="fa fa-circle-o"></i>Customer Order</a></li>
             <li><a href="/"><i class="fa fa-circle-o"></i>Consolidated</a></li>
             <li><a href="/"><i class="fa fa-circle-o"></i>Fulfillment Manager</a></li>
           </ul>
-        </li>        
+        </li>
         <li class='treeview'>
           <a href="#"><i class="fa fa-circle-o"></i>StockIn
-            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
             <li class="stockin"><a href="/stockin"><i class="fa fa-circle-o"></i>Regular Purchase</a></li>
@@ -108,15 +108,15 @@
         <li class="interbranch-transfer"><a href="/transfer"><i class="fa fa-circle-o"></i>InterBranch Transfer</a></li>
         <li class='treeview'>
           <a href="#"><i class="fa fa-circle-o"></i>Stock Adjustment
-            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span> 
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
-            <li class="stockin"><a href="/"><i class="fa fa-circle-o"></i>In</a></li>
-            <li><a href="/"><i class="fa fa-circle-o"></i>Out</a></li>
+            <li class="stockin"><a href="/adjust-in"><i class="fa fa-circle-o"></i>In</a></li>
+            <li><a href="/adjust-out"><i class="fa fa-circle-o"></i>Out</a></li>
           </ul>
         </li>
 
-      </ul> 
+      </ul>
     </li>
     <!-- /Inventory -->
     <!-- Record Management -->
@@ -136,7 +136,7 @@
               <li class="account"><a href="/"><i class="fa fa-circle-o"></i>Account/Registration</a></li>
               <li class="discounting"><a href="/discounting"><i class="fa fa-circle-o"></i>Discounting</a></li>
             </ul>
-        </li>  
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-circle-o"></i><span>Product</span>
@@ -175,7 +175,7 @@
               <li><a href="/"><i class="fa fa-circle-o"></i>Payment</a></li>
               <li><a href="/"><i class="fa fa-circle-o"></i>Deposit</a></li>
             </ul>
-        </li>  
+        </li>
         <li class="treeview">
             <a href="#">
               <i class="fa fa-circle-o"></i><span>Purchases</span>
@@ -185,7 +185,7 @@
               <li><a href="/"><i class="fa fa-circle-o"></i>SupplierCM</a></li>
               <li><a href="/"><i class="fa fa-circle-o"></i>Purchase Liquidation</a></li>
             </ul>
-        </li>  
+        </li>
         <li class="treeview">
             <a href="#">
               <i class="fa fa-circle-o"></i><span>Audit/Verifications</span>
@@ -195,7 +195,7 @@
               <li><a href="/"><i class="fa fa-circle-o"></i>StockIn</a></li>
               <li><a href="/"><i class="fa fa-circle-o"></i>Deposit</a></li>
             </ul>
-        </li>  
+        </li>
         <li class="treeview">
             <a href="#">
               <i class="fa fa-circle-o"></i><span>BackDating</span>
@@ -207,7 +207,7 @@
               <li><a href="/"><i class="fa fa-circle-o"></i>Non-AR Payment</a></li>
               <li><a href="/"><i class="fa fa-circle-o"></i>Deposit</a></li>
             </ul>
-        </li>  
+        </li>
         <li class="treeview">
             <a href="#">
               <i class="fa fa-circle-o"></i><span>Modify Transaction Info</span>
@@ -216,7 +216,7 @@
             <ul class="treeview-menu">
               <li><a href="/"><i class="fa fa-circle-o"></i>StockIn</a></li>
             </ul>
-        </li> 
+        </li>
         <li class="treeview">
             <a href="#">
               <i class="fa fa-circle-o"></i><span>Tools</span>
@@ -226,7 +226,7 @@
               <li><a href="/"><i class="fa fa-circle-o"></i>Export Invoices</a></li>
               <li><a href="/"><i class="fa fa-circle-o"></i>Export Receivables</a></li>
             </ul>
-        </li> 
+        </li>
                </ul>
     </li>
     <!-- /Operations -->
@@ -234,8 +234,8 @@
     <li class="treeview">
       <a href="#">
         <i class="fa fa-dashboard"></i> <span>Reports</span>
-        <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span>      
-      </a> 
+        <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span>
+      </a>
       <ul class="treeview-menu">
         <li class="journals"><a href="/journals"><i class="fa fa-circle-o"></i>Journals</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Non-AR Payments</a></li>
@@ -248,7 +248,7 @@
         <li><a href="/"><i class="fa fa-circle-o"></i>Invoices</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Purchases</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Collection</a></li>
-      </ul>     
+      </ul>
     </li>
     <!-- /Reports -->
     <!-- Settings -->
@@ -270,7 +270,7 @@
               <li class="clusters"><a href="/clusters"><i class="fa fa-circle-o"></i>Clusters</a></li>
               <li class="branches"><a href="/branches"><i class="fa fa-circle-o"></i>Branches</a></li>
             </ul>
-        </li>  
+        </li>
         <li class="treeview">
             <a href="/">
               <i class="fa fa-circle-o"></i><span>Products</span>
@@ -282,7 +282,7 @@
               <li class="product-group"><a href="/product-group"><i class="fa fa-circle-o"></i>Groups</a></li>
               <li class="product-storage"><a href="/product-storage"><i class="fa fa-circle-o"></i>Storages</a></li>
             </ul>
-        </li>  
+        </li>
         <li class="acc_levels"><a href="/acc_levels"><i class="fa fa-circle-o"></i>Account Level</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Bank Accounts</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Holidays</a></li>
@@ -303,10 +303,10 @@
               <li><a href="/"><i class="fa fa-circle-o"></i>Approval</a></li>
               <li><a href="/"><i class="fa fa-circle-o"></i>Misc</a></li>
             </ul>
-        </li>  
+        </li>
       </ul>
     </li>
-    <!-- /Settings -->         
+    <!-- /Settings -->
   </ul>
 </section>
 <!-- / sidebar menu -->

@@ -77,6 +77,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('transfer-float','TransferController@transferFloat');
 	Route::resource('/transfer','TransferController');
 
+	Route::resource('/adjust-in','AdjustInController');
+
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
 	Route::resource('clusters','ClusterController');
 
