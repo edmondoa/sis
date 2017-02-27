@@ -10,45 +10,44 @@
       $scope.transfer = [];
        $scope.products =[];
       $scope.currentPage = 1;
-      $scope.pageSize = 15;  
+      $scope.pageSize = 15;
 
       $scope.getTransfer = function() {
-        
+
         $http.get('/transfer/ng-transfer-list').
           success(function(data) {
             $scope.products = data.prodlist;
-            $scope.transfer = data.transfer;
-           console.log(data.transfer);
-            
+            $scope.transfer = data.transfer;          
+
             if(data.transfer.orig_branch_id)
             {
               $("#branch_id_from").val(data.transfer.orig_branch_id).trigger("change");
               $("#branch_id_to").val(data.transfer.recv_branch_id).trigger("change");
               // $("#supplier_id").val(data.transfers.supplier_id).trigger("change");
-              $("#transfer_id").val(data.transfer.transfer_id)            
-             
+              $("#transfer_id").val(data.transfer.transfer_id)
+
               $('#stockin-div :input').attr('disabled',true);
-              $('#stockin-div .btn-proceed').attr('disabled',true);                          
+              $('#stockin-div .btn-proceed').attr('disabled',true);
               $("select.stock").attr('disabled',true);
 
               $("#stockitem-div :input").removeAttr('disabled');
-              $('#stockitem .btn-add').removeAttr('disabled'); 
+              $('#stockitem .btn-add').removeAttr('disabled');
             }else{
              $('#stockin-div :input').removeAttr('disabled');
-              $('#stockin-div .btn-proceed').removeAttr('disabled');                          
+              $('#stockin-div .btn-proceed').removeAttr('disabled');
               $("select.stock").removeAttr('disabled');
               $("#stockitem-div :input").attr('disabled',true);
               $('#stockitem .btn-add').attr('disabled',true);
            }
 
             $scope.total(data.products);
-                              
+
            // console.log($scope.stockin);
           });
       }
 
       $scope.saveTranser = function()
-      {    
+      {
         if($("#branch_id_from").val() == $("#branch_id_to").val()){
           var data = {status:false,message:['Originating and Receiving branch should not be the same!']};
            $scope.message(data);
@@ -56,8 +55,8 @@
         }
         var model = {
               'orig_branch_id':$("#branch_id_from").val(),
-              'recv_branch_id':$("#branch_id_to").val()             
-        } 
+              'recv_branch_id':$("#branch_id_to").val()
+        }
         console.log(model);
         $http.post('/transfer-float',model)
          .success(function(data) {
@@ -65,7 +64,7 @@
             if(data.status)
             {
               $window.location.reload();
-            }            
+            }
             // $("#branch_id").val(data.stockin.branch_id).trigger("change");
             // $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
             // $("#doc_no").val(data.stockin.doc_no);
@@ -77,17 +76,18 @@
 
       $scope.total = function(datas)
       {
+        console.log(datas);
         var totalQuantity =0;
         var totalCost =0;
 
         angular.forEach(datas, function(value, key) {
-         
-          totalCost = parseFloat(value.total) + parseFloat(totalCost);          
-          totalQuantity = parseInt(value.quantity) + parseInt(totalQuantity); 
-                  
+
+          totalCost = parseFloat(value.total) + parseFloat(totalCost);
+          totalQuantity = parseInt(value.quantity) + parseInt(totalQuantity);
+
         });
         var total = $filter('currency')(totalCost,'₧');
-        $("#totalQuantity").text(totalQuantity);    
+        $("#totalQuantity").text(totalQuantity);
         $("#totalCost").text(total);
       }
 
@@ -95,7 +95,7 @@
       {
         $http.get('transfer-float/cancel')
          .success(function(data) {
-            $scope.message(data);            
+            $scope.message(data);
             $window.location.reload();
         })
       }
@@ -129,21 +129,21 @@
       });
       }
 
-      
-      
+
+
 
       $scope.order = function(predicate, reverse) {
         console.log("dd");
          $scope.transfers = orderBy($scope.transfers, predicate, reverse);
       };
-      $scope.getTransfer();      
-      
-     
+      $scope.getTransfer();
+
+
 
     $scope.message = function(data)
     {
       if(data.status){
-        $.notify({       
+        $.notify({
           message: data.message
         },{
           type: 'success',
@@ -160,7 +160,7 @@
           stringBuilder +="<li>"+data.message[x]+"</li>";
         }
         stringBuilder +="</ul>";
-         $.notify({       
+         $.notify({
             message: stringBuilder
           },{
             type: 'danger',
@@ -169,8 +169,8 @@
               align: "right",
               from: "bottom"
           }
-          });   
+          });
       }
-    }  
+    }
   }
 })();

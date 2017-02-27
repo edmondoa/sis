@@ -69,7 +69,7 @@ class StockinController extends Controller
         //$stockinFloat = //StockinFloat::create($input);
         //if($stockinFloat)
         return Response::json(['status'=>true,'message' => "Document was successfully validated!",'stockin'=>$input]);
-        
+
         //return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
@@ -150,7 +150,7 @@ class StockinController extends Controller
                             ]);
     	Session::forget('prodlist');
     	Session::forget('stockinFloat');
-    	return Response::json(['status'=>true,'message' => "StockIn was successfully saved for approval!"]);
+    	return Response::json(['status'=>true,'message' => "StockIn #".$stock->stockin_id." was successfully saved for approval!"]);
 
     }
 
@@ -204,7 +204,7 @@ class StockinController extends Controller
         return [
         'branch_id' => 'required',
         'supplier_id' => 'required',
-        'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,        
+        'doc_no' => 'required|unique:stockin,doc_no,NULL,id,branch_id,' . $branch_id,
         'doc_date' =>'required|date',
         'arrive_date' =>'required|date',
         'amount_due' => 'sometimes|integer|min:0'];

@@ -11,7 +11,7 @@
   </div>
   <!-- info row -->
   <div class="row invoice-info">
-    <div class="col-sm-8 invoice-col" >   
+    <div class="col-sm-8 invoice-col" >
       <dl class="dl-horizontal">
       	<dt style="width: 78px">Domain : </dt><dd style="margin-left: 96px">{{$stockin->branch->branch_name}}</dd>
         <dt style="width: 78px">Supplier  : </dt><dd style="margin-left: 96px">{{$stockin->supplier->contact_person}}</dd>
@@ -19,10 +19,10 @@
         <dt style="width: 78px">Doc Date : </dt><dd style="margin-left: 96px">{{$stockin->doc_date}}</dd>
         <dt style="width: 78px">Arrive Date : </dt><dd style="margin-left: 96px">{{$stockin->arrive_date}}</dd>
       </dl>
-       
-      
+
+
     </div>
-    
+
     <!-- /.col -->
     <div class="col-sm-4 invoice-col">
     <dl class="dl-horizontal">
@@ -32,7 +32,7 @@
         <dt style="width: 88px">Post Date  : </dt><dd style="margin-left: 96px">{{$stockin->approval->post_date}}</dd>
         <dt style="width: 88px">Encode Date   : </dt><dd style="margin-left: 96px">{{$stockin->encode_date}}</dd>
         <dt style="width: 88px">User  : </dt><dd style="margin-left: 96px">{{$stockin->user->username}}</dd>
-    </dl>	    
+    </dl>
     </div>
     <!-- /.col -->
   </div>
@@ -47,13 +47,13 @@
           <th class='col-sm-2'>Prod Code</th>
           <th class='col-sm-2'>Cat Code</th>
           <th>Product</th>
-          <th class='col-sm-1'>Price</th>
-          <th class='col-sm-1'>Qty</th>
-          <th class='col-sm-1'>Total</th>
+          <th class='col-sm-1 text-right'>Price</th>
+          <th class='col-sm-1 text-right'>Qty</th>
+          <th class='col-sm-1 text-right'>Total</th>
         </tr>
         </thead>
         <tbody>
-        <?php 
+        <?php
         	$quantity = 0;
         	$total = 0;
         ?>
@@ -62,9 +62,9 @@
           <td>{{$item->product->product_code}}</td>
           <td>{{$item->product->category->category_code}}</td>
           <td>{{$item->product->product_name}}</td>
-          <td>{{$item->cost_price}}</td>
-          <td>{{$item->quantity}}</td>
-          <td>{{ number_format(($item->quantity * $item->cost_price), 2, '.', ',')}}</td>
+          <td class='text-right'>{{$item->cost_price}}</td>
+          <td class='text-right'>{{$item->quantity}}</td>
+          <td class='text-right'>{{ number_format(($item->quantity * $item->cost_price), 2, '.', ',')}}</td>
         </tr>
         <?php $quantity += $item->quantity; $total += ($item->quantity * $item->cost_price)?>
         @endforeach
@@ -74,9 +74,9 @@
         	<td> </td>
         	<td> </td>
         	<td><strong>Total</strong></td>
-        	<td><strong>{{$quantity}}</strong></td>
-        	<td><strong>{{ number_format($total,2,'.',',')}}</strong></td>
-        	
+        	<td class='text-right'><strong>{{$quantity}}</strong></td>
+        	<td class='text-right'><strong>₧{{ number_format($total,2,'.',',')}}</strong></td>
+
         </tfoot>
       </table>
     </div>

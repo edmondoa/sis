@@ -16,9 +16,9 @@ use Response;
 use Redirect;
 class ApprovalController extends Controller
 {
-    
+
     public function __construct()
-    {        
+    {
         $this->middleware('web');
     }
     public function index()
@@ -26,7 +26,7 @@ class ApprovalController extends Controller
         if(!Core::setConnection())
         {
          return redirect()->intended('login');
-        }  
+        }
     	return view('approvals.index');
     }
 
@@ -42,26 +42,28 @@ class ApprovalController extends Controller
                 'post_date'=> $app['post_date'],
                 'branch_name'=>$app['branch']['branch_name'],
                 'approval_type' => $app['approval_type']['approval'],
+                'approval_id' => $app['approvalable_id'],
                 'user' => $app['user']['firstname'].' '.$app['user']['lastname'],
                 'status' => $app['status']
             ];
-        },$approvals->toArray() ) ;                   
-       
+        },$approvals->toArray() ) ;
+
         $tranfers = Transfer::with('approval','branch_transfer','user')
                     ->where('recv_branch_id',Auth::user()->branch_id)
                     ->where('status','APPROVED')->get();
-        
+
         $tranfers = array_map(function($tran){
 
             return [
                 'post_date'=> $tran['approval']['post_date'],
                 'branch_name'=>$tran['branch_transfer']['branch_name'],
                 'approval_type' => 'STOCK TRANSFER',
+                'approval_id' => $app['transfer_id'],
                 'user' => $tran['user']['firstname'].' '.$tran['user']['lastname'],
                 'status' => $tran['status']
             ];
-        },$tranfers->toArray() ) ;             
-        return array_merge($tranfers,$approvals);    
+        },$tranfers->toArray() ) ;
+        return array_merge($tranfers,$approvals);
     }
 
     public function update(Request $request,$status,$id)
@@ -74,13 +76,13 @@ class ApprovalController extends Controller
             $approval->notes = $request->note;
     	$approval->approver_user_id = Auth::user()->user_id;
     	$approval->approve_date =  Setting::first()->pluck('post_date')[0];
-    	
+
         if($approval->save())
     	{
             if(($status == 'APPROVED' && $other_detail['type']!='TRO') || $status == 'RECEIVED' )
     		    $approval->approvalable->series_id = $this->series_id($approval->approval_type_id, $approval->approvalable->branch_id);
     		$approval->approvalable->status = $status;
-    		
+
     		if($approval->approvalable->save())
     		{
                 if($status == 'APPROVED' && $other_detail['type']!='TRO')
@@ -89,11 +91,11 @@ class ApprovalController extends Controller
                     ProductBinCard::insert($approval->approvalable->items,$other_detail['reference'],$other_detail['type'],$other_detail['negative']);
                 }
                 return Response::json(['status'=>true,'message' => "Successfully ".strtolower($status)."!"]);
-        
+
     		}
     	}
-    	return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);	
-    	
+    	return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
+
     }
 
 
