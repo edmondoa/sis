@@ -34,7 +34,7 @@ class StockinController extends Controller
         }
         $suppliers = Supplier::get();
 
-    	$branches = Branch::get();
+    	 $branches = Branch::get();
         $post_date = Setting::first()->pluck('post_date')[0];
     	return view('stockin.index',compact('suppliers','branches','post_date'));
     }
@@ -121,14 +121,14 @@ class StockinController extends Controller
     	if(!Core::setConnection()){
             return Redirect::to("/login");
         }
-        $rows = count($req->quantity) - 1 ;
-    	$post_date = Setting::first()->pluck('post_date')[0];
-    	$stockin = Session::get('stockinFloat');
+      $rows = count($req->quantity) - 1 ;
+  	  $post_date = Setting::first()->pluck('post_date')[0];
+  	  $stockin = Session::get('stockinFloat');
 
-        $stockin['arrive_date'] = date("Y-m-d",strtotime($stockin['arrive_date']));
-        $stockin['doc_date'] = date("Y-m-d",strtotime($stockin['doc_date']));
-        $stockin['encode_date'] = $post_date;
-        $stockin['notes'] = $req->notes;
+      $stockin['arrive_date'] = date("Y-m-d",strtotime($stockin['arrive_date']));
+      $stockin['doc_date'] = date("Y-m-d",strtotime($stockin['doc_date']));
+      $stockin['encode_date'] = $post_date;
+      $stockin['notes'] = $req->notes;
     	$stock = Stockin::create($stockin);
         $prodlist = array_reverse(Session::get('prodlist'));
     	foreach($prodlist as $prod)

@@ -10,9 +10,7 @@ class AdjustIn extends Model
     protected $table = 'stock_adj_in';
     protected $primaryKey ='stock_adj_in_id';
 
-    public static $rules = ['supplier_id' => 'required',
-    						'branch_id' => 'required',
-    						'doc_no' => 'required|unique_with:stockin,branch_id'];
+    public static $rules = ['branch_id' => 'required'];
 
     protected $fillable = ['branch_id','notes' ,
     						'type','doc_no','doc_date','status','encode_date',

@@ -30,7 +30,7 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-4 control-label"></label>
               <div class="col-sm-8">
-                <a href="javascript:void(0)" class='btn btn-primary btn-proceed ' ng-click="saveStockin()" style="width:100%" tabindex="7"> Proceed</a>
+                <a href="javascript:void(0)" class='btn btn-primary btn-proceed ' ng-click="saveAdjustin()" style="width:100%" tabindex="7"> Proceed</a>
               </div>
             </div>
           </div>

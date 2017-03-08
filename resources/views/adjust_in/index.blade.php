@@ -14,15 +14,15 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="stockinCtrl">
-      <a href="#" class='hide refresh' ng-click="getStockins()"></a>
+    <section class="content" ng-controller="AdjustInCtrl">
+      <a href="#" class='hide refresh' ng-click="getAdjustIn()"></a>
       @include('adjust_in.create')
     </section>
       <!-- /.row (main row) -->
 @stop
 @section('html_footer')
 @parent
-<script src="/angular/controllers/stockin.js"></script>
+<script src="/angular/controllers/adjustin.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
@@ -58,9 +58,7 @@
     })
   $(document).on("click",'.search-prod',function(e){
     e.preventDefault();
-
-
-    $.get( "stockin/search", function( data ) {
+    $.get( "adjust-in/search", function( data ) {
       var dialog = bootbox.dialog({
           title: 'Search Products',
           message: data,
@@ -109,7 +107,7 @@
                   id:$("#prod_id").val(),
                   qty:$("#qty").val(),
                   costprice:$("#cprice").val()};
-      $.post("stockin-float/items",param, function( data ) {
+      $.post("adjust-in-float/items",param, function( data ) {
         $("#code").text('');
         $("#name").text('');
         $("#cprice").val('');
@@ -182,33 +180,24 @@
 
 
   $(document).on("click",".btn-save",function(e){
-    stopLoad();
+    startLoad();
     var totalCost =  $("#totalCost").text();
     var amount = $("#amount_due").val();
-    if(parseFloat(totalCost) != parseFloat(amount))
-    {
-      stopLoad();
-      bootbox.alert({
-          message: "Please check the Total amount it doesn't match to the amount due",
-          size: 'small'
-      });
-      $("div.amount-due").addClass('has-error');
-    }else{
-      var stocks = {};
-      var quantity = [];
-      var prod_id = [];
-      var costprice = [];
-      var updated_price = [];
-      var notes = $("[name='notes']").val();
-      $('.quantity').each(function () {
-        quantity.push($(this).val());
-        prod_id.push($(this).data('prodid'));
-        costprice.push($(this).data('costprice')) ;
-        updated_price.push($(this).parent('td').siblings('td').find('input.updated_price').val());
-      });
+    var stocks = {};
+    var quantity = [];
+    var prod_id = [];
+    var costprice = [];
+    var updated_price = [];
+    var notes = $("[name='notes']").val();
+    $('.quantity').each(function () {
+      quantity.push($(this).val());
+      prod_id.push($(this).data('prodid'));
+      costprice.push($(this).data('costprice')) ;
+      updated_price.push($(this).parent('td').siblings('td').find('input.updated_price').val());
+    });
       stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice,'updated_price':updated_price,'notes':notes};
       console.log(stocks);
-      $.post('stockin-float/save',stocks,function(data){
+      $.post('adjust-in-float/save',stocks,function(data){
         stopLoad();
         message(data);
         $(".refresh").trigger('click');
@@ -268,7 +257,7 @@
   });
 
   $(document).on('change','.searchStr',function(e){
-    Stockin().search($(this).val());
+    AdjustIn().search($(this).val());
   })
   $(document).on('click','#product-search table#products tr',function(){
     cls = $(this).attr('class');
@@ -281,10 +270,10 @@
   $(".calendar").datepicker({autoclose:true});
 
 
-  function Stockin()
+  function AdjustIn()
   {
     this.search = function(param){
-      $.post('product/multi_search',{str:param,supplier_id:$("#supplier_id").val()},function(data){
+      $.post('adjust-in/multi_search',{str:param},function(data){
         if(data.status)
         {
           var strBuilder ="";
