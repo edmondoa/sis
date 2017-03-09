@@ -11,7 +11,7 @@ class AdjustInItem extends Model
     public $timestamps = false;
 
 
-    public $fillable = ['product_id','cost_price','quantity','stockin_id'];
+    public $fillable = ['product_id','cost_price','quantity','stock_adj_in_id'];
     public static $rules = ['code' => 'required',
     						'qty' => 'required|number',
     						'cost' => 'required'];

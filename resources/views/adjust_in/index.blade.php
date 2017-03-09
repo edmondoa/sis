@@ -43,19 +43,7 @@
     });
 
   });
-  $(document).on("change",'#doc_date',function(e){
-      $('#arrive_date').datepicker('remove');
-      $('#arrive_date').val('');
-      var arrive_date = new Date($(this).val());
-      var date = new Date('{{$post_date}}');
-      $('#arrive_date').datepicker({
-            autoclose: true,
-            startDate: arrive_date,
-            endDate: date,
 
-      });
-      return true;
-    })
   $(document).on("click",'.search-prod',function(e){
     e.preventDefault();
     $.get( "adjust-in/search", function( data ) {
@@ -136,14 +124,14 @@
         return false;
       if($("#locked").val()==0){
         var param = {
-                id:$("#prod_id").val(),
-                qty:$("#qty").val(),
-                  costprice:$("#cprice").val()};
-        $.post("stockin-float/items",param, function( data ) {
+                    id:$("#prod_id").val(),
+                    qty:$("#qty").val(),
+                    costprice:$("#cprice").val()};
+        $.post("adjust-in-float/items",param, function( data ) {
           $("#code").text('');
-           $("#locked").val('');
           $("#name").text('');
           $("#cprice").val('');
+           $("#locked").val('');
           $("#qty").val('');
           $("#prod_id").val('');
           $("#search").val('');
@@ -217,16 +205,14 @@
         $("select.stock").attr('disabled',false);
         $("div.amount-due").removeClass('has-error');
       });
-    }
   })
 
   $(document).on('change','#search',function(e){
     e.preventDefault();
     searchStr = $(this).val();
-    supplier = $("#supplier_id").val();
     if(searchStr=='')
       searchStr ='_blank';
-    $.get( "products/search/"+supplier+"/"+searchStr, function( data ) {
+    $.get( "adjust-in/search/"+searchStr, function( data ) {
       if(data.status)
       {
         console.log(data.products);

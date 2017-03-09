@@ -8,6 +8,7 @@ use App\Models\Branch;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\AdjustIn;
+use App\Models\AdjustInItem;
 use Session;
 use Auth;
 use Validator;
@@ -113,7 +114,7 @@ class AdjustInController extends Controller
     return $jdata;
   }
 
-  public function save()
+  public function save(Request $req)
   {
     if(!Core::setConnection()){
           return Redirect::to("/login");
@@ -125,6 +126,7 @@ class AdjustInController extends Controller
     $adjustin['encode_date'] = $post_date;
     $adjustin['notes'] = $req->notes;
     $stock = AdjustIn::create($adjustin);
+
     $prodlist = array_reverse(Session::get('adjustprodlist'));
     foreach($prodlist as $prod)
     {
@@ -146,5 +148,54 @@ class AdjustInController extends Controller
     Session::forget('adjustprodlist');
     Session::forget('adjustInFloat');
     return Response::json(['status'=>true,'message' => "AdjustIn #".$stock->stockin_id." was successfully saved for approval!"]);
+  }
+
+  public function singleSearch($search=NULL)
+  {
+      Core::setConnection();
+      if (is_null($search)) $search ="";
+      $sql = "SELECT p.*,c.category_code FROM product p
+              LEFT JOIN category c ON p.category_id = c.category_id
+              WHERE (product_code = '".$search."' OR
+                barcode = '".$search."') AND p.suspended = 0";
+      $products = DB::select($sql);
+      if(count($products) > 0)
+          return Response::json(['status'=>true,'products'=>$products]);
+      return Response::json(['status'=>false,'products'=>[]]);
+  }
+
+  public function removeItems($key)
+  {
+    if(!Core::setConnection()){
+          return Redirect::to("/login");
+      }
+      $prodlist = (Session::has('adjustprodlist'))?Session::get('adjustprodlist'):[];
+    unset($prodlist[$key]);
+    $prodlist = array_values($prodlist);
+    Session::put('adjustprodlist',$prodlist);
+    return Response::json(['status'=>true,'message' => "Successfully removed!"]);
+  }
+
+  public function cancel()
+  {
+    if(!Core::setConnection()){
+          return Redirect::to("/login");
+      }
+    Session::forget('adjustprodlist');
+    Session::forget('adjustInFloat');
+    $jdata['prodlist'] = [];
+    $jdata['stockin'] = [];
+    $jdata['status'] = true;
+    $jdata['message'] ="AdjustIn was successfully cancelled!";
+    return $jdata;
+  }
+
+  public function show($id)
+  {
+    if(!Core::setConnection()){
+        return Redirect::to("/login");
+    }
+    $adjustin = AdjustIn::with('items','branch','user')->find($id);
+    return view('adjust_in.show',compact('adjustin'));
   }
 }

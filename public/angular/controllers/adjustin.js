@@ -39,7 +39,7 @@
               $('#stockitem-div .btn-add').attr('disabled',true);
 
             }
-
+            $scope.total(data.prodlist);
           });
       }
 
@@ -92,7 +92,7 @@
       $scope.cancel = function()
       {
         $("div.loading").removeClass('hide');
-        $http.get('/stockin-float/cancel')
+        $http.get('/adjust-in-float/cancel')
          .success(function(data) {
             $("div.loading").addClass('hide');
             $scope.message(data);
@@ -139,10 +139,10 @@
           callback: function (result) {
               if(result)
               {
-                 $http.post('/stockin-items-remove/'+index)
+                 $http.post('/adjust-in-items-remove/'+index)
                   .success(function(data) {
                     $scope.message(data);
-                    $scope.getStockins();
+                    $scope.getAdjustIn();
                   });
               }
           }

@@ -12,25 +12,18 @@ class AdjustIn extends Model
 
     public static $rules = ['branch_id' => 'required'];
 
-    protected $fillable = ['branch_id','notes' ,
-    						'type','doc_no','doc_date','status','encode_date',
+    protected $fillable = ['branch_id','notes' ,'status','encode_date',
     						'user_id','post_date','arrive_date','approval_id'];
 
     public function items()
     {
-    	return $this->hasMany('App\Models\StockItem','stockin_id','stockin_id');
+    	return $this->hasMany('App\Models\AdjustInItem','stock_adj_in_id','stock_adj_in_id');
     }
 
     public function branch()
     {
         return $this->belongsTo('App\Models\Branch','branch_id','branch_id')->select('branch_id','branch_name','business_name');
     }
-
-     public function supplier()
-    {
-        return $this->belongsTo('App\Models\Supplier');
-    }
-
 
     public function approval()
     {

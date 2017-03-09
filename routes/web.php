@@ -80,6 +80,10 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('adjust-in/ng-adjustin-list','AdjustInController@adjustinList');
 	Route::post('adjust-in-float','AdjustInController@adjustinFloat');
 	Route::get('adjust-in/search','AdjustInController@search');
+	Route::get('adjust-in-float/cancel','AdjustInController@cancel');
+	Route::get('stock_adj-in/{id}','AdjustInController@show');
+	Route::get('adjust-in/search/{searchstr}','AdjustInController@singleSearch');
+	Route::post('/adjust-in-items-remove/{id}','AdjustInController@removeItems');
 	Route::post('adjust-in/multi_search','AdjustInController@multi_search');
 	Route::post('adjust-in-float/items','AdjustInController@saveItems');
 	Route::post('adjust-in-float/save','AdjustInController@save');
