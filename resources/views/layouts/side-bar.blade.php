@@ -106,13 +106,13 @@
         </li>
         <li><a href="/stockout"><i class="fa fa-circle-o"></i>Stockout</a></li>
         <li class="interbranch-transfer"><a href="/transfer"><i class="fa fa-circle-o"></i>InterBranch Transfer</a></li>
-        <li class='treeview'>
+        <li class='treeview adjustment'>
           <a href="#"><i class="fa fa-circle-o"></i>Stock Adjustment
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
-            <li class="stockin"><a href="/adjust-in"><i class="fa fa-circle-o"></i>In</a></li>
-            <li><a href="/adjust-out"><i class="fa fa-circle-o"></i>Out</a></li>
+            <li class="adjust-in"><a href="/adjust-in"><i class="fa fa-circle-o"></i>In</a></li>
+            <li class="adjust-out"><a href="/adjust-out"><i class="fa fa-circle-o"></i>Out</a></li>
           </ul>
         </li>
 

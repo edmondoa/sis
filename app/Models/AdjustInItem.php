@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class AdjustInItem extends Model
 {
     //protected $connection = 'domain';
-    protected $table = 'stock_adj_in_item';
+    protected $table = 'stock_adj_out_item';
     public $timestamps = false;
 
 
-    public $fillable = ['product_id','cost_price','quantity','stock_adj_in_id'];
+    public $fillable = ['product_id','cost_price','quantity','stock_adj_out_id'];
     public static $rules = ['code' => 'required',
     						'qty' => 'required|number',
     						'cost' => 'required'];
@@ -31,7 +31,7 @@ class AdjustInItem extends Model
 
     public function getBranchIdAttribute()
     {
-        return $this->stock->branch_id;
+        return $this->ajust_in->branch_id;
     }
 
 }

@@ -89,6 +89,13 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('adjust-in-float/save','AdjustInController@save');
 	Route::resource('/adjust-in','AdjustInController');
 
+	Route::get('adjust-out/ng-adjustout-list','AdjustOutController@adjustOutList');
+	Route::post('adjust-out-float','AdjustOutController@adjustoutFloat');
+	Route::get('adjust-out/search','AdjustOutController@search');
+	Route::post('adjust-out-float/items','AdjustOutController@saveItems');
+	Route::post('adjust-out/multi_search','AdjustOutController@multi_search');
+	Route::resource('/adjust-out','AdjustOutController');
+
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
 	Route::resource('clusters','ClusterController');
 

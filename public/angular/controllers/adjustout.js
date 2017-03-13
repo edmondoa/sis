@@ -4,21 +4,22 @@
 
   angular
     .module('SisApp')
-    .controller('AdjustInCtrl', stockinCtrl);
+    .controller('AdjustOutCtrl', AdjustOutCtrl);
 
-    function stockinCtrl($scope,$filter, $timeout,$http,$window) {
+    function AdjustOutCtrl($scope,$filter, $timeout,$http,$window) {
       $scope.stockins = [];
        $scope.stock =[];
       $scope.currentPage = 1;
       $scope.pageSize = 15;
 
-      $scope.getAdjustIn = function() {
+      $scope.getAdjustOut = function() {
         $("div.loading").removeClass('hide');
-        $http.get('/adjust-in/ng-adjustin-list').
+        $http.get('/adjust-out/ng-adjustout-list').
           success(function(data) {
             $scope.stockins = data.prodlist;
             $("div.loading").addClass('hide');
-            if(data.adjustin.branch_id)
+          
+            if(data.adjustout.branch_id)
             {
               $('#stockin-div :input').attr('disabled',true);
               $('#stockin-div .btn-proceed').attr('disabled',true);
@@ -28,8 +29,8 @@
               $("#stockitem-div :input").removeAttr('disabled');
               $('#stockitem-div .btn-add').removeAttr('disabled');
 
-              $("select#branch_id").val(data.adjustin.branch_id).trigger("change");
-              $("input#branch_id").val(data.adjustin.branch_id);
+              $("select#branch_id").val(data.adjustout.branch_id).trigger("change");
+              $("input#branch_id").val(data.adjustout.branch_id);
 
             }else{
               $("#stockin-div :input").removeAttr('disabled');
@@ -43,14 +44,14 @@
           });
       }
 
-      $scope.saveAdjustin = function()
+      $scope.saveAdjustOut = function()
       {
         $("div.loading").removeClass('hide');
         var model = {
               'branch_id':$("#branch_id").val()
         }
         console.log(model);
-        $http.post('/adjust-in-float',model)
+        $http.post('/adjust-out-float',model)
          .success(function(data) {
             $("div.loading").addClass('hide');
             $scope.message(data);
@@ -65,7 +66,7 @@
               $("#stockitem-div :input").removeAttr('disabled');
               $('#stockitem-div .btn-add').removeAttr('disabled');
             }
-            $("#branch_id").val(data.adjustin.branch_id).trigger("change");
+            $("#branch_id").val(data.adjustout.branch_id).trigger("change");
 
 
         })
@@ -97,7 +98,7 @@
             $("div.loading").addClass('hide');
             $scope.message(data);
             $scope.stockins = data.prodlist;
-            $("select#branch_id").val('').trigger("change");          
+            $("select#branch_id").val('').trigger("change");
             $("#search").val('');
             $("#cprice").val('');
             $("#qty").val('');
@@ -137,7 +138,7 @@
                  $http.post('/adjust-in-items-remove/'+index)
                   .success(function(data) {
                     $scope.message(data);
-                    $scope.getAdjustIn();
+                    $scope.getAdjustOut();
                   });
               }
           }
@@ -151,7 +152,7 @@
         console.log("dd");
          $scope.stockins = orderBy($scope.stockins, predicate, reverse);
       };
-      $scope.getAdjustIn();
+      $scope.getAdjustOut();
 
 
 

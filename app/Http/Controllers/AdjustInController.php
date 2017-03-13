@@ -147,7 +147,7 @@ class AdjustInController extends Controller
                           ]);
     Session::forget('adjustprodlist');
     Session::forget('adjustInFloat');
-    return Response::json(['status'=>true,'message' => "AdjustIn #".$stock->stockin_id." was successfully saved for approval!"]);
+    return Response::json(['status'=>true,'message' => "AdjustIn #".$stock->stock_adj_in_id." was successfully saved for approval!"]);
   }
 
   public function singleSearch($search=NULL)
