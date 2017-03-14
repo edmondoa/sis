@@ -91,6 +91,8 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('adjust-out/ng-adjustout-list','AdjustOutController@adjustOutList');
 	Route::post('adjust-out-float','AdjustOutController@adjustoutFloat');
+	Route::post('adjust-out-float/save','AdjustOutController@save');
+	Route::get('adjust-out-float/cancel','AdjustOutController@cancel');
 	Route::get('adjust-out/search','AdjustOutController@search');
 	Route::post('adjust-out-float/items','AdjustOutController@saveItems');
 	Route::post('adjust-out/multi_search','AdjustOutController@multi_search');

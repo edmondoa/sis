@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdjustInItem extends Model
 {
     //protected $connection = 'domain';
-    protected $table = 'stock_adj_out_item';
+    protected $table = 'stock_adj_in_item';
     public $timestamps = false;
 
 

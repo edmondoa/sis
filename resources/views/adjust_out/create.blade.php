@@ -79,7 +79,7 @@
               <td>
                 <input type="text" class="form-control " id="cprice" name='cprice' style='padding:6px 2px !important'>
                 <input type="hidden" class="form-control " id="prod_id" name='prod_id' >
-                <input type="hidden" class="form-control " id="stockout_id" name='stockout_id' >
+                <input type="hidden" class="form-control " id="stock_adj_out_id" name='stock_adj_out_id' >
               </td>
               <td>
                 <input type="text" class="form-control " id="qty" name='qty' tabindex="9" style='padding:6px 2px !important'>

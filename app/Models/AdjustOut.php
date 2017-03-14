@@ -17,7 +17,7 @@ class AdjustOut extends Model
 
   public function items()
   {
-    return $this->hasMany('App\Models\AdjustInItem','stock_adj_out_id','stock_adj_out_id');
+    return $this->hasMany('App\Models\AdjustOutItem','stock_adj_out_id','stock_adj_out_id');
   }
 
   public function branch()

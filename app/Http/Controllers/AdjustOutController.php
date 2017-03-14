@@ -7,6 +7,8 @@ use App\Libraries\Core;
 use App\Models\Branch;
 use App\Models\Setting;
 use App\Models\AdjustOut;
+use App\Models\StockOut;
+use App\Models\AdjustOutItem;
 
 use App\Http\Requests;
 use Validator;
@@ -37,13 +39,17 @@ class AdjustOutController extends Controller
     public function adjustOutList()
     {
       Core::setConnection();
-        $adjustout = AdjustOut::with('items')->where('user_id',Auth::user()->user_id)
+      $adjustout = AdjustOut::where('user_id',Auth::user()->user_id)
     						->where('status','ONGOING')
+                ->with('items')
     						->orderBy('stock_adj_out_id', 'desc')->first();
 
-    	$jdata['prodlist'] = (!is_null($adjustout)) ? $adjustout->items : [];;
 
-    	$jdata['adjustout'] = (!is_null($adjustout)) ? $adjustout : [];;
+      $jdata['prodlist'] = (!is_null($adjustout)) ? $adjustout->items : [];
+
+    	$jdata['adjustout'] = (!is_null($adjustout)) ? $adjustout : [];
+      // dump($jdata);
+      // exit;
     	return $jdata;
     }
 
@@ -53,7 +59,6 @@ class AdjustOutController extends Controller
       $input = $req->all();
     	$input['status'] = 'ONGOING';
     	$input['user_id'] = Auth::user()->user_id;
-      $input['encode_date'] = date('Y-m-d');
     	$validate = Validator::make($input, AdjustOut::$rules);
         if($validate->fails())
         {
@@ -93,7 +98,59 @@ class AdjustOutController extends Controller
 
     public function saveItems(Request $req)
     {
-      
+
+        Core::setConnection();
+        $available = StockOut::available($req->id,$req->branch_id);
+      	if($available <= 0)
+      	{
+      		return Response::json(['status' => false, 'message' =>["Already out of stock"]]);
+      	}else if($available < $req->qty)
+      	{
+      		return Response::json(['status' => false, 'message' =>["Out of range. There are only ".$available." stocks available"]]);
+      	}
+        $adjustout_item = new AdjustOutItem;
+      	$adjustout_item->product_id = $req->id;
+        $adjustout_item->quantity = $req->qty;
+        $adjustout_item->stock_adj_out_id = $req->stock_adj_out_id;
+        $adjustout_item->cost_price = $req->costprice;
+        if($adjustout_item->save())
+        	return Response::json(['status' => true, 'message' =>["Item are now book"]]);
+
+        return Response::json(['status' => false, 'message' =>["Error"]]);
+    }
+
+    public function save(Request $req)
+    {
+        Core::setConnection();
+          $adjustout = AdjustOut::with('items')->where('user_id',Auth::user()->user_id)
+      						->where('status','ONGOING')
+      						->first();
+      	$adjustout->status = "PENDING";
+      	$adjustout->encode_date = date("Y-m-d");
+        $adjustout->notes = $req->notes;
+      	$adjustout->save();
+      	$post_date = Setting::first()->pluck('post_date')[0];
+      	$adjustout->approval()->create([
+                              'status' => 'PENDING',
+                              'user_id' => Auth::user()->user_id,
+                              'post_date' => $post_date,
+                              'branch_id' => $adjustout->branch_id,
+                              'approval_type_id' =>5
+                              ]);
+      	return Response::json(['status'=>true,'message' => "Successfully save!"]);
+    }
+
+    public function cancel()
+    {
+      Core::setConnection();
+      $adjustout = AdjustOut::with('items')->where('user_id',Auth::user()->user_id)
+                          ->where('status','ONGOING')
+                          ->first();
+      $adjustout->items()->delete();
+      $adjustout->delete();  
+      $jdata['status'] = true;
+      $jdata['message'] ="Successfully cancelled!";
+      return $jdata;
     }
 
 }

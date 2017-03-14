@@ -84,7 +84,7 @@
      if($("#locked").val()==0){
       var param = {
                   id:$("#prod_id").val(),
-                  stockout_id:$("#stockout_id").val(),
+                  stockout_id:$("#stock_adj_out_id").val(),
                   branch_id:$("#branch_id").val(),
                   qty:$("#qty").val(),
                   available:$("#available").text(),

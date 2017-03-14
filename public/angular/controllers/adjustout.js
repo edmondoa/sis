@@ -18,7 +18,7 @@
           success(function(data) {
             $scope.stockins = data.prodlist;
             $("div.loading").addClass('hide');
-          
+            console.log(data);
             if(data.adjustout.branch_id)
             {
               $('#stockin-div :input').attr('disabled',true);
@@ -31,7 +31,7 @@
 
               $("select#branch_id").val(data.adjustout.branch_id).trigger("change");
               $("input#branch_id").val(data.adjustout.branch_id);
-
+              $("#stock_adj_out_id").val(data.adjustout.stock_adj_out_id);
             }else{
               $("#stockin-div :input").removeAttr('disabled');
               $("select.stock").removeAttr('disabled');
@@ -79,12 +79,11 @@
         var totalCost =0;
         var regex = new RegExp(',', 'g');
         angular.forEach(datas, function(value, key) {
-
-          totalCost = parseFloat(value.total.replace(regex,'')) + parseFloat(totalCost);
+          totalCost = parseFloat(value.total) + parseFloat(totalCost);
           totalQuantity = parseInt(value.quantity) + parseInt(totalQuantity);
 
         });
-        console.log(datas);
+
         var total = $filter('currency')(totalCost,'₧');
         $("#totalQuantity").text(totalQuantity);
         $("#totalCost").text(total);
@@ -93,7 +92,7 @@
       $scope.cancel = function()
       {
         $("div.loading").removeClass('hide');
-        $http.get('/adjust-in-float/cancel')
+        $http.get('/adjust-out-float/cancel')
          .success(function(data) {
             $("div.loading").addClass('hide');
             $scope.message(data);

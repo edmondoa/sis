@@ -92,10 +92,12 @@
         return false;
      if($("#locked").val()==0){
       var param = {
-                  id:$("#prod_id").val(),
-                  qty:$("#qty").val(),
-                  costprice:$("#cprice").val()};
-      $.post("adjust-in-float/items",param, function( data ) {
+              id:$("#prod_id").val(),
+              qty:$("#qty").val(),
+              branch_id:$("#branch_id").val(),
+              stock_adj_out_id:$("#stock_adj_out_id").val(),
+              costprice:$("#cprice").val()};
+      $.post("adjust-out-float/items",param, function( data ) {
         $("#code").text('');
         $("#name").text('');
         $("#cprice").val('');
@@ -126,6 +128,8 @@
         var param = {
                     id:$("#prod_id").val(),
                     qty:$("#qty").val(),
+                    branch_id:$("#branch_id").val(),
+                    stock_adj_out_id:$("#stock_adj_out_id").val(),
                     costprice:$("#cprice").val()};
         $.post("adjust-out-float/items",param, function( data ) {
           $("#code").text('');
@@ -147,64 +151,25 @@
 
   });
 
-  $(document).on('change','.updated_price',function(e){
-    e.preventDefault();
-    key = $(this).parent('td').parent('tr').attr('id');
-
-    var updatedprice = $(this).val();
-    var quantity = $(this).parent('td').siblings('td').find('input.quantity').val();
-    var total = parseFloat(updatedprice) * parseFloat(quantity);
-    $(this).parent('td').siblings('td').find('.total').text(total);
-
-    var totalCost = 0;
-    $(".total").each(function(){
-      totalCost = totalCost + parseFloat($(this).text());
-    });
-    $("#totalCost").text(parseFloat(totalCost));
-    update(key,'updated_price',updatedprice);
-
-  })
-
-
-
   $(document).on("click",".btn-save",function(e){
-    startLoad();
-    var totalCost =  $("#totalCost").text();
-    var amount = $("#amount_due").val();
-    var stocks = {};
-    var quantity = [];
-    var prod_id = [];
-    var costprice = [];
-    var updated_price = [];
-    var notes = $("[name='notes']").val();
-    $('.quantity').each(function () {
-      quantity.push($(this).val());
-      prod_id.push($(this).data('prodid'));
-      costprice.push($(this).data('costprice')) ;
-      updated_price.push($(this).parent('td').siblings('td').find('input.updated_price').val());
-    });
-      stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice,'updated_price':updated_price,'notes':notes};
-      console.log(stocks);
-      $.post('adjust-in-float/save',stocks,function(data){
-        stopLoad();
-        message(data);
-        $(".refresh").trigger('click');
-        $("#branch_id").val('').trigger("change");
-        $("#supplier_id").val('').trigger("change");
-        $("#doc_no").val('');
-        $("#amount_due").val('');
-        $("#doc_date").val('');
-        $("#arrive_date").val('');
-        $("#totalQuantity").text(0);
-        $("#totalCost").text(parseFloat(0));
-        $('.btn-save').addClass('disabled');
-        $('.search-prod').addClass('disabled');
+      startLoad();
+      $.post('adjust-out-float/save',{notes:$("[name='notes']").val()},function(data){
+          stopLoad();
+          message(data);
+          $(".refresh").trigger('click');
+          $("select#branch_id").val('').trigger("change");
 
-        $("a.stock").removeClass('disabled');
-        $("input.stock").attr('readonly',false);
-        $("select.stock").attr('disabled',false);
-        $("div.amount-due").removeClass('has-error');
+          $("#totalQuantity").text(0);
+          $("#totalCost").text(parseFloat(0));
+          $('.btn-save').addClass('disabled');
+          $('.search-prod').addClass('disabled');
+
+          $("a.stock").removeClass('disabled');
+          $("input.stock").attr('readonly',false);
+          $("select.stock").attr('disabled',false);
+          $("div.amount-due").removeClass('has-error');
       });
+
   })
 
   $(document).on('change','#search',function(e){
@@ -221,6 +186,7 @@
         $("#name").text(data.products[0].product_name);
         $("#cprice").val(data.products[0].cost_price);
         $("#qty").val(1);
+
         $("#prod_id").val(data.products[0].product_id);
         $("#qty").focus();
       }
