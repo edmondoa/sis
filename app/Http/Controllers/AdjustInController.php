@@ -123,7 +123,7 @@ class AdjustInController extends Controller
     $post_date = Setting::first()->pluck('post_date')[0];
     $adjustin = Session::get('adjustInFloat');
 
-    $adjustin['encode_date'] = $post_date;
+    $adjustin['encode_date'] = date('Y-m-d');
     $adjustin['notes'] = $req->notes;
     $stock = AdjustIn::create($adjustin);
 
