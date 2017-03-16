@@ -14,6 +14,7 @@ use Auth;
 use Validator;
 use Response;
 use DB;
+use PDF;
 class AdjustInController extends Controller
 {
 
@@ -74,6 +75,16 @@ class AdjustInController extends Controller
     }
     $src ="adjustin";
     return view('products.search',compact('src'));
+  }
+
+  public function pdf($id)
+  {
+      Core::setConnection();
+      $adjustin = AdjustIn::with('items','branch')->find($id);
+      $filename = $adjustin->branch_id."-".$adjustin->stock_adj_in_id.".pdf";
+      $data =  array( 'adjustin' => $adjustin );
+      $pdf = PDF::loadView('pdf.adjustin', $data);
+      return $pdf->download($filename);
   }
 
   public function multi_search(Request $req)

@@ -77,6 +77,24 @@ class AdjustOutController extends Controller
       return view('products.search',compact('src'));
     }
 
+    public function show($id)
+    {
+      Core::setConnection();
+      $adjustout = AdjustOut::with('items','branch')->find($id);
+
+      return view('adjust_out.show',compact('adjustout'));
+    }
+
+    public function pdf($id)
+    {
+        Core::setConnection();
+        $adjustout = AdjustOut::with('items','branch')->find($id);
+        $filename = $adjustout->branch_id."-".$adjustout->stock_adj_out_id.".pdf";
+        $data =  array( 'adjustout' => $adjustout );
+        $pdf = PDF::loadView('pdf.adjustout', $data);
+        return $pdf->download($filename);
+    }
+
     public function multi_search(Request $req)
     {
        Core::setConnection();
@@ -147,7 +165,7 @@ class AdjustOutController extends Controller
                           ->where('status','ONGOING')
                           ->first();
       $adjustout->items()->delete();
-      $adjustout->delete();  
+      $adjustout->delete();
       $jdata['status'] = true;
       $jdata['message'] ="Successfully cancelled!";
       return $jdata;

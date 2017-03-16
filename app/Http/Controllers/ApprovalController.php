@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Approval;
 use App\Models\Stockin;
 use App\Models\AdjustIn;
+use App\Models\AdjustOut;
 use App\Models\StockOut;
 use App\Models\Transfer;
 use App\Models\Setting;
@@ -118,7 +119,9 @@ class ApprovalController extends Controller
     	 else if($type==2)
             $max = StockOut::where('branch_id',$branch_id)->max('series_id');
       else if($type==4)
-            $max = AdjustIn::where('branch_id',$branch_id)->max('series_id');      
+            $max = AdjustIn::where('branch_id',$branch_id)->max('series_id');
+      else if($type==5)
+            $max = AdjustOut::where('branch_id',$branch_id)->max('series_id');
 
         return (is_null($max)) ? 1 : $max + 1;
     }
@@ -142,6 +145,10 @@ class ApprovalController extends Controller
             $data['reference'] = 'stock_adj_in_id';
             $data['type'] = 'ADI';
             $data['negative'] = 0;
+        }else if($type==5){
+            $data['reference'] = 'stock_adj_out_id';
+            $data['type'] = 'ADO';
+            $data['negative'] = 1;
         }
         return $data;
     }

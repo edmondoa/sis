@@ -4,31 +4,31 @@
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
       <h1>
-        Stockout
+        Invoice
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class=""><i class="fa fa-circle"></i> Products</li>
-        <li class="active"><i class="fa fa-circle"></i> Stockout</li>
+        <li class="active"><i class="fa fa-circle"></i> Invoice</li>
       </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="stockoutCtrl">
-      <a href="#" class='hide refresh' ng-click="getStockins()"></a>
-      @include('stockout.create')
+    <section class="content" ng-controller="invoiceCtrl">
+      <a href="#" class='hide refresh' ng-click="getInvoice()"></a>
+      @include('invoice.create')
     </section>
       <!-- /.row (main row) -->
 @stop
 @section('html_footer')
 @parent
-<script src="/angular/controllers/stockout.js"></script>
+<script src="/angular/controllers/invoice.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $("li.inventory").addClass('active');
-    $("li.stockout").addClass("active");
+    $("li.sales").addClass('active');
+    $("li.sales-invoice").addClass("active");
   })
   var model ={};
   $(function(){

@@ -26,13 +26,13 @@
   <ul class="sidebar-menu">
     <li class="header">MAIN NAVIGATION</li>
     <!-- Sales -->
-    <li class="treeview">
+    <li class="treeview sales">
       <a href="#">
         <i class="fa fa-laptop"></i> <span>Sales</span>
         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="/"><i class="fa fa-circle-o"></i>Invoice</a></li>
+        <li class="sales-invoice"><a href="/invoice"><i class="fa fa-circle-o"></i>Invoice</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Invoice Return</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Consign</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Consign Invoicing/Return</a></li>
@@ -95,16 +95,16 @@
             <li><a href="/"><i class="fa fa-circle-o"></i>Fulfillment Manager</a></li>
           </ul>
         </li>
-        <li class='treeview'>
+        <li class='treeview stockin'>
           <a href="#"><i class="fa fa-circle-o"></i>StockIn
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
-            <li class="stockin"><a href="/stockin"><i class="fa fa-circle-o"></i>Regular Purchase</a></li>
+            <li class="regular"><a href="/stockin"><i class="fa fa-circle-o"></i>Regular Purchase</a></li>
             <li><a href="/"><i class="fa fa-circle-o"></i>Reject</a></li>
           </ul>
         </li>
-        <li><a href="/stockout"><i class="fa fa-circle-o"></i>Stockout</a></li>
+        <li class="stockout"><a href="/stockout"><i class="fa fa-circle-o"></i>Stockout</a></li>
         <li class="interbranch-transfer"><a href="/transfer"><i class="fa fa-circle-o"></i>InterBranch Transfer</a></li>
         <li class='treeview adjustment'>
           <a href="#"><i class="fa fa-circle-o"></i>Stock Adjustment

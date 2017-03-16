@@ -82,6 +82,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('adjust-in/search','AdjustInController@search');
 	Route::get('adjust-in-float/cancel','AdjustInController@cancel');
 	Route::get('stock_adj-in/{id}','AdjustInController@show');
+	Route::get("stock_adj-in/pdf/{id}","AdjustInController@pdf");
 	Route::get('adjust-in/search/{searchstr}','AdjustInController@singleSearch');
 	Route::post('/adjust-in-items-remove/{id}','AdjustInController@removeItems');
 	Route::post('adjust-in/multi_search','AdjustInController@multi_search');
@@ -96,7 +97,11 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('adjust-out/search','AdjustOutController@search');
 	Route::post('adjust-out-float/items','AdjustOutController@saveItems');
 	Route::post('adjust-out/multi_search','AdjustOutController@multi_search');
+	Route::get("stock_adj-out/pdf/{id}","AdjustOutController@pdf");
+	Route::get('stock_adj-out/{id}','AdjustOutController@show');
 	Route::resource('/adjust-out','AdjustOutController');
+
+	Route::resource('/invoice','InvoiceController');
 
 	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
 	Route::resource('clusters','ClusterController');

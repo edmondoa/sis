@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
       <h1>
-        StockIn     
+        StockIn
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -17,7 +17,7 @@
     <section class="content" ng-controller="stockinCtrl">
       <a href="#" class='hide refresh' ng-click="getStockins()"></a>
       @include('stockin.create')
-    </section>  
+    </section>
       <!-- /.row (main row) -->
 @stop
 @section('html_footer')
@@ -29,36 +29,36 @@
 
   var model ={};
   $(function(){
-    $(".select2").select2();  
+    $(".select2").select2();
 
   })
 
   $(document).ready(function(){
-      var date = new Date('{{$post_date}}');   
-    
+      var date = new Date('{{$post_date}}');
+
     $('#doc_date').datepicker({
-            autoclose: true,                 
-            endDate: date,                
-          
+            autoclose: true,
+            endDate: date,
+
     });
-    
+
   });
-  $(document).on("change",'#doc_date',function(e){ 
-      $('#arrive_date').datepicker('remove'); 
-      $('#arrive_date').val('');   
+  $(document).on("change",'#doc_date',function(e){
+      $('#arrive_date').datepicker('remove');
+      $('#arrive_date').val('');
       var arrive_date = new Date($(this).val());
-      var date = new Date('{{$post_date}}');     
+      var date = new Date('{{$post_date}}');
       $('#arrive_date').datepicker({
-            autoclose: true,                 
-            startDate: arrive_date, 
-            endDate: date,                 
-          
+            autoclose: true,
+            startDate: arrive_date,
+            endDate: date,
+
       });
       return true;
     })
   $(document).on("click",'.search-prod',function(e){
-    e.preventDefault();   
-    
+    e.preventDefault();
+
 
     $.get( "stockin/search", function( data ) {
       var dialog = bootbox.dialog({
@@ -69,14 +69,14 @@
                 label: 'Yes',
                 className: 'btn-success',
                 callback:function(){
-                  
+
                   var row = $("#product-search table#products tr.selected");
                   console.log(row);
                   $("#code").text(row.data('catcode'));
                   $("#name").text(row.data('prodname'));
                   $("#cprice").val(row.data('costprice'));
                   $("#qty").val(1);
-                  $("#prod_id").val(row.data('prod_id')); 
+                  $("#prod_id").val(row.data('prod_id'));
                   bootbox.hideAll();
                   $("#qty").focus();
                   return false;
@@ -88,28 +88,28 @@
             }
         },
       });
-          
+
     });
   });
-    
-  
+
+
   $(document).on('change','.all',function(e){
     e.preventDefault();
     $('.selected').not(this).prop('checked', this.checked);
   })
 
   $(document).on('click','.btn-add',function(e){
-    e.preventDefault(); 
+    e.preventDefault();
       if(!validate())
         return false;
       if(!check_number())
         return false;
-     if($("#locked").val()==0){  
+     if($("#locked").val()==0){
       var param = {
                   id:$("#prod_id").val(),
                   qty:$("#qty").val(),
                   costprice:$("#cprice").val()};
-      $.post("stockin-float/items",param, function( data ) {     
+      $.post("stockin-float/items",param, function( data ) {
         $("#code").text('');
         $("#name").text('');
         $("#cprice").val('');
@@ -141,7 +141,7 @@
                 id:$("#prod_id").val(),
                 qty:$("#qty").val(),
                   costprice:$("#cprice").val()};
-        $.post("stockin-float/items",param, function( data ) {     
+        $.post("stockin-float/items",param, function( data ) {
           $("#code").text('');
            $("#locked").val('');
           $("#name").text('');
@@ -155,10 +155,10 @@
       }else{
         bootbox.alert({message:"Product is locked!", size: 'small'});
       }
-      
-      
+
+
      }
-    
+
   });
 
   $(document).on('change','.updated_price',function(e){
@@ -167,16 +167,16 @@
 
     var updatedprice = $(this).val();
     var quantity = $(this).parent('td').siblings('td').find('input.quantity').val();
-    var total = parseFloat(updatedprice) * parseFloat(quantity);    
+    var total = parseFloat(updatedprice) * parseFloat(quantity);
     $(this).parent('td').siblings('td').find('.total').text(total);
 
     var totalCost = 0;
-    $(".total").each(function(){      
+    $(".total").each(function(){
       totalCost = totalCost + parseFloat($(this).text());
     });
     $("#totalCost").text(parseFloat(totalCost));
     update(key,'updated_price',updatedprice);
-    
+
   })
 
 
@@ -200,39 +200,39 @@
       var costprice = [];
       var updated_price = [];
       var notes = $("[name='notes']").val();
-      $('.quantity').each(function () { 
+      $('.quantity').each(function () {
         quantity.push($(this).val());
         prod_id.push($(this).data('prodid'));
         costprice.push($(this).data('costprice')) ;
         updated_price.push($(this).parent('td').siblings('td').find('input.updated_price').val());
-      }); 
+      });
       stocks = {'quantity':quantity,'prod_id':prod_id,'costprice':costprice,'updated_price':updated_price,'notes':notes};
       console.log(stocks);
       $.post('stockin-float/save',stocks,function(data){
         stopLoad();
         message(data);
-        $(".refresh").trigger('click'); 
+        $(".refresh").trigger('click');
         $("#branch_id").val('').trigger("change");
         $("#supplier_id").val('').trigger("change");
         $("#doc_no").val('');
         $("#amount_due").val('');
         $("#doc_date").val('');
         $("#arrive_date").val('');
-        $("#totalQuantity").text(0);    
+        $("#totalQuantity").text(0);
         $("#totalCost").text(parseFloat(0));
         $('.btn-save').addClass('disabled');
         $('.search-prod').addClass('disabled');
-        
+
         $("a.stock").removeClass('disabled');
         $("input.stock").attr('readonly',false);
         $("select.stock").attr('disabled',false);
-        $("div.amount-due").removeClass('has-error');      
+        $("div.amount-due").removeClass('has-error');
       });
     }
   })
 
   $(document).on('change','#search',function(e){
-    e.preventDefault();     
+    e.preventDefault();
     searchStr = $(this).val();
     supplier = $("#supplier_id").val();
     if(searchStr=='')
@@ -257,13 +257,13 @@
          $("#locked").val('');
         $("#prod_id").val('');
         $("#search").val('');
-        
+
         bootbox.alert({message:"Product not found!",
                        size: 'small'
             });
          $("#search").focus();
       }
-       
+
     });
   });
 
@@ -271,16 +271,16 @@
     Stockin().search($(this).val());
   })
   $(document).on('click','#product-search table#products tr',function(){
-    cls = $(this).attr('class');     
+    cls = $(this).attr('class');
     $("#product-search table#products tr").not('.'+cls).css('background-color','#fff !important');
     $("#product-search table#products tr").not('.'+cls).removeClass('selected');
     $(this).css('background-color','antiquewhite');
     $(this).addClass('selected');
-    
+
   })
   $(".calendar").datepicker({autoclose:true});
 
-  
+
   function Stockin()
   {
     this.search = function(param){
@@ -295,7 +295,7 @@
                           "data-prodcode ='"+data.products[i].product_code+"'"+
                           "data-catcode ='"+data.products[i].category_code+"'"+
                           "data-prodname ='"+data.products[i].product_name+"'"+
-                          "data-costprice ='"+data.products[i].cost_price+"'>";          
+                          "data-costprice ='"+data.products[i].cost_price+"'>";
             strBuilder += "<td>"+data.products[i].category_code+"</td>";
             strBuilder += "<td>"+data.products[i].product_code+"</td>";
             strBuilder += "<td>"+data.products[i].product_name+"</td>";
@@ -311,7 +311,7 @@
           $("#products tbody").html(strBuilder);
           bootbox.alert({message:"Product not found!", size: 'small'});
         }
-               
+
       });
     }
     return this;
@@ -325,9 +325,10 @@
   }
 
   $(document).ready(function(){
-    $("li.main-products").addClass('active');
-    $("li.stockin").addClass("active");    
-  
+    $("li.inventory").addClass('active');
+    $("li.stockin").addClass("active");
+    $("li.regular").addClass("active");    
+
   })
 </script>
 
