@@ -120,20 +120,20 @@
     </li>
     <!-- /Inventory -->
     <!-- Record Management -->
-    <li class="treeview">
+    <li class="treeview record-management">
       <a href="#">
         <i class="fa fa-laptop"></i><span>Record Management</span>
         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
-        <li class="treeview">
+        <li class="treeview customer">
             <a href="#">
               <i class="fa fa-circle-o"></i><span>Customer</span>
               <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
               <li><a href="/"><i class="fa fa-circle-o"></i>Customer Info</a></li>
-              <li class="account"><a href="/"><i class="fa fa-circle-o"></i>Account/Registration</a></li>
+              <li class="account"><a href="/customer/create"><i class="fa fa-circle-o"></i>Account/Registration</a></li>
               <li class="discounting"><a href="/discounting"><i class="fa fa-circle-o"></i>Discounting</a></li>
             </ul>
         </li>

@@ -4,3 +4,7 @@ table.invoice-table thead>tr>th {
    background-color: #777!important;
    color: #fff;
 }
+/*
+ section.details{font-family: ",Helvetica Neue",Helvetica,Arial,sans-serif !important;}
+*/
+section.details label{padding-left: 0px !important;}
