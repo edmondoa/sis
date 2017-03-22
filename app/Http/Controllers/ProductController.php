@@ -19,19 +19,29 @@ use Redirect;
 class ProductController extends Controller
 {
     public function __construct()
-    {        
+    {
         $this->middleware('web');
     }
     public function index()
     {
     	if(!Core::setConnection())
-        {
-            return redirect()->intended('login');
-        }  
-        $category = Category::get();
-        $discount = Discount::with('account_level')->get();
-        $groups = ProductGroup::get();
-    	return view('products.index',compact('category','discount','groups'));
+      {
+          return redirect()->intended('login');
+      }  
+
+    	return view('products.index');
+    }
+
+    public function create()
+    {
+      if(!Core::setConnection())
+      {
+          return redirect()->intended('login');
+      }
+      $category = Category::get();
+      $discount = Discount::with('account_level')->get();
+      $groups = ProductGroup::get();
+      return view('products.create',compact('category','discount','groups'));
     }
 
     public function store(Request $req)
@@ -44,12 +54,12 @@ class ProductController extends Controller
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
-        }        
+        }
         $product = Product::create($inputs);
-        if($product){        
+        if($product){
             return Response::json(['status'=>true,'message' => "Successfully created!"]);
         }
-       
+
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
@@ -74,7 +84,7 @@ class ProductController extends Controller
        Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
-        
+
         $validate = Validator::make($request->all(), self::rules($id));
         if($validate->fails())
         {
@@ -99,12 +109,12 @@ class ProductController extends Controller
         $product->suspended = (isset($request->suspended))?1:0;
         $product->notes = $request->notes;
         $product->user_id = Auth::user()->user_id;
-    
+
         if($product->save())
         {
             $jdata['status'] = true;
             $jdata['message'] = "Successfully updated!";
-     
+
         }
         return $jdata;
     }
@@ -117,12 +127,12 @@ class ProductController extends Controller
                 LEFT JOIN category c ON p.category_id = c.category_id
                 LEFT JOIN supplier_category sc ON c.category_id = sc.category_id
                 WHERE sc.supplier_id = $sup
-                AND (product_code = '".$search."' OR 
+                AND (product_code = '".$search."' OR
                   barcode = '".$search."') AND p.suspended = 0";
         $products = DB::select($sql);
         if(count($products) > 0)
             return Response::json(['status'=>true,'products'=>$products]);
-        return Response::json(['status'=>false,'products'=>[]]);               
+        return Response::json(['status'=>false,'products'=>[]]);
     }
 
     public function multi_search(Request $req)
@@ -136,32 +146,32 @@ class ProductController extends Controller
                 LEFT JOIN category c ON p.category_id = c.category_id
                 LEFT JOIN supplier_category sc ON c.category_id = sc.category_id
                 WHERE sc.supplier_id = $sup
-                AND (product_code LIKE ('%".$search."%') OR 
+                AND (product_code LIKE ('%".$search."%') OR
                   barcode LIKE ('%".$search."%') OR product_name LIKE ('%".$search."%') )
                   AND p.suspended = 0  LIMIT 15";
         $products = DB::select($sql);
-        if(count($products) > 0){            
+        if(count($products) > 0){
             return Response::json(['status'=>true,'products'=>$products]);
         }
-        return Response::json(['status'=>false,'products'=>[]]); 
+        return Response::json(['status'=>false,'products'=>[]]);
     }
 
     private function rules($param)
     {
         return [
-                             
+
                 'product_code' => 'required',
                 'category_id' => 'required',
                 'product_name' => 'required|unique:product,product_name,'.$param.',product_id' ,
                 'retail_price' => 'required|numeric|between:0,99999999.99',
                 'cost_price' => 'required|numeric|between:0,99999999.99',
-                             
+
                 // 'non_returnable' => 'required',
                 // 'vatable' => 'required',
                 // 'suspended' => 'required',
                 // 'lock' => 'required',
             ];
 
-            
+
     }
 }

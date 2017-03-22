@@ -1,13 +1,18 @@
-(function() {
+// (function() {
+//
+//   'use strict';
+//
+//   angular
+//     .module('SisApp', [
+//       'ngResource',
+//       'ui.bootstrap'
+//       'smart-table'
+//     ]);
+//
+// })();
 
-  'use strict';
-
-  angular
-    .module('SisApp', [
-      'ngResource',
-      'ui.bootstrap'
-    ]);
-
-})();
-
-
+App = angular.module('SisApp', [
+  'ngResource',
+  'ui.bootstrap',
+  'smart-table'
+]);

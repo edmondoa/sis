@@ -30,7 +30,7 @@
                 <li><!-- start message -->
                   <a href="#">
                     <div class="pull-left">
-                      <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                      <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <h4>
                       Support Team
@@ -43,7 +43,7 @@
                 <li>
                   <a href="#">
                     <div class="pull-left">
-                      <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                      <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                     </div>
                     <h4>
                       AdminLTE Design Team
@@ -152,9 +152,9 @@
                     <h3>
                       <span ng-bind='item.branch_name +" has new "+item.approval_type'></span>
                     </h3>
-                    
+
                   </a>
-                </li>                
+                </li>
               </ul>
             </li>
             <li class="footer">
@@ -179,7 +179,7 @@
                <!--  <small>Member since  </small> -->
               </p>
             </li>
-                        
+
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">

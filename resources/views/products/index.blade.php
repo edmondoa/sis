@@ -3,22 +3,16 @@
 @section('content')
     <link rel="stylesheet" href="/plugins/iCheck/all.css">
     <section class="content-header">
-      <h1>
-        Products     
-      </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Products</li>
-        <li class="active"><i class="fa fa-circle"></i> Regular</li>
+        <li class="active"><i class="fa fa-circle"></i> Products</li>
+        <li ><a href="/products-regular/create"><i class="fa fa-circle"></i> Create</a></li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content" ng-controller="productCtrl">
-      <div class='col-md-5'>
-        @include('products.create')
-      </div>
-      <div class='col-md-7'>
+      <div class='col-md-12' ng-init="getProducts()">
         <div class="box">
           <div class="box-header with-border">
             @include('layouts.search')
@@ -28,8 +22,8 @@
           <div class="box-body">
             <table class="table table-bordered">
               <tr>
-                <th style="width: 10px">#</th>  
-                <th>Products</th>              
+                <th style="width: 10px">#</th>
+                <th>Products</th>
                 <th>Category </th>
                 <th>Price</th>
                 <th style="width: 60px">Action</th>
@@ -41,22 +35,22 @@
                   <td ng-bind="prod.category.category_name"></td>
                   <td ng-bind="prod.retail_price"></td>
                   <td>
-                     
+
                     <a href="#" class="product-edit" data-id="@{{prod.product_id}}"><i class="fa fa-pencil"></i></a>
                     <a href="#"><i class="fa fa-trash warning"></i></a>
                   </td>
                 </tr>
               </tbody>
-              
+
             </table>
           </div>
             <!-- /.box-body -->
-          <div class="box-footer clearfix">            
+          <div class="box-footer clearfix">
             <dir-pagination-controls boundary-links="true" template-url="../angular/dirPagination.tpl.html"></dir-pagination-controls>
           </div>
         </div>
       </div>
-    </section>  
+    </section>
       <!-- /.row (main row) -->
 @stop
 @section('html_footer')
@@ -89,7 +83,7 @@
                 className: 'btn-success',
                 callback:function(){
                   var $this   = $(this);
-                  var data = $('#form-product').serialize();  
+                  var data = $('#form-product').serialize();
                   $.ajax({
                     url: "/products-regular/"+id,
                     method:'PUT',
@@ -98,16 +92,16 @@
                     success: function(result){
                       if (result['status'] == true) {
                         bootbox.hideAll();
-                        message(result);                        
+                        message(result);
                         $(".refresh").trigger('click');
-                      } else {    
-                        message(result);                      
+                      } else {
+                        message(result);
                         return false;
                       }
                     },
-                    
-                  });                 
-                  
+
+                  });
+
                   return false;
                 }
             },
@@ -117,7 +111,7 @@
             }
         },
       });
-          
+
     });
   })
 </script>

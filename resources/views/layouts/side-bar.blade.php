@@ -4,7 +4,7 @@
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+      <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
       <p>{{Auth::user()->firstname.' '.Auth::user()->lastname}}</p>
@@ -143,7 +143,13 @@
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
-            <li class='products-regular'><a href="/products-regular"><i class="fa fa-circle-o"></i>Regular</a></li>
+            <li class='products-regular'>
+              <a class="pull-right create" href="/products-regular/create">
+                  <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+              </a>
+              <a href="/products-regular" ><i class="fa fa-circle-o"></i>Regular</a>
+
+            </li>
             <li class="promo"><a href="/-overview"><i class="fa fa-circle-o"></i>Promo</a></li>
             <li class='price-adjustment'><a href="/-overview"><i class="fa fa-circle-o"></i>Price Adjustment</a></li>
             <li class="system-product"><a href="/-overview"><i class="fa fa-circle-o"></i>System Products</a></li>
@@ -159,7 +165,12 @@
         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
-        <li class='approvals'><a href="/approvals"><i class="fa fa-circle-o"></i>Approvals</a></li>
+        <li class='approvals'>
+          <a class="pull-right create" href="/approvals/create">
+              <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+          </a>
+          <a href="/approvals"><i class="fa fa-circle-o"></i>Approvals</a>
+        </li>
          <li class='request'><a href="/request"><i class="fa fa-circle-o"></i>Request</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Branch</a></li>
         <li><a href="/"><i class="fa fa-circle-o"></i>Domain</a></li>
@@ -252,14 +263,14 @@
     </li>
     <!-- /Reports -->
     <!-- Settings -->
-    <li class="treeview">
+    <li class="treeview settings">
       <a href="#">
         <i class="fa fa-gears"></i><span>Settings</span>
         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
       </a>
       <ul class="treeview-menu">
         <li><a href="/"><i class="fa fa-circle-o"></i>Security</a></li>
-        <li class="treeview">
+        <li class="treeview setting-branches">
             <a href="/">
               <i class="fa fa-circle-o"></i><span></span>Branches</span>
               <span class="pull-right-container">
@@ -267,8 +278,18 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="clusters"><a href="/clusters"><i class="fa fa-circle-o"></i>Clusters</a></li>
-              <li class="branches"><a href="/branches"><i class="fa fa-circle-o"></i>Branches</a></li>
+              <li class="clusters">
+                <a class="pull-right create" href="/clusters/create">
+                    <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+                </a>
+                <a href="/clusters"><i class="fa fa-circle-o"></i>Clusters</a>
+              </li>
+              <li class="branches">
+                <a class="pull-right create" href="/branches/create">
+                    <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+                </a>
+                <a href="/branches"><i class="fa fa-circle-o"></i>Branches</a>
+              </li>
             </ul>
         </li>
         <li class="treeview">
@@ -277,10 +298,30 @@
               <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
-              <li class="category"><a href="/category"><i class="fa fa-circle-o"></i>Categories</a></li>
-              <li class="suppliers"><a href="/suppliers"><i class="fa fa-circle-o"></i>Suppliers</a></li>
-              <li class="product-group"><a href="/product-group"><i class="fa fa-circle-o"></i>Groups</a></li>
-              <li class="product-storage"><a href="/product-storage"><i class="fa fa-circle-o"></i>Storages</a></li>
+              <li class="category">
+                <a class="pull-right create" href="/category/create">
+                    <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+                </a>
+                <a href="/category"><i class="fa fa-circle-o"></i>Categories</a>
+              </li>
+              <li class="suppliers">
+                <a class="pull-right create" href="/suppliers/create">
+                    <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+                </a>
+                <a href="/suppliers"><i class="fa fa-circle-o"></i>Suppliers</a>
+              </li>
+              <li class="product-group">
+                <a class="pull-right create" href="/product-group/create">
+                    <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+                </a>
+                <a href="/product-group"><i class="fa fa-circle-o"></i>Groups</a>
+              </li>
+              <li class="product-storage">
+                <a class="pull-right create" href="/product-storage/create">
+                    <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+                </a>
+                <a href="/product-storage"><i class="fa fa-circle-o"></i>Storages</a>
+              </li>
             </ul>
         </li>
         <li class="acc_levels"><a href="/acc_levels"><i class="fa fa-circle-o"></i>Account Level</a></li>

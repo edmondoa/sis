@@ -3,62 +3,23 @@
 @section('content')
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
-      <h1>
-        Clusters     
-      </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Settings</li>
         <li class="active"><i class="fa fa-circle"></i> Clusters</li>
+        <li><a href="/clusters/create"><i class="fa fa-circle"></i> Create</a></li>
       </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="clusterCtrl">
-      <div class='col-md-5'>
-        <div class="box box-info">
-          <div class="box-header with-border">
-            <h3 class="box-title">New Cluster</h3>
-          </div>
-          <!-- /.box-header -->
-          <!-- form start -->
-          <form class="form-horizontal">
-            <div class="box-body">
-              <div class="form-group">
-                <label for="inputEmail3"  class="col-sm-2 control-label">Cluster Name</label>
-
-                <div class="col-sm-10">                  
-                  <input type='text' ng-model="cluster.cluster_name" class='form-control' placeholder="Cluster Name"/>
-               </div>                 
-              </div>  
-              <div class="form-group">
-                <label for="inputEmail3"  class="col-sm-2 control-label">Notes</label>
-
-                <div class="col-sm-10">                  
-                  <textarea ng-model='cluster.notes' class='form-control'></textarea>
-               </div>                 
-              </div>           
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-              <button type="reset" class="btn btn-default">Cancel</button>
-              <button type="button" ng-click="saveCluster(cluster)" class="btn btn-info pull-right">Add</button>
-            </div>
-            <!-- /.box-footer -->
-          </form>
-        </div>
-      </div>
-      <div class='col-md-7'>
+    <section class="content" ng-controller="clusterCtrl as cc">
+      <div class='col-md-12'>
         <div class="box">
-          <div class="box-header with-border">
-            @include('layouts.search')
-          </div>
-          <a href="#" ng-click="getClusters()" class="hide refresh"></a>
+          <a href="#" ng-click="cc.callServer" class="hide refresh"></a>
             <!-- /.box-header -->
           <div class="box-body">
-            <table class="table table-bordered">
+            <!-- <table class="table table-bordered">
               <tr>
-                <th style="width: 10px">#</th>                
+                <th style="width: 10px">#</th>
                 <th>Cluster Name</th>
                 <th>No. Of Branches</th>
                 <th style="width: 40px">Action</th>
@@ -74,22 +35,63 @@
                   </td>
                 </tr>
               </tbody>
-              
+
             </table>
           </div>
-            <!-- /.box-body -->
-          <div class="box-footer clearfix">            
+
+          <div class="box-footer clearfix">
             <dir-pagination-controls boundary-links="true" template-url="../angular/dirPagination.tpl.html"></dir-pagination-controls>
-          </div>
+          </div> -->
+          <table class="table table-striped"  st-pipe="cc.callServer" st-table="cc.clusters">
+        		<thead>
+        		<tr>
+        			<th style="width: 10px">#</th>
+        			<th st-sort="cluster_name">Cluster Name</th>
+        			<th st-sort="count_branch">No. Of Branches</th>
+        			<th >Action</th>
+        		</tr>
+            <tr>
+              <td colspan="4">
+                <input st-search="" placeholder="Search here.." class="input-sm form-control" type="search">
+              </td>
+            </tr>
+        		</thead>
+        		<tbody  ng-show="!cc.isLoading">
+        		<tr ng-repeat="cluster in cc.clusters">
+              <td ng-bind="$index + 1"></td>
+              <td ng-bind="cluster.cluster_name"></td>
+              <td ng-bind="cluster.count_branch"></td>
+              <td>
+                <a href="#" class='cluster-edit' data-id="@{{cluster.cluster_id}}" ><i class="fa fa-pencil"></i></a>
+                <a href="#" ng-hide="cluster.count_branch > 0"><i class="fa fa-trash text-red cluster-delete" data-id="@{{cluster.cluster_id}}"></i></a>
+              </td>
+        		</tr>
+        		</tbody>
+            <tbody ng-show="mc.isLoading">
+            	<tr>
+            		<td colspan="4" class="text-center">Loading ... </td>
+            	</tr>
+          	</tbody>
+        		<tfoot>
+        			<tr>
+
+        					<td class="text-center" st-pagination="" st-items-by-page="10" colspan="4">
+
+        			</tr>
+        		</tfoot>
+        	</table>
         </div>
       </div>
-    </section>  
+    </section>
       <!-- /.row (main row) -->
 @stop
 @section('html_footer')
 @parent
+
 <script src="/angular/controllers/cluster.js"></script>
-<script src="/angular/dirPagination.js"></script>
+<script src="/angular/service/HttpRequestFactory.js"></script>
+<script src="/angular/service/clusterService.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function(){
     $("li.settings").addClass('active');
@@ -108,7 +110,7 @@
                 className: 'btn-success',
                 callback:function(){
                   var $this   = $(this);
-                  var data = $('#form-cluster').serialize();  
+                  var data = $('#form-cluster').serialize();
                   $.ajax({
                     url: "/clusters/"+id,
                     method:'PUT',
@@ -117,16 +119,16 @@
                     success: function(result){
                       if (result['status'] == true) {
                         bootbox.hideAll();
-                        message(result);                        
+                        message(result);
                         $(".refresh").trigger('click');
-                      } else {  
-                        message(result);                     
+                      } else {
+                        message(result);
                         return false;
                       }
                     },
-                    
-                  });                 
-                  
+
+                  });
+
                   return false;
                 }
             },
@@ -136,7 +138,7 @@
             }
         },
       });
-          
+
     });
   })
 
@@ -160,19 +162,19 @@ $(document).on('click','.cluster-delete',function(e){
         {
           $.ajax({
             url: "/clusters/"+id,
-            method:'DELETE',           
+            method:'DELETE',
             dataType: 'JSON',
             success: function(result){
               if (result['status'] == true) {
                 bootbox.hideAll();
-                message(result);                        
+                message(result);
                 $(".refresh").trigger('click');
-              } else {  
-                message(result);                     
+              } else {
+                message(result);
                 return false;
               }
             },
-            
+
           });
         }
     }

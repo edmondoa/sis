@@ -103,7 +103,7 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::resource('/invoice','InvoiceController');
 
-	Route::get('clusters/ng-cluster-list','ClusterController@cluster_list');
+	Route::post('clusters/ng-cluster-list','ClusterController@cluster_list');
 	Route::resource('clusters','ClusterController');
 
 	Route::get('product-group/ng-pgroup-list','ProductGroupController@group_list');

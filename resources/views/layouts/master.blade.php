@@ -6,7 +6,7 @@
   <title>SiS | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->  
+  <!-- Bootstrap 3.3.6 -->
   {{Html::style('/bootstrap/css/bootstrap.min.css')}}
   <!-- Font Awesome -->
   {{Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')}}
@@ -43,7 +43,7 @@
     <div class="loading hide">Loading&#8230;</div>
     @yield('content')
     <!-- /.content -->
-   </div> 
+   </div>
 </div>
 
 <!-- ./wrapper -->
@@ -88,6 +88,7 @@
 {{Html::script('/angular/angular.min.js')}}
 {{Html::script('/angular/ui-bootstrap-tpls.js')}}
 {{Html::script('/angular/angular-resource.js')}}
+{{Html::script('/plugins/angular-smart-table/dist/smart-table.min.js')}}
 {{Html::script('/angular/app.js')}}
 {{Html::script('/angular/controllers/header.js')}}
 {{Html::script('/js/bootbox.min.js')}}

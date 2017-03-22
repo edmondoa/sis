@@ -8,3 +8,20 @@ table.invoice-table thead>tr>th {
  section.details{font-family: ",Helvetica Neue",Helvetica,Arial,sans-serif !important;}
 */
 section.details label{padding-left: 0px !important;}
+
+section.sidebar li >a.create{display:none;z-index: 9999;font-size: 18px}
+section.sidebar li:hover>a {display: block; }
+.content-header>.breadcrumb {
+    float: left;
+    background: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    padding: 7px 5px;
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    border-radius: 2px;
+  }
+
+  section.content{margin-top: 2px;}

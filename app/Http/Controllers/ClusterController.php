@@ -13,7 +13,7 @@ use Redirect;
 class ClusterController extends Controller
 {
     public function __construct()
-    {        
+    {
         $this->middleware('web');
     }
     public function index()
@@ -21,9 +21,19 @@ class ClusterController extends Controller
         if(!Core::setConnection())
         {
          return redirect()->intended('login');
-        }  
+        }
+        //dump($req->all());
         $clusters = Cluster::get();
     	return view('clusters.index',compact('clusters'));
+    }
+
+    public function create()
+    {
+      if(!Core::setConnection())
+      {
+       return redirect()->intended('login');
+      }
+      return view("clusters.create");
     }
 
     public function store(Request $req)
@@ -35,23 +45,28 @@ class ClusterController extends Controller
             return Response::json(['status'=>false,'message' => $validate->messages()]);
         }
         $cluster = Cluster::create($req->all());
-        if($cluster)        
+        if($cluster)
         	return Response::json(['status'=>true,'message' => "Successfully created!"]);
-        
+
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
-    public function cluster_list()
+    public function cluster_list(Request $req)
     {
     	Core::setConnection();
-        $list = Cluster::get();
-    	return $list;
+      $start = $req->pagination['start'];
+      $limit = $req->pagination['number'];
+      $search = @$req->search['predicateObject']["$"];
+      $list = Cluster::whereRaw("cluster_name LIKE ('%".$search."%')")->skip($start)->take($limit)->get();
+      $total = Cluster::count();
+      return response()->json(['numberOfPages'=>$total,'list'=>$list]);
+
     }
 
     public function edit($id)
     {
         Core::setConnection();
-        $cluster = Cluster::find($id);        
+        $cluster = Cluster::find($id);
         return view('clusters.edit',compact('cluster'));
     }
 
@@ -60,7 +75,7 @@ class ClusterController extends Controller
         Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
-        
+
         $validate = Validator::make($request->all(), self::rules($id));
         if($validate->fails())
         {
@@ -73,7 +88,7 @@ class ClusterController extends Controller
         {
             $jdata['status'] = true;
             $jdata['message'] = "Successfully updated!";
-     
+
         }
         return $jdata;
     }
@@ -83,14 +98,14 @@ class ClusterController extends Controller
         Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
-        
-        
-        $cluster = Cluster::find($id);      
+
+
+        $cluster = Cluster::find($id);
         if($cluster->delete())
         {
             $jdata['status'] = true;
             $jdata['message'] = "Successfully deleted!";
-     
+
         }
         return $jdata;
     }
