@@ -24,4 +24,8 @@ section.sidebar li:hover>a {display: block; }
     border-radius: 2px;
   }
 
-  section.content{margin-top: 15px;}
+  section.content{margin-top: 20px;}
+
+  .form-control{
+    background-color: #f9f9f9!important;
+  }

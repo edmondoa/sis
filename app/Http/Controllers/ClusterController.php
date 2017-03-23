@@ -22,9 +22,8 @@ class ClusterController extends Controller
         {
          return redirect()->intended('login');
         }
-        //dump($req->all());
-        $clusters = Cluster::get();
-    	return view('clusters.index',compact('clusters'));
+
+    	return view('clusters.index');
     }
 
     public function create()

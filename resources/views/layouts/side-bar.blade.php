@@ -137,7 +137,7 @@
               <li class="discounting"><a href="/discounting"><i class="fa fa-circle-o"></i>Discounting</a></li>
             </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview product">
           <a href="#">
             <i class="fa fa-circle-o"></i><span>Product</span>
             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -150,7 +150,12 @@
               <a href="/products-regular" ><i class="fa fa-circle-o"></i>Regular</a>
 
             </li>
-            <li class="promo"><a href="/-overview"><i class="fa fa-circle-o"></i>Promo</a></li>
+            <li class="promo">
+              <a class="pull-right create" href="/products-promo/create">
+                  <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+              </a>
+              <a href="/products-promo"><i class="fa fa-circle-o"></i>Promo</a>
+            </li>
             <li class='price-adjustment'><a href="/-overview"><i class="fa fa-circle-o"></i>Price Adjustment</a></li>
             <li class="system-product"><a href="/-overview"><i class="fa fa-circle-o"></i>System Products</a></li>
           </ul>
