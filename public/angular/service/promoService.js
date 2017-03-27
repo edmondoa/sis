@@ -5,27 +5,27 @@
     *   https://weblogs.asp.net/dwahlin/using-an-angularjs-factory-to-interact-with-a-restful-service
     */
 app.factory('promoService', ['HttpRequestFactory','$q','$timeout',function (HttpRequestFactory,$q,$timeout) {
-        var urlBase = '/clusters';
+        var urlBase = '/products-promo';
 
         function getPage(start, number, params) {
             console.log(params);
             var config;
             config = {
                 method: 'POST',
-                url: urlBase+'/ng-cluster-list',
+                url: urlBase+'/ng-promo-list',
                 data:$.param(params),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             };
             return HttpRequestFactory.request(config);
     	}
 
-      function save(model){
-        console.log(model);
+      function savePromo(promo,need,branch){
+        var datum = {promo:promo,need:need,branch:branch};
         var config;
         config = {
             method: 'POST',
             url: urlBase,
-            data:$.param(model),
+            data:$.param(datum),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
         return HttpRequestFactory.request(config);
@@ -33,7 +33,7 @@ app.factory('promoService', ['HttpRequestFactory','$q','$timeout',function (Http
 
     	return {
     		getPage: getPage,
-        save : save
+        savePromo : savePromo
     	};
     }]);
 

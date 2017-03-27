@@ -10,18 +10,19 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="clusterCtrl as cc">
+    <section class="content" ng-controller="promoCtrl as pc">
       <div class='col-md-12'>
         <div class="box">
-          <a href="#" ng-click="cc.callServer" class="hide refresh"></a>
+          <a href="#" ng-click="pc.callServer" class="hide refresh"></a>
             <!-- /.box-header -->
           <div class="box-body">
 
-          <table class="table table-striped "  st-pipe="cc.callServer" st-table="cc.clusters">
+          <table class="table table-striped "  st-pipe="pc.callServer" st-table="pc.promos">
         		<thead>
         		<tr>
         			<th style="width: 10px">#</th>
         			<th st-sort="cluster_name">Promo</th>
+              <th st-sort="cluster_name">CAT</th>
         			<th st-sort="count_branch">Product</th>
               <th st-sort="count_branch">Start Date</th>
               <th st-sort="count_branch">End Date</th>
@@ -36,16 +37,17 @@
             </tr>
         		</thead>
         		<tbody  ng-show="!cc.isLoading">
-        		<tr ng-repeat="cluster in cc.clusters">
+        		<tr ng-repeat="promo in pc.promos">
               <td ng-bind="$index + 1"></td>
-              <td ng-bind="cluster.cluster_name"></td>
-              <td ng-bind="cluster.count_branch"></td>
-              <td ng-bind="cluster.count_branch"></td>
-              <td ng-bind="cluster.count_branch"></td>
-              <td ng-bind="cluster.count_branch"></td>
-              <td ng-bind="cluster.count_branch"></td>
+              <td ng-bind="promo.promo_id"></td>
+              <td ng-bind="promo.product.category.category_name"></td>
+              <td ng-bind="promo.product.product_name"></td>
+              <td ng-bind="promo.start_date"></td>
+              <td ng-bind="promo.end_date"></td>
+              <td ng-bind="promo.promo_price"></td>
+              <td ng-bind="promo.promo_discount"></td>
               <td>
-                <a href="#" class='cluster-edit' data-id="@{{cluster.cluster_id}}" ><i class="fa fa-pencil"></i></a>
+                <a href="#" class='cluster-edit' data-id="@{{promo.promo_id}}" ><i class="fa fa-pencil"></i></a>
                 <a href="#" ng-hide="cluster.count_branch > 0"><i class="fa fa-trash text-red cluster-delete" data-id="@{{cluster.cluster_id}}"></i></a>
               </td>
         		</tr>
@@ -71,9 +73,9 @@
 @section('html_footer')
 @parent
 
-<script src="/angular/controllers/cluster.js"></script>
+<script src="/angular/controllers/promo.js"></script>
 <script src="/angular/service/HttpRequestFactory.js"></script>
-<script src="/angular/service/clusterService.js"></script>
+<script src="/angular/service/promoService.js"></script>
 
 <script type="text/javascript">
   $(document).ready(function(){

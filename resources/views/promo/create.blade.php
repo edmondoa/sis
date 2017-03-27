@@ -22,7 +22,7 @@
       <br>
       <div class="text-center">
         <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        <button type="button"  class="btn btn-success  btn-save " >Save <span class="glyphicon glyphicon-floppy-disk"></button>
+        <button type="button"  class="btn btn-success  btn-save " ng-click="pc.savePromo(promo,need)">Save <span class="glyphicon glyphicon-floppy-disk"></button>
       </div>
     </form>
     </section>
@@ -40,7 +40,19 @@
     $("li.record-management").addClass('active');
     $("li.product").addClass('active');
     $("li.promo").addClass('active');
+
+    $(".datepicker").datepicker({
+      dateFormat: 'yyyy-mm-dd',
+      autoclose: true});
   });
+
+  $(document).on('click',".btn-exclude",function(){
+    id = $(this).data('id');
+    text = $(this).text();
+    $(this).remove();
+    var opt = "<option value='"+id+"="+text+"'>"+text+"</option";
+    $("select.exclude-branch").append(opt);
+  })
   $(function(){
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
       checkboxClass: 'icheckbox_flat-green',

@@ -1,12 +1,17 @@
 (function(app) {
     'use strict';
-
+app.filter('unsafe', function($sce) {
+        return function(val) {
+            return $sce.trustAsHtml(val);
+        };
+    });
 app.controller('promoCtrl', ['promoService', function (service) {
 
   var ctrl = this;
 
   this.promos = [];
-
+  this.need = [];
+  this.branch = [];
   this.callServer = function callServer(tableState) {
 
     ctrl.isLoading = true;
@@ -22,20 +27,39 @@ app.controller('promoCtrl', ['promoService', function (service) {
       ctrl.isLoading = false;
     });
   };
-
-  this.saveCluster = function saveCluster(model){
-    service.save(model).then(function (result) {
-        ctrl.message(result);
-    });
-  }
-
+  
   this.saveExclude = function saveExclude(param)
   {
     var branch = param.split("=");
-    var str = "<a href='javascript:void(0)' data-id='"+branch[0]+"'class='btn btn-sm btn-info m-2'>"+branch[1]+"</a>";
+    var str = "<a href='javascript:void(0)' style='margin:5px' data-id='"+branch[0]+"'class='btn btn-sm btn-info btn-exclude' ng-click='pc.removeExclude(\'"+branch[0]+"\')'>"+branch[1]+"</a>";
+    console.log(param);
+    this.branch.push({branch_id:branch[0]});
+    if($("select.exclude-branch").text() != 'Select' ){
+        $("select.exclude-branch option[value='"+param+"']").remove();
+        $("#branch-exclude").append(str);
+    }
+  }
 
-    $(".select.exclude-branch option[value='"+param+"']").remove();
-    $("#branch-exclude").append(str);
+  this.savePromoNeed = function savePromoNeed(need)
+  {
+    console.log(need.product);
+    var product = need.product.split("=");
+    var action = "<a ng-click='pc.remove(need)'><i class='fa fa-times text-danger'></i></a>"
+    ctrl.need.push({pid:product[0],category:product[1],name:product[2],qty:need.qty,action:action});
+  }
+
+  this.savePromo = function savePromo(promo)
+  {
+
+    promo['non_book'] = $("#non_book").is(':checked')?1:0;
+    promo['non_consign'] = $("#non_consign").is(':checked')?1:0;
+    promo['lock'] = $("#lock").is('checked')?1:0;
+    promo['suspended'] = $("#suspended").is(':checked')?1:0;
+    promo['description'] = $("#description").val();
+    console.log(promo)
+    service.savePromo(promo, this.need, this.branch).then(function (result) {
+      this.message(result);
+    });
   }
 
   this.message = function(result)

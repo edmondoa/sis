@@ -120,6 +120,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('request/ng-journal-list','JournalController@journal_list');
 	Route::resource('request','JournalController');
 
+	Route::post('products-promo/ng-promo-list','PromoController@promo_list');
 	Route::resource('products-promo','PromoController');
 
 	Route::resource('customer','CustomerController');

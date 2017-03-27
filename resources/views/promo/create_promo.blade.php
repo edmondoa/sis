@@ -63,7 +63,7 @@
 
         <div class="col-sm-8">
           <label>
-            <input type="checkbox" class="flat-red" id='non-book'ng-model='promo.lock' >
+            <input type="checkbox" class="flat-red" id='lock'ng-model='promo.lock' >
           </label>
         </div>
       </div>
@@ -72,14 +72,14 @@
 
         <div class="col-sm-8">
           <label>
-            <input type="checkbox" class="flat-red" id='non_consign'ng-model='promo.suspended' >
+            <input type="checkbox" class="flat-red" id='suspended'ng-model='promo.suspended' >
           </label>
         </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-4 control-label">Description</label>
         <div class="col-sm-8">
-          <textarea ng-model="description" class='form-control'>  </textarea>
+          <textarea  id='description' class='form-control'></textarea>
        </div>
       </div>
     </div>
