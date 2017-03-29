@@ -6,47 +6,39 @@
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active"><i class="fa fa-circle"></i> Products</li>
-        <li ><a href="/products-regular/create"><i class="fa fa-circle"></i> Create</a></li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content" ng-controller="productCtrl">
-      <div class='col-md-12' ng-init="getProducts()">
+      <div class='col-md-12'>
         <div class="box">
-          <div class="box-header with-border">
-            @include('layouts.search')
-          </div>
-          <a href="#" ng-click="getProducts()" class="hide refresh"></a>
             <!-- /.box-header -->
-          <div class="box-body">
-            <table class="table table-bordered">
-              <tr>
-                <th style="width: 10px">#</th>
-                <th>Products</th>
-                <th>Category </th>
-                <th>Price</th>
-                <th style="width: 60px">Action</th>
-              </tr>
-              <tbody>
-                <tr dir-paginate="prod in products |filter:searchQry| myFilter:product.category_id|itemsPerPage: pageSize" current-page="currentPage">
-                  <td ng-bind="$index + 1"></td>
-                  <td ng-bind="prod.product_name"></td>
-                  <td ng-bind="prod.category.category_name"></td>
-                  <td ng-bind="prod.retail_price"></td>
-                  <td>
+          <div class="box-body" >
+            <div tasty-table bind-resource-callback="callServer" bind-init="init" bind-filters="filterBy">
 
-                    <a href="#" class="product-edit" data-id="@{{prod.product_id}}"><i class="fa fa-pencil"></i></a>
-                    <a href="#"><i class="fa fa-trash warning"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-
-            </table>
-          </div>
-            <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <dir-pagination-controls boundary-links="true" template-url="../angular/dirPagination.tpl.html"></dir-pagination-controls>
+              <div class='col-md-5 pull-right'>
+                <div class='col-md-8'>
+                  <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter"/>
+                </div>
+                <a href="/products-regular/create" class='btn  btn-info'>New Product  <span class="glyphicon glyphicon-plus-sign"></span></a>
+              </div>
+              <table class="table table-striped">
+                <thead tasty-thead></thead>
+                <tbody>
+                  <tr ng-repeat="product in rows">
+                    <td ng-bind="product.product_name"></td>
+                    <td ng-bind="product.category.category_name"></td>
+                    <td ng-bind="product.cost_price"></td>
+                    <td>
+                      <a href="#" class='product-edit' data-id="@{{product.product_id}}" ><i class="fa fa-pencil"></i></a>
+                      <a href="#"><i class="fa fa-trash text-red product-delete" data-id="@{{product.product_id}}"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div tasty-pagination></div>
+            </div>
           </div>
         </div>
       </div>
@@ -56,7 +48,8 @@
 @section('html_footer')
 @parent
 <script src="/angular/controllers/product.js"></script>
-<script src="/angular/dirPagination.js"></script>
+<script src="/angular/service/HttpRequestFactory.js"></script>
+<script src="/angular/service/productService.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){

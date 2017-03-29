@@ -198,7 +198,8 @@
 @section('html_footer')
 @parent
 <script src="/angular/controllers/product.js"></script>
-<script src="/angular/dirPagination.js"></script>
+<script src="/angular/service/HttpRequestFactory.js"></script>
+<script src="/angular/service/productService.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){

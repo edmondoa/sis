@@ -1,11 +1,13 @@
-(function() {
+(function(app) {
 
   'use strict';
 
-  angular
-    .module('SisApp')
-    .controller('productCtrl', productCtrl)
-    .filter('myFilter', function(){
+  app.filter('unsafe', function($sce) {
+          return function(val) {
+              return $sce.trustAsHtml(val);
+          };
+      })
+      .filter('myFilter', function(){
          return function(products, category_id){
            if(!category_id){
              return [];
@@ -20,19 +22,35 @@
            return arr;
          }});
 
-    function productCtrl($scope,$filter, $timeout,$http) {
+  app.controller('productCtrl', ['productService','$scope', function (service,$scope) {
+
+
       $scope.products = [];
       $scope.product = {};
       $scope.currentPage = 1;
       $scope.pageSize = 15;
 
-      $scope.getProducts = function() {
-
-        $http.get('/products-regular-list').
-          success(function(data) {
-            $scope.products = data;
-                  });
+      $scope.init = {
+        'count': 10,
+        'page': 1,
+        'sortBy': 'product_id',
+        'sortOrder': 'asc',
+        'filterBase': 1 // set false to disable
+      };
+      $scope.filterBy = {
+        'searchStr': '',
       }
+      $scope.callServer = function(params, paramsObj) {
+        return service.getPage(params, paramsObj).then(function (result) {
+
+          return {
+          'rows': result.data.list,
+          'header': result.data.header,
+          'pagination': result.data.pagination
+
+          }
+        });
+      };
 
       $scope.saveProduct = function(model)
       {
@@ -44,23 +62,11 @@
         model['lock'] = $("#lock").is('checked')?1:0;
         model['suspended'] = $("#suspended").is(':checked')?1:0;
 
-        $http.post('/products-regular',model)
-         .success(function(data) {
+        service.saveProduct(model).then(function(result){
           $("button [type='reset']").trigger('click');
-            $scope.message(data);
-            $scope.getProducts();
+            $scope.message(result.data);
         })
       }
-
-
-
-
-      $scope.order = function(predicate, reverse) {
-        console.log("dd");
-         $scope.products = orderBy($scope.products, predicate, reverse);
-      };
-
-
 
     $scope.message = function(data)
     {
@@ -77,8 +83,7 @@
         });
       }else{
         var stringBuilder ="<ul class='error'>";
-        for (var x in data.message) {
-          console.log(x);
+        for (var x in data.message) {        
           stringBuilder +="<li>"+data.message[x]+"</li>";
         }
         stringBuilder +="</ul>";
@@ -94,5 +99,5 @@
           });
       }
     }
-  }
-})();
+}])
+})(App)

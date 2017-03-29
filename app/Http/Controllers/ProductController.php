@@ -16,6 +16,7 @@ use DB;
 use Auth;
 use Session;
 use Redirect;
+use Config;
 class ProductController extends Controller
 {
     public function __construct()
@@ -27,7 +28,7 @@ class ProductController extends Controller
     	if(!Core::setConnection())
       {
           return redirect()->intended('login');
-      }  
+      }
 
     	return view('products.index');
     }
@@ -63,10 +64,22 @@ class ProductController extends Controller
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
-    public function product_list()
+    public function product_list(Request $req)
     {
     	Core::setConnection();
-        return Product::with('category')->get();
+      $start = ($req->page - 1) * $req->count;
+      $limit = $req->count;
+      $filter = @$req->searchStr;
+      $status = @$req->status;
+      $sql =  Product::with('category')->leftJoin('category','product.category_id','category.category_id')
+              ->whereRaw("(product_name LIKE ('%".$filter."%') OR product_code LIKE ('%".$filter."%') or category_name LIKE ('%".$filter."%'))");
+      $total = $sql->count();
+      $list = $sql->skip($start)->take($limit)->get();
+
+      $pages = $total / $limit;
+      $pagination=['count' =>$limit,'page'=>$req->page,'pages'=>ceil($pages),'size'=>$total];
+      $header = Config::get('header.product');
+      return response()->json(['list'=>$list,'header'=>$header,'pagination'=>$pagination]);
     }
 
      public function edit($id)

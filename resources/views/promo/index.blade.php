@@ -54,52 +54,6 @@
               </table>
               <div tasty-pagination></div>
             </div>
-<!--
-          <table class="table table-striped "  ng-init="callServer()" >
-        		<thead>
-        		<tr>
-        			<th style="width: 10px">#</th>
-        			<th >Promo</th>
-              <th >CAT</th>
-        			<th >Product</th>
-              <th >Start Date</th>
-              <th >End Date</th>
-              <th >Price</th>
-              <th >Discount</th>
-        			<th >Action</th>
-        		</tr>
-            <tr>
-              <td colspan="4">
-                <input  placeholder="Search here.." class="input-sm form-control" type="search">
-              </td>
-            </tr>
-        		</thead>
-        		<tbody  ng-show="!pc.isLoading">
-        		<tr dir-paginate="promo in promos |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
-              <td ng-bind="$index + 1"></td>
-              <td ng-bind="promo.promo_id"></td>
-              <td ng-bind="promo.product.category.category_name"></td>
-              <td ng-bind="promo.product.product_name"></td>
-              <td ng-bind="promo.start_date"></td>
-              <td ng-bind="promo.end_date"></td>
-              <td ng-bind="promo.promo_price"></td>
-              <td ng-bind="promo.promo_discount"></td>
-              <td>
-                <a href="#" class='cluster-edit' data-id="@{{promo.promo_id}}" ><i class="fa fa-pencil"></i></a>
-                <a href="#" ng-hide="cluster.count_branch > 0"><i class="fa fa-trash text-red cluster-delete" data-id="@{{cluster.cluster_id}}"></i></a>
-              </td>
-        		</tr>
-        		</tbody>
-            <tbody ng-show="pc.isLoading">
-            	<tr>
-            		<td colspan="4" class="text-center">Loading ... </td>
-            	</tr>
-          	</tbody>
-        	</table>
-          <div class="box-footer clearfix">
-            <dir-pagination-controls boundary-links="true" template-url="../angular/dirPagination.tpl.html"></dir-pagination-controls>
-          </div>
-        -->
         </div>
       </div>
     </section>

@@ -10,6 +10,12 @@ return array(
           ['key' => 'price' , 'name' => 'Price'],
           ['key' => 'discount' , 'name' => 'Discount'],
           ['key' => 'action' , 'name' => 'Action'],
+      ],
+    'product' =>[
+          ['key' => 'product' , 'name' => 'Products'],
+          ['key' => 'category' , 'name' => 'Category'],
+          ['key' => 'price' , 'name' => 'Price'],
+          ['key' => 'action' , 'name' => 'Action']
       ]
 
 );
