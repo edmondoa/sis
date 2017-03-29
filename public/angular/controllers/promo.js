@@ -5,50 +5,57 @@ app.filter('unsafe', function($sce) {
             return $sce.trustAsHtml(val);
         };
     });
-app.controller('promoCtrl', ['promoService', function (service) {
+app.controller('promoCtrl', ['promoService','$scope', function (service,$scope) {
 
   var ctrl = this;
 
-  this.promos = [];
-  this.need = [];
-  this.branch = [];
-  this.callServer = function callServer(tableState) {
+  $scope.promos = [];
+  $scope.need = [];
+  $scope.branch = [];
+  $scope.init = {
+    'count': 10,
+    'page': 1,
+    'sortBy': 'promo_id',
+    'sortOrder': 'asc',
+    'filterBase': 1 // set false to disable
+  };
+  $scope.filterBy = {
+  'searchStr': '',
+  'status' :''
+}
+  $scope.callServer = function(params, paramsObj) {
+    return service.getPage(params, paramsObj).then(function (result) {
 
-    ctrl.isLoading = true;
-    var pagination = tableState.pagination;
+      return {
+      'rows': result.data.list,
+      'header': result.data.header,
+      'pagination': result.data.pagination
 
-    var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
-    var number = pagination.number || 10;  // Number of entries showed per page.
-
-    service.getPage(start, number, tableState).then(function (result) {
-      console.log(result);
-      ctrl.promos = result.data.list;
-      tableState.pagination.numberOfPages = result.data.numberOfPages / number;//set the number of pages so the pagination can update
-      ctrl.isLoading = false;
+      }
     });
   };
-  
-  this.saveExclude = function saveExclude(param)
+
+  $scope.saveExclude = function(param)
   {
     var branch = param.split("=");
     var str = "<a href='javascript:void(0)' style='margin:5px' data-id='"+branch[0]+"'class='btn btn-sm btn-info btn-exclude' ng-click='pc.removeExclude(\'"+branch[0]+"\')'>"+branch[1]+"</a>";
     console.log(param);
-    this.branch.push({branch_id:branch[0]});
+    $scope.branch.push({branch_id:branch[0]});
     if($("select.exclude-branch").text() != 'Select' ){
         $("select.exclude-branch option[value='"+param+"']").remove();
         $("#branch-exclude").append(str);
     }
   }
 
-  this.savePromoNeed = function savePromoNeed(need)
+  $scope.savePromoNeed = function(need)
   {
     console.log(need.product);
     var product = need.product.split("=");
     var action = "<a ng-click='pc.remove(need)'><i class='fa fa-times text-danger'></i></a>"
-    ctrl.need.push({pid:product[0],category:product[1],name:product[2],qty:need.qty,action:action});
+    $scope.need.push({pid:product[0],category:product[1],name:product[2],qty:need.qty,action:action});
   }
 
-  this.savePromo = function savePromo(promo)
+  $scope.savePromo = function(promo)
   {
 
     promo['non_book'] = $("#non_book").is(':checked')?1:0;
@@ -58,11 +65,11 @@ app.controller('promoCtrl', ['promoService', function (service) {
     promo['description'] = $("#description").val();
     console.log(promo)
     service.savePromo(promo, this.need, this.branch).then(function (result) {
-      this.message(result);
+      $scope.message(result);
     });
   }
 
-  this.message = function(result)
+  $scope.message = function(result)
     {
       console.log(result);
         if(result.data.status){

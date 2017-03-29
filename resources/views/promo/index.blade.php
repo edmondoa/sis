@@ -13,31 +13,69 @@
     <section class="content" ng-controller="promoCtrl as pc">
       <div class='col-md-12'>
         <div class="box">
-          <a href="#" ng-click="pc.callServer" class="hide refresh"></a>
             <!-- /.box-header -->
-          <div class="box-body">
+          <div class="box-body" >
+            <div tasty-table bind-resource-callback="callServer" bind-init="init" bind-filters="filterBy">
+              <div class='col-md-5'>
+                <div class='col-md-8'>
+                  <select class='form-control' ng-model="filterBy.status">
+                    <option value="">All</option>
+                    <option value="active">Active</option>
+                    <option value="incoming">Incoming</option>
+                    <option value="inactive">In-active</option>
+                  </select>
 
-          <table class="table table-striped "  st-pipe="pc.callServer" st-table="pc.promos">
+                </div>
+              </div>
+
+              <div class='col-md-5 pull-right'>
+                <div class='col-md-8'>
+                  <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter"/>
+                </div>
+                <a href="/products-promo/create" class='btn  btn-info'>New Promo  <span class="glyphicon glyphicon-plus-sign"></span></a>
+              </div>
+              <table class="table table-striped">
+                <thead tasty-thead></thead>
+                <tbody>
+                  <tr ng-repeat="promo in rows">
+                    <td ng-bind="promo.promo_id"></td>
+                    <td ng-bind="promo.product.category.category_name"></td>
+                    <td ng-bind="promo.product.product_name"></td>
+                    <td ng-bind="promo.start_date"></td>
+                    <td ng-bind="promo.end_date"></td>
+                    <td ng-bind="promo.promo_price"></td>
+                    <td ng-bind="promo.promo_discount"></td>
+                    <td>
+                      <a href="#" class='promo-edit' data-id="@{{promo.promo_id}}" ><i class="fa fa-pencil"></i></a>
+                      <a href="#"><i class="fa fa-trash text-red promo-delete" data-id="@{{promo.promo_id}}"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div tasty-pagination></div>
+            </div>
+<!--
+          <table class="table table-striped "  ng-init="callServer()" >
         		<thead>
         		<tr>
         			<th style="width: 10px">#</th>
-        			<th st-sort="cluster_name">Promo</th>
-              <th st-sort="cluster_name">CAT</th>
-        			<th st-sort="count_branch">Product</th>
-              <th st-sort="count_branch">Start Date</th>
-              <th st-sort="count_branch">End Date</th>
-              <th st-sort="count_branch">Price</th>
-              <th st-sort="count_branch">Discount</th>
+        			<th >Promo</th>
+              <th >CAT</th>
+        			<th >Product</th>
+              <th >Start Date</th>
+              <th >End Date</th>
+              <th >Price</th>
+              <th >Discount</th>
         			<th >Action</th>
         		</tr>
             <tr>
               <td colspan="4">
-                <input st-search="" placeholder="Search here.." class="input-sm form-control" type="search">
+                <input  placeholder="Search here.." class="input-sm form-control" type="search">
               </td>
             </tr>
         		</thead>
-        		<tbody  ng-show="!cc.isLoading">
-        		<tr ng-repeat="promo in pc.promos">
+        		<tbody  ng-show="!pc.isLoading">
+        		<tr dir-paginate="promo in promos |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
               <td ng-bind="$index + 1"></td>
               <td ng-bind="promo.promo_id"></td>
               <td ng-bind="promo.product.category.category_name"></td>
@@ -52,19 +90,16 @@
               </td>
         		</tr>
         		</tbody>
-            <tbody ng-show="mc.isLoading">
+            <tbody ng-show="pc.isLoading">
             	<tr>
             		<td colspan="4" class="text-center">Loading ... </td>
             	</tr>
           	</tbody>
-        		<tfoot>
-        			<tr>
-
-        					<td class="text-center" st-pagination="" st-items-by-page="10" colspan="4">
-
-        			</tr>
-        		</tfoot>
         	</table>
+          <div class="box-footer clearfix">
+            <dir-pagination-controls boundary-links="true" template-url="../angular/dirPagination.tpl.html"></dir-pagination-controls>
+          </div>
+        -->
         </div>
       </div>
     </section>
@@ -76,11 +111,12 @@
 <script src="/angular/controllers/promo.js"></script>
 <script src="/angular/service/HttpRequestFactory.js"></script>
 <script src="/angular/service/promoService.js"></script>
-
+<script src="/angular/dirPagination.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $("li.settings").addClass('active');
-    $("li.clusters").addClass('active');
+    $("li.record-management").addClass('active');
+    $("li.product").addClass('active');
+    $("li.promo").addClass('active');
   });
   $(document).on('click','.cluster-edit',function(e){
     e.preventDefault();

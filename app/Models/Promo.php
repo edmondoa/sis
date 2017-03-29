@@ -48,4 +48,15 @@ class Promo extends Model
   {
     return $this->product->category->category_name;
   }
+
+  public function scopeStatus($query,$status)
+  {
+    if($status=='active'){
+      return $query->whereRaw("start_date <= '".date("Y-m-d")."' AND end_date >= '".date('Y-m-d')."'" );
+    }else if($status =='inactive'){
+      return $query->whereRaw("end_date < '".date('Y-m-d')."'" );
+    }else if($status=='incoming'){
+        return $query->whereRaw("start_date > '".date('Y-m-d')."'" );
+    }
+  }
 }

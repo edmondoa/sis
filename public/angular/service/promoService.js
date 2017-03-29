@@ -7,13 +7,11 @@
 app.factory('promoService', ['HttpRequestFactory','$q','$timeout',function (HttpRequestFactory,$q,$timeout) {
         var urlBase = '/products-promo';
 
-        function getPage(start, number, params) {
-            console.log(params);
+        function getPage(params, paramsObj) {            
             var config;
             config = {
-                method: 'POST',
-                url: urlBase+'/ng-promo-list',
-                data:$.param(params),
+                method: 'GET',
+                url: urlBase+'/ng-promo-list?'+params,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             };
             return HttpRequestFactory.request(config);

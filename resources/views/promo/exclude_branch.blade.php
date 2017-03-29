@@ -19,7 +19,7 @@
         </select>
       </div>
       <div class='col-sm-2'>
-        <a href="javascript:void(0)" class='btn btn-success' ng-click='pc.saveExclude(exbranch)'>Add</a>
+        <a href="javascript:void(0)" class='btn btn-success' ng-click='saveExclude(exbranch)'>Add</a>
       </div>
     </div>
   </div>

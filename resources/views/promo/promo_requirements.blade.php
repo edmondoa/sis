@@ -2,7 +2,7 @@
   <div class="box box-info">
     <div class="box-header with-border">
       <h3 class="box-title">Promo Requirements</h3>
-    </div>  
+    </div>
     <div class="box-body">
       <table class='table table-striped'>
         <thead>
@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="ne in pc.need">
+          <tr ng-repeat="ne in need">
             <td ng-bind='ne.name'> </td>
             <td ng-bind='ne.category'> </td>
             <td ng-bind='ne.qty'> </td>
@@ -36,7 +36,7 @@
         <input type="text" class="form-control" ng-model="promo_need.qty"/>
       </div>
       <div class='col-sm-2'>
-        <a href="javascript:void(0)" class='btn btn-success' ng-click='pc.savePromoNeed(promo_need)'>Add</a>
+        <a href="javascript:void(0)" class='btn btn-success' ng-click='savePromoNeed(promo_need)'>Add</a>
       </div>
     </div>
   </div>

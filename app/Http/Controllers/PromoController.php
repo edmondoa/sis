@@ -14,6 +14,7 @@ use Validator;
 use Response;
 use Redirect;
 use Auth;
+use Config;
 class PromoController extends Controller
 {
   public function __construct()
@@ -80,16 +81,28 @@ class PromoController extends Controller
      return redirect()->intended('login');
     }
     Core::setConnection();
-    $start = $req->pagination['start'];
-    $limit = $req->pagination['number'];
-    $sql = Promo::with(['product' => function($q){
+    $start = ($req->page - 1) * $req->count;
+    $limit = $req->count;
+    $filter = @$req->searchStr;
+    $status = @$req->status;
+    $sql = Promo::status($status)
+        ->with(['product' => function($q) {
             $q->with('category');
-    }])->leftJoin('promo_exclude_branch','promo.promo_id','promo_exclude_branch.promo_id')
-        ->whereRaw('promo_exclude_branch.branch_id NOT IN (SELECT branch_id FROM promo_exclude_branch peb WHERE peb.promo_id = promo.promo_id )');
+    }])
+    ->leftJoin('product','promo.product_id','product.product_id')
+    ->leftJoin('category','product.category_id','category.category_id')
+    ->leftJoin('promo_exclude_branch','promo.promo_id','promo_exclude_branch.promo_id')
+        ->whereRaw("promo_exclude_branch.promo_id NOT IN (SELECT  peb.promo_id FROM promo_exclude_branch peb WHERE peb.promo_id = promo.promo_id  and  peb.branch_id ='".Auth::user()->branch_id."')")
+        ->whereRaw("(promo.promo_id LIKE('%".$filter."%') OR product.product_name LIKE('%".$filter."%') OR category.category_name LIKE('%".$filter."%'))")
+        ->select('promo.*');
 
-    $list = $sql->skip($start)->take($limit)->get();
     $total = $sql->count();
-    return response()->json(['numberOfPages'=>$total,'list'=>$list]);
+    $list = $sql->skip($start)->take($limit)->get();
+
+    $pages = $total / $limit;
+    $pagination=['count' =>$limit,'page'=>$req->page,'pages'=>ceil($pages),'size'=>$total];
+    $header = Config::get('header.promo');
+    return response()->json(['list'=>$list,'header'=>$header,'pagination'=>$pagination]);
 
   }
 

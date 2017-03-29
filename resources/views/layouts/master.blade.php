@@ -83,12 +83,15 @@
 {{Html::script('/dist/js/app.min.js')}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{Html::script('/plugins/bootstrap-notify.min.js')}}
+
+
 <!-- {{Html::script('/dist/js/pages/dashboard.js')}} -->
 <!-- AdminLTE for demo purposes -->
 {{Html::script('/angular/angular.min.js')}}
 {{Html::script('/angular/ui-bootstrap-tpls.js')}}
 {{Html::script('/angular/angular-resource.js')}}
 {{Html::script('/plugins/angular-smart-table/dist/smart-table.min.js')}}
+{{Html::script('/plugins/ng-tasty-tpls.min.js')}}
 {{Html::script('/angular/app.js')}}
 {{Html::script('/angular/controllers/header.js')}}
 {{Html::script('/js/bootbox.min.js')}}

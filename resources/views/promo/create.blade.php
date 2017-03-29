@@ -22,7 +22,7 @@
       <br>
       <div class="text-center">
         <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        <button type="button"  class="btn btn-success  btn-save " ng-click="pc.savePromo(promo,need)">Save <span class="glyphicon glyphicon-floppy-disk"></button>
+        <button type="button"  class="btn btn-success  btn-save " ng-click="savePromo(promo,need)">Save <span class="glyphicon glyphicon-floppy-disk"></button>
       </div>
     </form>
     </section>
