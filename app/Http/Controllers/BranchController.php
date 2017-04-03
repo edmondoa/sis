@@ -12,9 +12,9 @@ use App\Models\Cluster;
 use Redirect;
 class BranchController extends Controller
 {
-    
+
     public function __construct()
-    {        
+    {
         $this->middleware('web');
     }
     public function index()
@@ -22,32 +22,51 @@ class BranchController extends Controller
         if(!Core::setConnection())
         {
          return redirect()->intended('login');
-        }  
+        }
         $clusters = Cluster::get();
     	return view('branch.index',compact('clusters'));
     }
 
 
-    public function branch_list()
+    public function branch_list(Request $req)
     {
     	Core::setConnection();
-        return Branch::with('cluster')->get();
+      $start = $req->offset;
+      $limit = $req->limit;
+      $search = @$req->searchStr;
+      $sql =  Branch::with('cluster')->whereRaw("branch_name LIKE ('%".$search."%')");
+      $total = $sql->count();
+      $list = $sql->skip($start)->take($limit)->get();
+
+      $rows = array_map(function($row){
+        $action = "<div class='text-center'><a data-id='".$row['branch_id']."' href='javascript:void(0)' title='Edit Branch' class='branch-edit'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></i></a>";
+        $action .= "</div>";
+        return [
+            'action' => $action,
+            'branch_name' => $row['branch_name'],
+            'cluster_name' => $row['cluster']['cluster_name'],
+            'status' => $row['status'],
+            'lock' => ($row['lock'] == 1) ? 'True' : 'False',
+            'suspended' => ($row['suspended'] == 1) ? 'True' : 'False'
+          ];
+      },$list->toArray());
+      return response()->json(['total'=>$total,'rows'=>$rows]);
     }
 
     public function store(Request $req)
     {
     	Core::setConnection();
-        $inputs = $req->all();    	
+        $inputs = $req->all();
     	$validate = Validator::make($inputs, Branch::$rules);
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
         }
-       
+
         $branch = Branch::create($inputs);
-        if($branch)        
+        if($branch)
         	return Response::json(['status'=>true,'message' => "Successfully created!"]);
-        
+
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
@@ -57,14 +76,14 @@ class BranchController extends Controller
         $branch = Branch::find($id);
         $clusters = Cluster::get();
         return view('branch.edit',compact('branch','clusters'));
-    } 
+    }
 
     public function update(Request $request,$id)
     {
         Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
-        
+
         $validate = Validator::make($request->all(), self::rules($id));
         if($validate->fails())
         {
@@ -85,18 +104,18 @@ class BranchController extends Controller
         {
             $jdata['status'] = true;
             $jdata['message'] = "Successfully updated!";
-     
+
         }
         return $jdata;
     }
 
     private function rules($param)
     {
-        return [                
+        return [
                 'branch_name' => 'required|unique:branch,branch_name,'.$param.',branch_id',
                 'business_name' => 'required',
-                'addressline1' => 'required'              
+                'addressline1' => 'required'
             ];
-    
+
     }
 }

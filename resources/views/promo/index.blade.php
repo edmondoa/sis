@@ -14,45 +14,45 @@
       <div class='col-md-12'>
         <div class="box">
             <!-- /.box-header -->
+            <a href="#" ng-click="reload()" class='hide reload'></a>
           <div class="box-body" >
-            <div tasty-table bind-resource-callback="callServer" bind-init="init" bind-filters="filterBy">
-              <div class='col-md-5'>
-                <div class='col-md-8'>
-                  <select class='form-control' ng-model="filterBy.status">
+              <div class='row'>
+                <div class='col-md-5 pull-right'>
+                  <div class='col-md-8'>
+                    <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter" ng-keyup="filterRecord(filterBy)"/>
+                  </div>
+                  <a href="/products-promo/create" class='btn  btn-info'>New Promo  <span class="glyphicon glyphicon-plus-sign"></span></a>
+                </div>
+                <div class='col-md-4'>
+                  <select class='form-control' ng-model="filterBy.status" ng-change="filterRecord(filterBy)">
                     <option value="">All</option>
                     <option value="active">Active</option>
                     <option value="incoming">Incoming</option>
                     <option value="inactive">In-active</option>
                   </select>
-
                 </div>
               </div>
-
-              <div class='col-md-5 pull-right'>
-                <div class='col-md-8'>
-                  <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter"/>
-                </div>
-                <a href="/products-promo/create" class='btn  btn-info'>New Promo  <span class="glyphicon glyphicon-plus-sign"></span></a>
-              </div>
-              <table class="table table-striped">
-                <thead tasty-thead></thead>
-                <tbody>
-                  <tr ng-repeat="promo in rows">
-                    <td ng-bind="promo.promo_id"></td>
-                    <td ng-bind="promo.product.category.category_name"></td>
-                    <td ng-bind="promo.product.product_name"></td>
-                    <td ng-bind="promo.start_date"></td>
-                    <td ng-bind="promo.end_date"></td>
-                    <td ng-bind="promo.promo_price"></td>
-                    <td ng-bind="promo.promo_discount"></td>
-                    <td>
-                      <a href="#" class='promo-edit' data-id="@{{promo.promo_id}}" ><i class="fa fa-pencil"></i></a>
-                      <a href="#"><i class="fa fa-trash text-red promo-delete" data-id="@{{promo.promo_id}}"></i></a>
-                    </td>
+              <br>
+              <table id="products-promo" class="bsTable table table-striped"
+               data-url="/products-promo/ng-promo-list"
+               data-pagination="true"
+               data-side-pagination="server"
+               data-page-list="[10,20,50]"
+               data-sort-order="desc"
+               data-show-clear="true"
+               js-bootstraptable>
+              <thead>
+                  <tr>
+                      <th style='width:50px' data-field="action" class="action">Action</th>
+                      <th class="col-md-5" data-sortable="true" data-field="promo_id" >Promo ID</th>
+                      <th class="col-md-4"data-sortable="true" data-field="category_name" >Category Name</th>
+                      <th class="col-md-3" data-sortable="true" data-field="start_date" >Start Date</th>
+                      <th class="col-md-3" data-sortable="true" data-field="end_date" >End Date</th>
+                      <th class="col-md-3" data-sortable="true" data-field="promo_price" >Price</th>
+                      <th class="col-md-3" data-sortable="true" data-field="promo_discount" >Discount</th>
                   </tr>
-                </tbody>
+              </thead>
               </table>
-              <div tasty-pagination></div>
             </div>
         </div>
       </div>

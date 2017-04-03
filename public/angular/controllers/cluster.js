@@ -85,22 +85,32 @@ app.controller('clusterCtrl', ['clusterService', function (service) {
   var ctrl = this;
 
   this.clusters = [];
+  var bsTable     = jQuery('.bsTable');
 
-  this.callServer = function callServer(tableState) {
+  bsTable.bootstrapTable({
+      responseHandler: function (res) {
+          return ctrl.formatter(res);
+      },
+      queryParams: function(q){
+          return q;
+      },
+      onPostBody: function(data){
+      }
+  });
 
-    ctrl.isLoading = true;
-    var pagination = tableState.pagination;
-
-    var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
-    var number = pagination.number || 10;  // Number of entries showed per page.
-
-    service.getPage(start, number, tableState).then(function (result) {
-      console.log(result);
-      ctrl.clusters = result.data.list;
-      tableState.pagination.numberOfPages = result.data.numberOfPages / number;//set the number of pages so the pagination can update
-      ctrl.isLoading = false;
-    });
-  };
+  this.formatter = function(res){
+        $("div.bs-bars").addClass('col-md-5');
+      return {
+          "total": res.total,
+          "rows": res.rows
+      };
+  }
+  this.filterRecord = function(model)
+  {
+    var searchStr = (typeof(model['searchStr'])=='undefined') ? '': model['searchStr'];
+    var url = '/clusters/ng-cluster-list?searchStr='+searchStr;
+    bsTable.bootstrapTable('refresh', {url: url});
+  }
 
   this.saveCluster = function saveCluster(model){
     service.save(model).then(function (result) {

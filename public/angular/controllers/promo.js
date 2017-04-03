@@ -12,28 +12,32 @@ app.controller('promoCtrl', ['promoService','$scope', function (service,$scope) 
   $scope.promos = [];
   $scope.need = [];
   $scope.branch = [];
-  $scope.init = {
-    'count': 10,
-    'page': 1,
-    'sortBy': 'promo_id',
-    'sortOrder': 'asc',
-    'filterBase': 1 // set false to disable
-  };
-  $scope.filterBy = {
-  'searchStr': '',
-  'status' :''
-}
-  $scope.callServer = function(params, paramsObj) {
-    return service.getPage(params, paramsObj).then(function (result) {
+  var bsTable     = jQuery('.bsTable');
 
-      return {
-      'rows': result.data.list,
-      'header': result.data.header,
-      'pagination': result.data.pagination
-
+  bsTable.bootstrapTable({
+      responseHandler: function (res) {
+          return $scope.formatter(res);
+      },
+      queryParams: function(q){
+          return q;
+      },
+      onPostBody: function(data){
       }
-    });
-  };
+  });
+
+  $scope.formatter = function(res){
+        $("div.bs-bars").addClass('col-md-5');
+      return {
+          "total": res.total,
+          "rows": res.rows
+      };
+  }
+  $scope.filterRecord = function(model)
+  {
+    var searchStr = (typeof(model['searchStr'])=='undefined') ? '': model['searchStr'];
+    var url = '/products-promo/ng-promo-list?status='+model['status']+'&searchStr='+searchStr;
+    bsTable.bootstrapTable('refresh', {url: url});
+  }
 
   $scope.saveExclude = function(param)
   {

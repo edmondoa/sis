@@ -67,19 +67,30 @@ class ProductController extends Controller
     public function product_list(Request $req)
     {
     	Core::setConnection();
-      $start = ($req->page - 1) * $req->count;
-      $limit = $req->count;
+      $start = $req->offset;
+      $limit = $req->limit;
       $filter = @$req->searchStr;
-      $status = @$req->status;
+      $sort = ($req->sort) ? $req->sort : 'product_name';
+      $order = @$req->order || 'asc';
       $sql =  Product::with('category')->leftJoin('category','product.category_id','category.category_id')
               ->whereRaw("(product_name LIKE ('%".$filter."%') OR product_code LIKE ('%".$filter."%') or category_name LIKE ('%".$filter."%'))");
       $total = $sql->count();
-      $list = $sql->skip($start)->take($limit)->get();
-
-      $pages = $total / $limit;
-      $pagination=['count' =>$limit,'page'=>$req->page,'pages'=>ceil($pages),'size'=>$total];
-      $header = Config::get('header.product');
-      return response()->json(['list'=>$list,'header'=>$header,'pagination'=>$pagination]);
+      $list = $sql->orderBy($sort,$order)->skip($start)->take($limit)->get();
+      $rows = array_map(function($row){
+        $action = "<div class='text-center'><a data-id='".$row['product_id']."' href='javascript:void(0)' title='Edit Product' class='product-edit'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></i></a>";
+        $action .= "</div>";
+        return [
+            'action' => $action,
+            'product_name' => $row['product_name'],
+            'category_name'=> $row['category']['category_name'],
+            'cost_price'=> $row['cost_price']
+        ];
+      },$list->toArray());
+      //
+      // $pages = $total / $limit;
+      // $pagination=['count' =>$limit,'page'=>$req->page,'pages'=>ceil($pages),'size'=>$total];
+      // $header = Config::get('header.product');
+      return response()->json(['rows'=>$rows,'total'=>$total]);
     }
 
      public function edit($id)

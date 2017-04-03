@@ -13,7 +13,5 @@
 
 App = angular.module('SisApp', [
   'ngResource',
-  'ui.bootstrap',
-  'smart-table',
-  'ngTasty'
+  'ui.bootstrap'
 ]);

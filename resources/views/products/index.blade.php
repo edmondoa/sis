@@ -14,31 +14,33 @@
       <div class='col-md-12'>
         <div class="box">
             <!-- /.box-header -->
-          <div class="box-body" >
-            <div tasty-table bind-resource-callback="callServer" bind-init="init" bind-filters="filterBy">
 
+          <div class="box-body" >
+            <div class='row'>
               <div class='col-md-5 pull-right'>
                 <div class='col-md-8'>
-                  <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter"/>
+                  <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter" ng-keyup="filterRecord(filterBy)"/>
                 </div>
                 <a href="/products-regular/create" class='btn  btn-info'>New Product  <span class="glyphicon glyphicon-plus-sign"></span></a>
               </div>
-              <table class="table table-striped">
-                <thead tasty-thead></thead>
-                <tbody>
-                  <tr ng-repeat="product in rows">
-                    <td ng-bind="product.product_name"></td>
-                    <td ng-bind="product.category.category_name"></td>
-                    <td ng-bind="product.cost_price"></td>
-                    <td>
-                      <a href="#" class='product-edit' data-id="@{{product.product_id}}" ><i class="fa fa-pencil"></i></a>
-                      <a href="#"><i class="fa fa-trash text-red product-delete" data-id="@{{product.product_id}}"></i></a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div tasty-pagination></div>
             </div>
+            <br>
+            <table id="products-regular" class="bsTable table table-striped"
+             data-url="/products-regular-list"
+             data-pagination="true"
+             data-side-pagination="server"
+             data-page-list="[10,20,50]"
+             data-sort-order="desc"
+             js-bootstraptable>
+            <thead>
+                <tr>
+                    <th style='width:50px' data-field="action" class="action">Action</th>
+                    <th class="col-md-5" data-sortable="true" data-field="product_name" >Product Name</th>
+                    <th class="col-md-4"data-sortable="true" data-field="category_name" >Category Name</th>
+                    <th class="col-md-3" data-sortable="true" data-field="cost_price" >Price</th>
+                </tr>
+            </thead>
+            </table>
           </div>
         </div>
       </div>
@@ -86,7 +88,8 @@
                       if (result['status'] == true) {
                         bootbox.hideAll();
                         message(result);
-                        $(".refresh").trigger('click');
+                          $('.bsTable').bootstrapTable('refresh');
+
                       } else {
                         message(result);
                         return false;

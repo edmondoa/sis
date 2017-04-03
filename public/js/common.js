@@ -1,3 +1,5 @@
+$("div.search").addClass('col-md-3')
+$("div.bs-bars").addClass('col-md-6')
 function startLoad()
 {
   $("div.loading").removeClass('hide');
@@ -10,7 +12,7 @@ function stopLoad()
 function message(data)
 {
   if(data.status){
-    $.notify({       
+    $.notify({
       message: data.message
     },{
       type: 'success',
@@ -27,7 +29,7 @@ function message(data)
       stringBuilder +="<li>"+data.message[x]+"</li>";
     }
     stringBuilder +="</ul>";
-     $.notify({       
+     $.notify({
         message: stringBuilder
       },{
         type: 'danger',
@@ -36,7 +38,7 @@ function message(data)
             align: "right",
             from: "bottom"
         }
-      });   
+      });
   }
 }
 
@@ -61,24 +63,23 @@ function check_number()
     var data = {status:false,message:['Quantity should be a valid number']};
     message(data);
     return false;
-   }   
+   }
   if(isNaN($("#cprice").val())){
     var data = {status:false,message:['Price should be a valid number']};
     message(data);
     return false;
-   }  
-  return true;    
+   }
+  return true;
 }
 function only_numbers(event)
 {
   console.log(event.keyCode);
-  
+
   if (event.keyCode == 46 || event.keyCode == 8) {
   }
-  else {     
+  else {
     if (event.keyCode < 48 || event.keyCode > 57) {
         event.preventDefault();
-    }     
-  } 
+    }
+  }
 }
-

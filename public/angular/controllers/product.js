@@ -24,33 +24,38 @@
 
   app.controller('productCtrl', ['productService','$scope', function (service,$scope) {
 
-
+      self = this;
       $scope.products = [];
       $scope.product = {};
       $scope.currentPage = 1;
       $scope.pageSize = 15;
 
-      $scope.init = {
-        'count': 10,
-        'page': 1,
-        'sortBy': 'product_id',
-        'sortOrder': 'asc',
-        'filterBase': 1 // set false to disable
-      };
-      $scope.filterBy = {
-        'searchStr': '',
-      }
-      $scope.callServer = function(params, paramsObj) {
-        return service.getPage(params, paramsObj).then(function (result) {
+      var bsTable     = jQuery('.bsTable');
 
-          return {
-          'rows': result.data.list,
-          'header': result.data.header,
-          'pagination': result.data.pagination
-
-          }
+        bsTable.bootstrapTable({
+            responseHandler: function (res) {
+                return $scope.formatter(res);
+            },
+            queryParams: function(q){
+                return q;
+            },
+            onPostBody: function(data){
+            }
         });
-      };
+
+        $scope.formatter = function(res){
+            return {
+                "total": res.total,
+                "rows": res.rows
+            };
+        }
+
+        $scope.filterRecord = function(model)
+        {
+          var searchStr = (typeof(model['searchStr'])=='undefined') ? '': model['searchStr'];
+          var url = '/products-regular-list?searchStr='+searchStr;
+          bsTable.bootstrapTable('refresh', {url: url});
+        }
 
       $scope.saveProduct = function(model)
       {
@@ -83,7 +88,7 @@
         });
       }else{
         var stringBuilder ="<ul class='error'>";
-        for (var x in data.message) {        
+        for (var x in data.message) {
           stringBuilder +="<li>"+data.message[x]+"</li>";
         }
         stringBuilder +="</ul>";

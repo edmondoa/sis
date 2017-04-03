@@ -12,20 +12,20 @@
         function(){
           $scope.getTask()
         },10000);
-         
+
      $scope.getTask = function()
      {
-      $http.get('/header/task')
-         .success(function(data) {
-          $scope.task = data;
-         });
-     } 
-     
+      // $http.get('/header/task')
+      //    .success(function(data) {
+      //     $scope.task = data;
+      //    });
+     }
+
 
     $scope.message = function(data)
     {
       if(data.status){
-        $.notify({       
+        $.notify({
           message: data.message
         },{
           type: 'success',
@@ -42,7 +42,7 @@
           stringBuilder +="<li>"+data.message[x]+"</li>";
         }
         stringBuilder +="</ul>";
-         $.notify({       
+         $.notify({
             message: stringBuilder
           },{
             type: 'danger',
@@ -51,8 +51,8 @@
               align: "right",
               from: "bottom"
           }
-          });   
+          });
       }
-    }  
+    }
   }
 })();

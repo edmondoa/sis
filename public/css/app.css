@@ -29,3 +29,8 @@ section.sidebar li:hover>a {display: block; }
   .form-control{
     background-color: #f9f9f9!important;
   }
+
+  .ml-5{margin-left: 5px !important}
+div.search{ width:30% !important; min-height: 1px !important;
+    padding-right: 15px !important;
+    padding-left: 15px !important;}

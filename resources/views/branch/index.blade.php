@@ -3,64 +3,52 @@
 @section('content')
   <link rel="stylesheet" href="/plugins/iCheck/all.css">
   <link rel="stylesheet" href="/plugins/select2/select2.min.css">
-    <section class="content-header">
-      <h1>
-        Branches
-      </h1>
+    <section class="content-header">  
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li class=""><i class="fa fa-circle"></i>Settings</li>
         <li class="active"><i class="fa fa-circle"></i>Branches</li>
       </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="branchCtrl">
-      <div class='col-md-4'>
-        @include('branch.create')
-      </div>
-      <div class='col-md-8'>
+    <section class="content" ng-controller="branchCtrl as bc">
+      <div class='col-md-12'>
         <div class="box">
-          <div class="box-header with-border">
-            @include('layouts.search')
-          </div>
-          <a href="#" ng-click="getBranches()" class="hide refresh"></a>
-          
-            <!-- /.box-header -->
           <div class="box-body">
-            <table class="table table-bordered">
-              <tr>
-                <th style="width: 10px">#</th>                
-                <th class="col-sm-3">Branch Name</th>               
-                <th class="col-sm-2">Cluster</th>                
-                <th class="col-sm-2">Status</th>
-                <th class="col-sm-1">Lock</th>
-                <th class="col-sm-1">Suspended</th>
-                <th style="width: 40px">Action</th>
-              </tr>
-              <tbody>
-                <tr dir-paginate="br in branches |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
-                  <td ng-bind="$index + 1"></td>
-                  <td ng-bind="br.branch_name"></td>                 
-                  <td ng-bind="br.cluster.cluster_name"></td>                  
-                  <td><span ng-class="(br.status =='CLOSE')?'text-red':'text-green'" ng-bind="br.status"></span></td>
-                  <td><span ng-bind="(br.lock==1)?'Yes':'No'"></span></td>
-                  <td><span ng-bind="(br.suspended==1)?'Yes':'No'"></span></td>
-                  <td>
-                    <a href="#" class='branch-edit' data-id="@{{br.branch_id}}"><i class="fa fa-pencil"></i></a>                   
-                  </td>
+            <div class='row'>
+              <div class='col-md-5 pull-right'>
+                <div class='col-md-8'>
+                  <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter" ng-keyup="bc.filterRecord(filterBy)"/>
+                </div>
+                <a href="/branches/create" class='btn  btn-info'>New Branch  <span class="glyphicon glyphicon-plus-sign"></span></a>
+              </div>
+            </div>
+            <br>
+            <table id="branches" class="bsTable table table-striped"
+             data-url="/branches/ng-branch-list"
+             data-pagination="true"
+             data-side-pagination="server"
+             data-page-list="[10,20,50]"
+             data-sort-order="desc"
+             data-show-clear="true"
+             js-bootstraptable>
+            <thead>
+                <tr>
+                    <th style='width:50px' data-field="action" class="action">Action</th>
+                    <th class="col-md-5" data-field="branch_name" >Branch Name</th>
+                    <th class="col-md-4"data-field="cluster_name" >Cluster</th>
+                    <th class="col-md-1"  data-field="status" >Status</th>
+                    <th class="col-md-1"  data-field="lock" >Lock</th>
+                    <th class="col-md-1"  data-field="suspended" >Suspended</th>
                 </tr>
-              </tbody>
-              
+            </thead>
             </table>
           </div>
             <!-- /.box-body -->
-          <div class="box-footer clearfix">            
-            <dir-pagination-controls boundary-links="true" template-url="../angular/dirPagination.tpl.html"></dir-pagination-controls>
-          </div>
+
         </div>
       </div>
-    </section>  
+    </section>
       <!-- /.row (main row) -->
 @stop
 @section('html_footer')
@@ -95,7 +83,7 @@
                 className: 'btn-success',
                 callback:function(){
                   var $this   = $(this);
-                  var data = $('#form-branches').serialize();  
+                  var data = $('#form-branches').serialize();
                   $.ajax({
                     url: "/branches/"+id,
                     method:'PUT',
@@ -104,16 +92,16 @@
                     success: function(result){
                       if (result['status'] == true) {
                         bootbox.hideAll();
-                        message(result);                        
+                        message(result);
                         $(".refresh").trigger('click');
-                      } else {    
-                        message(result);                      
+                      } else {
+                        message(result);
                         return false;
                       }
                     },
-                    
-                  });                 
-                  
+
+                  });
+
                   return false;
                 }
             },
@@ -123,7 +111,7 @@
             }
         },
       });
-          
+
     });
   })
 </script>

@@ -14,72 +14,33 @@
     <section class="content" ng-controller="clusterCtrl as cc">
       <div class='col-md-12'>
         <div class="box">
-          <a href="#" ng-click="cc.callServer" class="hide refresh"></a>
             <!-- /.box-header -->
           <div class="box-body">
-            <!-- <table class="table table-bordered">
-              <tr>
-                <th style="width: 10px">#</th>
-                <th>Cluster Name</th>
-                <th>No. Of Branches</th>
-                <th style="width: 40px">Action</th>
-              </tr>
-              <tbody>
-                <tr dir-paginate="cluster in clusters |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
-                  <td ng-bind="$index + 1"></td>
-                  <td ng-bind="cluster.cluster_name"></td>
-                  <td ng-bind="cluster.count_branch"></td>
-                  <td>
-                    <a href="#" class='cluster-edit' data-id="@{{cluster.cluster_id}}" ><i class="fa fa-pencil"></i></a>
-                    <a href="#" ng-hide="cluster.count_branch > 0"><i class="fa fa-trash text-red cluster-delete" data-id="@{{cluster.cluster_id}}"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-
-            </table>
+          <div class='row'>
+            <div class='col-md-5 pull-right'>
+              <div class='col-md-8'>
+                <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter" ng-keyup="cc.filterRecord(filterBy)"/>
+              </div>
+              <a href="/clusters/create" class='btn  btn-info'>New Cluster  <span class="glyphicon glyphicon-plus-sign"></span></a>
+            </div>
           </div>
-
-          <div class="box-footer clearfix">
-            <dir-pagination-controls boundary-links="true" template-url="../angular/dirPagination.tpl.html"></dir-pagination-controls>
-          </div> -->
-          <table class="table table-striped"  st-pipe="cc.callServer" st-table="cc.clusters">
-        		<thead>
-        		<tr>
-        			<th style="width: 10px">#</th>
-        			<th st-sort="cluster_name">Cluster Name</th>
-        			<th st-sort="count_branch">No. Of Branches</th>
-        			<th >Action</th>
-        		</tr>
-            <tr>
-              <td colspan="4">
-                <input st-search="" placeholder="Search here.." class="input-sm form-control" type="search">
-              </td>
-            </tr>
-        		</thead>
-        		<tbody  ng-show="!cc.isLoading">
-        		<tr ng-repeat="cluster in cc.clusters">
-              <td ng-bind="$index + 1"></td>
-              <td ng-bind="cluster.cluster_name"></td>
-              <td ng-bind="cluster.count_branch"></td>
-              <td>
-                <a href="#" class='cluster-edit' data-id="@{{cluster.cluster_id}}" ><i class="fa fa-pencil"></i></a>
-                <a href="#" ng-hide="cluster.count_branch > 0"><i class="fa fa-trash text-red cluster-delete" data-id="@{{cluster.cluster_id}}"></i></a>
-              </td>
-        		</tr>
-        		</tbody>
-            <tbody ng-show="mc.isLoading">
-            	<tr>
-            		<td colspan="4" class="text-center">Loading ... </td>
-            	</tr>
-          	</tbody>
-        		<tfoot>
-        			<tr>
-
-        					<td class="text-center" st-pagination="" st-items-by-page="10" colspan="4">
-
-        			</tr>
-        		</tfoot>
-        	</table>
+          <br>
+          <table id="cluster" class="bsTable table table-striped"
+           data-url="/clusters/ng-cluster-list"
+           data-pagination="true"
+           data-side-pagination="server"
+           data-page-list="[10,20,50]"
+           data-sort-order="desc"
+           data-show-clear="true"
+           js-bootstraptable>
+          <thead>
+              <tr>
+                  <th style='width:50px' data-field="action" class="action">Action</th>
+                  <th class="col-md-8" data-sortable="true" data-field="cluster_name" >Cluster Name</th>
+                  <th class="col-md-4"data-sortable="true" data-field="count_branch" >No. Of Branches</th>
+              </tr>
+          </thead>
+          </table>
         </div>
       </div>
     </section>
@@ -120,7 +81,7 @@
                       if (result['status'] == true) {
                         bootbox.hideAll();
                         message(result);
-                        $(".refresh").trigger('click');
+                        $(".bsTable").bootstrapTable('refresh');
                       } else {
                         message(result);
                         return false;
@@ -168,7 +129,7 @@ $(document).on('click','.cluster-delete',function(e){
               if (result['status'] == true) {
                 bootbox.hideAll();
                 message(result);
-                $(".refresh").trigger('click');
+                $(".bsTable").bootstrapTable('refresh');
               } else {
                 message(result);
                 return false;

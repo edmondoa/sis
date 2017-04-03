@@ -53,12 +53,24 @@ class ClusterController extends Controller
     public function cluster_list(Request $req)
     {
     	Core::setConnection();
-      $start = $req->pagination['start'];
-      $limit = $req->pagination['number'];
-      $search = @$req->search['predicateObject']["$"];
+      $start = $req->offset;
+      $limit = $req->limit;
+      $search = @$req->searchStr;
       $list = Cluster::whereRaw("cluster_name LIKE ('%".$search."%')")->skip($start)->take($limit)->get();
       $total = Cluster::count();
-      return response()->json(['numberOfPages'=>$total,'list'=>$list]);
+      $rows = array_map(function($row){
+        $action = "<div class='text-center'><a data-id='".$row['cluster_id']."' href='javascript:void(0)' title='Edit Cluster' class='cluster-edit'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></i></a>";
+        if($row['count_branch'] == 0){
+            $action .= "<a data-id='".$row['cluster_id']."' href='javascript:void(0)' title='Delete Cluster' class='cluster-delete ml-5 text-danger'><i class='fa fa-times-circle' aria-hidden='true'></i></i></a>";
+        }
+        $action .= "</div>";
+        return [
+            'action' => $action,
+            'cluster_name' => $row['cluster_name'],
+            'count_branch'=> $row['count_branch']
+          ];
+      },$list->toArray());
+      return response()->json(['total'=>$total,'rows'=>$rows]);
 
     }
 

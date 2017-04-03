@@ -81,10 +81,11 @@ class PromoController extends Controller
      return redirect()->intended('login');
     }
     Core::setConnection();
-    $start = ($req->page - 1) * $req->count;
-    $limit = $req->count;
+    $start = $req->offset;
+    $limit = $req->limit;
     $filter = @$req->searchStr;
     $status = @$req->status;
+  
     $sql = Promo::status($status)
         ->with(['product' => function($q) {
             $q->with('category');
@@ -99,10 +100,20 @@ class PromoController extends Controller
     $total = $sql->count();
     $list = $sql->skip($start)->take($limit)->get();
 
-    $pages = $total / $limit;
-    $pagination=['count' =>$limit,'page'=>$req->page,'pages'=>ceil($pages),'size'=>$total];
-    $header = Config::get('header.promo');
-    return response()->json(['list'=>$list,'header'=>$header,'pagination'=>$pagination]);
+    $rows = array_map(function($row){
+      $action = "<div class='text-center'><a data-id='".$row['promo_id']."' href='javascript:void(0)' title='Edit Product' class='product-edit'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></i></a>";
+      $action .= "</div>";
+      return [
+          'action' => $action,
+          'promo_id' => $row['promo_id'],
+          'category_name'=> $row['product']['category']['category_name'],
+          'start_date'=> $row['start_date'],
+          'end_date'=> $row['end_date'],
+          'promo_price'=> $row['promo_price'],
+          'promo_discount'=> $row['promo_discount']
+      ];
+    },$list->toArray());
+    return response()->json(['rows'=>$rows,'total'=>$total]);
 
   }
 
