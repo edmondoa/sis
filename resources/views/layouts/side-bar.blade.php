@@ -297,7 +297,7 @@
               </li>
             </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview settings-product">
             <a href="/">
               <i class="fa fa-circle-o"></i><span>Products</span>
               <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>

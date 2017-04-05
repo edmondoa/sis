@@ -184,9 +184,9 @@
 
             </div>
             <!-- /.box-body -->
-            <div class="box-footer">
-              <button type="reset" class="btn btn-default">Cancel</button>
-              <button type="button" ng-click="saveProduct(product)" class="btn btn-info pull-right">Add</button>
+            <div class="box-footer text-center">
+              <button type="reset" class="btn btn-warning">Cancel</button>
+              <button type="button" ng-click="saveProduct(product)" class="btn btn-success">Add <span class="glyphicon glyphicon-floppy-disk"></span></button>
             </div>
             <!-- /.box-footer -->
           </form>

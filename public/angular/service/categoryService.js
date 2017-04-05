@@ -4,8 +4,8 @@
     *   productService
     *   https://weblogs.asp.net/dwahlin/using-an-angularjs-factory-to-interact-with-a-restful-service
     */
-app.factory('clusterService', ['HttpRequestFactory','$q','$timeout',function (HttpRequestFactory,$q,$timeout) {
-        var urlBase = '/clusters';
+app.factory('categoryService', ['HttpRequestFactory','$q','$timeout',function (HttpRequestFactory,$q,$timeout) {
+        var urlBase = '/category';
 
         function getPage(params, paramsObj) {
             var config;
@@ -17,7 +17,7 @@ app.factory('clusterService', ['HttpRequestFactory','$q','$timeout',function (Ht
             return HttpRequestFactory.request(config);
     	}
 
-      function saveCluster(product){
+      function saveCategory(product){
         var config;
         config = {
             method: 'POST',
@@ -30,7 +30,7 @@ app.factory('clusterService', ['HttpRequestFactory','$q','$timeout',function (Ht
 
     	return {
     		getPage: getPage,
-        saveCluster : saveCluster
+        saveCategory : saveCategory
     	};
     }]);
 

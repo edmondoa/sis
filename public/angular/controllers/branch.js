@@ -1,16 +1,12 @@
-(function() {
+(function(app) {
 
   'use strict';
 
-  angular
-    .module('SisApp')
-    .controller('branchCtrl', branchCtrl);
+  app.controller('branchCtrl', ['branchService','$scope', function (service,$scope) {
 
-    function branchCtrl($scope,$filter, $timeout,$http) {
-      $scope.branches = [];
-      $scope.currentPage = 1;
-      $scope.pageSize = 15;
       var ctrl = this;
+      $scope.branch = {};
+      ctrl.branches = [];      
       var bsTable     = jQuery('.bsTable');
 
       bsTable.bootstrapTable({
@@ -38,33 +34,17 @@
         bsTable.bootstrapTable('refresh', {url: url});
       }
 
-      this.saveCluster = function saveCluster(model){
-        service.save(model).then(function (result) {
-            $scope.message(result);
+      this.saveBranch = function(model){
+        console.log(model);
+        service.saveBranch(model).then(function (result) {
+            ctrl.message(result);
+            $("button [type='reset']").trigger('click');
         });
       }
 
-      $scope.saveBranch = function(model)
-      {
-        $http.post('/branches',model)
-         .success(function(data) {
-            $scope.message(data);
-            $("button [type='reset']").trigger('click');
-
-        })
-      }
 
 
-
-
-      $scope.order = function(predicate, reverse) {
-        console.log("dd");
-         $scope.branches = orderBy($scope.branches, predicate, reverse);
-      };
-
-
-
-    $scope.message = function(data)
+    this.message = function(data)
     {
       if(data.status){
         $.notify({
@@ -96,5 +76,5 @@
           });
       }
     }
-  }
-})();
+  }])
+  })(App)

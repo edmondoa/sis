@@ -3,7 +3,7 @@
 @section('content')
   <link rel="stylesheet" href="/plugins/iCheck/all.css">
   <link rel="stylesheet" href="/plugins/select2/select2.min.css">
-    <section class="content-header">  
+    <section class="content-header">
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
         <li class="active"><i class="fa fa-circle"></i>Branches</li>
@@ -54,12 +54,14 @@
 @section('html_footer')
 @parent
 <script src="/angular/controllers/branch.js"></script>
-<script src="/angular/dirPagination.js"></script>
+<script src="/angular/service/HttpRequestFactory.js"></script>
+<script src="/angular/service/branchService.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $("li.settings").addClass('active');
+    $("li.setting-branches").addClass('active');
     $("li.branches").addClass('active');
   });
   $(function () {
@@ -93,7 +95,7 @@
                       if (result['status'] == true) {
                         bootbox.hideAll();
                         message(result);
-                        $(".refresh").trigger('click');
+                        $(".bsTable").bootstrapTable('refresh');
                       } else {
                         message(result);
                         return false;

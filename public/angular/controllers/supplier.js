@@ -1,85 +1,78 @@
-(function() {
 
-  'use strict';
+(function(app) {
+    'use strict';
 
-  angular
-    .module('SisApp')
-    .controller('supplierCtrl', supplierCtrl);
+app.controller('supplierCtrl', ['supplierService' ,'$scope', function (service ,$scope) {
 
-    function supplierCtrl($scope,$filter, $timeout,$http) {
-      $scope.suppliers = [];
-      $scope.supplier ={};
-      $scope.currentPage = 1;
-      $scope.pageSize = 15;  
+  var ctrl = this;
+  $scope.supplier = {};
+  var bsTable     = jQuery('.bsTable');
 
-      $scope.getSuppliers = function() {
-        
-        $http.get('suppliers/ng-supplier-list').
-          success(function(data) {
-            $scope.suppliers = data;         
-            console.log($scope.suppliers);
-          });
+  bsTable.bootstrapTable({
+      responseHandler: function (res) {
+          return ctrl.formatter(res);
+      },
+      queryParams: function(q){
+          return q;
+      },
+      onPostBody: function(data){
       }
+  });
 
-      $scope.saveSupplier = function(model)
-      {   
-        if (model !== undefined && model !== null) {
-          model['suspended'] = ($("#suspended").is(":checked"))?'1':'0';
-          model['lock'] = ($("#lock").is(":checked"))?'1':'0';
-        }
-        //
-        
-        $http.post('/suppliers',model)
-         .success(function(data) {
-            $scope.message(data);
-            $scope.supplier ={};
-            $("#suspended").attr('checked',false);
-            $scope.getSuppliers();
-        })
-      }
-
-      
-      
-
-      $scope.order = function(predicate, reverse) {
-        console.log("dd");
-         $scope.suppliers = orderBy($scope.suppliers, predicate, reverse);
+  this.formatter = function(res){
+        $("div.bs-bars").addClass('col-md-5');
+      return {
+          "total": res.total,
+          "rows": res.rows
       };
-      $scope.getSuppliers();      
-      
-     
+  }
+  this.filterRecord = function(model)
+  {
+    var searchStr = (typeof(model['searchStr'])=='undefined') ? '': model['searchStr'];
+    var url = '/suppliers/ng-supplier-list?searchStr='+searchStr;
+    bsTable.bootstrapTable('refresh', {url: url});
+  }
 
-    $scope.message = function(data)
+  this.saveSupplier = function saveCluster(model){    
+    service.saveSupplier(model).then(function (result) {
+        $scope.message(result);
+    });
+  }
+
+  $scope.message = function(result)
     {
-      if(data.status){
-        $.notify({       
-          message: data.message
-        },{
-          type: 'success',
-          newest_on_top: true,
-          placement: {
-              align: "right",
-              from: "bottom"
-          }
-        });
-      }else{
-        var stringBuilder ="<ul class='error'>";
-        for (var x in data.message) {
-          console.log(x);
-          stringBuilder +="<li>"+data.message[x]+"</li>";
-        }
-        stringBuilder +="</ul>";
-         $.notify({       
-            message: stringBuilder
+      console.log(result);
+        if(result.data.status){
+          $.notify({
+            message: result.data.message
           },{
-            type: 'danger',
+            type: 'success',
             newest_on_top: true,
             placement: {
                 align: "right",
                 from: "bottom"
             }
-          });   
-      }
-    }  
+          });
+        }else{
+          var stringBuilder ="<ul class='error'>";
+          for (var x in result.data.message) {
+            console.log(x);
+            stringBuilder +="<li>"+result.data.message[x]+"</li>";
+          }
+          stringBuilder +="</ul>";
+           $.notify({
+              message: stringBuilder
+            },{
+              type: 'danger',
+              newest_on_top: true,
+              placement: {
+                  align: "right",
+                  from: "bottom"
+              }
+            });
+        }
+
   }
-})();
+
+}])
+})(App)

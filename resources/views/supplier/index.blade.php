@@ -1,74 +1,65 @@
 @extends('layouts.master')
 
 @section('content')
-    
+
     <link rel="stylesheet" href="/plugins/iCheck/all.css">
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
-      <h1>
-        Suppliers     
-      </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li class=""><i class="fa fa-circle"></i>Settings</li>
         <li class="active"><i class="fa fa-circle"></i>Suppliers</li>
       </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="supplierCtrl">
-      <div class='col-md-5'>
-        @include('supplier.create')
-      </div>
-      <div class='col-md-7'>
+    <section class="content" ng-controller="supplierCtrl as sc">
         <div class="box">
-          <div class="box-header with-border">
-            @include('layouts.search')
-          </div>
-          <a href="#" ng-click="getSuppliers()" class="hide refresh"></a>
-          
-            <!-- /.box-header -->
-          <div class="box-body">            
-            <table class="table table-bordered">
-              <tr>
-                <th style="width: 10px">#</th>  
-                <th>Supplier Name</th> 
-                <th>Contact Person</th>
-
-                <th style="width: 40px">Action</th>
-              </tr>
-              <tbody>
-                <tr dir-paginate="supplier in suppliers |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
-                  <td ng-bind="$index + 1"></td>                 
-                  <td ng-bind="supplier.supplier_name"></td> 
-                  <td ng-bind="supplier.contact_person"></td>               
-                  <td>
-                    <a href="javascript:void(0)" class='supplier-edit' data-id="@{{supplier.supplier_id}}"><i class="fa fa-pencil"></i></a>
-                    <a href="#"><i class="fa fa-trash warning text-red"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-              
-            </table>
-          </div>
             <!-- /.box-body -->
-          <div class="box-footer clearfix">            
-            <dir-pagination-controls boundary-links="true" template-url="../angular/dirPagination.tpl.html"></dir-pagination-controls>
-          </div>
+            <div class="box-body">
+              <div class='row'>
+                <div class='col-md-5 pull-right'>
+                  <div class='col-md-8'>
+                    <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter" ng-keyup="sc.filterRecord(filterBy)"/>
+                  </div>
+                  <a href="/suppliers/create" class='btn  btn-info'>New Supplier  <span class="glyphicon glyphicon-plus-sign"></span></a>
+                </div>
+              </div>
+              <br>
+              <table id="suppliers" class="bsTable table table-striped"
+               data-url="/suppliers/ng-supplier-list"
+               data-pagination="true"
+               data-side-pagination="server"
+               data-page-list="[10,20,50]"
+               data-sort-order="desc"
+               data-show-clear="true"
+               js-bootstraptable>
+              <thead>
+                  <tr>
+                      <th style='width:50px' data-field="action" class="action">Action</th>
+                      <th class="col-md-6" data-field="supplier_name" >Supplier</th>
+                      <th class="col-md-6"data-field="contact_person" >Contact Person</th>
+
+                  </tr>
+              </thead>
+              </table>
+            </div>
         </div>
-      </div>
-    </section>  
+
+    </section>
       <!-- /.row (main row) -->
 @stop
 @section('html_footer')
 @parent
 <script src="/angular/controllers/supplier.js"></script>
+<script src="/angular/service/HttpRequestFactory.js"></script>
+<script src="/angular/service/supplierService.js"></script>
 <script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $("li.settings").addClass('active');
+    $("li.settings-product").addClass('active');
     $("li.suppliers").addClass('active');
   });
   $(function () {
@@ -80,7 +71,6 @@
     });
   });
   $(document).on('click','.supplier-edit',function(e){
-    e.preventDefault();
     id = $(this).data('id');
     $.get( "suppliers/"+id+"/edit", function( data ) {
       var dialog = bootbox.dialog({
@@ -92,7 +82,7 @@
                 className: 'btn-success',
                 callback:function(){
                   var $this   = $(this);
-                  var data = $('#form-suppliers').serialize()+"&"+$('#sup_cat').serialize();  
+                  var data = $('#form-suppliers').serialize()+"&"+$('#sup_cat').serialize();
                   $.ajax({
                     url: "/suppliers/"+id,
                     method:'PUT',
@@ -101,16 +91,16 @@
                     success: function(result){
                       if (result['status'] == true) {
                         bootbox.hideAll();
-                        message(result);                        
-                        $(".refresh").trigger('click');
-                      } else {    
-                        message(result);                      
+                        message(result);
+                        $(".bsTable").bootstrapTable('refresh');
+                      } else {
+                        message(result);
                         return false;
                       }
                     },
-                    
-                  });                 
-                  
+
+                  });
+
                   return false;
                 }
             },
@@ -120,7 +110,7 @@
             }
         },
       });
-          
+
     });
   })
 </script>

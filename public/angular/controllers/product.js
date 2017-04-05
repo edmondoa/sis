@@ -26,10 +26,7 @@
 
       self = this;
       $scope.products = [];
-      $scope.product = {};
-      $scope.currentPage = 1;
-      $scope.pageSize = 15;
-
+      $scope.product = {};  
       var bsTable     = jQuery('.bsTable');
 
         bsTable.bootstrapTable({

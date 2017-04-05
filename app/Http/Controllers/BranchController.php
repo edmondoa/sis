@@ -23,8 +23,17 @@ class BranchController extends Controller
         {
          return redirect()->intended('login');
         }
-        $clusters = Cluster::get();
-    	return view('branch.index',compact('clusters'));
+      return view('branch.index');
+    }
+
+    public function create()
+    {
+      if(!Core::setConnection())
+      {
+       return redirect()->intended('login');
+      }
+      $clusters = Cluster::get();
+      return view('branch.create',compact('clusters'));
     }
 
 

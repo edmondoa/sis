@@ -15,7 +15,7 @@ use Redirect;
 class SupplierController extends Controller
 {
     public function __construct()
-    {        
+    {
         $this->middleware('web');
     }
 
@@ -24,10 +24,19 @@ class SupplierController extends Controller
     	if(!Core::setConnection())
         {
             return redirect()->intended('login');
-        }  
-        
-        $categories = Category::get();                
-    	return view('supplier.index',compact('categories'));
+        }
+
+
+    	return view('supplier.index');
+    }
+
+    public function create()
+    {
+      if(!Core::setConnection())
+            return redirect()->intended('login');
+
+        $categories = Category::get();
+        return view("supplier.create", compact('categories'));
     }
 
     public function store(Request $req)
@@ -38,19 +47,36 @@ class SupplierController extends Controller
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);
         }
-        
+
         $supplier = Supplier::create($req->all());
-        if($supplier) { 
+        if($supplier) {
             return Response::json(['status'=>true,'message' => "Successfully created!"]);
-        }        
+        }
         return Response::json(['status'=>false,'message' => "Error occured please report to your administrator!"]);
     }
 
-    public function supplier_list()
+    public function supplier_list(Request $req)
     {
     	Core::setConnection();
-        $list = Supplier::get();
-    	return $list;
+
+      $start = $req->offset;
+      $limit = $req->limit;
+      $search = @$req->searchStr;
+      $sql =  Supplier::whereRaw("supplier_name LIKE ('%".$search."%') OR contact_person LIKE ('%".$search."%')");
+      $total = $sql->count();
+      $list = $sql->skip($start)->take($limit)->get();
+
+      $rows = array_map(function($row){
+        $action = "<div class='text-center'><a data-id='".$row['supplier_id']."' href='javascript:void(0)' title='Edit Supplier' class='supplier-edit'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></i></a>";
+        $action .= "<a data-id='".$row['supplier_id']."' href='javascript:void(0)' title='Delete Supplier' class='supplier-delete text-danger ml-5'><i class='fa fa-times-circle' aria-hidden='true'></i></i></a>";
+        $action .= "</div>";
+        return [
+            'action' => $action,
+            'supplier_name' => $row['supplier_name'],
+            'contact_person' => $row['contact_person']
+          ];
+      },$list->toArray());
+      return response()->json(['total'=>$total,'rows'=>$rows]);
     }
 
     public function edit($id)
@@ -61,7 +87,7 @@ class SupplierController extends Controller
         foreach ($supplier->category as $key) {
             array_push($mylist,$key->pivot->category_id);
         }
-       
+
         $categories = Category::get();
         return view('supplier.edit',compact('supplier','categories','mylist'));
     }
@@ -71,7 +97,7 @@ class SupplierController extends Controller
         Core::setConnection();
         $jdata['status'] = false;
         $jdata['message'] = "Error in updating, Please contact the administrator";
-        
+
         $validate = Validator::make($request->all(), self::rules($id));
         if($validate->fails())
         {
@@ -90,17 +116,17 @@ class SupplierController extends Controller
         if($supplier->save())
         {
             if(count($request->category) > 0){
-                $supplier->category()->detach();            
-                foreach ($request->category as $val) {              
-                   $supplier->category()->attach($val);              
+                $supplier->category()->detach();
+                foreach ($request->category as $val) {
+                   $supplier->category()->attach($val);
                 }
-            }    
+            }
             $jdata['status'] = true;
             $jdata['message'] = "Successfully updated!";
-     
+
         }
 
-       
+
         return $jdata;
     }
 
