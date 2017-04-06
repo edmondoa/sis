@@ -86,10 +86,7 @@ class ProductController extends Controller
             'cost_price'=> $row['cost_price']
         ];
       },$list->toArray());
-      //
-      // $pages = $total / $limit;
-      // $pagination=['count' =>$limit,'page'=>$req->page,'pages'=>ceil($pages),'size'=>$total];
-      // $header = Config::get('header.product');
+
       return response()->json(['rows'=>$rows,'total'=>$total]);
     }
 

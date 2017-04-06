@@ -1,51 +1,49 @@
-(function() {
+(function(app) {
+    'use strict';
 
-  'use strict';
+app.controller('pGroupCtrl', ['groupService' ,'$scope', function (service ,$scope) {
+      var ctrl = this;
+      $scope.group = {};
+      var bsTable     = jQuery('.bsTable');
 
-  angular
-    .module('SisApp')
-    .controller('pGroupCtrl', pGroupCtrl);
+      bsTable.bootstrapTable({
+          responseHandler: function (res) {
+              return ctrl.formatter(res);
+          },
+          queryParams: function(q){
+              return q;
+          },
+          onPostBody: function(data){
+          }
+      });
 
-    function pGroupCtrl($scope,$filter, $timeout,$http) {
-      $scope.groups = [];
-      $scope.group ={};
-      $scope.currentPage = 1;
-      $scope.pageSize = 15;  
-
-      $scope.getGroups = function() {
-        
-        $http.get('/product-group/ng-pgroup-list').
-          success(function(data) {
-            $scope.groups = data;         
-            console.log($scope.groups);
-          });
+      this.formatter = function(res){
+            $("div.bs-bars").addClass('col-md-5');
+          return {
+              "total": res.total,
+              "rows": res.rows
+          };
+      }
+      this.filterRecord = function(model)
+      {
+        var searchStr = (typeof(model['searchStr'])=='undefined') ? '': model['searchStr'];
+        var url = '/product-group/ng-pgroup-list?searchStr='+searchStr;
+        bsTable.bootstrapTable('refresh', {url: url});
       }
 
-      $scope.saveGroup = function(model)
-      {        
-        $http.post('/product-group',model)
-         .success(function(data) {
-            $scope.message(data);
-            $scope.group ={};
-            $scope.getGroups();
-        })
+      this.saveGroup = function (model){
+        console.log('ss');
+        console.log(model);
+        service.saveGroup(model).then(function (result) {
+            $scope.message(result);
+        });
       }
 
-      
-      
-
-      $scope.order = function(predicate, reverse) {
-        console.log("dd");
-         $scope.groups = orderBy($scope.groups, predicate, reverse);
-      };
-      $scope.getGroups();      
-      
-     
 
     $scope.message = function(data)
     {
       if(data.status){
-        $.notify({       
+        $.notify({
           message: data.message
         },{
           type: 'success',
@@ -62,7 +60,7 @@
           stringBuilder +="<li>"+data.message[x]+"</li>";
         }
         stringBuilder +="</ul>";
-         $.notify({       
+         $.notify({
             message: stringBuilder
           },{
             type: 'danger',
@@ -71,8 +69,8 @@
               align: "right",
               from: "bottom"
           }
-          });   
+          });
       }
-    }  
-  }
-})();
+    }
+}])
+})(App)

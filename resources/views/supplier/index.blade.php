@@ -53,7 +53,6 @@
 <script src="/angular/controllers/supplier.js"></script>
 <script src="/angular/service/HttpRequestFactory.js"></script>
 <script src="/angular/service/supplierService.js"></script>
-<script src="/angular/dirPagination.js"></script>
 <script src="/plugins/select2/select2.full.min.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">

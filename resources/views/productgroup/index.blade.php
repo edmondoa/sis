@@ -3,9 +3,7 @@
 @section('content')
 
     <section class="content-header">
-      <h1>
-        Product Groups
-      </h1>
+
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
         <li class="active"><i class="fa fa-circle"></i>Product Groups</li>
@@ -13,30 +11,35 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="pGroupCtrl">
+    <section class="content" ng-controller="pGroupCtrl as pg">
         <div class="box">
-          <a href="#" ng-click="getGroups()" class="hide refresh"></a>
 
             <!-- /.box-header -->
           <div class="box-body">
-            <table class="table table-bordered">
-              <tr>
-                <th style="width: 10px">#</th>
-                <th>Group Name</th>
-                <th style="width: 60px">Action</th>
-              </tr>
-              <tbody>
-                <tr dir-paginate="gr in groups |filter:searchQry|itemsPerPage: pageSize" current-page="currentPage">
-                  <td ng-bind="$index + 1"></td>
-                  <td ng-bind="gr.group_name"></td>
-                  <td>
-
-                    <a href="#" class='group-edit' data-id="@{{gr.group_id}}"><i class="fa fa-pencil"></i></a>
-                    <a href="#"><i class="fa fa-trash warning"></i></a>
-                  </td>
+            <div class='row'>
+              <div class='col-md-5 pull-right'>
+                <div class='col-md-8'>
+                  <input type='text'class='form-control' ng-model="filterBy.searchStr" placeholder="Filter" ng-keyup="pg.filterRecord(filterBy)"/>
+                </div>
+                <a href="/product-group/create" class='btn  btn-info'>New Groups  <span class="glyphicon glyphicon-plus-sign"></span></a>
+              </div>
+            </div>
+            <br>
+            <table id="product-group" class="bsTable table table-striped"
+             data-url="/product-group/ng-pgroup-list"
+             data-pagination="true"
+             data-side-pagination="server"
+             data-page-list="[10,20,50]"
+             data-sort-order="desc"
+             data-show-clear="true"
+             js-bootstraptable>
+            <thead>
+                <tr>
+                    <th style='width:50px' data-field="action" class="action">Action</th>
+                    <th class="col-md-6" data-field="group_name" >Group Name</th>
+                    <th class="col-md-6" data-field="notes" >Notes</th>
                 </tr>
-              </tbody>
-
+            </thead>
             </table>
           </div>
             <!-- /.box-body -->
@@ -48,7 +51,8 @@
 @section('html_footer')
 @parent
 <script src="/angular/controllers/group.js"></script>
-<script src="/angular/dirPagination.js"></script>
+<script src="/angular/service/HttpRequestFactory.js"></script>
+<script src="/angular/service/groupService.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $("li.settings").addClass('active');
@@ -77,7 +81,7 @@
                       if (result['status'] == true) {
                         bootbox.hideAll();
                         message(result);
-                        $(".refresh").trigger('click');
+                        $(".bsTable").bootstrapTable('refresh');
                       } else {
                         message(result);
                         return false;

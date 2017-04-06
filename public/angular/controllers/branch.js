@@ -6,7 +6,6 @@
 
       var ctrl = this;
       $scope.branch = {};
-      ctrl.branches = [];      
       var bsTable     = jQuery('.bsTable');
 
       bsTable.bootstrapTable({
@@ -37,14 +36,14 @@
       this.saveBranch = function(model){
         console.log(model);
         service.saveBranch(model).then(function (result) {
-            ctrl.message(result);
+            $scope.message(result);
             $("button [type='reset']").trigger('click');
         });
       }
 
 
 
-    this.message = function(data)
+    $scope.message = function(data)
     {
       if(data.status){
         $.notify({

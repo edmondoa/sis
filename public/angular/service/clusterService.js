@@ -7,16 +7,6 @@
 app.factory('clusterService', ['HttpRequestFactory','$q','$timeout',function (HttpRequestFactory,$q,$timeout) {
         var urlBase = '/clusters';
 
-        function getPage(params, paramsObj) {
-            var config;
-            config = {
-                method: 'GET',
-                url: '/products-regular-list?'+params,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            };
-            return HttpRequestFactory.request(config);
-    	}
-
       function saveCluster(product){
         var config;
         config = {
@@ -28,8 +18,7 @@ app.factory('clusterService', ['HttpRequestFactory','$q','$timeout',function (Ht
         return HttpRequestFactory.request(config);
       }
 
-    	return {
-    		getPage: getPage,
+    	return {    	
         saveCluster : saveCluster
     	};
     }]);
