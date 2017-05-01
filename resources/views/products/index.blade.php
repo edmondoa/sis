@@ -34,10 +34,10 @@
              js-bootstraptable>
             <thead>
                 <tr>
-                    <th style='width:50px' data-field="action" class="action">Action</th>
                     <th class="col-md-5" data-sortable="true" data-field="product_name" >Product Name</th>
                     <th class="col-md-4"data-sortable="true" data-field="category_name" >Category Name</th>
                     <th class="col-md-3" data-sortable="true" data-field="cost_price" >Price</th>
+                    <th style='width:50px' data-field="action" class="action">Action</th>
                 </tr>
             </thead>
             </table>

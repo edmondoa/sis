@@ -35,9 +35,9 @@
              js-bootstraptable>
             <thead>
                 <tr>
-                    <th style='width:50px' data-field="action" class="action">Action</th>
                     <th class="col-md-6" data-field="group_name" >Group Name</th>
                     <th class="col-md-6" data-field="notes" >Notes</th>
+                    <th style='width:50px' data-field="action" class="action">Action</th>
                 </tr>
             </thead>
             </table>

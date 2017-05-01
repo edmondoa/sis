@@ -36,6 +36,7 @@ class ProductGroupController extends Controller
     }
     public function store(Request $req)
     {
+    
     	Core::setConnection();
         $validate = Validator::make($req->all(), ProductGroup::$rules);
         if($validate->fails())

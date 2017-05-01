@@ -3,7 +3,7 @@
 
 app.controller('pGroupCtrl', ['groupService' ,'$scope', function (service ,$scope) {
       var ctrl = this;
-      $scope.group = {};
+     var group = {};
       var bsTable     = jQuery('.bsTable');
 
       bsTable.bootstrapTable({
@@ -31,17 +31,19 @@ app.controller('pGroupCtrl', ['groupService' ,'$scope', function (service ,$scop
         bsTable.bootstrapTable('refresh', {url: url});
       }
 
-      this.saveGroup = function (model){
-        console.log('ss');
-        console.log(model);
-        service.saveGroup(model).then(function (result) {
-            $scope.message(result);
+      this.saveGroup = function saveGroup(){
+        group['group_name'] = $("#group_name").val();
+        group['notes'] = $("#notes").val();
+
+        service.saveGroup(group).then(function (result) {
+            $scope.message(result.data);
         });
       }
 
 
     $scope.message = function(data)
     {
+      
       if(data.status){
         $.notify({
           message: data.message

@@ -21,7 +21,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form class="form-horizontal ">
+          <form class="form-horizontal " id='promoForm'>
             <div class="box-body">
               <div class="form-group">
                 <label for="inputEmail3"  class="col-sm-4 control-label">Category</label>

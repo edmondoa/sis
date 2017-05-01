@@ -34,11 +34,10 @@
                data-show-clear="true"
                js-bootstraptable>
               <thead>
-                  <tr>
-                      <th style='width:50px' data-field="action" class="action">Action</th>
+                  <tr>                     
                       <th class="col-md-6" data-field="supplier_name" >Supplier</th>
                       <th class="col-md-6"data-field="contact_person" >Contact Person</th>
-
+                      <th style='width:50px' data-field="action" class="action">Action</th>  
                   </tr>
               </thead>
               </table>

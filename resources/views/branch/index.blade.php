@@ -34,12 +34,12 @@
              js-bootstraptable>
             <thead>
                 <tr>
-                    <th style='width:50px' data-field="action" class="action">Action</th>
                     <th class="col-md-5" data-field="branch_name" >Branch Name</th>
                     <th class="col-md-4"data-field="cluster_name" >Cluster</th>
                     <th class="col-md-1"  data-field="status" >Status</th>
                     <th class="col-md-1"  data-field="lock" >Lock</th>
                     <th class="col-md-1"  data-field="suspended" >Suspended</th>
+                    <th style='width:50px' data-field="action" class="action">Action</th>
                 </tr>
             </thead>
             </table>

@@ -18,6 +18,7 @@ app.factory('productService', ['HttpRequestFactory','$q','$timeout',function (Ht
     	}
 
       function saveProduct(product){
+        console.log(product);
         var config;
         config = {
             method: 'POST',

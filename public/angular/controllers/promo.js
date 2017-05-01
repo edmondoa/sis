@@ -8,7 +8,7 @@ app.filter('unsafe', function($sce) {
 app.controller('promoCtrl', ['promoService','$scope', function (service,$scope) {
 
   var ctrl = this;
-
+  //$scope.promo ={};
   $scope.promos = [];
   $scope.need = [];
   $scope.branch = [];
@@ -59,15 +59,20 @@ app.controller('promoCtrl', ['promoService','$scope', function (service,$scope) 
     $scope.need.push({pid:product[0],category:product[1],name:product[2],qty:need.qty,action:action});
   }
 
-  $scope.savePromo = function(promo)
+  $scope.savePromo = function()
   {
 
-    promo['non_book'] = $("#non_book").is(':checked')?1:0;
-    promo['non_consign'] = $("#non_consign").is(':checked')?1:0;
+    var x = $("#promoForm").serializeArray();
+    var promo = {};
+    $.each(x, function(i, field){
+        promo[field.name] = (field.value ==='? undefined:undefined ?') ?'':field.value;
+    });
+    promo['non_book'] = ($("#non_book").is(':checked'))?1:0;
+    promo["non_consign"] = $("#non_consign").is(':checked')?1:0;
     promo['lock'] = $("#lock").is('checked')?1:0;
     promo['suspended'] = $("#suspended").is(':checked')?1:0;
     promo['description'] = $("#description").val();
-    console.log(promo)
+   
     service.savePromo(promo, this.need, this.branch).then(function (result) {
       $scope.message(result);
     });

@@ -25,14 +25,14 @@
                 <div class="form-group ">
                   <label for="inputEmail3"  class="col-sm-3 control-label">Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control"  ng-model='group.group_name' placeholder="Group Name">
+                    <input type="text" class="form-control"  id="group_name"ng-model='group_name' placeholder="Group Name">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3"  class="col-sm-3 control-label">Notes</label>
 
                   <div class="col-sm-9">
-                    <textarea class="form-control" id="" ng-model='group.notes'></textarea>
+                    <textarea class="form-control"  id='notes'ng-model='notes'></textarea>
 
                   </div>
                 </div>
@@ -43,7 +43,7 @@
             <!-- /.box-body -->
             <div class="box-footer text-center">
               <button type="reset" class="btn btn-danger">Cancel</button>
-              <button type="button" ng-click="pg.saveGroup(group)" class="btn btn-success ">Add <span class="glyphicon glyphicon-floppy-disk"></span></button>
+              <button type="button" ng-click="pg.saveGroup()" class="btn btn-success ">Add <span class="glyphicon glyphicon-floppy-disk"></span></button>
             </div>
             <!-- /.box-footer -->
           </form>

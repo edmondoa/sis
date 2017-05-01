@@ -20,6 +20,8 @@ class Promo extends Model
         'price' => 'required|numeric|between:0,99999999.99',
         'discount' => 'required|numeric|between:0,100',
         'start_date' => 'date',
+        'max_limit_qty' => 'required|numeric',
+        'account_limit_qty' => 'required|numeric',
         'end_date' => 'date'  ];
 
   //protected $appends = ['product','category'];

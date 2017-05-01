@@ -35,9 +35,9 @@
            js-bootstraptable>
           <thead>
               <tr>
-                  <th style='width:50px' data-field="action" class="action">Action</th>
                   <th class="col-md-8" data-sortable="true" data-field="cluster_name" >Cluster Name</th>
                   <th class="col-md-4"data-sortable="true" data-field="count_branch" >No. Of Branches</th>
+                  <th style='width:50px' data-field="action" class="action">Action</th>
               </tr>
           </thead>
           </table>

@@ -37,11 +37,11 @@
              data-show-clear="true"
              js-bootstraptable>
             <thead>
-                <tr>
-                    <th style='width:50px' data-field="action" class="action">Action</th>
+                <tr>                    
                     <th class="col-md-5" data-field="category_name" >Category Name</th>
                     <th class="col-md-4"data-field="category_code" >Category Code</th>
                     <th class="col-md-3"  data-field="count_supplier" >Supplier</th>
+                    <th style='width:50px' data-field="action" class="action">Action</th>
                 </tr>
             </thead>
             </table>

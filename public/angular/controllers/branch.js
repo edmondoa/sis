@@ -34,7 +34,15 @@
       }
 
       this.saveBranch = function(model){
-        console.log(model);
+        var fbranch = $("form[name='branch-form']").serializeArray();
+        for(var i=0; i<fbranch.length; i++){
+          if(fbranch[i]['value']=='? undefined:undefined ?'){
+            model[fbranch[i]['name']] = '';
+          }else{
+            model[fbranch[i]['name']] = fbranch[i]['value'];
+          }
+
+        }
         service.saveBranch(model).then(function (result) {
             $scope.message(result);
             $("button [type='reset']").trigger('click');
@@ -45,6 +53,7 @@
 
     $scope.message = function(data)
     {
+      console.log(data);
       if(data.status){
         $.notify({
           message: data.message

@@ -12,8 +12,8 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-controller="promoCtrl as pc">
-      <form class="form-horizontal">
+    <section class="content" ng-controller="promoCtrl">
+      <form class="form-horizontal" id='promoForm'>
       <div class="row">
         @include('promo.create_promo')
         @include('promo.promo_requirements')
@@ -22,7 +22,7 @@
       <br>
       <div class="text-center">
         <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        <button type="button"  class="btn btn-success  btn-save " ng-click="savePromo(promo,need)">Save <span class="glyphicon glyphicon-floppy-disk"></button>
+        <button type="button"  class="btn btn-success  btn-save " ng-click="savePromo()">Save <span class="glyphicon glyphicon-floppy-disk"></button>
       </div>
     </form>
     </section>
@@ -34,8 +34,12 @@
 <script src="/angular/service/HttpRequestFactory.js"></script>
 <script src="/angular/service/promoService.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
-
+<script src="/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
+
+  $(function(){
+    $(".select2").select2();
+  })
   $(document).ready(function(){
     $("li.record-management").addClass('active');
     $("li.product").addClass('active');
@@ -43,7 +47,7 @@
 
     $(".datepicker").datepicker({
       dateFormat: 'yyyy-mm-dd',
-      autoclose: true});
+      autoclose: true});    
   });
 
   $(document).on('click',".btn-exclude",function(){

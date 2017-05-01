@@ -54,16 +54,17 @@ class PromoController extends Controller
     {
      return redirect()->intended('login');
     }
-    $promo = $request->promo;
-    $promo['user_id'] = Auth::user()->user_id;
-    $promo['start_date'] = date("Y-m-d",strtotime($promo['start']));
-    $promo['end_date'] = date("Y-m-d",strtotime($promo['end']));
-    $promo['post_date'] = Setting::first()->pluck('post_date')[0];
+    $promo = $request->promo;    
+    
     $validate = Validator::make($promo, Promo::$rules);
      if($validate->fails())
      {
          return Response::json(['status'=>false,'message' => $validate->messages()]);
      }
+    $promo['user_id'] = Auth::user()->user_id;
+    $promo['start_date'] = date("Y-m-d",strtotime($promo['start']));
+    $promo['end_date'] = date("Y-m-d",strtotime($promo['end']));
+    $promo['post_date'] = Setting::first()->pluck('post_date')[0];
      $newPromo = Promo::create($promo);
      if($newPromo){
        $needs = $request->need;

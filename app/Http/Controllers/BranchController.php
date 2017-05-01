@@ -64,9 +64,9 @@ class BranchController extends Controller
 
     public function store(Request $req)
     {
-    	Core::setConnection();
+    	   Core::setConnection();
         $inputs = $req->all();
-    	$validate = Validator::make($inputs, Branch::$rules);
+    	  $validate = Validator::make($inputs, Branch::$rules);
         if($validate->fails())
         {
             return Response::json(['status'=>false,'message' => $validate->messages()]);

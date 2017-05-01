@@ -25,19 +25,19 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Branch Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control"  ng-model='branch.branch_name' placeholder="Branch Name">
+                    <input type="text" class="form-control"  ng-model='branch.branch_name'  name='branch_name' placeholder="Branch Name">
                   </div>
                 </div>
                 <div class="form-group ">
                   <label for="inputEmail3" class="col-sm-3 control-label">Business Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control"  ng-model='branch.business_name' placeholder="Business Name">
+                    <input type="text" class="form-control"  ng-model='branch.business_name'  name='business_name' placeholder="Business Name">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Cluster</label>
                   <div class="col-sm-9">
-                    <select class="form-control select2 cluster_name" ng-model='branch.cluster_id' >
+                    <select class="form-control select2 cluster_name" ng-model='branch.cluster_id'  name='cluster_id'>
                       @foreach($clusters as $cluster)
                       <option value="{{$cluster->cluster_id}}">{{$cluster->cluster_name}}</option>
                       @endforeach
@@ -47,32 +47,32 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Addressline1</label>
                   <div class="col-sm-9">
-                    <textarea class="form-control" ng-model='branch.addressline1'></textarea>
+                    <textarea class="form-control" ng-model='branch.addressline1'  name='addressline1'></textarea>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Addressline2</label>
                   <div class="col-sm-9">
-                    <textarea class="form-control"  ng-model='branch.addressline2'></textarea>
+                    <textarea class="form-control"  ng-model='branch.addressline2'  name='addressline2'></textarea>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3"  class="col-sm-3 control-label">TIN #</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control"  ng-model='branch.tin_no' placeholder="TIN #">
+                    <input type="text" class="form-control"  ng-model='branch.tin_no'  name='tin_no' placeholder="TIN #">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3"  class="col-sm-3 control-label">BIR Permit #</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control"  ng-model='branch.bir_permit_no' placeholder="BIR Permit #">
+                    <input type="text" class="form-control"  ng-model='branch.bir_permit_no'  name='bir_permit_no' placeholder="BIR Permit #">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3"  class="col-sm-3 control-label">Lock</label>
                   <div class="col-sm-9">
                    <label>
-                      <input type="checkbox" class="flat-red" id='lock' checked>
+                      <input type="checkbox" class="flat-red" id='lock'  name='lock' checked>
                     </label>
                   </div>
                 </div>
@@ -80,14 +80,14 @@
                   <label for="inputEmail3"  class="col-sm-3 control-label">Suspended</label>
                   <div class="col-sm-9">
                     <label>
-                      <input type="checkbox" class="flat-red" id='suspended' >
+                      <input type="checkbox" class="flat-red" id='suspended' name='suspended' >
                     </label>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3"  class="col-sm-3 control-label">Notes</label>
                   <div class="col-sm-9">
-                    <textarea class="form-control"  ng-model='branch.notes'></textarea>
+                    <textarea class="form-control"  ng-model='branch.notes' name='notes'></textarea>
                   </div>
                 </div>
                 <!-- <div class="form-group">
