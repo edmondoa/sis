@@ -5,10 +5,10 @@ app.filter('unsafe', function($sce) {
             return $sce.trustAsHtml(val);
         };
     });
-app.controller('promoCtrl', ['promoService','$scope', function (service,$scope) {
+app.controller('promoCtrl', ['promoService','$scope','$http', function (service,$scope,$http) {
 
   var ctrl = this;
-  //$scope.promo ={};
+  $scope.promo ={};
   $scope.promos = [];
   $scope.need = [];
   $scope.branch = [];
@@ -76,6 +76,46 @@ app.controller('promoCtrl', ['promoService','$scope', function (service,$scope) 
     service.savePromo(promo, this.need, this.branch).then(function (result) {
       $scope.message(result);
     });
+  }
+
+  $scope.searchProd = function()
+  {
+    var search = $("#searchStr").val();
+    service.searchProd(search).then(function(result){
+      if(result.data.status)
+        {
+          console.log(result.data.products[0].retail_price)
+          $scope.promo.price = result.data.products[0].retail_price;
+          $("#description").text(result.data.products[0].description);
+          
+
+        }else{
+          bootbox.alert({message:"Product not found!",
+                       size: 'small'
+            });
+        }
+    })
+    // $http.get('/product/searchProd?search='+search).
+    //       success(function(data) {
+    //         $("#search").val(data.products[0].product_id);         
+    //         $("#description").text(data.products[0].description);
+    //         $scope.promo.price = data.products[0].retail_price;
+    //       })  
+    // $.get('/product/searchProd?search='+search,function(data){
+    //     if(data.status)
+    //     {
+    //       console.log(data.products);  
+    //       $("#search").val(data.products[0].product_id);         
+    //       $("#description").text(data.products[0].description);
+    //       $("#price").text(data.products[0].retail_price);
+
+    //     }else{
+    //       bootbox.alert({message:"Product not found!",
+    //                    size: 'small'
+    //         });
+    //     }
+
+    // });
   }
 
   $scope.message = function(result)

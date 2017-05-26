@@ -28,7 +28,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('products-regular-list','ProductController@product_list');
 	Route::get('products/search/{id}/{param}','ProductController@search');
 	Route::post('product/multi_search','ProductController@multi_search');
-
+	Route::get("product/searchProd","ProductController@searchProd");
+		
 	Route::resource('products-regular','ProductController');
 
 	Route::get('acc_levels/ng-acc_levels-list','AccountLevelController@level_list');
@@ -126,6 +127,10 @@ Route::group(['middleware' => 'web'], function () {
 	Route::resource('customer','CustomerController');
 
 	Route::get('header/task','HeaderController@task');
+
+	
+	Route::get('memo-credit-list',"MemoCreditsController@credit_list");
+	Route::resource('memo-credit',"MemoCreditsController");
 });
 
 

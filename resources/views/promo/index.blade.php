@@ -155,5 +155,7 @@ $(document).on('click','.cluster-delete',function(e){
     }
 });
   })
+
+
 </script>
 @stop

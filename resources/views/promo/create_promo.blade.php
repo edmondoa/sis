@@ -8,36 +8,37 @@
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-4 control-label">Product</label>
         <div class="col-sm-8">
-          <select class='form-control select2'  name="product_id" ng-model="promo.product_id">
-            <option>Select</option>
-            @foreach($products as $product)
-              <option value="{{$product->product_id}}">{{$product->product_name}}</option>
-            @endforeach
-          </select>
+          <div class="input-group">
+            <input type="hidden" class="form-control " id="search" name='search' tabindex="8" style='padding:6px 2px !important'>  
+            <input type="text" class="form-control " id="searchStr" name='searchStr' tabindex="8" style='padding:6px 2px !important'>
+            <a href="#" class='btn btn-sm btn-default input-group-addon  search-prod' ng-click='searchProd()'>
+              <i class="fa fa-search"></i>
+            </a>
+          </div>
        </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-4 control-label">Price</label>
         <div class="col-sm-8">
-          <input type='text' class='form-control'  name="price" ng-model='promo.price'/>
+          <input type='text' class='form-control' id="price" name="price" ng-model='promo.price'/>
        </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-4 control-label">Discount</label>
         <div class="col-sm-8">
-          <input type='text' class='form-control'  name="discount" ng-model='promo.discount'/>
+          <input type='text' class='form-control' id="discount" name="discount" ng-model='promo.discount'/>
        </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-4 control-label">Start</label>
         <div class="col-sm-8">
-          <input type='text' class='form-control datepicker'  name="start" ng-model='promo.start'/>
+          <input type='text' class='form-control datepicker' id="start" name="start" ng-model='promo.start'/>
        </div>
       </div>
       <div class="form-group">
         <label for="inputEmail3"  class="col-sm-4 control-label">End</label>
         <div class="col-sm-8">
-          <input type='text' class='form-control datepicker'  name="end" ng-model='promo.end'/>
+          <input type='text' class='form-control datepicker'id="end"  name="end" ng-model='promo.end'/>
        </div>
       </div>
       <div class="form-group">

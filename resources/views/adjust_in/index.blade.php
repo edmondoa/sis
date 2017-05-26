@@ -69,7 +69,7 @@
                 }
             },
             cancel: {
-                label: 'No',
+                label: 'Close',
                 className: 'btn-danger'
             }
         },

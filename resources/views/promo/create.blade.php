@@ -57,6 +57,26 @@
     var opt = "<option value='"+id+"="+text+"'>"+text+"</option";
     $("select.exclude-branch").append(opt);
   })
+
+  $(document).on("click",".search-prod",function(){
+    var search = $("#searchStr").val();
+    
+    $.get('/product/searchProd?search='+search,function(data){
+        if(data.status)
+        {
+          console.log(data.products);  
+          $("#search").val(data.products[0].product_id);         
+          $("#description").text(data.products[0].description);
+          $("#price").text(data.products[0].retail_price);
+
+        }else{
+          bootbox.alert({message:"Product not found!",
+                       size: 'small'
+            });
+        }
+
+    });
+  });
   $(function(){
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
       checkboxClass: 'icheckbox_flat-green',

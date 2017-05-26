@@ -28,10 +28,20 @@ app.factory('promoService', ['HttpRequestFactory','$q','$timeout',function (Http
         };
         return HttpRequestFactory.request(config);
       }
+      function searchProd(searchStr){        
+        var config;
+        config = {
+            method: 'GET',
+            url: '/product/searchProd?search='+searchStr,            
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        };
+        return HttpRequestFactory.request(config);
+      }
 
     	return {
     		getPage: getPage,
-        savePromo : savePromo
+            savePromo : savePromo,
+            searchProd : searchProd
     	};
     }]);
 

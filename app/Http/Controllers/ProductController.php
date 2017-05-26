@@ -156,6 +156,23 @@ class ProductController extends Controller
         return Response::json(['status'=>false,'products'=>[]]);
     }
 
+    public function searchProd(Request $req)
+    {
+        Core::setConnection();
+
+        $search = $req->search;
+        if ($search =='_blank') $search ="";
+        $sql = "SELECT p.*,c.category_code FROM product p
+                LEFT JOIN category c ON p.category_id = c.category_id
+                WHERE (product_code = '".$search."' OR
+                  barcode = '".$search."') AND p.suspended = 0";
+        
+        $products = DB::select($sql);
+        if(count($products) > 0)
+            return Response::json(['status'=>true,'products'=>$products]);
+        return Response::json(['status'=>false,'products'=>[]]);
+    }
+
     public function multi_search(Request $req)
     {
        Core::setConnection();

@@ -56,12 +56,18 @@
             <li><a href="/"><i class="fa fa-circle-o"></i>Out</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview memo">
           <a href="#"><i class="fa fa-circle-o"></i>Memo
             <span class="pull-right-container"><i  class="fa fa-angle-left pull-right"></i></span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="/"><i class="fa fa-circle-o"></i>Credit (CM)</a></li>
+          <ul class="treeview-menu">            
+            <li class='memo-credit'>
+              <a class="pull-right create" href="/memo-credit/create">
+                  <i class="fa fa-plus-circle" style="width:20px" title="Create New"></i>
+              </a>
+              <a href="/memo-credit" ><i class="fa fa-circle-o"></i>Credit (CM)</a>
+            </li>
+
             <li><a href="/"><i class="fa fa-circle-o"></i>Debit (DM)</a></li>
           </ul>
         </li>
