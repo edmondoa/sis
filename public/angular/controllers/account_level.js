@@ -14,8 +14,8 @@
       $scope.getAccountLevel = function() {
         
         $http.get('acc_levels/ng-acc_levels-list').
-          success(function(data) {
-            $scope.acc_levels = data;         
+          then(function(result) {
+            $scope.acc_levels = result.data;         
             console.log($scope.acc_levels);
           });
       }
@@ -23,8 +23,8 @@
       $scope.saveAccountLevel = function(model)
       {        
         $http.post('/acc_levels',model)
-         .success(function(data) {
-            $scope.message(data);
+         .then(function(data) {
+            $scope.message(result.data);
             $("button [type='reset']").trigger('click');
             $scope.getAccountLevel();
         })

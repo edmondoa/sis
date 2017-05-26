@@ -15,10 +15,10 @@
       $scope.getInvoice = function() {
         $("div.loading").removeClass('hide');
         $http.get('/stockout/ng-stockout-list').
-          success(function(data) {
+          then(function(result) {
             $("div.loading").addClass('hide');
-            $scope.stockins = data.prodlist;
-            if(data.stockout.branch_id)
+            $scope.stockins = result.data.prodlist;
+            if(result.data.stockout.branch_id)
             {
               $('#stockout-div :input').attr('disabled',true);
               $('#stockout-div .btn-proceed').attr('disabled',true);
@@ -27,10 +27,10 @@
               $("#stockitem-div :input").removeAttr('disabled');
               $('#stockitem-div .btn-add').removeAttr('disabled');
 
-              $("#branch_id").val(data.stockout.branch_id).trigger("change");
-              $("#supplier_id").val(data.stockout.supplier_id).trigger("change");
-              $("#stockout_id").val(data.stockout.stockout_id)
-              $("input#branch_id").val(data.stockout.branch_id);
+              $("#branch_id").val(result.data.stockout.branch_id).trigger("change");
+              $("#supplier_id").val(result.data.stockout.supplier_id).trigger("change");
+              $("#stockout_id").val(result.data.stockout.stockout_id)
+              $("input#branch_id").val(result.data.stockout.branch_id);
             }else{
               $('#stockout-div :input').removeAttr('disabled');
               $('#stockout-div .btn-proceed').removeAttr('disabled');
@@ -39,7 +39,7 @@
               $('#stockitem-div .btn-add').attr('disabled',true);
             }
 
-            $scope.total(data.prodlist);
+            $scope.total(result.data.prodlist);
 
             console.log($scope.stockin);
           });
@@ -53,10 +53,10 @@
               'supplier_id': $("#supplier_id").val()
         }
         $http.post('/stockout-float',model)
-         .success(function(data) {
+         .then(function(result) {
             $("div.loading").addClass('hide');
-            $scope.message(data);
-            if(data.status)
+            $scope.message(result.data);
+            if(result.data.status)
             {
               $('#stockout-div :input').attr('disabled',true);
               $('#stockout-div .btn-proceed').attr('disabled',true);
@@ -65,11 +65,11 @@
               $("#stockitem-div :input").removeAttr('disabled');
               $('#stockitem .btn-add').removeAttr('disabled');
 
-              $("#stockout_id").val(data.stockout.stockout_id)
-              $("input#branch_id").val(data.stockout.branch_id);
+              $("#stockout_id").val(result.data.stockout.stockout_id)
+              $("input#branch_id").val(result.data.stockout.branch_id);
             }
-            $("#branch_id").val(data.stockin.branch_id).trigger("change");
-            $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
+            $("#branch_id").val(result.data.stockin.branch_id).trigger("change");
+            $("#supplier_id").val(result.data.stockin.supplier_id).trigger("change");
         })
       }
 
@@ -93,9 +93,9 @@
       {
         $("div.loading").removeClass('hide');
         $http.get('/stockout-float/cancel')
-         .success(function(data) {
+         .then(function(result) {
             $("div.loading").addClass('hide');
-            $scope.message(data);
+            $scope.message(result.data);
             $scope.stockins = [];
             $("select#branch_id").val('').trigger("change");
             $("select#supplier_id").val('').trigger("change");
@@ -134,8 +134,8 @@
               if(result)
               {
                  $http.post('stockout-items-remove',model)
-                  .success(function(data) {
-                    $scope.message(data);
+                  .then(function(res) {
+                    $scope.message(res.data);
                     $scope.getInvoice();
                   });
               }

@@ -25,12 +25,13 @@
       <hr>
       <div class='clearfix'></div>
       <div class="col-sm-6">
-        <select class='form-control select2' ng-model="promo_need.product">
-          <option selected >Select</option>
-          @foreach($products as $product)
-            <option value="{{$product->product_id.'='.$product->category->category_name.'='.$product->product_name}}" data-id="">{{$product->product_name}}</option>
-          @endforeach
-        </select>
+          <div class="input-group">
+            <input type="hidden" class="form-control " ng-model='promo_need.product' tabindex="8" style='padding:6px 2px !important'>  
+            <input type="text" class="form-control " id="searchStr2" name='searchStr2' tabindex="8" style='padding:6px 2px !important'>
+            <a href="#" class='btn btn-sm btn-default input-group-addon  search-prod' ng-click='searchProd2()'>
+              <i class="fa fa-search"></i>
+            </a>
+          </div>
       </div>
       <div class="col-sm-4">
         <input type="text" class="form-control" ng-model="promo_need.qty"/>

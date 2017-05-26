@@ -14,8 +14,8 @@
       $scope.getDiscounts = function() {
         
         $http.get('/discounting/ng-discount-list').
-          success(function(data) {
-            $scope.discounts = data;         
+          then(function(result) {
+            $scope.discounts = result.data;         
             console.log($scope.discounts);
           });
       }
@@ -23,8 +23,8 @@
       $scope.saveDiscount = function(model)
       {        
         $http.post('/discounting',model)
-         .success(function(data) {
-            $scope.message(data);
+         .then(function(result) {
+            $scope.message(result.data);
             $("button [type='reset']").trigger('click');
             $scope.getDiscounts();
         })

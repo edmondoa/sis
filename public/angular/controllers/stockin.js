@@ -15,10 +15,10 @@
       $scope.getStockins = function() {
         $("div.loading").removeClass('hide');
         $http.get('/stockin/ng-stockin-list').
-          success(function(data) {
-            $scope.stockins = data.prodlist; 
+          then(function(result) {            
+            $scope.stockins = result.data.prodlist; 
             $("div.loading").addClass('hide');         
-            if(data.stockin.branch_id)
+            if(result.data.stockin.branch_id)
             {             
               $('#stockin-div :input').attr('disabled',true);
               $('#stockin-div .btn-proceed').attr('disabled',true);
@@ -28,13 +28,13 @@
               $("#stockitem-div :input").removeAttr('disabled');
               $('#stockitem-div .btn-add').removeAttr('disabled');
 
-              $("select#branch_id").val(data.stockin.branch_id).trigger("change");
-              $("input#branch_id").val(data.stockin.branch_id);
-              $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
-              $("#doc_no").val(data.stockin.doc_no);
-              $("#amount_due").val(data.stockin.amount_due);
-              $("#doc_date").val(data.stockin.doc_date);
-              $("#arrive_date").val(data.stockin.arrive_date);
+              $("select#branch_id").val(result.data.stockin.branch_id).trigger("change");
+              $("input#branch_id").val(result.data.stockin.branch_id);
+              $("#supplier_id").val(result.data.stockin.supplier_id).trigger("change");
+              $("#doc_no").val(result.data.stockin.doc_no);
+              $("#amount_due").val(result.data.stockin.amount_due);
+              $("#doc_date").val(result.data.stockin.doc_date);
+              $("#arrive_date").val(result.data.stockin.arrive_date);
               
             }else{
               $("#stockin-div :input").removeAttr('disabled');             
@@ -45,7 +45,7 @@
              
             }
 
-            $scope.total(data.prodlist);                              
+            $scope.total(result.data.prodlist);                              
            
           });
       }
@@ -63,10 +63,10 @@
         } 
         console.log(model);
         $http.post('/stockin-float',model)
-         .success(function(data) {
+         .then(function(result) {
             $("div.loading").addClass('hide');
-            $scope.message(data);
-            if(data.status)
+            $scope.message(result.data);
+            if(result.data.status)
             {
               $("div.loading").addClass('hide');
               $('#stockin-div :input').attr('disabled',true);
@@ -77,12 +77,12 @@
               $("#stockitem-div :input").removeAttr('disabled');
               $('#stockitem-div .btn-add').removeAttr('disabled');
             }            
-            $("#branch_id").val(data.stockin.branch_id).trigger("change");
-            $("#supplier_id").val(data.stockin.supplier_id).trigger("change");
-            $("#doc_no").val(data.stockin.doc_no);
-            $("#amount_due").val(data.stockin.amount_due);
-            $("#doc_date").val(data.stockin.doc_date);
-            $("#arrive_date").val(data.stockin.arrive_date);
+            $("#branch_id").val(result.data.stockin.branch_id).trigger("change");
+            $("#supplier_id").val(result.data.stockin.supplier_id).trigger("change");
+            $("#doc_no").val(result.data.stockin.doc_no);
+            $("#amount_due").val(result.data.stockin.amount_due);
+            $("#doc_date").val(result.data.stockin.doc_date);
+            $("#arrive_date").val(result.data.stockin.arrive_date);
            
         })
       }
@@ -109,10 +109,10 @@
       {
         $("div.loading").removeClass('hide');
         $http.get('/stockin-float/cancel')
-         .success(function(data) {  
+         .then(function(result) {  
             $("div.loading").addClass('hide');          
-            $scope.message(data);            
-            $scope.stockins = data.prodlist;
+            $scope.message(result.data);            
+            $scope.stockins = result.data.prodlist;
             $("select#branch_id").val('').trigger("change");
             $("select#supplier_id").val('').trigger("change");         
             $("#search").val('');
@@ -156,8 +156,8 @@
               if(result)
               {
                  $http.post('/stockin-items-remove/'+index)
-                  .success(function(data) {
-                    $scope.message(data);
+                  .then(function(res) {
+                    $scope.message(res.data);
                     $scope.getStockins();
                   });
               }

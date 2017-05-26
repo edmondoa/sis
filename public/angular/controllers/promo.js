@@ -84,38 +84,52 @@ app.controller('promoCtrl', ['promoService','$scope','$http', function (service,
     service.searchProd(search).then(function(result){
       if(result.data.status)
         {
-          console.log(result.data.products[0].retail_price)
+          $scope.promo.product_id = result.data.products[0].product_id;
           $scope.promo.price = result.data.products[0].retail_price;
           $("#description").text(result.data.products[0].description);
-          
+          $.notify({
+            message: "Product Found"
+          },{
+            type: 'success',
+            newest_on_top: true,
+            placement: {
+                align: "right",
+                from: "bottom"
+            }
+          });
 
         }else{
           bootbox.alert({message:"Product not found!",
                        size: 'small'
             });
         }
-    })
-    // $http.get('/product/searchProd?search='+search).
-    //       success(function(data) {
-    //         $("#search").val(data.products[0].product_id);         
-    //         $("#description").text(data.products[0].description);
-    //         $scope.promo.price = data.products[0].retail_price;
-    //       })  
-    // $.get('/product/searchProd?search='+search,function(data){
-    //     if(data.status)
-    //     {
-    //       console.log(data.products);  
-    //       $("#search").val(data.products[0].product_id);         
-    //       $("#description").text(data.products[0].description);
-    //       $("#price").text(data.products[0].retail_price);
+    })    
+  }
+  $scope.searchProd2 = function()
+  {
+    var search = $("#searchStr2").val();
+    service.searchProd(search).then(function(result){
+      if(result.data.status)
+        {
+          $scope.promo_need.product = result.data.products[0].product_id;
+          
+          $.notify({
+            message: "Product Found"
+          },{
+            type: 'success',
+            newest_on_top: true,
+            placement: {
+                align: "right",
+                from: "bottom"
+            }
+          });
 
-    //     }else{
-    //       bootbox.alert({message:"Product not found!",
-    //                    size: 'small'
-    //         });
-    //     }
-
-    // });
+        }else{
+          bootbox.alert({message:"Product not found!",
+                       size: 'small'
+            });
+        }
+    })    
   }
 
   $scope.message = function(result)

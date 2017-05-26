@@ -14,8 +14,8 @@
       $scope.getApproves = function() {
         
         $http.get('approvals/ng-approve-list').
-          success(function(data) {
-            $scope.approvals = data;         
+          then(function(result) {
+            $scope.approvals = result.data;         
             console.log($scope.approvals);
           });
       } 
@@ -23,27 +23,27 @@
       $scope.approved = function(model)
       {
         $http.post('approvals/update/APPROVED/'+model.approval_id).
-        success(function(data) {
+        then(function(result) {
          $scope.getApproves();         
-         $scope.message(data); 
+         $scope.message(result.data); 
         });
       }
 
       $scope.recieve = function(model)
       {
         $http.post('approvals/update/RECEIVED/'+model.approval_id).
-        success(function(data) {
+        then(function(result) {
          $scope.getApproves();         
-         $scope.message(data); 
+         $scope.message(result.data); 
         });
       }
 
       $scope.dis_approved = function(model)
       {
-        $http.get( "approvals/notes").success(function(data) {
+        $http.get( "approvals/notes").then(function(result) {
         var dialog = bootbox.dialog({
             title: 'Notes',           
-            message: data,
+            message: result.data,
             buttons: {
               confirm: {
                   label: 'GO!',
@@ -65,9 +65,9 @@
                     }  
                     var param = {'note':$("[name='notes']").val()};                           
                     $http.post('approvals/update/DECLINED/'+model.approval_id,param).
-                      success(function(data) {
+                      then(function(res) {
                       $scope.getApproves();         
-                      $scope.message(data);
+                      $scope.message(res.data);
                       bootbox.hideAll(); 
                     });
                    

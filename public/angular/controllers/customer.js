@@ -14,8 +14,8 @@
       $scope.getCustomers = function() {
 
         $http.get('category/ng-cat-list').
-          success(function(data) {
-            $scope.customers = data;
+          then(function(result) {
+            $scope.customers = result.data;
             console.log($scope.categories);
           });
       }
@@ -23,13 +23,13 @@
       $scope.saveCustomer = function(model)
       {
         $http.post('/customer',model)
-         .success(function(data) {
+         .then(function(result) {
             
-            if(data.status){
-              location.href = '/customer/'+data.customer_id;
+            if(result.data.status){
+              location.href = '/customer/'+result.data.customer_id;
             //  $scope.$apply();
           }else{
-            $scope.message(data);
+            $scope.message(result.data);
           }
         })
       }

@@ -14,18 +14,18 @@
       $scope.getJournals = function() {
         
         $http.get('request/ng-journal-list').
-          success(function(data) {
-            $scope.journals = data;         
+          then(function(result) {
+            $scope.journals = result.data;         
             console.log($scope.journals);
           });
       } 
 
       $scope.cancel = function(model)
       {
-        $http.get( "approvals/notes").success(function(data) {
+        $http.get( "approvals/notes").then(function(result) {
         var dialog = bootbox.dialog({
             title: 'Notes',           
-            message: data,
+            message: result.data,
             buttons: {
               confirm: {
                   label: 'GO!',
@@ -47,9 +47,9 @@
                     }  
                     var param = {'note':$("[name='notes']").val()};                           
                     $http.post('approvals/update/CANCELLED/'+model.approval_id,param).
-                      success(function(data) {
+                      then(function(result) {
                       $scope.getJournals();         
-                      $scope.message(data);
+                      $scope.message(result.data);
                       bootbox.hideAll(); 
                     });
                    

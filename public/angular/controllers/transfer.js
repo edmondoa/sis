@@ -15,16 +15,16 @@
       $scope.getTransfer = function() {
 
         $http.get('/transfer/ng-transfer-list').
-          success(function(data) {
-            $scope.products = data.prodlist;
-            $scope.transfer = data.transfer;          
+          then(function(result) {
+            $scope.products = result.data.prodlist;
+            $scope.transfer = result.data.transfer;          
 
-            if(data.transfer.orig_branch_id)
+            if(result.data.transfer.orig_branch_id)
             {
-              $("#branch_id_from").val(data.transfer.orig_branch_id).trigger("change");
-              $("#branch_id_to").val(data.transfer.recv_branch_id).trigger("change");
+              $("#branch_id_from").val(result.data.transfer.orig_branch_id).trigger("change");
+              $("#branch_id_to").val(result.data.transfer.recv_branch_id).trigger("change");
               // $("#supplier_id").val(data.transfers.supplier_id).trigger("change");
-              $("#transfer_id").val(data.transfer.transfer_id)
+              $("#transfer_id").val(result.data.transfer.transfer_id)
 
               $('#stockin-div :input').attr('disabled',true);
               $('#stockin-div .btn-proceed').attr('disabled',true);
@@ -40,7 +40,7 @@
               $('#stockitem .btn-add').attr('disabled',true);
            }
 
-            $scope.total(data.products);
+            $scope.total(result.data.products);
 
            // console.log($scope.stockin);
           });
@@ -59,8 +59,8 @@
         }
         console.log(model);
         $http.post('/transfer-float',model)
-         .success(function(data) {
-            $scope.message(data);
+         .then(function(result) {
+            $scope.message(result.data);
             if(data.status)
             {
               $window.location.reload();
@@ -94,8 +94,8 @@
       $scope.cancel = function()
       {
         $http.get('transfer-float/cancel')
-         .success(function(data) {
-            $scope.message(data);
+         .then(function(result) {
+            $scope.message(result.data);
             $window.location.reload();
         })
       }
@@ -120,8 +120,8 @@
               if(result)
               {
                  $http.post('transfer-items-remove/'+model.transfer_item_id)
-                  .success(function(data) {
-                    $scope.message(data);
+                  .then(function(res) {
+                    $scope.message(res.data);
                     $scope.getTransfer();
                   });
               }

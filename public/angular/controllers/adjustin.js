@@ -15,10 +15,10 @@
       $scope.getAdjustIn = function() {
         $("div.loading").removeClass('hide');
         $http.get('/adjust-in/ng-adjustin-list').
-          success(function(data) {
-            $scope.stockins = data.prodlist;
+          then(function(result) {
+            $scope.stockins = result.data.prodlist;
             $("div.loading").addClass('hide');
-            if(data.adjustin.branch_id)
+            if(result.data.adjustin.branch_id)
             {
               $('#stockin-div :input').attr('disabled',true);
               $('#stockin-div .btn-proceed').attr('disabled',true);
@@ -28,8 +28,8 @@
               $("#stockitem-div :input").removeAttr('disabled');
               $('#stockitem-div .btn-add').removeAttr('disabled');
 
-              $("select#branch_id").val(data.adjustin.branch_id).trigger("change");
-              $("input#branch_id").val(data.adjustin.branch_id);
+              $("select#branch_id").val(result.data.adjustin.branch_id).trigger("change");
+              $("input#branch_id").val(result.data.adjustin.branch_id);
 
             }else{
               $("#stockin-div :input").removeAttr('disabled');
@@ -39,7 +39,7 @@
               $('#stockitem-div .btn-add').attr('disabled',true);
 
             }
-            $scope.total(data.prodlist);
+            $scope.total(result.data.prodlist);
           });
       }
 
@@ -51,10 +51,10 @@
         }
         console.log(model);
         $http.post('/adjust-in-float',model)
-         .success(function(data) {
+         .then(function(result) {
             $("div.loading").addClass('hide');
-            $scope.message(data);
-            if(data.status)
+            $scope.message(result.data);
+            if(result.data.status)
             {
               $("div.loading").addClass('hide');
               $('#stockin-div :input').attr('disabled',true);
@@ -65,7 +65,7 @@
               $("#stockitem-div :input").removeAttr('disabled');
               $('#stockitem-div .btn-add').removeAttr('disabled');
             }
-            $("#branch_id").val(data.adjustin.branch_id).trigger("change");
+            $("#branch_id").val(result.data.adjustin.branch_id).trigger("change");
 
 
         })
@@ -93,10 +93,10 @@
       {
         $("div.loading").removeClass('hide');
         $http.get('/adjust-in-float/cancel')
-         .success(function(data) {
+         .then(function(result) {
             $("div.loading").addClass('hide');
-            $scope.message(data);
-            $scope.stockins = data.prodlist;
+            $scope.message(result.data);
+            $scope.stockins = result.data.prodlist;
             $("select#branch_id").val('').trigger("change");          
             $("#search").val('');
             $("#cprice").val('');
@@ -135,8 +135,8 @@
               if(result)
               {
                  $http.post('/adjust-in-items-remove/'+index)
-                  .success(function(data) {
-                    $scope.message(data);
+                  .then(function(res) {
+                    $scope.message(res.data);
                     $scope.getAdjustIn();
                   });
               }

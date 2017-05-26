@@ -9,7 +9,7 @@
         <label for="inputEmail3"  class="col-sm-4 control-label">Product</label>
         <div class="col-sm-8">
           <div class="input-group">
-            <input type="hidden" class="form-control " id="search" name='search' tabindex="8" style='padding:6px 2px !important'>  
+            <input type="hidden" class="form-control " ng-model='promo.product_id' tabindex="8" style='padding:6px 2px !important'>  
             <input type="text" class="form-control " id="searchStr" name='searchStr' tabindex="8" style='padding:6px 2px !important'>
             <a href="#" class='btn btn-sm btn-default input-group-addon  search-prod' ng-click='searchProd()'>
               <i class="fa fa-search"></i>
