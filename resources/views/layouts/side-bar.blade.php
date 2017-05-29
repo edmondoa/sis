@@ -107,7 +107,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="regular"><a href="/stockin"><i class="fa fa-circle-o"></i>Regular Purchase</a></li>
-            <li><a href="/"><i class="fa fa-circle-o"></i>Reject</a></li>
+            <li><a href="/stockin-reject"><i class="fa fa-circle-o"></i>Reject</a></li>
           </ul>
         </li>
         <li class="stockout"><a href="/stockout"><i class="fa fa-circle-o"></i>Stockout</a></li>

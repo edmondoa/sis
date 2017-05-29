@@ -3,17 +3,18 @@
 @section('content')
     <link rel="stylesheet" href="/plugins/select2/select2.min.css">
     <section class="content-header">
+      
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class=""><i class="fa fa-circle"></i> Products</li>
-        <li class="active"><i class="fa fa-circle"></i> Stockout</li>
+        <li class=""><i class="fa fa-circle"></i> Inventory</li>
+        <li class="active"><i class="fa fa-circle"></i>Stockin-Reject</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content" ng-controller="stockoutCtrl">
       <a href="#" class='hide refresh' ng-click="getStockins()"></a>
-      @include('stockout.create')
+      @include('stockin_reject.create')
     </section>
       <!-- /.row (main row) -->
 @stop
